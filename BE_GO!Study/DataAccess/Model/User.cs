@@ -40,5 +40,8 @@ namespace DataAccess.Model
         public ICollection<Data> Data { get; set; }
 
         public ICollection<Analytic> Analytics { get; set; }
+
+        public ICollection<Attendance> Attendances { get; set; }
+
     }
 }

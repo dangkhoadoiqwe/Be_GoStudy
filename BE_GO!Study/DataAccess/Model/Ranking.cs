@@ -25,5 +25,7 @@ namespace DataAccess.Model
 
         [Required]
         public string Period { get; set; }
+
+       
     }
 }

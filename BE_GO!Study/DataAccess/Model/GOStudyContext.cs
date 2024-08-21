@@ -14,6 +14,7 @@ namespace DataAccess.Model
 
         public DbSet<User> Users { get; set; }
         public DbSet<Account> Accounts { get; set; }
+        public DbSet<Attendance> Attendances { get; set; }
         public DbSet<Specialization> Specializations { get; set; }
         public DbSet<Semester> Semesters { get; set; }
         public DbSet<Classroom> Classrooms { get; set; }

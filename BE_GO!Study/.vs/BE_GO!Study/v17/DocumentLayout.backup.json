@@ -3,16 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\BE_GO!Study\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\BE_GO!Study\\DataAccess\\Migrations\\20240821080854_v2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:DataAccess\\Migrations\\20240821080854_v2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2740E7CB-84A5-41A7-B2F5-77AC1B26D321}|BE_GO!Study\\BE_GO!Study.csproj|c:\\users\\admin\\onedrive\\documents\\github\\dream\\duan\\be_go!study\\be_go!study\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2740E7CB-84A5-41A7-B2F5-77AC1B26D321}|BE_GO!Study\\BE_GO!Study.csproj|solutionrelative:be_go!study\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3CC7C96-07A7-4F99-AE7D-C2CFDDC69920}|DataAccess\\DataAccess.csproj|c:\\users\\admin\\onedrive\\documents\\github\\dream\\duan\\be_go!study\\dataaccess\\model\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3CC7C96-07A7-4F99-AE7D-C2CFDDC69920}|DataAccess\\DataAccess.csproj|solutionrelative:dataaccess\\model\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{C3CC7C96-07A7-4F99-AE7D-C2CFDDC69920}|DataAccess\\DataAccess.csproj|c:\\users\\admin\\onedrive\\documents\\github\\dream\\duan\\be_go!study\\dataaccess\\model\\gostudycontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C3CC7C96-07A7-4F99-AE7D-C2CFDDC69920}|DataAccess\\DataAccess.csproj|solutionrelative:dataaccess\\model\\gostudycontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C3CC7C96-07A7-4F99-AE7D-C2CFDDC69920}|DataAccess\\DataAccess.csproj|c:\\users\\admin\\onedrive\\documents\\github\\dream\\duan\\be_go!study\\dataaccess\\model\\analytic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3CC7C96-07A7-4F99-AE7D-C2CFDDC69920}|DataAccess\\DataAccess.csproj|solutionrelative:dataaccess\\model\\analytic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C3CC7C96-07A7-4F99-AE7D-C2CFDDC69920}|DataAccess\\DataAccess.csproj|c:\\users\\admin\\onedrive\\documents\\github\\dream\\duan\\be_go!study\\dataaccess\\model\\attendance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3CC7C96-07A7-4F99-AE7D-C2CFDDC69920}|DataAccess\\DataAccess.csproj|solutionrelative:dataaccess\\model\\attendance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C3CC7C96-07A7-4F99-AE7D-C2CFDDC69920}|DataAccess\\DataAccess.csproj|c:\\users\\admin\\onedrive\\documents\\github\\dream\\duan\\be_go!study\\dataaccess\\model\\classroom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3CC7C96-07A7-4F99-AE7D-C2CFDDC69920}|DataAccess\\DataAccess.csproj|solutionrelative:dataaccess\\model\\classroom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2740E7CB-84A5-41A7-B2F5-77AC1B26D321}|BE_GO!Study\\BE_GO!Study.csproj|c:\\users\\admin\\onedrive\\documents\\github\\dream\\duan\\be_go!study\\be_go!study\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{2740E7CB-84A5-41A7-B2F5-77AC1B26D321}|BE_GO!Study\\BE_GO!Study.csproj|solutionrelative:be_go!study\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3CC7C96-07A7-4F99-AE7D-C2CFDDC69920}|DataAccess\\DataAccess.csproj|c:\\users\\admin\\onedrive\\documents\\github\\dream\\duan\\be_go!study\\dataaccess\\model\\analytic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3CC7C96-07A7-4F99-AE7D-C2CFDDC69920}|DataAccess\\DataAccess.csproj|solutionrelative:dataaccess\\model\\analytic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,32 +43,89 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Classroom.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\BE_GO!Study\\DataAccess\\Model\\Classroom.cs",
-              "RelativeDocumentMoniker": "DataAccess\\Model\\Classroom.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\BE_GO!Study\\DataAccess\\Model\\Classroom.cs",
-              "RelativeToolTip": "DataAccess\\Model\\Classroom.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAkwBUAAAAqAAAAAAAAAA==",
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\BE_GO!Study\\DataAccess\\Model\\User.cs",
+              "RelativeDocumentMoniker": "DataAccess\\Model\\User.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\BE_GO!Study\\DataAccess\\Model\\User.cs",
+              "RelativeToolTip": "DataAccess\\Model\\User.cs",
+              "ViewState": "AgIAACMAAAAAAAAAAADwvykAAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-20T06:25:03.98Z",
+              "WhenOpened": "2024-08-21T08:03:53.93Z",
+              "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "20240821080854_v2.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\BE_GO!Study\\DataAccess\\Migrations\\20240821080854_v2.cs",
+              "RelativeDocumentMoniker": "DataAccess\\Migrations\\20240821080854_v2.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\BE_GO!Study\\DataAccess\\Migrations\\20240821080854_v2.cs",
+              "RelativeToolTip": "DataAccess\\Migrations\\20240821080854_v2.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-21T08:08:54.265Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\BE_GO!Study\\BE_GO!Study\\Program.cs",
+              "RelativeDocumentMoniker": "BE_GO!Study\\Program.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\BE_GO!Study\\BE_GO!Study\\Program.cs",
+              "RelativeToolTip": "BE_GO!Study\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-21T08:08:29.387Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\BE_GO!Study\\BE_GO!Study\\appsettings.json",
+              "RelativeDocumentMoniker": "BE_GO!Study\\appsettings.json",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\BE_GO!Study\\BE_GO!Study\\appsettings.json",
+              "RelativeToolTip": "BE_GO!Study\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-08-21T08:06:08.507Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Attendance.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\BE_GO!Study\\DataAccess\\Model\\Attendance.cs",
+              "RelativeDocumentMoniker": "DataAccess\\Model\\Attendance.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\BE_GO!Study\\DataAccess\\Model\\Attendance.cs",
+              "RelativeToolTip": "DataAccess\\Model\\Attendance.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-21T08:00:31.755Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "GOStudyContext.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\BE_GO!Study\\DataAccess\\Model\\GOStudyContext.cs",
               "RelativeDocumentMoniker": "DataAccess\\Model\\GOStudyContext.cs",
               "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\BE_GO!Study\\DataAccess\\Model\\GOStudyContext.cs",
               "RelativeToolTip": "DataAccess\\Model\\GOStudyContext.cs",
-              "ViewState": "AgIAAHcAAAAAAAAAAAAcwIUAAAA0AAAAAAAAAA==",
+              "ViewState": "AgIAAHgAAAAAAAAAAAAqwIoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-20T06:24:11.892Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 6,
               "Title": "Analytic.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\BE_GO!Study\\DataAccess\\Model\\Analytic.cs",
               "RelativeDocumentMoniker": "DataAccess\\Model\\Analytic.cs",
@@ -60,12 +133,7 @@
               "RelativeToolTip": "DataAccess\\Model\\Analytic.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-20T00:58:16.584Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+              "WhenOpened": "2024-08-20T00:58:16.584Z"
             }
           ]
         },
