@@ -24,7 +24,7 @@ namespace DataAccess.Model
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Bookmark> Bookmarks { get; set; }
         public DbSet<Ranking> Rankings { get; set; }
-        public DbSet<Task> Tasks { get; set; }
+        public DbSet<Tasks> Tasks { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<PrivacySetting> PrivacySettings { get; set; }
         public DbSet<FriendRequest> FriendRequests { get; set; }
@@ -132,7 +132,26 @@ namespace DataAccess.Model
                .HasOne(a => a.Classroom)
                .WithMany(c => c.Analytics)
                .HasForeignKey(a => a.ClassroomId)
-               .OnDelete(DeleteBehavior.NoAction);  
+               .OnDelete(DeleteBehavior.NoAction);
+            SeedData(modelBuilder);
+        }
+        private void SeedData(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Semester>().HasData(
+          new Semester { Name = "Fall 2024"},
+          new Semester {Name = "Spring 2025" }
+      );
+
+            modelBuilder.Entity<Specialization>().HasData(
+                new Specialization { Name = "Computer Science" },
+                new Specialization { Name = "Business Administration" }
+            );
+
+            modelBuilder.Entity<User>().HasData(
+                new User { FullName = "John", PasswordHash = "Doe", Email = "john.doe@example.com" , PrivacySettingId =1 , SpecializationId = 1, SemesterId = 1 },
+                new User { FullName = "Jane", PasswordHash = "Smith", Email = "jane.smith@example.com", PrivacySettingId = 1, SpecializationId = 1, SemesterId = 1}
+            ); 
+
         }
     }
 }

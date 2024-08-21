@@ -21,7 +21,7 @@ namespace DataAccess.Model
 
         public int TaskId { get; set; }
         [ForeignKey("TaskId")]
-        public Task Task { get; set; }
+        public Tasks Task { get; set; }
 
         public int ClassroomId { get; set; }
 
