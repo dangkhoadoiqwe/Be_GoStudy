@@ -99,24 +99,35 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "BE_GO_Study.Controllers.WeatherForecastController",
-    "Method": "Get",
-    "RelativePath": "WeatherForecast",
-    "HttpMethod": "GET",
+    "ContainingType": "BE_GO_Study.Controllers.LoginController",
+    "Method": "Login",
+    "RelativePath": "api/v1/users/login",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
+    "Parameters": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[BE_GO_Study.WeatherForecast, BE_GO!Study, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
+        "Name": "req",
+        "Type": "GO_Study_Logic.ViewModel.LoginRequest",
+        "IsRequired": true
       }
     ],
-    "EndpointName": "GetWeatherForecast"
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_GO_Study.Controllers.LoginController",
+    "Method": "RefreshToken",
+    "RelativePath": "api/v1/users/RefreshToken",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tokenModel",
+        "Type": "GO_Study_Logic.ViewModel.TokenModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

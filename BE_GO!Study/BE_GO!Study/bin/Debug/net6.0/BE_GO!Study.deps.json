@@ -37,6 +37,14 @@
           }
         }
       },
+      "AWSSDK.Core/3.7.400.11": {
+        "runtime": {
+          "lib/netcoreapp3.1/AWSSDK.Core.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.7.400.11"
+          }
+        }
+      },
       "BCrypt.Net-Next/4.0.3": {
         "runtime": {
           "lib/net6.0/BCrypt.Net-Next.dll": {
@@ -755,7 +763,8 @@
       },
       "DataAccess/1.0.0": {
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.33"
+          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.33",
+          "NTQ.Sdk.Core": "1.1.7"
         },
         "runtime": {
           "DataAccess.dll": {
@@ -766,8 +775,14 @@
       },
       "GOStudy_Logic/1.0.0": {
         "dependencies": {
+          "AWSSDK.Core": "3.7.400.11",
           "AutoMapper": "13.0.1",
-          "DataAccess": "1.0.0"
+          "BCrypt.Net-Next": "4.0.3",
+          "DataAccess": "1.0.0",
+          "Microsoft.EntityFrameworkCore.Analyzers": "6.0.33",
+          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.33",
+          "Microsoft.Extensions.Configuration": "8.0.0",
+          "NTQ.Sdk.Core": "1.1.7"
         },
         "runtime": {
           "GOStudy_Logic.dll": {
@@ -790,6 +805,13 @@
       "sha512": "sha512-/Fx1SbJ16qS7dU4i604Sle+U9VLX+WSNVJggk6MupKVkYvvBm4XqYaeFuf67diHefHKHs50uQIS2YEDFhPCakQ==",
       "path": "automapper/13.0.1",
       "hashPath": "automapper.13.0.1.nupkg.sha512"
+    },
+    "AWSSDK.Core/3.7.400.11": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-bRntRauoB4FwswqaeEiUAcwjZd0AOeHjZCoFPvOMNaT9tJVWRvF0SHTPE1A5zR2MLeFHCZjbLJxJYOIgVJiCXA==",
+      "path": "awssdk.core/3.7.400.11",
+      "hashPath": "awssdk.core.3.7.400.11.nupkg.sha512"
     },
     "BCrypt.Net-Next/4.0.3": {
       "type": "package",

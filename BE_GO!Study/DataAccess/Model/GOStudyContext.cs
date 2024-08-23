@@ -35,6 +35,7 @@ namespace DataAccess.Model
         public DbSet<Analytic> Analytics { get; set; }
         public DbSet<Package> Packages { get; set; }
         public DbSet<PaymentTransaction> PaymentTransactions { get; set; }
+        public virtual DbSet<RefreshToken> RefreshTokens { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -133,25 +134,35 @@ namespace DataAccess.Model
                .WithMany(c => c.Analytics)
                .HasForeignKey(a => a.ClassroomId)
                .OnDelete(DeleteBehavior.NoAction);
-            SeedData(modelBuilder);
+
+            modelBuilder.Entity<RefreshToken>(entity =>
+            {
+                entity.ToTable("RefreshToken");
+
+                entity.HasIndex(e => e.UserId, "IX_RefreshToken_UserId");
+
+                entity.Property(e => e.RefreshTokenId).ValueGeneratedNever();
+
+                entity.Property(e => e.ExpriedAt).HasColumnType("datetime");
+
+                entity.Property(e => e.IssuedAt).HasColumnType("datetime");
+
+                entity.Property(e => e.JwtId)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Token)
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.RefreshTokens)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_RefreshToken_Users");
+            });
+
         }
-        private void SeedData(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Semester>().HasData(
-          new Semester { Name = "Fall 2024"},
-          new Semester {Name = "Spring 2025" }
-      );
-
-            modelBuilder.Entity<Specialization>().HasData(
-                new Specialization { Name = "Computer Science" },
-                new Specialization { Name = "Business Administration" }
-            );
-
-            modelBuilder.Entity<User>().HasData(
-                new User { FullName = "John", PasswordHash = "Doe", Email = "john.doe@example.com" , PrivacySettingId =1 , SpecializationId = 1, SemesterId = 1 },
-                new User { FullName = "Jane", PasswordHash = "Smith", Email = "jane.smith@example.com", PrivacySettingId = 1, SpecializationId = 1, SemesterId = 1}
-            ); 
-
-        }
+ 
     }
 }

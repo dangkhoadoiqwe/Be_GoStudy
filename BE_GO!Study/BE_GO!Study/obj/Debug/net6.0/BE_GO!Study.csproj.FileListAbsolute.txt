@@ -165,3 +165,4 @@ C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GO!Study\BE_GO
 C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GO!Study\BE_GO!Study\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GO!Study\BE_GO!Study\bin\Debug\net6.0\GOStudy_Logic.dll
 C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GO!Study\BE_GO!Study\bin\Debug\net6.0\GOStudy_Logic.pdb
+C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GO!Study\BE_GO!Study\bin\Debug\net6.0\AWSSDK.Core.dll

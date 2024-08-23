@@ -15,6 +15,10 @@ namespace DataAccess.Model
         public string Email { get; set; }
 
         [Required]
+
+        public int role { get; set; }
+
+        [Required]
         public string PasswordHash { get; set; }
 
         public string ProfileImage { get; set; }
@@ -42,6 +46,8 @@ namespace DataAccess.Model
         public ICollection<Analytic> Analytics { get; set; }
 
         public ICollection<Attendance> Attendances { get; set; }
+
+        public  ICollection<RefreshToken> RefreshTokens { get; set; }
 
     }
 }

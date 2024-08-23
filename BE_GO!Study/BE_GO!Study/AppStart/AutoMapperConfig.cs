@@ -10,6 +10,7 @@ namespace BE_GO_Study.AppStart
             MapperConfiguration mapperConfiguration = new MapperConfiguration(mc =>
             {
                 mc.ConfigClassRoomModule();
+                mc.ConfigUserModule();
             });
             IMapper mapper = mapperConfiguration.CreateMapper();
             services.AddSingleton(mapper);

@@ -535,6 +535,45 @@ namespace DataAccess.Migrations
                     b.ToTable("Reactions");
                 });
 
+            modelBuilder.Entity("DataAccess.Model.RefreshToken", b =>
+                {
+                    b.Property<Guid>("RefreshTokenId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("ExpriedAt")
+                        .HasColumnType("datetime");
+
+                    b.Property<bool>("IsRevoked")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsUsed")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("IssuedAt")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("JwtId")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(500)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("RefreshTokenId");
+
+                    b.HasIndex(new[] { "UserId" }, "IX_RefreshToken_UserId");
+
+                    b.ToTable("RefreshToken", (string)null);
+                });
+
             modelBuilder.Entity("DataAccess.Model.Semester", b =>
                 {
                     b.Property<int>("SemesterId")
@@ -598,7 +637,7 @@ namespace DataAccess.Migrations
                     b.ToTable("SupportTickets");
                 });
 
-            modelBuilder.Entity("DataAccess.Model.Task", b =>
+            modelBuilder.Entity("DataAccess.Model.Tasks", b =>
                 {
                     b.Property<int>("TaskId")
                         .ValueGeneratedOnAdd()
@@ -667,6 +706,9 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("int");
 
+                    b.Property<int>("role")
+                        .HasColumnType("int");
+
                     b.HasKey("UserId");
 
                     b.HasIndex("PrivacySettingId");
@@ -697,7 +739,7 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("DataAccess.Model.Task", "Task")
+                    b.HasOne("DataAccess.Model.Tasks", "Task")
                         .WithMany("Analytics")
                         .HasForeignKey("TaskId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -849,7 +891,7 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DataAccess.Model.Notification", b =>
                 {
-                    b.HasOne("DataAccess.Model.Task", "Task")
+                    b.HasOne("DataAccess.Model.Tasks", "Task")
                         .WithMany("Notifications")
                         .HasForeignKey("TaskId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -915,6 +957,17 @@ namespace DataAccess.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("DataAccess.Model.RefreshToken", b =>
+                {
+                    b.HasOne("DataAccess.Model.User", "User")
+                        .WithMany("RefreshTokens")
+                        .HasForeignKey("UserId")
+                        .IsRequired()
+                        .HasConstraintName("FK_RefreshToken_Users");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("DataAccess.Model.SupportTicket", b =>
                 {
                     b.HasOne("DataAccess.Model.User", "User")
@@ -926,7 +979,7 @@ namespace DataAccess.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("DataAccess.Model.Task", b =>
+            modelBuilder.Entity("DataAccess.Model.Tasks", b =>
                 {
                     b.HasOne("DataAccess.Model.User", "User")
                         .WithMany()
@@ -978,7 +1031,7 @@ namespace DataAccess.Migrations
                     b.Navigation("Messages");
                 });
 
-            modelBuilder.Entity("DataAccess.Model.Task", b =>
+            modelBuilder.Entity("DataAccess.Model.Tasks", b =>
                 {
                     b.Navigation("Analytics");
 
@@ -1002,6 +1055,8 @@ namespace DataAccess.Migrations
                     b.Navigation("Notifications");
 
                     b.Navigation("ReceivedFriendRequests");
+
+                    b.Navigation("RefreshTokens");
 
                     b.Navigation("SentFriendRequests");
                 });
