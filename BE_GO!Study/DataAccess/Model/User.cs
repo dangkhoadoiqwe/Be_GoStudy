@@ -32,7 +32,7 @@ namespace DataAccess.Model
         public Specialization Specialization { get; set; }
 
         public int? SemesterId { get; set; }
-        [ForeignKey("SemesterId")]
+        [ForeignKey("SemesterId")] 
         public Semester Semester { get; set; }
         public ICollection<FriendRequest> SentFriendRequests { get; set; }
         public ICollection<FriendRequest> ReceivedFriendRequests { get; set; }

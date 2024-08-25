@@ -23,9 +23,13 @@ namespace FSAM.BusinessLogic.Generations.DependencyInjection
 
             services.AddScoped<IClassroomRepository, ClassroomRepository>();
             services.AddScoped<IClassroomService, ClassroomService>();
-            services.AddScoped<IUserRepository, UserRepository>();
+            
             services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
+
             services.AddScoped<LoginService>();
+
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
         }
     }

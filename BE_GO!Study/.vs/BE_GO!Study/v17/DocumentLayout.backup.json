@@ -3,36 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GO!Study\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D7024BDB-122D-4B6F-9A5B-4B88D561DB24}|GO!Study_Logic\\GOStudy_Logic.csproj|c:\\users\\admin\\onedrive\\documents\\github\\dream\\duan\\be_gostudy\\be_go!study\\go!study_logic\\viewmodel\\loginmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D7024BDB-122D-4B6F-9A5B-4B88D561DB24}|GO!Study_Logic\\GOStudy_Logic.csproj|solutionrelative:go!study_logic\\viewmodel\\loginmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D7024BDB-122D-4B6F-9A5B-4B88D561DB24}|GO!Study_Logic\\GOStudy_Logic.csproj|c:\\users\\admin\\onedrive\\documents\\github\\dream\\duan\\be_gostudy\\be_go!study\\go!study_logic\\service\\loginservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D7024BDB-122D-4B6F-9A5B-4B88D561DB24}|GO!Study_Logic\\GOStudy_Logic.csproj|solutionrelative:go!study_logic\\service\\loginservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2740E7CB-84A5-41A7-B2F5-77AC1B26D321}|BE_GO!Study\\BE_GO!Study.csproj|c:\\users\\admin\\onedrive\\documents\\github\\dream\\duan\\be_gostudy\\be_go!study\\be_go!study\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2740E7CB-84A5-41A7-B2F5-77AC1B26D321}|BE_GO!Study\\BE_GO!Study.csproj|solutionrelative:be_go!study\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2740E7CB-84A5-41A7-B2F5-77AC1B26D321}|BE_GO!Study\\BE_GO!Study.csproj|c:\\users\\admin\\onedrive\\documents\\github\\dream\\duan\\be_gostudy\\be_go!study\\be_go!study\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{2740E7CB-84A5-41A7-B2F5-77AC1B26D321}|BE_GO!Study\\BE_GO!Study.csproj|solutionrelative:be_go!study\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2740E7CB-84A5-41A7-B2F5-77AC1B26D321}|BE_GO!Study\\BE_GO!Study.csproj|c:\\users\\admin\\onedrive\\documents\\github\\dream\\duan\\be_gostudy\\be_go!study\\be_go!study\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2740E7CB-84A5-41A7-B2F5-77AC1B26D321}|BE_GO!Study\\BE_GO!Study.csproj|solutionrelative:be_go!study\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2740E7CB-84A5-41A7-B2F5-77AC1B26D321}|BE_GO!Study\\BE_GO!Study.csproj|c:\\users\\admin\\onedrive\\documents\\github\\dream\\duan\\be_gostudy\\be_go!study\\be_go!study\\dependencyinjection\\dependencyinjectionresolvergen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2740E7CB-84A5-41A7-B2F5-77AC1B26D321}|BE_GO!Study\\BE_GO!Study.csproj|solutionrelative:be_go!study\\dependencyinjection\\dependencyinjectionresolvergen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C3CC7C96-07A7-4F99-AE7D-C2CFDDC69920}|DataAccess\\DataAccess.csproj|c:\\users\\admin\\onedrive\\documents\\github\\dream\\duan\\be_gostudy\\be_go!study\\dataaccess\\model\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3CC7C96-07A7-4F99-AE7D-C2CFDDC69920}|DataAccess\\DataAccess.csproj|solutionrelative:dataaccess\\model\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{C3CC7C96-07A7-4F99-AE7D-C2CFDDC69920}|DataAccess\\DataAccess.csproj|c:\\users\\admin\\onedrive\\documents\\github\\dream\\duan\\be_gostudy\\be_go!study\\dataaccess\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C3CC7C96-07A7-4F99-AE7D-C2CFDDC69920}|DataAccess\\DataAccess.csproj|solutionrelative:dataaccess\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7024BDB-122D-4B6F-9A5B-4B88D561DB24}|GO!Study_Logic\\GOStudy_Logic.csproj|c:\\users\\admin\\onedrive\\documents\\github\\dream\\duan\\be_gostudy\\be_go!study\\go!study_logic\\viewmodel\\user\\user_view_home_model.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7024BDB-122D-4B6F-9A5B-4B88D561DB24}|GO!Study_Logic\\GOStudy_Logic.csproj|solutionrelative:go!study_logic\\viewmodel\\user\\user_view_home_model.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2740E7CB-84A5-41A7-B2F5-77AC1B26D321}|BE_GO!Study\\BE_GO!Study.csproj|c:\\users\\admin\\onedrive\\documents\\github\\dream\\duan\\be_gostudy\\be_go!study\\be_go!study\\controllers\\user\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2740E7CB-84A5-41A7-B2F5-77AC1B26D321}|BE_GO!Study\\BE_GO!Study.csproj|solutionrelative:be_go!study\\controllers\\user\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7024BDB-122D-4B6F-9A5B-4B88D561DB24}|GO!Study_Logic\\GOStudy_Logic.csproj|c:\\users\\admin\\onedrive\\documents\\github\\dream\\duan\\be_gostudy\\be_go!study\\go!study_logic\\automappermodule\\usermodule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7024BDB-122D-4B6F-9A5B-4B88D561DB24}|GO!Study_Logic\\GOStudy_Logic.csproj|solutionrelative:go!study_logic\\automappermodule\\usermodule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7024BDB-122D-4B6F-9A5B-4B88D561DB24}|GO!Study_Logic\\GOStudy_Logic.csproj|c:\\users\\admin\\onedrive\\documents\\github\\dream\\duan\\be_gostudy\\be_go!study\\go!study_logic\\service\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7024BDB-122D-4B6F-9A5B-4B88D561DB24}|GO!Study_Logic\\GOStudy_Logic.csproj|solutionrelative:go!study_logic\\service\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,114 +30,77 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UserRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GO!Study\\DataAccess\\Repositories\\UserRepository.cs",
+              "RelativeDocumentMoniker": "DataAccess\\Repositories\\UserRepository.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GO!Study\\DataAccess\\Repositories\\UserRepository.cs",
+              "RelativeToolTip": "DataAccess\\Repositories\\UserRepository.cs",
+              "ViewState": "AgIAADEAAAAAAAAAAAA8wDgAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-24T13:24:48.922Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GO!Study\\GO!Study_Logic\\Service\\UserService.cs",
+              "RelativeDocumentMoniker": "GO!Study_Logic\\Service\\UserService.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GO!Study\\GO!Study_Logic\\Service\\UserService.cs",
+              "RelativeToolTip": "GO!Study_Logic\\Service\\UserService.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAqwEEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-24T13:18:09.072Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "DependencyInjectionResolverGen.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GO!Study\\BE_GO!Study\\DependencyInjection\\DependencyInjectionResolverGen.cs",
-              "RelativeDocumentMoniker": "BE_GO!Study\\DependencyInjection\\DependencyInjectionResolverGen.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GO!Study\\BE_GO!Study\\DependencyInjection\\DependencyInjectionResolverGen.cs",
-              "RelativeToolTip": "BE_GO!Study\\DependencyInjection\\DependencyInjectionResolverGen.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAIAwwBUAAAA8AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-23T15:04:40.753Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GO!Study\\BE_GO!Study\\appsettings.json",
-              "RelativeDocumentMoniker": "BE_GO!Study\\appsettings.json",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GO!Study\\BE_GO!Study\\appsettings.json",
-              "RelativeToolTip": "BE_GO!Study\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-08-23T15:01:08.192Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GO!Study\\BE_GO!Study\\Program.cs",
-              "RelativeDocumentMoniker": "BE_GO!Study\\Program.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GO!Study\\BE_GO!Study\\Program.cs",
-              "RelativeToolTip": "BE_GO!Study\\Program.cs",
-              "ViewState": "AgIAABsAAAAAAAAAAAAwwCUAAAAgAAAAAAAAAA==",
+              "Title": "UserModule.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GO!Study\\GO!Study_Logic\\AutoMapperModule\\UserModule.cs",
+              "RelativeDocumentMoniker": "GO!Study_Logic\\AutoMapperModule\\UserModule.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GO!Study\\GO!Study_Logic\\AutoMapperModule\\UserModule.cs",
+              "RelativeToolTip": "GO!Study_Logic\\AutoMapperModule\\UserModule.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAQwBMAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-23T14:56:21.128Z",
+              "WhenOpened": "2024-08-25T03:42:48.854Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "LoginController.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GO!Study\\BE_GO!Study\\Controllers\\LoginController.cs",
-              "RelativeDocumentMoniker": "BE_GO!Study\\Controllers\\LoginController.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GO!Study\\BE_GO!Study\\Controllers\\LoginController.cs",
-              "RelativeToolTip": "BE_GO!Study\\Controllers\\LoginController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAYAAAAAAAAAA==",
+              "Title": "UserController.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GO!Study\\BE_GO!Study\\Controllers\\User\\UserController.cs",
+              "RelativeDocumentMoniker": "BE_GO!Study\\Controllers\\User\\UserController.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GO!Study\\BE_GO!Study\\Controllers\\User\\UserController.cs",
+              "RelativeToolTip": "BE_GO!Study\\Controllers\\User\\UserController.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAowAwAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-23T14:44:59.46Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "UserRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GO!Study\\DataAccess\\Repositories\\UserRepository.cs",
-              "RelativeDocumentMoniker": "DataAccess\\Repositories\\UserRepository.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GO!Study\\DataAccess\\Repositories\\UserRepository.cs",
-              "RelativeToolTip": "DataAccess\\Repositories\\UserRepository.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-23T14:41:17.202Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "User.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GO!Study\\DataAccess\\Model\\User.cs",
-              "RelativeDocumentMoniker": "DataAccess\\Model\\User.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GO!Study\\DataAccess\\Model\\User.cs",
-              "RelativeToolTip": "DataAccess\\Model\\User.cs",
-              "ViewState": "AgIAABQAAAAAAAAAAAAgwAUAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-23T13:55:56.584Z",
+              "WhenOpened": "2024-08-25T03:04:57.087Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "LoginService.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GO!Study\\GO!Study_Logic\\Service\\LoginService.cs",
-              "RelativeDocumentMoniker": "GO!Study_Logic\\Service\\LoginService.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GO!Study\\GO!Study_Logic\\Service\\LoginService.cs",
-              "RelativeToolTip": "GO!Study_Logic\\Service\\LoginService.cs",
-              "ViewState": "AgIAADUAAAAAAAAAAAAqwEcAAAArAAAAAAAAAA==",
+              "Title": "User_View_Home_Model.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GO!Study\\GO!Study_Logic\\ViewModel\\User\\User_View_Home_Model.cs",
+              "RelativeDocumentMoniker": "GO!Study_Logic\\ViewModel\\User\\User_View_Home_Model.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GO!Study\\GO!Study_Logic\\ViewModel\\User\\User_View_Home_Model.cs",
+              "RelativeToolTip": "GO!Study_Logic\\ViewModel\\User\\User_View_Home_Model.cs",
+              "ViewState": "AgIAAD4AAAAAAAAAAIA7wFUAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-23T13:52:16.582Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "LoginModel.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GO!Study\\GO!Study_Logic\\ViewModel\\LoginModel.cs",
-              "RelativeDocumentMoniker": "GO!Study_Logic\\ViewModel\\LoginModel.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GO!Study\\GO!Study_Logic\\ViewModel\\LoginModel.cs",
-              "RelativeToolTip": "GO!Study_Logic\\ViewModel\\LoginModel.cs",
-              "ViewState": "AgIAACcAAAAAAAAAAIA4wDMAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-23T13:44:55.463Z",
+              "WhenOpened": "2024-08-24T08:30:24.528Z",
               "EditorCaption": ""
             }
           ]
