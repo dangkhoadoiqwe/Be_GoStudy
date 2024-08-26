@@ -21,4 +21,11 @@ namespace GO_Study_Logic.ViewModel
 
         public DateTime CreatedAt { get; set; } 
     }
+
+    public class ClassUserModel
+    {
+        public IEnumerable<FriendRequest> FriendRequests { get; set; }
+        public IEnumerable<ClassroomModel> UserRooms { get; set; }
+        public IEnumerable<ClassroomModel> OtherClassrooms { get; set; }
+    }
 }

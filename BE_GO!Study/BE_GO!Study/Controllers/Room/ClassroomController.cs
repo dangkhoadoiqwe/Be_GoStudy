@@ -2,7 +2,7 @@
 using GO_Study_Logic.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BE_GO_Study.Controllers
+namespace BE_GO_Study.Controllers.Room
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -51,11 +51,13 @@ namespace BE_GO_Study.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteClassroom(int id)
+        [HttpGet("user/{userid}")]
+        public async Task<ActionResult<IEnumerable<ClassroomModel>>> GetUserRooms(int userid)
         {
-            await _service.DeleteClassroomAsync(id);
-            return NoContent();
+            var classrooms = await _service.GetUserDashboardAsync(userid);
+            return Ok(classrooms);
         }
+
+        
     }
 }
