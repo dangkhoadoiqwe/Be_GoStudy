@@ -27,5 +27,17 @@ namespace BE_GO_Study.Controllers.User
 
             return Ok(userHomeData);
         }
+        [HttpGet("GetUserProfile/{userid}")]
+        public async Task<IActionResult> GetUserProfile(int userid)
+        {
+            var userHomeData = await _userService.GetUserProfile(userid);
+
+            if (userHomeData == null)
+            {
+                return NotFound($"User with ID {userid} not found.");
+            }
+
+            return Ok(userHomeData);
+        }
     }
 }

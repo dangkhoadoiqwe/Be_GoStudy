@@ -17,6 +17,9 @@ namespace DataAccess.Repositories
         Task<IEnumerable<FriendRequest>> GetAllFriendRequestsAsync(int userid);
         Task<PrivacySetting?> GetPrivacySettingByuserIDAsync(int userid);
         Task<BlogPost?> Get1BlogPostAsync(int id);
+        Task<int> TotalAttendance(int userid);
+       
+        Task<IEnumerable<Analytic>> GetUserIdAnalyticAsync(int userid);
     }
     public partial class UserRepository : BaseRepository<User>, IUserRepository
     
@@ -63,6 +66,19 @@ namespace DataAccess.Repositories
             var user = await _dbContext.Set<User>().Include(u=>u.PrivacySetting).FirstOrDefaultAsync( u=>u.UserId == userid);
             return user?.PrivacySetting;
         }
+
+        public async Task<IEnumerable<Analytic>> GetUserIdAnalyticAsync(int userid)
+        {
+            return await _dbContext.Set<Analytic>().Where(t => t.UserId == userid).ToListAsync();
+        }
+
+        public async Task<int> TotalAttendance(int userid)
+        {
+            return await _dbContext.Set<Attendance>()
+                .CountAsync(a => a.UserId == userid);
+        }
+
+        
     }
 }
 

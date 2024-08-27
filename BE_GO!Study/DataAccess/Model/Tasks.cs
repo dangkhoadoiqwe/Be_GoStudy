@@ -20,6 +20,8 @@ namespace DataAccess.Model
         [Required]
         public string Title { get; set; }
 
+        public int TimeComplete {  get; set; }
+
         public string Description { get; set; }
 
         [Required]

@@ -45,18 +45,13 @@ namespace GO_Study_Logic.ViewModel.User
         public int Id { get; set; }
         public string Description { get; set; }
         public decimal Value { get; set; }
+        public int UserId { get; set; }
+        public int TaskId { get; set; }
+        public int ClassroomId { get; set; }
+        public DateTime Timestamp { get; set; }
     }
-    public class Semester_View_Model
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public int Year { get; set; }
-    }
-    public class Specialization_View_Model
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-    }
+    
+  
     public class PrivacySetting_View_Model
     {
         public int PrivacySettingId { get; set; }
@@ -71,7 +66,7 @@ namespace GO_Study_Logic.ViewModel.User
        
         public string ProfileImage { get; set; }
 
-        
+        public int totalAttendace { get; set; }
         public PrivacySetting_View_Model PrivacySetting { get; set; }  
 
         public List<Analytic_View_Model> Analytics { get; set; } = new List<Analytic_View_Model>(); 

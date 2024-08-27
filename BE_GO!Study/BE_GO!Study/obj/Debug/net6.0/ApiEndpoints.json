@@ -125,6 +125,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "BE_GO_Study.Controllers.User.UserController",
+    "Method": "GetUserProfile",
+    "RelativePath": "api/User/GetUserProfile/{userid}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userid",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "BE_GO_Study.Controllers.LoginController",
     "Method": "Login",
     "RelativePath": "api/v1/users/login",
