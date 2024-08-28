@@ -14,211 +14,158 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using NTQ.Sdk.Core.Filters;
+using GO_Study_Logic.ViewModel.User;
 
 namespace GO_Study_Logic.Service
 {
     public class LoginService
     {
         private readonly IUserRepository _userRepository;
-
         private readonly IConfiguration _configuration;
         private readonly TokenValidationParameters _tokenValidationParameters;
         private readonly IRefreshTokenRepository _refreshTokenRepository;
         private readonly IMapper _mapper;
 
-        public LoginService(IUserRepository userRepository, IConfiguration configuration
-            , TokenValidationParameters tokenValidationParameters, IRefreshTokenRepository refreshTokenRepository, IMapper mapper)
+        public LoginService(IUserRepository userRepository, IConfiguration configuration,
+                            TokenValidationParameters tokenValidationParameters,
+                            IRefreshTokenRepository refreshTokenRepository,
+                            IMapper mapper)
         {
-
+            _userRepository = userRepository;
             _configuration = configuration;
             _tokenValidationParameters = tokenValidationParameters;
             _refreshTokenRepository = refreshTokenRepository;
             _mapper = mapper;
-            _userRepository = userRepository;
         }
 
-        public async Task<LoginModel> login(LoginRequest login)
+        public async Task<LoginModel> Login(LoginRequest login)
         {
-            var userExist = _userRepository.FirstOrDefault(u => u.Email == login.Email);
-            var userModel = _mapper.Map<UserViewModel>(userExist);
-            string storedPassword = userExist.PasswordHash;
-            string passwordToCheck = login.Password;
-
-            bool passwordVerified = false;
-            if (userExist is null)
+            var userExist = await _userRepository.FirstOrDefaultAsync(u => u.Email == login.Email);
+            if (userExist == null)
             {
-                throw new ErrorResponse(404, 4, "User not exist");
-
-            }
-            if (storedPassword.Length == 60 && storedPassword.StartsWith("$2a$"))
-            {
-                // Mật khẩu đã được mã hóa, sử dụng Verify của BCrypt để xác minh
-                passwordVerified = BCrypt.Net.BCrypt.Verify(passwordToCheck, storedPassword);
-            }
-            else
-            {
-                // Mật khẩu chưa được mã hóa, mã hóa mật khẩu trước khi xác minh
-                passwordVerified = (passwordToCheck == storedPassword);
+                throw new ErrorResponse(404, 4, "User does not exist");
             }
 
+            bool passwordVerified = VerifyPassword(login.Password, userExist.PasswordHash);
             if (!passwordVerified)
             {
                 throw new ErrorResponse(404, 4, "Wrong Password");
             }
 
+            var userModel = _mapper.Map<UserViewModel1>(userExist);
             return new LoginModel
             {
                 Success = true,
                 UserName = userModel.Email,
                 Role = Enum.GetName(typeof(RoleEnum), userModel.Role),
                 Data = GenerateJwtToken(userModel),
-
             };
-
         }
 
-        public TokenModel GenerateJwtToken(UserViewModel userModel)
+        private bool VerifyPassword(string inputPassword, string storedPassword)
+        {
+            return storedPassword.Length == 60 && storedPassword.StartsWith("$2a$")
+                ? BCrypt.Net.BCrypt.Verify(inputPassword, storedPassword)
+                : inputPassword == storedPassword;
+        }
+
+        public TokenModel GenerateJwtToken(UserViewModel1 userModel)
         {
             var user = _mapper.Map<User>(userModel);
-            var expries = DateTime.UtcNow.Add(TimeSpan.Parse(_configuration.GetSection("JwtSettings:ExpiryTimeFrame").Value));
+            var expires = DateTime.UtcNow.Add(TimeSpan.Parse(_configuration["JwtSettings:ExpiryTimeFrame"]));
             var handler = new JwtSecurityTokenHandler();
 
-
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetSection("JwtSettings:Key").Value));
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSettings:Key"]));
             var tokenDescription = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-                    new Claim(JwtRegisteredClaimNames.Sid,user.UserId.ToString()),
-                    new Claim(JwtRegisteredClaimNames.Sub,user.FullName),
-                    new Claim(JwtRegisteredClaimNames.Email,user.Email),
-                    new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()),
-                    new Claim(JwtRegisteredClaimNames.Iat,DateTime.Now.ToUniversalTime().ToString()),
-                    new Claim(ClaimTypes.Role, Enum.GetName(typeof(RoleEnum), user.role))
-        }),
-                Expires = expries,
+                new Claim(JwtRegisteredClaimNames.Sid, user.UserId.ToString()),
+                new Claim(JwtRegisteredClaimNames.Sub, user.FullName),
+                new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+            }),
+                Expires = expires,
                 SigningCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature)
-
             };
+
             var token = handler.CreateToken(tokenDescription);
             var accessToken = handler.WriteToken(token);
-            var refreshToken = new RefreshToken
-            {
-                RefreshTokenId = Guid.NewGuid(),
-                JwtId = token.Id,
-                Token = RandomStringGeneration(),
-                IssuedAt = DateTime.UtcNow,
-                ExpriedAt = DateTime.UtcNow.AddMonths(1),
-                IsRevoked = false,
-                IsUsed = false,
-                UserId = user.UserId
+            var refreshToken = CreateRefreshToken(token.Id, user.UserId);
 
-            };
-            _refreshTokenRepository.Create(refreshToken);
-            _refreshTokenRepository.Save();
             return new TokenModel
             {
                 AccessToken = accessToken,
                 RefreshToken = refreshToken.Token
             };
         }
+
+        private RefreshToken CreateRefreshToken(string jwtId, int userId)
+        {
+            var refreshToken = new RefreshToken
+            {
+                RefreshTokenId = Guid.NewGuid(),
+                JwtId = jwtId,
+                Token = RandomStringGeneration(),
+                IssuedAt = DateTime.UtcNow,
+                ExpriedAt = DateTime.UtcNow.AddMonths(1),
+                IsRevoked = false,
+                IsUsed = false,
+                UserId = userId
+            };
+
+            _refreshTokenRepository.Create(refreshToken);
+            _refreshTokenRepository.Save();
+            return refreshToken;
+        }
+
         public async Task<UserModel> VerifyAndGenerateToken(TokenModel token)
         {
             var jwtTokenHandler = new JwtSecurityTokenHandler();
             try
             {
-                //_tokenValidationParameters.ValidateLifetime = false;
                 var tokenVerification = jwtTokenHandler.ValidateToken(token.AccessToken, _tokenValidationParameters, out var validatedToken);
-                if (validatedToken is JwtSecurityToken jwtToken)
+                if (validatedToken is JwtSecurityToken jwtToken && !jwtToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
                 {
-                    var result = jwtToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase);
-                    if (result == false)
-
-                        return null;
-
+                    return new UserModel { Success = false, Message = "Invalid Token" };
                 }
-                var utcExpiryDate = long.Parse(tokenVerification.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Exp).Value);
 
-                var expiryDate = UnixTimeStampToDateTime(utcExpiryDate);
-                if (expiryDate > DateTime.Now)
+                var expiryDate = UnixTimeStampToDateTime(long.Parse(tokenVerification.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Exp)?.Value ?? "0"));
+                if (expiryDate < DateTime.UtcNow)
                 {
-                    return new UserModel
-                    {
-                        Success = false,
-                        Message = "Expried Token"
-                    };
+                    return new UserModel { Success = false, Message = "Expired Token" };
                 }
+
                 var storedToken = await _refreshTokenRepository.FirstOrDefaultAsync(x => x.Token == token.RefreshToken);
-                if (storedToken == null)
+                if (storedToken == null || storedToken.IsUsed || storedToken.IsRevoked)
                 {
-                    return new UserModel
-                    {
-                        Success = false,
-                        Message = "Refresh token does not exist"
-                    };
+                    return new UserModel { Success = false, Message = "Invalid or used/revoked Refresh token" };
                 }
-                if (storedToken.IsUsed)
+
+                if (storedToken.JwtId != tokenVerification.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Jti)?.Value)
                 {
-                    return new UserModel
-                    {
-                        Success = false,
-                        Message = "Refresh token has been used"
-                    };
+                    return new UserModel { Success = false, Message = "Invalid Token" };
                 }
-                if (storedToken.IsRevoked)
-                {
-                    return new UserModel
-                    {
-                        Success = false,
-                        Message = "Refresh token has been revoked"
-                    };
-                }
-                var jti = tokenVerification.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Jti).Value;
-                if (storedToken.JwtId != jti)
-                {
-                    return new UserModel
-                    {
-                        Success = false,
-                        Message = "Invalid Token"
-                    };
-                }
-                if (storedToken.ExpriedAt < DateTime.UtcNow)
-                {
-                    return new UserModel
-                    {
-                        Success = false,
-                        Message = "Exprired Token"
-                    };
-                }
+
                 storedToken.IsUsed = true;
                 _refreshTokenRepository.Update(storedToken);
                 await _refreshTokenRepository.SaveAsync();
+
                 var dbUser = await _userRepository.FirstOrDefaultAsync(u => u.UserId == storedToken.UserId);
-                var userModel = _mapper.Map<UserViewModel>(dbUser);
+                var userModel = _mapper.Map<UserViewModel1>(dbUser);
                 var accessToken = GenerateJwtToken(userModel);
-                return new UserModel
-                {
-                    Success = true,
-                    Data = accessToken,
-                    Message = "Verify And GenerateToken success"
-                };
+
+                return new UserModel { Success = true, Data = accessToken, Message = "Verify And Generate Token success" };
             }
             catch (Exception ex)
             {
-                return new UserModel
-                {
-                    Success = false,
-                    Message = ex.Message,
-                };
+                return new UserModel { Success = false, Message = ex.Message };
             }
-
         }
 
         private DateTime UnixTimeStampToDateTime(long utcExpiryDate)
         {
-            var dateTimeVal = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-            dateTimeVal = dateTimeVal.AddSeconds(utcExpiryDate).ToUniversalTime();
-            return dateTimeVal;
+            return DateTimeOffset.FromUnixTimeSeconds(utcExpiryDate).UtcDateTime;
         }
 
         private string RandomStringGeneration()
@@ -227,7 +174,6 @@ namespace GO_Study_Logic.Service
             using (var rng = RandomNumberGenerator.Create())
             {
                 rng.GetBytes(random);
-
                 return Convert.ToBase64String(random);
             }
         }

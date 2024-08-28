@@ -1,9 +1,12 @@
 // Program.cs or Startup.cs (ASP.NET Core setup file)
 using BE_GO_Study.AppStart;
+using BE_GO_Study.GlobalExceptionHandler;
 using DataAccess.Model;
 using DataAccess.Repositories;
 using FSAM.BusinessLogic.Generations.DependencyInjection;
+using GO_Study_Logic.Helper.CustomExceptions;
 using GO_Study_Logic.Service;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -27,22 +30,42 @@ builder.Services.InitializerDependencyInjection();
 // Configure AutoMapper
 builder.Services.ConfigureAutoMapper();
 
-// Register TokenValidationParameters
-builder.Services.AddSingleton<TokenValidationParameters>(provider =>
-{
-    var configuration = provider.GetRequiredService<IConfiguration>();
-    var jwtSettings = configuration.GetSection("JwtSettings");
-    return new TokenValidationParameters
-    {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true, 
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"]))
-    };
-});
+var key = Encoding.ASCII.GetBytes(builder.Configuration["JwtSettings:Key"]
+    ?? throw new Exception("JwtSettings:Key is not found"));
 
-// Add services for controllers
+var tokenValidationParameter = new TokenValidationParameters
+{
+    ValidateIssuer = false,
+    ValidateAudience = false,
+    ValidateLifetime = true,
+    ValidateIssuerSigningKey = true,
+    IssuerSigningKey = new SymmetricSecurityKey(key),
+    RequireExpirationTime = true,
+    ClockSkew = TimeSpan.Zero
+};
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(jwt =>
+{
+    jwt.Events = new JwtBearerEvents
+    {
+        OnAuthenticationFailed = async context =>
+        {
+            throw new UnauthourizeException("Failed to validate token");
+        }
+    };
+    jwt.SaveToken = true;
+    jwt.TokenValidationParameters = tokenValidationParameter;
+});
+builder.Services.AddSingleton(tokenValidationParameter);
+builder.Services.AddTransient<ExceptionHandlingMiddleware>();
+builder.Services.AddTransient<ArgumentExceptionHandlingMiddleware>();
+builder.Services.AddTransient<UnauthourizeExceptionHandlingMiddleware>();
+ 
 builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

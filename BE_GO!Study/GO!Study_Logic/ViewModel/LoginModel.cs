@@ -33,12 +33,12 @@ namespace GO_Study_Logic.ViewModel
         public string Email { get; set; } = null!;
         public string Password { get; set; } = null!;
     }
-    public class UserViewModel
+    public class UserViewModel1
     {
-        public int UserId { get; set; } 
-        public string FullName { get; set; } 
-        public string Email { get; set; } 
-        public int Role { get; set; }  
+        public int UserId { get; set; }
+        public string FullName { get; set; }
+        public string Email { get; set; }
+        public int Role { get; set; }
         public string PasswordHash { get; set; }
 
     }

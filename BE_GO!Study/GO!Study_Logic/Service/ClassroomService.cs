@@ -2,6 +2,7 @@
 using DataAccess.Model;
 using DataAccess.Repositories;
 using GO_Study_Logic.ViewModel;
+using GO_Study_Logic.ViewModel.User;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -78,23 +79,24 @@ namespace GO_Study_Logic.Service
 
         public async Task<ClassUserModel> GetUserDashboardAsync(int userId)
         {
-            // Get friend requests
+           
             var friendRequests = await _userRepository.GetAllFriendRequestsAsync(userId);
-
-            // Get user rooms
+            var userdetail = await _userRepository.GetByIdAsync(userId);
             var userRooms = await _repository.GetUserRoomAsync(userId);
-
-            // Get other classrooms
             var otherClassrooms = await _repository.GetOtherClassroomsAsync();
 
-            // Map to ClassroomModel
+
+            var userdetailMapped = _mapper.Map<UserViewModel>(userdetail);
+            var friendRequestsMapped = _mapper.Map<IEnumerable<FriendRequest_View_Model>>(friendRequests);
             var userRoomsMapped = _mapper.Map<IEnumerable<ClassroomModel>>(userRooms);
+
             var otherClassroomsMapped = _mapper.Map<IEnumerable<ClassroomModel>>(otherClassrooms);
 
             // Create and return combined DTO
             return new ClassUserModel
             {
-                FriendRequests = friendRequests,
+                user = userdetailMapped,
+                FriendRequests = friendRequestsMapped,
                 UserRooms = userRoomsMapped,
                 OtherClassrooms = otherClassroomsMapped
             };

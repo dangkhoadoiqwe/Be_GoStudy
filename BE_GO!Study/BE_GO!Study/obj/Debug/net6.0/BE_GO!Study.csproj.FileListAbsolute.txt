@@ -151,7 +151,6 @@ C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GO!Study\BE_GO
 C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GO!Study\BE_GO!Study\bin\Debug\net6.0\GOStudy_Logic.dll
 C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GO!Study\BE_GO!Study\bin\Debug\net6.0\GOStudy_Logic.pdb
 C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GO!Study\BE_GO!Study\bin\Debug\net6.0\DataAccess.pdb
-C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GO!Study\BE_GO!Study\obj\Debug\net6.0\BE_GO!Study.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GO!Study\BE_GO!Study\obj\Debug\net6.0\staticwebassets.build.json
 C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GO!Study\BE_GO!Study\obj\Debug\net6.0\staticwebassets.development.json
 C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GO!Study\BE_GO!Study\obj\Debug\net6.0\staticwebassets\msbuild.BE_GO!Study.Microsoft.AspNetCore.StaticWebAssets.props
@@ -166,3 +165,4 @@ C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GO!Study\BE_GO
 C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GO!Study\BE_GO!Study\obj\Debug\net6.0\BE_GO!Study.pdb
 C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GO!Study\BE_GO!Study\obj\Debug\net6.0\BE_GO!Study.genruntimeconfig.cache
 C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GO!Study\BE_GO!Study\obj\Debug\net6.0\ref\BE_GO!Study.dll
+C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GO!Study\BE_GO!Study\obj\Debug\net6.0\BE_GO!Study.MvcApplicationPartsAssemblyInfo.cs

@@ -10,19 +10,19 @@ namespace BE_GO_Study.Controllers
 
     public class LoginController : ControllerBase
     {
-       
+
         private readonly LoginService _loginService;
 
         public LoginController(LoginService loginService)
         {
-            
+
             _loginService = loginService;
         }
         [HttpPost]
         [Route("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest req)
         {
-            var loginResult = await _loginService.login(req);
+            var loginResult = await _loginService.Login(req);
             if (!ModelState.IsValid)
                 return BadRequest();
             if (loginResult.Success)

@@ -61,6 +61,8 @@ namespace GO_Study_Logic.ViewModel.User
     public class User_View_Home_Model
     {
         public int UserId { get; set; }
+
+        public int role { get; set; }
         public string FullName { get; set; }
         public string Email { get; set; }
        

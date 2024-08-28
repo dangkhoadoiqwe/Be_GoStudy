@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GO_Study_Logic.ViewModel.User;
 
 namespace GO_Study_Logic.ViewModel
 {
@@ -24,7 +25,8 @@ namespace GO_Study_Logic.ViewModel
 
     public class ClassUserModel
     {
-        public IEnumerable<FriendRequest> FriendRequests { get; set; }
+        public UserViewModel user { get; set; }
+        public IEnumerable<FriendRequest_View_Model> FriendRequests { get; set; }
         public IEnumerable<ClassroomModel> UserRooms { get; set; }
         public IEnumerable<ClassroomModel> OtherClassrooms { get; set; }
     }

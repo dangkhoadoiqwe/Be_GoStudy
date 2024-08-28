@@ -1,5 +1,6 @@
 ﻿using GO_Study_Logic.Service;
 using GO_Study_Logic.ViewModel.User;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BE_GO_Study.Controllers.User
@@ -14,7 +15,7 @@ namespace BE_GO_Study.Controllers.User
         {
             _userService = userService;
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpGet("GetUserHome/{userid}")]
         public async Task<IActionResult> GetUserHome(int userid)
         {
