@@ -127,13 +127,26 @@ namespace DataAccess.Model
                 .HasOne(a => a.Task)
                 .WithMany(t => t.Analytics)
                 .HasForeignKey(a => a.TaskId)
-                .OnDelete(DeleteBehavior.NoAction);  
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Analytic>()
                .HasOne(a => a.Classroom)
                .WithMany(c => c.Analytics)
                .HasForeignKey(a => a.ClassroomId)
                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<UserSpecialization>()
+         .HasKey(us => us.UserSpecializationId);
+
+            modelBuilder.Entity<UserSpecialization>()
+                .HasOne(us => us.User)
+                .WithMany(u => u.UserSpecializations)
+                .HasForeignKey(us => us.UserId);
+
+            modelBuilder.Entity<UserSpecialization>()
+                .HasOne(us => us.Specialization)
+                .WithMany(s => s.UserSpecializations)
+                .HasForeignKey(us => us.SpecializationId);
 
             modelBuilder.Entity<RefreshToken>(entity =>
             {
@@ -161,8 +174,6 @@ namespace DataAccess.Model
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_RefreshToken_Users");
             });
-
         }
- 
     }
 }

@@ -16,6 +16,9 @@ namespace DataAccess.Model
 
         [Required]
         public string Name { get; set; }
+
+        public ICollection<UserSpecialization> UserSpecializations { get; set; } // Navigation property
+
     }
 
 }

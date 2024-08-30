@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(GOStudyContext))]
-    [Migration("20240823144322_v4")]
-    partial class v4
+    [Migration("20240830104721_v2")]
+    partial class v2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -180,9 +180,6 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -191,9 +188,12 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("SpecializationId")
+                        .HasColumnType("int");
+
                     b.HasKey("ClassroomId");
 
-                    b.HasIndex("CreatedBy");
+                    b.HasIndex("SpecializationId");
 
                     b.ToTable("Classrooms");
                 });
@@ -658,6 +658,9 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("TimeComplete")
+                        .HasColumnType("int");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -803,13 +806,13 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DataAccess.Model.Classroom", b =>
                 {
-                    b.HasOne("DataAccess.Model.User", "User")
+                    b.HasOne("DataAccess.Model.Specialization", "Specialization")
                         .WithMany()
-                        .HasForeignKey("CreatedBy")
+                        .HasForeignKey("SpecializationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("Specialization");
                 });
 
             modelBuilder.Entity("DataAccess.Model.Comment", b =>

@@ -178,9 +178,6 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -189,9 +186,12 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("SpecializationId")
+                        .HasColumnType("int");
+
                     b.HasKey("ClassroomId");
 
-                    b.HasIndex("CreatedBy");
+                    b.HasIndex("SpecializationId");
 
                     b.ToTable("Classrooms");
                 });
@@ -701,15 +701,11 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Role")
+                        .HasColumnType("int");
+
                     b.Property<int?>("SemesterId")
                         .IsRequired()
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SpecializationId")
-                        .IsRequired()
-                        .HasColumnType("int");
-
-                    b.Property<int>("role")
                         .HasColumnType("int");
 
                     b.HasKey("UserId");
@@ -718,9 +714,36 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("SemesterId");
 
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("DataAccess.Model.UserSpecialization", b =>
+                {
+                    b.Property<int>("UserSpecializationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserSpecializationId"), 1L, 1);
+
+                    b.Property<DateTime>("DateEnd")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateStart")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("SpecializationId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserSpecializationId");
+
                     b.HasIndex("SpecializationId");
 
-                    b.ToTable("Users");
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserSpecialization");
                 });
 
             modelBuilder.Entity("DataAccess.Model.Account", b =>
@@ -804,13 +827,13 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DataAccess.Model.Classroom", b =>
                 {
-                    b.HasOne("DataAccess.Model.User", "User")
+                    b.HasOne("DataAccess.Model.Specialization", "Specialization")
                         .WithMany()
-                        .HasForeignKey("CreatedBy")
+                        .HasForeignKey("SpecializationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("Specialization");
                 });
 
             modelBuilder.Entity("DataAccess.Model.Comment", b =>
@@ -1007,17 +1030,28 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("PrivacySetting");
+
+                    b.Navigation("Semester");
+                });
+
+            modelBuilder.Entity("DataAccess.Model.UserSpecialization", b =>
+                {
                     b.HasOne("DataAccess.Model.Specialization", "Specialization")
-                        .WithMany()
+                        .WithMany("UserSpecializations")
                         .HasForeignKey("SpecializationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("PrivacySetting");
-
-                    b.Navigation("Semester");
+                    b.HasOne("DataAccess.Model.User", "User")
+                        .WithMany("UserSpecializations")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Specialization");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("DataAccess.Model.BlogPost", b =>
@@ -1032,6 +1066,11 @@ namespace DataAccess.Migrations
                     b.Navigation("Analytics");
 
                     b.Navigation("Messages");
+                });
+
+            modelBuilder.Entity("DataAccess.Model.Specialization", b =>
+                {
+                    b.Navigation("UserSpecializations");
                 });
 
             modelBuilder.Entity("DataAccess.Model.Tasks", b =>
@@ -1062,6 +1101,8 @@ namespace DataAccess.Migrations
                     b.Navigation("RefreshTokens");
 
                     b.Navigation("SentFriendRequests");
+
+                    b.Navigation("UserSpecializations");
                 });
 #pragma warning restore 612, 618
         }

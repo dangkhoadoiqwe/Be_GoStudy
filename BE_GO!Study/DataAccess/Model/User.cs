@@ -1,5 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccess.Model
 {
@@ -15,8 +16,7 @@ namespace DataAccess.Model
         public string Email { get; set; }
 
         [Required]
-
-        public int role { get; set; }
+        public int Role { get; set; }
 
         [Required]
         public string PasswordHash { get; set; }
@@ -27,27 +27,23 @@ namespace DataAccess.Model
         [ForeignKey("PrivacySettingId")]
         public PrivacySetting PrivacySetting { get; set; }
 
-        public int? SpecializationId { get; set; }
-        [ForeignKey("SpecializationId")]
-        public Specialization Specialization { get; set; }
+        public ICollection<UserSpecialization> UserSpecializations { get; set; }
 
         public int? SemesterId { get; set; }
-        [ForeignKey("SemesterId")] 
+        [ForeignKey("SemesterId")]
         public Semester Semester { get; set; }
+
         public ICollection<FriendRequest> SentFriendRequests { get; set; }
         public ICollection<FriendRequest> ReceivedFriendRequests { get; set; }
         public ICollection<Bookmark> Bookmarks { get; set; }
-         public ICollection<Comment> Comments { get; set; }
+        public ICollection<Comment> Comments { get; set; }
         public ICollection<Message> Messages { get; set; }
         public ICollection<Notification> Notifications { get; set; }
-
         public ICollection<Data> Data { get; set; }
-
         public ICollection<Analytic> Analytics { get; set; }
-
         public ICollection<Attendance> Attendances { get; set; }
+        public ICollection<RefreshToken> RefreshTokens { get; set; }
 
-        public  ICollection<RefreshToken> RefreshTokens { get; set; }
-
+        // Removed direct relationship with
     }
 }
