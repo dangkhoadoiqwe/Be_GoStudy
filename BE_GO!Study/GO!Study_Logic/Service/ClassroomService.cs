@@ -16,7 +16,7 @@ namespace GO_Study_Logic.Service
         Task UpdateClassroomAsync(ClassroomModel classroomModel);
         Task DeleteClassroomAsync(int classroomId);
         Task<IEnumerable<ClassroomModel>> GetUserRoomAsync(int userId);
-        Task<IEnumerable<ClassroomModel>> GetOtherClassroomsAsync();
+        Task<IEnumerable<ClassroomModel>> GetOtherClassroomsAsync(int userId);
         Task<ClassUserModel> GetUserDashboardAsync(int userId);
     }
 
@@ -71,9 +71,9 @@ namespace GO_Study_Logic.Service
             return _mapper.Map<IEnumerable<ClassroomModel>>(userRooms);
         }
 
-        public async Task<IEnumerable<ClassroomModel>> GetOtherClassroomsAsync()
+        public async Task<IEnumerable<ClassroomModel>> GetOtherClassroomsAsync(int userid)
         {
-            var classrooms = await _repository.GetOtherClassroomsAsync();
+            var classrooms = await _repository.GetOtherClassroomsAsync(userid);
             return _mapper.Map<IEnumerable<ClassroomModel>>(classrooms);
         }
 
@@ -83,7 +83,7 @@ namespace GO_Study_Logic.Service
             var friendRequests = await _userRepository.GetAllFriendRequestsAsync(userId);
             var userdetail = await _userRepository.GetByIdAsync(userId);
             var userRooms = await _repository.GetUserRoomAsync(userId);
-            var otherClassrooms = await _repository.GetOtherClassroomsAsync();
+            var otherClassrooms = await _repository.GetOtherClassroomsAsync(userId);
 
 
             var userdetailMapped = _mapper.Map<UserViewModel>(userdetail);

@@ -36,7 +36,7 @@ namespace DataAccess.Model
         public DbSet<Package> Packages { get; set; }
         public DbSet<PaymentTransaction> PaymentTransactions { get; set; }
         public virtual DbSet<RefreshToken> RefreshTokens { get; set; } = null!;
-
+        public DbSet<UserSpecialization> UserSpecializations { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var connectionString = _configuration.GetConnectionString("DefaultConnection");

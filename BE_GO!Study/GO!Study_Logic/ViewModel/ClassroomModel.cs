@@ -16,7 +16,7 @@ namespace GO_Study_Logic.ViewModel
       
         public string Name { get; set; }
 
-        public int CreatedBy { get; set; } 
+     
 
         public string Nickname { get; set; }
 
