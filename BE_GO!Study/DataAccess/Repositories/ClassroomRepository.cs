@@ -10,7 +10,7 @@ namespace DataAccess.Repositories
 {
     public interface IClassroomRepository
     {
-        Task<IEnumerable<Classroom>> GetAllClassroomsAsync();
+        Task<IEnumerable<Classroom>> GetAllClassroomsAsync(int userId);
         Task<Classroom?> GetClassroomByIdAsync(int classroomId);
         Task AddClassroomAsync(Classroom classroom);
         Task UpdateClassroomAsync(Classroom classroom);
@@ -27,10 +27,7 @@ namespace DataAccess.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<Classroom>> GetAllClassroomsAsync()
-        {
-            return await _context.Classrooms.ToListAsync();
-        }
+    
 
         public async Task<Classroom?> GetClassroomByIdAsync(int classroomId)
         {
@@ -73,21 +70,37 @@ namespace DataAccess.Repositories
                 .Where(c => specializationIds.Contains(c.SpecializationId))
                 .ToListAsync();
         }
-
-
-        public async Task<IEnumerable<Classroom>> GetOtherClassroomsAsync(int userId)
+      
+        public async Task<IEnumerable<Classroom>> GetAllClassroomsAsync(int userId)
         {
-            // Step 1: Get the list of classroom IDs that the user is currently enrolled in
-            var userClassroomIds = await _context.Analytics
-                .Where(a => a.UserId == userId)
-                .Select(a => a.ClassroomId)
+            var userClassroomIds = await _context.UserSpecializations
+                .Where(us => us.UserId == userId)
+                .Select(us => us.SpecializationId)
                 .Distinct()
                 .ToListAsync();
 
-            // Step 2: Fetch classrooms that are not in the user's list
+
             var otherClassrooms = await _context.Classrooms
-                .Where(c => !userClassroomIds.Contains(c.ClassroomId))  // Exclude user's classrooms
-                .Take(3)  // Optional: limit to 3 classrooms or use a different number
+                .Where(c => !userClassroomIds.Contains(c.ClassroomId))
+                .Distinct()
+                .ToListAsync();
+
+
+            return otherClassrooms;
+        }
+        public async Task<IEnumerable<Classroom>> GetOtherClassroomsAsync(int userId)
+        {
+           
+            var userClassroomIds = await _context.UserSpecializations
+                .Where(us => us.UserId == userId)
+                .Select(us => us.SpecializationId)
+                .Distinct()
+                .ToListAsync();
+
+
+            var otherClassrooms = await _context.Classrooms
+                .Where(c => !userClassroomIds.Contains(c.ClassroomId))   
+                .Take(3)   
                 .ToListAsync();
 
             return otherClassrooms;

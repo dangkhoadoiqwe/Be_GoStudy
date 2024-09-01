@@ -15,7 +15,9 @@ namespace GO_Study_Logic.AutoMapperModule
             public static void ConfigClassRoomModule(this IMapperConfigurationExpression mc)
             {
                 mc.CreateMap<Classroom, ClassroomModel>().ReverseMap();
-            }
+                mc.CreateMap<Classroom, AllClassModel>().ReverseMap();
+                mc.CreateMap<Classroom, ClassUserModel>().ReverseMap();
+        }
         }
      
 }

@@ -15,31 +15,29 @@ namespace BE_GO_Study.Controllers.Room
             _service = service;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<ClassroomModel>>> GetAllClassrooms()
+        [HttpGet("AllClass/{userid}")]
+        public async Task<IActionResult> GetAllClassrooms(int userid)
         {
-            var classrooms = await _service.GetAllClassroomsAsync();
-            return Ok(classrooms);
-        }
-
-        [HttpGet("{id}")]
-        public async Task<ActionResult<ClassroomModel>> GetClassroomById(int id)
-        {
-            var classroom = await _service.GetClassroomByIdAsync(id);
-            if (classroom == null)
+            try
             {
-                return NotFound();
+                var classrooms = await _service.GetAllClassroomsAsync(userid);
+                if (classrooms == null)
+                {
+                    return NotFound($"No classrooms found for user with ID {userid}");
+                }
+                return Ok(classrooms);
             }
-            return Ok(classroom);
+            catch (Exception ex)
+            {
+                
+                return StatusCode(500, "Internal server error");
+            }
         }
 
-        [HttpPost]
-        public async Task<IActionResult> AddClassroom(ClassroomModel ClassroomModel)
-        {
-            await _service.AddClassroomAsync(ClassroomModel);
-            return CreatedAtAction(nameof(GetClassroomById), new { id = ClassroomModel.ClassroomId }, ClassroomModel);
-        }
 
+
+
+         
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateClassroom(int id, ClassroomModel ClassroomModel)
         {
