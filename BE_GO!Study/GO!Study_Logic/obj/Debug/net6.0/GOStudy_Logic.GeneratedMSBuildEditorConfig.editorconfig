@@ -8,6 +8,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = GO_Study_Logic
-build_property.ProjectDir = C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GO!Study\GO!Study_Logic\
-build_property.EnableComHosting = 
-build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.ProjectDir = /Users/toanphuc/Desktop/EXE/BE2/Be_GoStudy/BE_GO!Study/GO!Study_Logic/

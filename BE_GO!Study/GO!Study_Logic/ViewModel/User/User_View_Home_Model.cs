@@ -23,13 +23,6 @@ namespace GO_Study_Logic.ViewModel.User
         public int UserId { get; set; }
     }
 
-    public class BlogPost_View_Model
-    {
-        public int PostId { get; set; }
-        public string Title { get; set; }
-        public string Content { get; set; }
-        public DateTime CreatedDate { get; set; }
-    }
 
     public class FriendRequest_View_Model
     {
