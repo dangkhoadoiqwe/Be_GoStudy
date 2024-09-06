@@ -33,6 +33,9 @@ namespace FSAM.BusinessLogic.Generations.DependencyInjection
 
             services.AddScoped<ISemestersRepository, SemestersRepository>();
             services.AddScoped<ISpecializationRepository, SpecializationRepository>();
+
+            services.AddScoped<ITaskRepository, TaskReposiory>();
+            services.AddScoped<ITaskService, TaskService>();
              
         }
     }

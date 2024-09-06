@@ -15,7 +15,7 @@ namespace BE_GO_Study.Controllers.User
         {
             _userService = userService;
         }
-        [Authorize(Roles = "Admin")]
+     
         [HttpGet("GetUserHome/{userid}")]
         public async Task<IActionResult> GetUserHome(int userid)
         {

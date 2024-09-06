@@ -42,8 +42,10 @@ namespace GO_Study_Logic.ViewModel.User
     }
     public class Analytic_View_Model
     {
-        public int Id { get; set; }
+        public int AnalyticsId { get; set; }
         public string Description { get; set; }
+
+        public int Metric { get; set;  }
         public decimal Value { get; set; }
         public int UserId { get; set; }
         public int TaskId { get; set; }

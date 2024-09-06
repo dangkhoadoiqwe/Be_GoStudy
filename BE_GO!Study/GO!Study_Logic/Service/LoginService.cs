@@ -59,6 +59,7 @@ namespace GO_Study_Logic.Service
                 UserName = userModel.Email,
                 Role = Enum.GetName(typeof(RoleEnum), userModel.Role),
                 Data = GenerateJwtToken(userModel),
+                userId = userModel.UserId,
             };
         }
 

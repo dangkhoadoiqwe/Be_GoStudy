@@ -73,7 +73,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSwaggerGen(options =>
 {
-    options.SwaggerDoc("v1", new OpenApiInfo { Title = "Your API Title", Version = "v1" });
+    options.SwaggerDoc("v1", new OpenApiInfo { Title = "GOStudy", Version = "v1" });
 
     // Define the JWT Bearer scheme that's used across the API
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme

@@ -38,6 +38,22 @@
   },
   {
     "ContainingType": "BE_GO_Study.Controllers.Room.ClassroomController",
+    "Method": "GetMeetingRoom",
+    "RelativePath": "api/Classroom/MeetingRoom/{userid}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userid",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_GO_Study.Controllers.Room.ClassroomController",
     "Method": "GetUserRooms",
     "RelativePath": "api/Classroom/user/{userid}",
     "HttpMethod": "GET",
@@ -61,6 +77,27 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "BE_GO_Study.Controllers.Room.TaskController",
+    "Method": "SaveTask",
+    "RelativePath": "api/Task/SaveTakUserID/{userid}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "taskViewModel",
+        "Type": "GO_Study_Logic.ViewModel.TaskViewModel",
+        "IsRequired": true
+      },
+      {
+        "Name": "userid",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "BE_GO_Study.Controllers.User.UserController",

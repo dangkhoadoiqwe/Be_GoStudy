@@ -166,3 +166,9 @@ C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GO!Study\BE_GO
 C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GO!Study\BE_GO!Study\obj\Debug\net6.0\BE_GO!Study.pdb
 C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GO!Study\BE_GO!Study\obj\Debug\net6.0\BE_GO!Study.genruntimeconfig.cache
 C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GO!Study\BE_GO!Study\obj\Debug\net6.0\ref\BE_GO!Study.dll
+C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GO!Study\BE_GO!Study\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GO!Study\BE_GO!Study\bin\Debug\net6.0\Microsoft.Extensions.Http.dll
+C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GO!Study\BE_GO!Study\bin\Debug\net6.0\Microsoft.Extensions.Logging.dll
+C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GO!Study\BE_GO!Study\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GO!Study\BE_GO!Study\bin\Debug\net6.0\Microsoft.Extensions.Options.dll
+C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GO!Study\BE_GO!Study\bin\Debug\net6.0\Newtonsoft.Json.dll

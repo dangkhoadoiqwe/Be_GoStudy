@@ -25,6 +25,32 @@ namespace GO_Study_Logic.ViewModel
 
         public IEnumerable<ClassroomModel> Classroom { get; set; }
     }
+    public class NotificationViewRoom {
+        public string Message { get; set; }
+
+      
+        public DateTime SentAt { get; set; }
+    }
+
+    public class TaskViewMeeting
+    {
+        public int TaskId { get; set; }
+
+        public int UserId { get; set; }
+    
+        public string Title { get; set; }
+
+        public int TimeComplete { get; set; }
+
+        public string Description { get; set; }
+        public DateTime ScheduledTime { get; set; }
+        public string Status { get; set; }
+
+        //public IEnumerable<NotificationViewRoom> Notifications { get; set; }
+
+   
+}
+ 
     public class ClassUserModel
     {
         public UserViewModel user { get; set; }

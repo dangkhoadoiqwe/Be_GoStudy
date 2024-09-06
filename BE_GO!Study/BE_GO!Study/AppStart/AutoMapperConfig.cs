@@ -13,6 +13,7 @@ namespace BE_GO_Study.AppStart
                 mc.ConfigUserModule();
                 mc.ConfigSemesterModule();
                 mc.ConfigSpecializationModule();
+                mc.ConfigTasksModule();
             });
             IMapper mapper = mapperConfiguration.CreateMapper();
             services.AddSingleton(mapper);

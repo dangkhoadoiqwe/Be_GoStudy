@@ -19,6 +19,8 @@ namespace GO_Study_Logic.Service
         Task<IEnumerable<ClassroomModel>> GetUserRoomAsync(int userId);
         Task<IEnumerable<ClassroomModel>> GetOtherClassroomsAsync(int userId);
         Task<ClassUserModel> GetUserDashboardAsync(int userId);
+
+        Task<IEnumerable<TaskViewMeeting>>GetRoomByUserID(int userId);
     }
 
     public class ClassroomService : IClassroomService
@@ -26,18 +28,21 @@ namespace GO_Study_Logic.Service
         private readonly IClassroomRepository _repository;
         private readonly IMapper _mapper;
         private readonly IUserRepository _userRepository;
+        private readonly ITaskRepository _taskRepository;
 
         public ClassroomService(
             IClassroomRepository repository,
             IMapper mapper,
-            IUserRepository userRepository)
+            IUserRepository userRepository,
+            ITaskRepository taskRepository)
         {
             _repository = repository;
             _mapper = mapper;
             _userRepository = userRepository;
+            _taskRepository = taskRepository;
         }
 
-       
+
 
         public async Task<ClassroomModel> GetClassroomByIdAsync(int classroomId)
         {
@@ -110,6 +115,11 @@ namespace GO_Study_Logic.Service
             };
         }
 
-        
+        public async Task<IEnumerable<TaskViewMeeting>> GetRoomByUserID(int userId)
+        {
+            var tasks = await _taskRepository.GetTaskByID(userId);
+            var taskMap = _mapper.Map<IEnumerable<TaskViewMeeting>>(tasks);
+            return taskMap;
+        }
     }
 }

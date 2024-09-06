@@ -13,6 +13,7 @@ namespace GO_Study_Logic.ViewModel
         public string UserName { get; set; }
         public string Role { get; set; }
         public object Data { get; set; } 
+        public int userId { get; set; }
     }
 
     public class TokenModel

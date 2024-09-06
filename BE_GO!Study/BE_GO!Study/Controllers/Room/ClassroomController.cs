@@ -36,8 +36,25 @@ namespace BE_GO_Study.Controllers.Room
 
 
 
+        [HttpGet("MeetingRoom/{userid}")]
+        public async Task<IActionResult> GetMeetingRoom(int userid)
+        {
+            try
+            {
+                var classrooms = await _service.GetRoomByUserID(userid);
+                if (classrooms == null)
+                {
+                    return NotFound($"No classrooms found for user with ID {userid}");
+                }
+                return Ok(classrooms);
+            }
+            catch (Exception ex)
+            {
 
-         
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateClassroom(int id, ClassroomModel ClassroomModel)
         {
