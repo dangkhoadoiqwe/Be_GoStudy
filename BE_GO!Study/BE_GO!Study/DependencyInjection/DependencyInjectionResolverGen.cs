@@ -36,7 +36,10 @@ namespace FSAM.BusinessLogic.Generations.DependencyInjection
 
             services.AddScoped<ITaskRepository, TaskReposiory>();
             services.AddScoped<ITaskService, TaskService>();
-             
+
+            services.AddScoped<IBlogPostService, BlogPostService>();
+            services.AddScoped<IBlogPostRepository, BlogPostRepository>();
+
         }
     }
 }

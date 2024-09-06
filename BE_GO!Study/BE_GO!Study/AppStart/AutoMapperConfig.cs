@@ -14,6 +14,8 @@ namespace BE_GO_Study.AppStart
                 mc.ConfigSemesterModule();
                 mc.ConfigSpecializationModule();
                 mc.ConfigTasksModule();
+
+                mc.ConfigBlogModule();
             });
             IMapper mapper = mapperConfiguration.CreateMapper();
             services.AddSingleton(mapper);
