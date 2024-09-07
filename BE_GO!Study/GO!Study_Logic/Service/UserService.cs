@@ -16,6 +16,8 @@ namespace GO_Study_Logic.Service
         Task<User_View_Home_Model> GetHomeUserID(int userid);
 
         Task<UserProfileModel> GetUserProfile(int userid);
+
+        Task<User> FindOrCreateUser(GoogleTokenInfo googleTokenInfo);
     }
     public class UserService : IUserService
     {
@@ -72,7 +74,25 @@ namespace GO_Study_Logic.Service
 
             return userViewHomeModel;
         }
+        public async Task<User> FindOrCreateUser(GoogleTokenInfo googleTokenInfo)
+        {
+            // Kiểm tra xem người dùng đã tồn tại dựa trên email của Google chưa
+            var user = await _userRepository.GetUserByEmailAsync(googleTokenInfo.Email);
+            if (user == null)
+            {
+                // Nếu chưa có người dùng thì tạo mới
+                user = new User
+                {
+                    FullName = googleTokenInfo.Name,
+                    Email = googleTokenInfo.Email,
+                    ProfileImage = googleTokenInfo.Picture,
+                };
 
+                await _userRepository.CreateUserAsync(user);
+            }
+
+            return user;
+        }
         public async Task<UserProfileModel> GetUserProfile(int userid)
         {
             var user = await _userRepository.GetByIdAsync(userid);

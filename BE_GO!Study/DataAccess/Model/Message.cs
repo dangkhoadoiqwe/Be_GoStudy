@@ -13,13 +13,13 @@ namespace DataAccess.Model
         [Key]
         public int MessageId { get; set; }
 
-        public int ClassroomId { get; set; }
-        [ForeignKey("ClassroomId")]
-        public Classroom Classroom { get; set; }
+        public int SenderId { get; set; }   // Sender
+        [ForeignKey("SenderId")]
+        public User Sender { get; set; }
 
-        public int UserId { get; set; }
-        [ForeignKey("UserId")]
-        public User User { get; set; }
+        public int RecipientId { get; set; }  // Recipient
+        [ForeignKey("RecipientId")]
+        public User Recipient { get; set; }
 
         [Required]
         public string Content { get; set; }
@@ -27,4 +27,5 @@ namespace DataAccess.Model
         [Required]
         public DateTime CreatedAt { get; set; }
     }
+
 }

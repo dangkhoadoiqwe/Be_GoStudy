@@ -37,7 +37,8 @@ namespace DataAccess.Model
         public ICollection<FriendRequest> ReceivedFriendRequests { get; set; }
         public ICollection<Bookmark> Bookmarks { get; set; }
         public ICollection<Comment> Comments { get; set; }
-        public ICollection<Message> Messages { get; set; }
+        public ICollection<Message> MessagesSent { get; set; }
+        public ICollection<Message> MessagesReceived { get; set; }
         public ICollection<Notification> Notifications { get; set; }
         public ICollection<Data> Data { get; set; }
         public ICollection<Analytic> Analytics { get; set; }

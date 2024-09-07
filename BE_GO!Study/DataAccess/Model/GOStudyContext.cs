@@ -37,6 +37,7 @@ namespace DataAccess.Model
         public DbSet<PaymentTransaction> PaymentTransactions { get; set; }
         public virtual DbSet<RefreshToken> RefreshTokens { get; set; } = null!;
         public DbSet<UserSpecialization> UserSpecializations { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var connectionString = _configuration.GetConnectionString("DefaultConnection");
@@ -45,6 +46,7 @@ namespace DataAccess.Model
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Configure currency precision for packages, payment transactions, and rankings
             modelBuilder.Entity<Package>()
                 .Property(p => p.Price)
                 .HasColumnType("decimal(18,2)");
@@ -57,6 +59,7 @@ namespace DataAccess.Model
                 .Property(r => r.PerformanceScore)
                 .HasColumnType("decimal(18,2)");
 
+            // FriendRequest relationships
             modelBuilder.Entity<FriendRequest>()
                 .HasOne(fr => fr.Requester)
                 .WithMany(u => u.SentFriendRequests)
@@ -69,6 +72,20 @@ namespace DataAccess.Model
                 .HasForeignKey(fr => fr.RecipientId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            // Message relationships (User-to-User)
+            modelBuilder.Entity<Message>()
+                .HasOne(m => m.Sender)
+                .WithMany(u => u.MessagesSent)
+                .HasForeignKey(m => m.SenderId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Message>()
+                .HasOne(m => m.Recipient)
+                .WithMany(u => u.MessagesReceived)
+                .HasForeignKey(m => m.RecipientId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Bookmark relationships
             modelBuilder.Entity<Bookmark>()
                 .HasOne(b => b.User)
                 .WithMany(u => u.Bookmarks)
@@ -81,6 +98,7 @@ namespace DataAccess.Model
                 .HasForeignKey(b => b.PostId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            // Comment relationships
             modelBuilder.Entity<Comment>()
                 .HasOne(c => c.Post)
                 .WithMany(bp => bp.Comments)
@@ -93,18 +111,7 @@ namespace DataAccess.Model
                 .HasForeignKey(c => c.UserId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<Message>()
-                .HasOne(m => m.Classroom)
-                .WithMany(c => c.Messages)
-                .HasForeignKey(m => m.ClassroomId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Message>()
-                .HasOne(m => m.User)
-                .WithMany(u => u.Messages)
-                .HasForeignKey(m => m.UserId)
-                .OnDelete(DeleteBehavior.Restrict);
-
+            // Notification relationships
             modelBuilder.Entity<Notification>()
                 .HasOne(n => n.Task)
                 .WithMany(t => t.Notifications)
@@ -117,6 +124,7 @@ namespace DataAccess.Model
                 .HasForeignKey(n => n.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            // Analytic relationships
             modelBuilder.Entity<Analytic>()
                 .HasOne(a => a.User)
                 .WithMany(u => u.Analytics)
@@ -135,8 +143,9 @@ namespace DataAccess.Model
                .HasForeignKey(a => a.ClassroomId)
                .OnDelete(DeleteBehavior.NoAction);
 
+            // UserSpecialization relationships
             modelBuilder.Entity<UserSpecialization>()
-         .HasKey(us => us.UserSpecializationId);
+               .HasKey(us => us.UserSpecializationId);
 
             modelBuilder.Entity<UserSpecialization>()
                 .HasOne(us => us.User)
@@ -148,6 +157,7 @@ namespace DataAccess.Model
                 .WithMany(s => s.UserSpecializations)
                 .HasForeignKey(us => us.SpecializationId);
 
+            // RefreshToken relationships
             modelBuilder.Entity<RefreshToken>(entity =>
             {
                 entity.ToTable("RefreshToken");
@@ -174,6 +184,8 @@ namespace DataAccess.Model
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_RefreshToken_Users");
             });
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

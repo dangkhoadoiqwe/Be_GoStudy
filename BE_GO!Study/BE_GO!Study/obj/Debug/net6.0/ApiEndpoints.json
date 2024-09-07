@@ -1,5 +1,130 @@
 [
   {
+    "ContainingType": "AuthController",
+    "Method": "GoogleLogin",
+    "RelativePath": "api/auth/google",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "GoogleLoginRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_GO_Study.Controllers.BlogPost.BlogPostController",
+    "Method": "GetAllBlogPosts",
+    "RelativePath": "api/BlogPost",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[GO_Study_Logic.ViewModel.BlogPost_View_Model, GOStudy_Logic, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "BE_GO_Study.Controllers.BlogPost.BlogPostController",
+    "Method": "GetBlogPostById",
+    "RelativePath": "api/BlogPost/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "GO_Study_Logic.ViewModel.BlogPost_View_Model",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "BE_GO_Study.Controllers.BlogPost.BlogPostController",
+    "Method": "UpdateBlogPost",
+    "RelativePath": "api/BlogPost/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "blogPostViewModel",
+        "Type": "GO_Study_Logic.ViewModel.BlogPost_View_Model",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_GO_Study.Controllers.BlogPost.BlogPostController",
+    "Method": "DeleteBlogPost",
+    "RelativePath": "api/BlogPost/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_GO_Study.Controllers.BlogPost.BlogPostController",
+    "Method": "GetTrendingBlogPosts",
+    "RelativePath": "api/BlogPost/trending",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_GO_Study.Controllers.BlogPost.BlogPostController",
+    "Method": "GetUserBlogPosts",
+    "RelativePath": "api/BlogPost/yourblog/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "BE_GO_Study.Controllers.Room.ClassroomController",
     "Method": "UpdateClassroom",
     "RelativePath": "api/Classroom/{id}",

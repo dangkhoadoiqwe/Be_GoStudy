@@ -384,7 +384,7 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MessageId"), 1L, 1);
 
-                    b.Property<int>("ClassroomId")
+                    b.Property<int?>("ClassroomId")
                         .HasColumnType("int");
 
                     b.Property<string>("Content")
@@ -394,14 +394,19 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("UserId")
+                    b.Property<int>("RecipientId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SenderId")
                         .HasColumnType("int");
 
                     b.HasKey("MessageId");
 
                     b.HasIndex("ClassroomId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("RecipientId");
+
+                    b.HasIndex("SenderId");
 
                     b.ToTable("Messages");
                 });
@@ -928,21 +933,25 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DataAccess.Model.Message", b =>
                 {
-                    b.HasOne("DataAccess.Model.Classroom", "Classroom")
+                    b.HasOne("DataAccess.Model.Classroom", null)
                         .WithMany("Messages")
-                        .HasForeignKey("ClassroomId")
+                        .HasForeignKey("ClassroomId");
+
+                    b.HasOne("DataAccess.Model.User", "Recipient")
+                        .WithMany("MessagesReceived")
+                        .HasForeignKey("RecipientId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("DataAccess.Model.User", "User")
-                        .WithMany("Messages")
-                        .HasForeignKey("UserId")
+                    b.HasOne("DataAccess.Model.User", "Sender")
+                        .WithMany("MessagesSent")
+                        .HasForeignKey("SenderId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Classroom");
+                    b.Navigation("Recipient");
 
-                    b.Navigation("User");
+                    b.Navigation("Sender");
                 });
 
             modelBuilder.Entity("DataAccess.Model.Notification", b =>
@@ -1122,7 +1131,9 @@ namespace DataAccess.Migrations
 
                     b.Navigation("Data");
 
-                    b.Navigation("Messages");
+                    b.Navigation("MessagesReceived");
+
+                    b.Navigation("MessagesSent");
 
                     b.Navigation("Notifications");
 

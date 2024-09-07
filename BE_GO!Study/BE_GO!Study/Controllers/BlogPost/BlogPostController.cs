@@ -1,4 +1,5 @@
 ﻿using System;
+using DataAccess.Model;
 using GO_Study_Logic.Service;
 using GO_Study_Logic.ViewModel;
 using Microsoft.AspNetCore.Mvc;
@@ -21,6 +22,10 @@ namespace BE_GO_Study.Controllers.BlogPost
         public async Task<ActionResult<IEnumerable<BlogPost_View_Model>>> GetAllBlogPosts()
         {
             var blogPosts = await _blogPostService.GetAllBlogPostsAsync();
+            if (blogPosts == null)
+            {
+                return NotFound();
+            }
             return Ok(blogPosts);
         }
 

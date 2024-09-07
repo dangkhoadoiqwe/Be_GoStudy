@@ -19,6 +19,8 @@ namespace GO_Study_Logic.AutoMapperModule
             mc.CreateMap<User, UserViewModel1>().ReverseMap();
             mc.CreateMap<User, User_View_Home_Model>().ReverseMap();
             mc.CreateMap<User, Ranking_View_Model>().ReverseMap();
+            mc.CreateMap<User, GoogleTokenInfo>().ReverseMap();
+             
 
             mc.CreateMap<Analytic, Analytic_View_Model>().ReverseMap();
 
@@ -31,7 +33,7 @@ namespace GO_Study_Logic.AutoMapperModule
             mc.CreateMap<Ranking, Ranking_View_Model>().ReverseMap();
 
             mc.CreateMap<PrivacySetting, PrivacySetting_View_Model>().ReverseMap(); 
-
+              
              
         }
     }

@@ -40,6 +40,8 @@ namespace FSAM.BusinessLogic.Generations.DependencyInjection
             services.AddScoped<IBlogPostService, BlogPostService>();
             services.AddScoped<IBlogPostRepository, BlogPostRepository>();
 
+            services.AddScoped<IJwtService, JwtService>();
+             
         }
     }
 }

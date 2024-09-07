@@ -1,12 +1,13 @@
-// Program.cs or Startup.cs (ASP.NET Core setup file)
-using BE_GO_Study.AppStart;
+﻿using BE_GO_Study.AppStart;
 using BE_GO_Study.GlobalExceptionHandler;
 using DataAccess.Model;
 using DataAccess.Repositories;
 using FSAM.BusinessLogic.Generations.DependencyInjection;
 using GO_Study_Logic.Helper.CustomExceptions;
 using GO_Study_Logic.Service;
+using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -21,6 +22,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<GOStudyContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// Add Identity for user management (if needed)
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+    .AddEntityFrameworkStores<GOStudyContext>();
+
 // Add AutoMapper for dependency injection
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -30,9 +35,11 @@ builder.Services.InitializerDependencyInjection();
 // Configure AutoMapper
 builder.Services.ConfigureAutoMapper();
 
+// JWT Key from configuration
 var key = Encoding.ASCII.GetBytes(builder.Configuration["JwtSettings:Key"]
     ?? throw new Exception("JwtSettings:Key is not found"));
 
+// Token validation parameters for JWT
 var tokenValidationParameter = new TokenValidationParameters
 {
     ValidateIssuer = false,
@@ -44,8 +51,10 @@ var tokenValidationParameter = new TokenValidationParameters
     ClockSkew = TimeSpan.Zero
 };
 
+// Authentication configuration (JWT and Google)
 builder.Services.AddAuthentication(options =>
 {
+    // Default scheme is JWT Bearer
     options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 })
@@ -60,12 +69,19 @@ builder.Services.AddAuthentication(options =>
     };
     jwt.SaveToken = true;
     jwt.TokenValidationParameters = tokenValidationParameter;
+})
+.AddGoogle(options =>
+{
+    options.ClientId = builder.Configuration["Google:ClientId"];   // Thay bằng ClientId của bạn
+    options.ClientSecret = builder.Configuration["Google:ClientSecret"]; // Thay bằng ClientSecret của bạn
 });
+
 builder.Services.AddSingleton(tokenValidationParameter);
 builder.Services.AddTransient<ExceptionHandlingMiddleware>();
 builder.Services.AddTransient<ArgumentExceptionHandlingMiddleware>();
 builder.Services.AddTransient<UnauthourizeExceptionHandlingMiddleware>();
- 
+builder.Services.AddHttpClient();
+// Add MVC controllers
 builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

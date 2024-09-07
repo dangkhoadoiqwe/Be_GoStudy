@@ -10,6 +10,8 @@ namespace DataAccess.Repositories
 
     public partial interface IUserRepository : IBaseRepository<User>
     {
+        Task<User> GetUserByEmailAsync(string email);
+        Task CreateUserAsync(User user);
         Task<User?> GetByIdAsync(int id);
         Task<IEnumerable<Ranking>> GetAllRankingAsync();
         Task<IEnumerable<Attendance>> GetUserIdAtendanceAsync(int id);
@@ -53,6 +55,16 @@ namespace DataAccess.Repositories
         public async Task<IEnumerable<Attendance>> GetUserIdAtendanceAsync(int id)
         {
             return await _dbContext.Set<Attendance>().Where(Attendance => Attendance.UserId == id).ToListAsync();
+        }
+        public async Task<User> GetUserByEmailAsync(string email)
+        {
+            return await _dbContext.Set<User>().FirstOrDefaultAsync(u => u.Email == email);
+        }
+
+        public async Task CreateUserAsync(User user)
+        {
+            _dbContext.Set<User>().Add(user);
+            await _dbContext.SaveChangesAsync();
         }
         public async Task<IEnumerable<FriendRequest>> GetAllFriendRequestsAsync(int userid)
         {
