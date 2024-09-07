@@ -57,7 +57,7 @@ namespace DataAccess.Repositories
         public async Task<List<BlogPost>> GetTrendingBlogPosts()
         {
             return await _context.BlogPosts
-                .Where(p => p.CreatedAt >= DateTime.Now.AddDays(-7))
+                .Where(p => p.IsTrending && p.CreatedAt >= DateTime.Now.AddDays(-7))
                 .OrderByDescending(p => p.ViewCount + p.likeCount + p.Comments.Count)
                 .ToListAsync();
         }

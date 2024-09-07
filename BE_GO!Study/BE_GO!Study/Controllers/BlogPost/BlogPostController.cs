@@ -81,6 +81,18 @@ namespace BE_GO_Study.Controllers.BlogPost
             var userPosts = await _blogPostService.GetUserBlogPosts(userId);
             return Ok(userPosts);
         }
+        [HttpPost(Name = "CreateBlogPost")]
+        public async Task<IActionResult> CreateBlogPost([FromBody] BlogPost_View_Model blogPostViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            await _blogPostService.AddBlogPostAsync(blogPostViewModel);
+
+            return Ok(new { message = "Blog post created successfully." });
+        }
     }
 }
 
