@@ -20,6 +20,8 @@ namespace GO_Study_Logic.ViewModel
     {
         public string AccessToken { get; set; }
         public string RefreshToken { get; set; }
+
+        public int userID { get; set; }
     }
 
     public class UserModel

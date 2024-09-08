@@ -37,6 +37,23 @@
   },
   {
     "ContainingType": "BE_GO_Study.Controllers.BlogPost.BlogPostController",
+    "Method": "CreateBlogPost",
+    "RelativePath": "api/BlogPost",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "blogPostViewModel",
+        "Type": "GO_Study_Logic.ViewModel.BlogPost_View_Model",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [],
+    "EndpointName": "CreateBlogPost"
+  },
+  {
+    "ContainingType": "BE_GO_Study.Controllers.BlogPost.BlogPostController",
     "Method": "GetBlogPostById",
     "RelativePath": "api/BlogPost/{id}",
     "HttpMethod": "GET",

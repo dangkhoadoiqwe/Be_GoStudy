@@ -76,16 +76,25 @@ namespace GO_Study_Logic.Service
         }
         public async Task<User> FindOrCreateUser(GoogleTokenInfo googleTokenInfo)
         {
-            // Kiểm tra xem người dùng đã tồn tại dựa trên email của Google chưa
+            if (googleTokenInfo == null)
+            {
+                throw new ArgumentNullException(nameof(googleTokenInfo), "Google token info cannot be null");
+            }
+
+            // Check if the user already exists based on the email from Google
             var user = await _userRepository.GetUserByEmailAsync(googleTokenInfo.Email);
             if (user == null)
             {
-                // Nếu chưa có người dùng thì tạo mới
+                // If not, create a new user
                 user = new User
                 {
-                    FullName = googleTokenInfo.Name,
+                    FullName = googleTokenInfo.Name ?? "Default Name", // Handle potential null
                     Email = googleTokenInfo.Email,
                     ProfileImage = googleTokenInfo.Picture,
+                    PasswordHash = "123", // Consider using a secure password hash
+                    PrivacySettingId = 1,
+                    Role = 1,
+                    SemesterId = 1,
                 };
 
                 await _userRepository.CreateUserAsync(user);

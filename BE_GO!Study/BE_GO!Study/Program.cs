@@ -22,7 +22,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<GOStudyContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Add Identity for user management (if needed)
+// Add Identity for user management
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<GOStudyContext>();
 
@@ -54,7 +54,6 @@ var tokenValidationParameter = new TokenValidationParameters
 // Authentication configuration (JWT and Google)
 builder.Services.AddAuthentication(options =>
 {
-    // Default scheme is JWT Bearer
     options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 })
@@ -72,8 +71,8 @@ builder.Services.AddAuthentication(options =>
 })
 .AddGoogle(options =>
 {
-    options.ClientId = builder.Configuration["Google:ClientId"];   // Thay bằng ClientId của bạn
-    options.ClientSecret = builder.Configuration["Google:ClientSecret"]; // Thay bằng ClientSecret của bạn
+    options.ClientId = builder.Configuration["Google:ClientId"];
+    options.ClientSecret = builder.Configuration["Google:ClientSecret"];
 });
 
 builder.Services.AddSingleton(tokenValidationParameter);
@@ -81,17 +80,17 @@ builder.Services.AddTransient<ExceptionHandlingMiddleware>();
 builder.Services.AddTransient<ArgumentExceptionHandlingMiddleware>();
 builder.Services.AddTransient<UnauthourizeExceptionHandlingMiddleware>();
 builder.Services.AddHttpClient();
+
 // Add MVC controllers
 builder.Services.AddControllers();
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+// Configure Swagger/OpenAPI
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo { Title = "GOStudy", Version = "v1" });
 
-    // Define the JWT Bearer scheme that's used across the API
+    // Define the JWT Bearer scheme used across the API
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Description = "JWT Authorization header using the Bearer scheme. Example: 'Bearer {token}'",
