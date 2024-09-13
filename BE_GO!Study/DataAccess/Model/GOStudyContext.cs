@@ -52,6 +52,16 @@ namespace DataAccess.Model
                 .HasColumnType("decimal(18,2)");
 
             modelBuilder.Entity<PaymentTransaction>()
+          .HasOne(p => p.User)
+          .WithMany(u => u.PaymentTransactions)
+          .HasForeignKey(p => p.UserId);
+
+            modelBuilder.Entity<PaymentTransaction>()
+                .HasOne(p => p.Package)
+                .WithMany(pkg => pkg.PaymentTransactions)
+                .HasForeignKey(p => p.PackageId);
+
+            modelBuilder.Entity<PaymentTransaction>()
                 .Property(pt => pt.Amount)
                 .HasColumnType("decimal(18,2)");
 

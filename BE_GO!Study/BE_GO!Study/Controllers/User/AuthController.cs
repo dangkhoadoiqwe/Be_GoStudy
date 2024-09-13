@@ -20,7 +20,6 @@ public class AuthController : ControllerBase
         _jwtService = jwtService;
         _loginService = loginService;
     }
-
     [HttpPost("google")]
     public async Task<IActionResult> GoogleLogin([FromBody] GoogleLoginRequest request)
     {
@@ -29,25 +28,59 @@ public class AuthController : ControllerBase
             return BadRequest("ID token is required.");
         }
 
+        // Validate Google token and get the token information
         var googleTokenInfo = await ValidateGoogleToken(request.IdToken);
+
         if (googleTokenInfo != null)
         {
-            // Successfully authenticated with Google, find or create user in DB
-            var user = await _userService.FindOrCreateUser(googleTokenInfo);
+            // Find or create the user in the database
+            var user = await _userService.FindOrCreateUser(googleTokenInfo);  // Thay đổi từ User thành AppUser
 
-            // Validate user properties before generating token
             if (user == null || string.IsNullOrEmpty(user.Email) || string.IsNullOrEmpty(user.FullName))
             {
                 return BadRequest("User information is incomplete.");
             }
 
-            // Create JWT token
-            var jwtToken = _jwtService.GenerateJwtToken(user);
+            // Convert Google token info to custom token format
+            var customTokenInfo = ConvertToCustomFormat(googleTokenInfo);
 
+            // Generate JWT token
+            var appUser = _userService.ConvertToAppUser(user);
+
+            // Generate JWT token using AppUser
+            var jwtToken = _jwtService.GenerateJwtToke(appUser);
+
+            // Return the token
             return Ok(new { Token = jwtToken });
         }
 
         return BadRequest("Invalid ID token.");
+    }
+
+
+    private CustomTokenInfo ConvertToCustomFormat(GoogleTokenInfo googleTokenInfo)
+    {
+        var customTokenInfo = new CustomTokenInfo
+        {
+            Context = new Context
+            {
+                User = new UserInfo
+                {
+                    Avatar = googleTokenInfo.Picture,   // Google Picture mapped to Avatar
+                    Name = googleTokenInfo.Name,        // Google Name mapped to custom format
+                    Email = googleTokenInfo.Email,      // Google Email mapped to custom format
+                    Id = googleTokenInfo.Sub            // Google Sub (User ID) mapped to Id
+                },
+                Group = "a123-123-456-789"  // Hardcoded group as per your requirement
+            },
+            Aud = "jitsi",        // Hardcoded Audience
+            Iss = "my_client",    // Hardcoded Issuer
+            Sub = "meet.jit.si",  // Hardcoded Subject
+            Room = "*",           // Hardcoded Room value
+            Exp = googleTokenInfo.Exp  // Use the expiration from Google Token Info
+        };
+
+        return customTokenInfo;
     }
 
     private async Task<GoogleTokenInfo> ValidateGoogleToken(string idToken)
@@ -58,15 +91,21 @@ public class AuthController : ControllerBase
         if (response.IsSuccessStatusCode)
         {
             var jsonString = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<GoogleTokenInfo>(jsonString);
+            // Log the raw response to check structure
+            Console.WriteLine($"Google Token Response: {jsonString}");
+
+            // Deserialize the Google token info
+            var tokenInfo = JsonConvert.DeserializeObject<GoogleTokenInfo>(jsonString);
+            return tokenInfo;
         }
         else
         {
-            // Log the error for debugging purposes
             var errorResponse = await response.Content.ReadAsStringAsync();
             throw new Exception($"Token validation failed: {response.StatusCode} - {errorResponse}");
         }
     }
+
+
 }
 
 public class GoogleLoginRequest

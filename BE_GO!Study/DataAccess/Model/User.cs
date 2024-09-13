@@ -44,7 +44,7 @@ namespace DataAccess.Model
         public ICollection<Analytic> Analytics { get; set; }
         public ICollection<Attendance> Attendances { get; set; }
         public ICollection<RefreshToken> RefreshTokens { get; set; }
-
+        public ICollection<PaymentTransaction> PaymentTransactions { get; set; }
         // Removed direct relationship with
     }
 }

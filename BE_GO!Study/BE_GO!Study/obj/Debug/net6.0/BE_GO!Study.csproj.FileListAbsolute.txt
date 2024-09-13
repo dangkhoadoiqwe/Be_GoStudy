@@ -184,6 +184,9 @@ C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GO!Study\BE_GO
 C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GO!Study\BE_GO!Study\bin\Debug\net6.0\BouncyCastle.Cryptography.dll
 C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GO!Study\BE_GO!Study\bin\Debug\net6.0\Humanizer.dll
 C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GO!Study\BE_GO!Study\bin\Debug\net6.0\MailKit.dll
+C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GO!Study\BE_GO!Study\bin\Debug\net6.0\MediatR.dll
+C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GO!Study\BE_GO!Study\bin\Debug\net6.0\MediatR.Contracts.dll
+C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GO!Study\BE_GO!Study\bin\Debug\net6.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GO!Study\BE_GO!Study\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.Google.dll
 C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GO!Study\BE_GO!Study\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GO!Study\BE_GO!Study\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.Internal.dll

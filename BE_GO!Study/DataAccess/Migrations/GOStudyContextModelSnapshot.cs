@@ -476,10 +476,45 @@ namespace DataAccess.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<DateTime>("ExpireDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("MerchantId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("PackageId")
                         .HasColumnType("int");
 
+                    b.Property<string>("PaymentContent")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentCurrency")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentDestinationId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentLanguage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentLastMessage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("PaymentMethod")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentRefId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -976,13 +1011,13 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("DataAccess.Model.PaymentTransaction", b =>
                 {
                     b.HasOne("DataAccess.Model.Package", "Package")
-                        .WithMany()
+                        .WithMany("PaymentTransactions")
                         .HasForeignKey("PackageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DataAccess.Model.User", "User")
-                        .WithMany()
+                        .WithMany("PaymentTransactions")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1107,6 +1142,11 @@ namespace DataAccess.Migrations
                     b.Navigation("Messages");
                 });
 
+            modelBuilder.Entity("DataAccess.Model.Package", b =>
+                {
+                    b.Navigation("PaymentTransactions");
+                });
+
             modelBuilder.Entity("DataAccess.Model.Specialization", b =>
                 {
                     b.Navigation("UserSpecializations");
@@ -1136,6 +1176,8 @@ namespace DataAccess.Migrations
                     b.Navigation("MessagesSent");
 
                     b.Navigation("Notifications");
+
+                    b.Navigation("PaymentTransactions");
 
                     b.Navigation("ReceivedFriendRequests");
 

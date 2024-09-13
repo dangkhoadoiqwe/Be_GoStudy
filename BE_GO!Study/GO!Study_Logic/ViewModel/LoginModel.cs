@@ -15,13 +15,21 @@ namespace GO_Study_Logic.ViewModel
         public object Data { get; set; } 
         public int userId { get; set; }
     }
-
+    public class FirebaseIdentity
+    {
+        public Dictionary<string, List<string>> Identities { get; set; }
+        public string SignInProvider { get; set; }
+    }
     public class TokenModel
     {
         public string AccessToken { get; set; }
         public string RefreshToken { get; set; }
 
         public int userID { get; set; }
+
+        public Boolean Success { get; set; }
+
+        public FirebaseIdentity Firebase { get; set; }
     }
 
     public class UserModel
@@ -42,7 +50,9 @@ namespace GO_Study_Logic.ViewModel
         public string FullName { get; set; }
         public string Email { get; set; }
         public int Role { get; set; }
-        public string PasswordHash { get; set; }
+        public string PasswordHash { get; set; } 
+
+  public string ProfileImage { get; set; } 
 
     }
 

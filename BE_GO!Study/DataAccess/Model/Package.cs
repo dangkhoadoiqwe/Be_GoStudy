@@ -20,5 +20,7 @@ namespace DataAccess.Model
 
         [Required]
         public string Features { get; set; }
+        public ICollection<PaymentTransaction> PaymentTransactions { get; set; }
+
     }
 }

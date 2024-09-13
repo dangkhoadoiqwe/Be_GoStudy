@@ -70,23 +70,31 @@ namespace GO_Study_Logic.Service
                 : inputPassword == storedPassword;
         }
 
-        public TokenModel GenerateJwtToken(UserViewModel1 userModel)
+        public TokenModel GenerateJwtToken(UserViewModel1 user)
         {
-            var user = _mapper.Map<User>(userModel);
-            var expires = DateTime.UtcNow.Add(TimeSpan.Parse(_configuration["JwtSettings:ExpiryTimeFrame"]));
+            
+            var now = DateTime.UtcNow;
+            var expires = now.Add(TimeSpan.Parse(_configuration["JwtSettings:ExpiryTimeFrame"]));
             var handler = new JwtSecurityTokenHandler();
 
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSettings:Key"]));
+
             var tokenDescription = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-                new Claim(JwtRegisteredClaimNames.Sid, user.UserId.ToString()),
-                new Claim(JwtRegisteredClaimNames.Sub, user.FullName),
-                new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-            }),
+            new Claim(JwtRegisteredClaimNames.Sid, user.UserId.ToString()),               // User ID
+            new Claim(JwtRegisteredClaimNames.Sub, user.FullName),                        // Full name (Subject)
+            new Claim(JwtRegisteredClaimNames.Email, user.Email),                        // Email
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),            // JWT ID
+           new Claim(JwtRegisteredClaimNames.Iat, new DateTimeOffset(now).ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64),  // Issued at
+            new Claim(JwtRegisteredClaimNames.Nbf, new DateTimeOffset(now).ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64),  // Not Before
+            new Claim(JwtRegisteredClaimNames.Exp, new DateTimeOffset(expires).ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64),
+             new Claim("picture", user.ProfileImage)
+        }),
                 Expires = expires,
+                Issuer = "https://securetoken.google.com/meet-jit-si-66cbd",                      // Issuer
+                Audience = "meet-jit-si-66cbd",                                                  // Audience
                 SigningCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature)
             };
 
@@ -100,6 +108,7 @@ namespace GO_Study_Logic.Service
                 RefreshToken = refreshToken.Token
             };
         }
+
 
         private RefreshToken CreateRefreshToken(string jwtId, int userId)
         {

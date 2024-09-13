@@ -3,9 +3,12 @@ using DataAccess.Model;
 using DataAccess.Repositories;
 using GO_Study_Logic.ViewModel;
 using GO_Study_Logic.ViewModel.User;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,10 +17,11 @@ namespace GO_Study_Logic.Service
     public interface IUserService
     {
         Task<User_View_Home_Model> GetHomeUserID(int userid);
-
+        AppUser ConvertToAppUser(User user);
         Task<UserProfileModel> GetUserProfile(int userid);
 
         Task<User> FindOrCreateUser(GoogleTokenInfo googleTokenInfo);
+        string GenerateJwtToken(CustomTokenInfo customTokenInfo, string secretKey);
     }
     public class UserService : IUserService
     {
@@ -32,6 +36,18 @@ namespace GO_Study_Logic.Service
             _mapper = mapper;
             _semestersRepository = semestersRepository;
             _specializationRepository = specializationRepository;
+        }
+
+        public AppUser ConvertToAppUser(User user)
+        {
+            return new AppUser
+            {
+                FullName = user.FullName,
+                Email = user.Email,
+                ProfileImage = user.ProfileImage,
+                UserId = user.UserId,  
+                                      
+            };
         }
 
         public async Task<User_View_Home_Model> GetHomeUserID(int userid)
@@ -74,7 +90,7 @@ namespace GO_Study_Logic.Service
 
             return userViewHomeModel;
         }
-        public async Task<User> FindOrCreateUser(GoogleTokenInfo googleTokenInfo)
+        public async Task<User> FindOrCreateUser(GoogleTokenInfo googleTokenInfo)  // Thay đổi từ User thành AppUser
         {
             if (googleTokenInfo == null)
             {
@@ -85,10 +101,10 @@ namespace GO_Study_Logic.Service
             var user = await _userRepository.GetUserByEmailAsync(googleTokenInfo.Email);
             if (user == null)
             {
-                // If not, create a new user
+                // If user does not exist, create a new AppUser
                 user = new User
                 {
-                    FullName = googleTokenInfo.Name ?? "Default Name", // Handle potential null
+                    FullName = googleTokenInfo.Name ?? "Default Name",
                     Email = googleTokenInfo.Email,
                     ProfileImage = googleTokenInfo.Picture,
                     PasswordHash = "123", // Consider using a secure password hash
@@ -97,11 +113,57 @@ namespace GO_Study_Logic.Service
                     SemesterId = 1,
                 };
 
+                // Save the new AppUser to the database
                 await _userRepository.CreateUserAsync(user);
             }
 
             return user;
         }
+        public string GenerateJwtToken(CustomTokenInfo customTokenInfo, string secretKey)
+        {
+            // Ensure the secret key is at least 256 bits (32 characters)
+            if (string.IsNullOrEmpty(secretKey) || Encoding.UTF8.GetBytes(secretKey).Length < 32)
+            {
+                throw new ArgumentOutOfRangeException(nameof(secretKey), "The secret key must be at least 256 bits (32 characters).");
+            }
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(),
+                Expires = DateTimeOffset.FromUnixTimeSeconds(customTokenInfo.Exp).UtcDateTime,
+                SigningCredentials = creds,
+                AdditionalHeaderClaims = new Dictionary<string, object>
+        {
+            { "context", new Dictionary<string, object>
+                {
+                    { "user", new Dictionary<string, object>
+                        {
+                            { "avatar", customTokenInfo.Context.User.Avatar },
+                            { "name", customTokenInfo.Context.User.Name },
+                            { "email", customTokenInfo.Context.User.Email },
+                            { "id", customTokenInfo.Context.User.Id }
+                        }
+                    },
+                    { "group", customTokenInfo.Context.Group }
+                }
+            },
+            { "aud", customTokenInfo.Aud },
+            { "iss", customTokenInfo.Iss },
+            { "sub", customTokenInfo.Sub },
+            { "room", customTokenInfo.Room },
+            { "exp", customTokenInfo.Exp }
+        }
+            };
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
+        }
+
+
         public async Task<UserProfileModel> GetUserProfile(int userid)
         {
             var user = await _userRepository.GetByIdAsync(userid);

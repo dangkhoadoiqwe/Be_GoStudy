@@ -5,6 +5,9 @@ using DataAccess.Repositories;
 using FSAM.BusinessLogic.Generations.DependencyInjection;
 using GO_Study_Logic.Helper.CustomExceptions;
 using GO_Study_Logic.Service;
+using GO_Study_Logic.Service.VNPAY;
+using GO_Study_Logic.ViewModel;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -29,10 +32,15 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
 // Add AutoMapper for dependency injection
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+// Register MediatR - ensuring the correct assembly is targeted
+// Đăng ký MediatR và các handler
+builder.Services.AddMediatR(typeof(CreatePaymentHandler).Assembly);
+
+builder.Services.AddHttpContextAccessor();
 // Initialize Dependency Injection
 builder.Services.InitializerDependencyInjection();
 
-// Configure AutoMapper
+// Configure AutoMapper (assuming this is a custom method)
 builder.Services.ConfigureAutoMapper();
 
 // JWT Key from configuration
@@ -50,6 +58,18 @@ var tokenValidationParameter = new TokenValidationParameters
     RequireExpirationTime = true,
     ClockSkew = TimeSpan.Zero
 };
+
+// Cấu hình CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReactApp", policy =>
+    {
+        policy.WithOrigins("http://localhost:3000", "https://localhost:3000")
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials(); // Nếu cần sử dụng cookie hoặc thông tin xác thực khác
+    });
+});
 
 // Authentication configuration (JWT and Google)
 builder.Services.AddAuthentication(options =>
@@ -76,6 +96,8 @@ builder.Services.AddAuthentication(options =>
 });
 
 builder.Services.AddSingleton(tokenValidationParameter);
+
+// Register middleware components
 builder.Services.AddTransient<ExceptionHandlingMiddleware>();
 builder.Services.AddTransient<ArgumentExceptionHandlingMiddleware>();
 builder.Services.AddTransient<UnauthourizeExceptionHandlingMiddleware>();
@@ -83,7 +105,8 @@ builder.Services.AddHttpClient();
 
 // Add MVC controllers
 builder.Services.AddControllers();
-
+builder.Services.Configure<VnpayConfig>(
+             builder.Configuration.GetSection(VnpayConfig.ConfigName));
 // Configure Swagger/OpenAPI
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
@@ -125,6 +148,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("AllowReactApp"); // Sử dụng policy CORS
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();

@@ -29,5 +29,19 @@ namespace DataAccess.Model
 
         [Required]
         public decimal Amount { get; set; }
+
+        public string Status { get; set; }
+
+        public string PaymentLastMessage { get; set; } = string.Empty;
+
+        // Thêm các trường bổ sung theo yêu cầu
+        public string PaymentContent { get; set; } = string.Empty; // Nội dung thanh toán
+        public string PaymentCurrency { get; set; } = "VND"; // Tiền tệ thanh toán
+        public string PaymentRefId { get; set; } = string.Empty; // Mã tham chiếu thanh toán
+        public DateTime ExpireDate { get; set; } = DateTime.Now.AddMinutes(15); // Ngày hết hạn
+        public string PaymentLanguage { get; set; } = "vn"; // Ngôn ngữ thanh toán
+        public string MerchantId { get; set; } = string.Empty; // ID của người bán
+        public string PaymentDestinationId { get; set; } = string.Empty; // ID của điểm đến thanh toán
     }
+
 }

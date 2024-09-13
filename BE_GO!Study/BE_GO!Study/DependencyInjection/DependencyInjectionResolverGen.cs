@@ -12,6 +12,8 @@ using Org.BouncyCastle.Asn1.X509.Qualified;
 using DataAccess.Model;
 using DataAccess.Repositories;
 using GO_Study_Logic.Service;
+using GO_Study_Logic.Service.VNPAY;
+using GO_Study_Logic.Service.Interface;
 
 namespace FSAM.BusinessLogic.Generations.DependencyInjection
 {
@@ -40,8 +42,20 @@ namespace FSAM.BusinessLogic.Generations.DependencyInjection
             services.AddScoped<IBlogPostService, BlogPostService>();
             services.AddScoped<IBlogPostRepository, BlogPostRepository>();
 
+            services.AddScoped<IPaymentTransactionRepository, PaymentTransactionRepository>(); 
+            services.AddScoped<IPaymentService, PaymentService>();
+
             services.AddScoped<IJwtService, JwtService>();
-             
+
+            services.AddScoped<IVnPayService, VnPayService>();
+
+
+            services.AddScoped<ISqlService, SqlService>();
+            services.AddScoped<ICurrentUserService, CurrentUserService>();
+            services.AddScoped<IConnectionService, ConnectionService>();
+            
+
+
         }
     }
 }

@@ -221,6 +221,144 @@
     ]
   },
   {
+    "ContainingType": "BE_GO_Study.Controllers.PaymentControllner",
+    "Method": "Create",
+    "RelativePath": "api/PaymentControllner",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "GO_Study_Logic.Service.VNPAY.CreatePayment",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "GO_Study_Logic.ViewModel.BaseResultWithData\u00601[[GO_Study_Logic.ViewModel.PaymentTransactionViewModel, GOStudy_Logic, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      }
+    ]
+  },
+  {
+    "ContainingType": "BE_GO_Study.Controllers.PaymentControllner",
+    "Method": "InsertPaymentTransaction",
+    "RelativePath": "api/PaymentControllner/insert",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "GO_Study_Logic.ViewModel.PaymentTransactionViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_GO_Study.Controllers.PaymentControllner",
+    "Method": "UpdatePaymentTransactionStatus",
+    "RelativePath": "api/PaymentControllner/update-status",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "GO_Study_Logic.ViewModel.UpdateStatusDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_GO_Study.Controllers.PaymentControllner",
+    "Method": "VnPayReturn",
+    "RelativePath": "api/PaymentControllner/vnpay-return",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "vnp_Amount",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "vnp_BankCode",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "vnp_BankTranNo",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "vnp_CardType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "vnp_OrderInfo",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "vnp_PayDate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "vnp_ResponseCode",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "vnp_TmnCode",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "vnp_TransactionNo",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "vnp_TransactionStatus",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "vnp_TxnRef",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "vnp_SecureHash",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "BE_GO_Study.Controllers.Room.TaskController",
     "Method": "SaveTask",
     "RelativePath": "api/Task/SaveTakUserID/{userid}",
