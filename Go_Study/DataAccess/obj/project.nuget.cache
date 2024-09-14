@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "FnxmuK65FBs=",
+  "dgSpecHash": "U8+ItmHP/Xo=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\Go_Study\\DataAccess\\DataAccess.csproj",
+  "projectFilePath": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\Go_Study\\DataAccess\\DataAccess.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\mediatr\\11.0.0\\mediatr.11.0.0.nupkg.sha512",

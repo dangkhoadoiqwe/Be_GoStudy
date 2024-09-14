@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+fBAkpzoEGw=",
+  "dgSpecHash": "muHXrc/QYkg=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\Go_Study\\BE_GOStudy\\BE_GOStudy.csproj",
+  "projectFilePath": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\Go_Study\\BE_GOStudy\\BE_GOStudy.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\awssdk.core\\3.7.400.20\\awssdk.core.3.7.400.20.nupkg.sha512",
