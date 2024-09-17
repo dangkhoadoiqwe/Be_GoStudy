@@ -1,8 +1,10 @@
-﻿using GOStudy_Logic.Service;
+﻿
 using Microsoft.AspNetCore.Mvc;
 using DataAccess.Model;
 using System.Threading.Tasks;
 using GO_Study_Logic.Service;
+using GO_Study_Logic.ViewModel;
+using GOStudy_Logic.ViewModel;
 
 namespace BE_GOStudy.Controllers
 {
@@ -12,17 +14,13 @@ namespace BE_GOStudy.Controllers
     {
         private readonly ISpecializationService _specializationService;
 
-        // Inject SpecializationService vào controller
         public SpecializationController(ISpecializationService specializationService)
         {
             _specializationService = specializationService;
         }
 
-         
-
-        
-        [HttpPost("save")]
-        public async Task<IActionResult> SaveSpecialization([FromBody] Specialization specialization)
+        [HttpPost("save_Specialization")]
+        public async Task<IActionResult> SaveSpecialization([FromBody] SpecializationViewModel specialization)
         {
             if (specialization == null || string.IsNullOrEmpty(specialization.Name))
             {

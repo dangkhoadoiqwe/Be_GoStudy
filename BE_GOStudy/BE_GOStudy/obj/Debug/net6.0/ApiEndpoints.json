@@ -537,14 +537,14 @@
   {
     "ContainingType": "BE_GOStudy.Controllers.SpecializationController",
     "Method": "SaveSpecialization",
-    "RelativePath": "api/Specialization/save",
+    "RelativePath": "api/Specialization/save_Specialization",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "specialization",
-        "Type": "DataAccess.Model.Specialization",
+        "Type": "GOStudy_Logic.ViewModel.SpecializationViewModel",
         "IsRequired": true
       }
     ],
@@ -664,6 +664,22 @@
   },
   {
     "ContainingType": "BE_GO_Study.Controllers.User.UserController",
+    "Method": "GetAttendance",
+    "RelativePath": "api/User/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_GO_Study.Controllers.User.UserController",
     "Method": "GetUserHome",
     "RelativePath": "api/User/GetUserHome/{userid}",
     "HttpMethod": "GET",
@@ -689,6 +705,22 @@
       {
         "Name": "userid",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_GO_Study.Controllers.User.UserController",
+    "Method": "SaveAttendance",
+    "RelativePath": "api/User/SaveAttendance",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "attendanceRequest",
+        "Type": "GOStudy_Logic.ViewModel.AttendanceRequestModel",
         "IsRequired": true
       }
     ],

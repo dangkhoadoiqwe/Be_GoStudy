@@ -13,5 +13,5 @@ namespace GO_Study_Logic.ViewModel
         public decimal Price { get; set; }
         public string Features { get; set; }
     }
-
+  
 }

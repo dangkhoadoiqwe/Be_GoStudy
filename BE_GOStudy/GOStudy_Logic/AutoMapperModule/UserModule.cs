@@ -2,6 +2,7 @@
 using DataAccess.Model;
 using GO_Study_Logic.ViewModel;
 using GO_Study_Logic.ViewModel.User;
+using GOStudy_Logic.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,9 +33,11 @@ namespace GO_Study_Logic.AutoMapperModule
 
             mc.CreateMap<Ranking, Ranking_View_Model>().ReverseMap();
 
-            mc.CreateMap<PrivacySetting, PrivacySetting_View_Model>().ReverseMap(); 
-              
-             
+            mc.CreateMap<PrivacySetting, PrivacySetting_View_Model>().ReverseMap();
+
+            mc.CreateMap<Attendance, AttendanceRequestModel>().ReverseMap();
+
+            mc.CreateMap<Specialization, SpecializationViewModel>().ReverseMap();
         }
     }
 }
