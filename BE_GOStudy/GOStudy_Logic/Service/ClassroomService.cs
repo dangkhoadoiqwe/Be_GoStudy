@@ -14,13 +14,15 @@ namespace GO_Study_Logic.Service
         Task<AllClassModel> GetAllClassroomsAsync(int userid);
         Task<ClassroomModel> GetClassroomByIdAsync(int classroomId);
         Task AddClassroomAsync(ClassroomModel classroomModel);
-        Task UpdateClassroomAsync(ClassroomModel classroomModel);
+        Task UpdateClassroomLinkUrlAsync(int classroomId, string linkUrl);
         Task DeleteClassroomAsync(int classroomId);
         Task<IEnumerable<ClassroomModel>> GetUserRoomAsync(int userId);
         Task<IEnumerable<ClassroomModel>> GetOtherClassroomsAsync(int userId);
         Task<ClassUserModel> GetUserDashboardAsync(int userId);
 
         Task<IEnumerable<TaskViewMeeting>>GetRoomByUserID(int userId);
+
+        Task<IEnumerable<ClassroomModel>> GetAllClassrooms();
     }
 
     public class ClassroomService : IClassroomService
@@ -56,10 +58,14 @@ namespace GO_Study_Logic.Service
             await _repository.AddClassroomAsync(classroom);
         }
 
-        public async Task UpdateClassroomAsync(ClassroomModel classroomModel)
+        public async Task UpdateClassroomLinkUrlAsync(int classroomId, string linkUrl)
         {
-            var classroom = _mapper.Map<Classroom>(classroomModel);
-            await _repository.UpdateClassroomAsync(classroom);
+            await _repository.UpdateClassroomLinkUrlAsync(classroomId, linkUrl);
+        }
+        public async Task<IEnumerable<ClassroomModel>> GetAllClassrooms()
+        {
+            var classrooms = await _repository.GetAllClassrooms();
+            return _mapper.Map<IEnumerable<ClassroomModel>>(classrooms);
         }
 
         public async Task DeleteClassroomAsync(int classroomId)

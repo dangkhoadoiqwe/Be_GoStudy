@@ -13,10 +13,12 @@ namespace DataAccess.Repositories
         Task<IEnumerable<Classroom>> GetAllClassroomsAsync(int userId);
         Task<Classroom?> GetClassroomByIdAsync(int classroomId);
         Task AddClassroomAsync(Classroom classroom);
-        Task UpdateClassroomAsync(Classroom classroom);
+        Task UpdateClassroomLinkUrlAsync(int classroomId, string linkUrl);
         Task DeleteClassroomAsync(int classroomId);
         Task<IEnumerable<Classroom>> GetOtherClassroomsAsync(int userId);
         Task<IEnumerable<Classroom>> GetUserRoomAsync( int userid );
+
+        Task<IEnumerable<Classroom>> GetAllClassrooms();
     }
     public class ClassroomRepository : IClassroomRepository
     {
@@ -40,10 +42,19 @@ namespace DataAccess.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateClassroomAsync(Classroom classroom)
+        public async Task UpdateClassroomLinkUrlAsync(int classroomId, string linkUrl)
         {
-            _context.Classrooms.Update(classroom);
-            await _context.SaveChangesAsync();
+            var classroom = await _context.Classrooms.FindAsync(classroomId);
+            if (classroom != null)
+            {
+                classroom.LinkUrl = linkUrl; // Cập nhật LinkUrl
+                _context.Classrooms.Attach(classroom).Property(c => c.LinkUrl).IsModified = true;
+                await _context.SaveChangesAsync();
+            }
+        }
+        public async Task<IEnumerable<Classroom>> GetAllClassrooms()
+        {
+            return await _context.Classrooms.ToListAsync();
         }
 
         public async Task DeleteClassroomAsync(int classroomId)

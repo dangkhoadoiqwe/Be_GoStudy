@@ -9,14 +9,15 @@ namespace BE_GOStudy.Controllers.Room
     public class ClassroomController : ControllerBase
     {
         private readonly IClassroomService _service;
-
-        public ClassroomController(IClassroomService service)
+        private readonly IUserService _userService;
+        public ClassroomController(IClassroomService service, IUserService userService)
         {
             _service = service;
+            _userService = userService;
         }
 
-        [HttpGet("AllClass/{userid}")]
-        public async Task<IActionResult> GetAllClassrooms(int userid)
+        [HttpGet("AllClassUser/{userid}")]
+        public async Task<IActionResult> GetAllClassroomsforUserID(int userid)
         {
             try
             {
@@ -34,7 +35,47 @@ namespace BE_GOStudy.Controllers.Room
             }
         }
 
+        [HttpGet("AllClassroomsAdmin/{userid}")]
+        public async Task<IActionResult> GetAllClassroomsforAdmin(int userid)
+        {
+            try
+            {
+                // Lấy thông tin claims từ HttpContext.User
+                var claims = HttpContext.User.Claims;
+                foreach (var claim in claims)
+                {
+                    Console.WriteLine($"Claim Type: {claim.Type}, Claim Value: {claim.Value}");
+                }
 
+                // Lấy thông tin người dùng từ userId
+                var user = await _userService.GetById(userid);
+                if (user == null)
+                {
+                    return NotFound("User not found");
+                }
+
+                // Kiểm tra quyền của người dùng (role 2 hoặc role 3)
+                if (user.Role == 2 || user.Role == 3)
+                {
+                    var classrooms = await _service.GetAllClassrooms();
+                    if (classrooms == null || !classrooms.Any())
+                    {
+                        return NotFound("No classrooms found.");
+                    }
+                    return Ok(classrooms);
+                }
+                else
+                {
+                    // Nếu không có quyền, trả về 403 Forbidden
+                    return StatusCode(403, "Bạn không có quyền vào");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Xử lý lỗi và trả về 500 Internal Server Error
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
 
         [HttpGet("MeetingRoom/{userid}")]
         public async Task<IActionResult> GetMeetingRoom(int userid)
@@ -54,16 +95,24 @@ namespace BE_GOStudy.Controllers.Room
                 return StatusCode(500, "Internal server error");
             }
         }
-
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateClassroom(int id, ClassroomModel ClassroomModel)
+        [HttpPut("UpdateLinkUrl/{id}")]
+        public async Task<IActionResult> UpdateClassroomLinkUrl(int id, [FromBody] string linkUrl)
         {
-            if (id != ClassroomModel.ClassroomId)
+            if (string.IsNullOrEmpty(linkUrl))
             {
-                return BadRequest();
+                return BadRequest("Link URL cannot be null or empty");
             }
-            await _service.UpdateClassroomAsync(ClassroomModel);
-            return NoContent();
+
+            try
+            {
+                await _service.UpdateClassroomLinkUrlAsync(id, linkUrl);
+                return Ok("Link URL updated successfully.");
+            }
+            catch (Exception ex)
+            {
+                // Log lỗi (ex) nếu cần
+                return StatusCode(500, $"Error updating Link URL: {ex.Message}");
+            }
         }
 
         [HttpGet("user/{userid}")]

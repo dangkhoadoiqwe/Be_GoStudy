@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using DataAccess.Model;
 using System.Threading.Tasks;
+using GO_Study_Logic.Service;
 
 namespace BE_GOStudy.Controllers
 {
@@ -17,13 +18,9 @@ namespace BE_GOStudy.Controllers
             _specializationService = specializationService;
         }
 
-        // Phương thức để trả về trang Index (mặc định)
-        public IActionResult Index()
-        {
-            return View();
-        }
+         
 
-        // Phương thức HTTP POST để lưu Specialization
+        
         [HttpPost("save")]
         public async Task<IActionResult> SaveSpecialization([FromBody] Specialization specialization)
         {
