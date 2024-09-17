@@ -14,6 +14,7 @@ using DataAccess.Repositories;
 using GO_Study_Logic.Service;
 using GO_Study_Logic.Service.VNPAY;
 using GO_Study_Logic.Service.Interface;
+using GOStudy_Logic.Service;
 
 namespace BE_GOStudy.DependencyInjection
 {
@@ -34,7 +35,9 @@ namespace BE_GOStudy.DependencyInjection
             services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddScoped<ISemestersRepository, SemestersRepository>();
+
             services.AddScoped<ISpecializationRepository, SpecializationRepository>();
+            services.AddScoped<ISpecializationService, SpecializationService>();
 
             services.AddScoped<ITaskRepository, TaskRepository>();
             services.AddScoped<ITaskService, TaskService>();
@@ -52,6 +55,7 @@ namespace BE_GOStudy.DependencyInjection
             services.AddScoped<IPackageService, PackageService>();
             services.AddScoped<IPackageRepository, PackageRepository>();
 
+          
 
             services.AddScoped<ISqlService, SqlService>();
             services.AddScoped<ICurrentUserService, CurrentUserService>();

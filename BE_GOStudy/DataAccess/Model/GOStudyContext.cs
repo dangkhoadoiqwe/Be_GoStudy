@@ -52,9 +52,9 @@ namespace DataAccess.Model
                 .HasColumnType("decimal(18,2)");
 
             modelBuilder.Entity<PaymentTransaction>()
-          .HasOne(p => p.User)
-          .WithMany(u => u.PaymentTransactions)
-          .HasForeignKey(p => p.UserId);
+                .HasOne(p => p.User)
+                .WithMany(u => u.PaymentTransactions)
+                .HasForeignKey(p => p.UserId);
 
             modelBuilder.Entity<PaymentTransaction>()
                 .HasOne(p => p.Package)
@@ -194,32 +194,36 @@ namespace DataAccess.Model
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_RefreshToken_Users");
             });
-            modelBuilder.Entity<Specialization>().HasData(
-          new Specialization { SpecializationId = -1, Name = "English" },
-          new Specialization { SpecializationId = -2, Name = "Chinese" },
-          new Specialization { SpecializationId = -3, Name = "Japanese" },
-          new Specialization { SpecializationId = -4, Name = "Economics and Management" },
-          new Specialization { SpecializationId = -5, Name = "Marketing" },
-          new Specialization { SpecializationId = -6, Name = "Media and Journalism" },
-          new Specialization { SpecializationId = -7, Name = "Design" },
-          new Specialization { SpecializationId = -8, Name = "Science and Technology" },
-          new Specialization { SpecializationId = -9, Name = "Industry and Construction" },
-          new Specialization { SpecializationId = -10, Name = "General Subjects" }
-      );
 
-            // Seed data cho Classroom
-            modelBuilder.Entity<Classroom>().HasData(
-                new Classroom { ClassroomId = -1, Name = "Room 101", SpecializationId = -1, Nickname = "Eng101", CreatedAt = DateTime.UtcNow },
-                new Classroom { ClassroomId = -2, Name = "Room 102", SpecializationId = -2, Nickname = "Chi102", CreatedAt = DateTime.UtcNow },
-                new Classroom { ClassroomId = -3, Name = "Room 103", SpecializationId = -3, Nickname = "Jap103", CreatedAt = DateTime.UtcNow },
-                new Classroom { ClassroomId = -4, Name = "Room 104", SpecializationId = -4, Nickname = "EconMgmt104", CreatedAt = DateTime.UtcNow },
-                new Classroom { ClassroomId = -5, Name = "Room 105", SpecializationId = -5, Nickname = "Mkt105", CreatedAt = DateTime.UtcNow },
-                new Classroom { ClassroomId = -6, Name = "Room 106", SpecializationId = -6, Nickname = "MediaJourn106", CreatedAt = DateTime.UtcNow },
-                new Classroom { ClassroomId = -7, Name = "Room 107", SpecializationId = -7, Nickname = "Design107", CreatedAt = DateTime.UtcNow },
-                new Classroom { ClassroomId = -8, Name = "Room 108", SpecializationId = -8, Nickname = "SciTech108", CreatedAt = DateTime.UtcNow },
-                new Classroom { ClassroomId = -9, Name = "Room 109", SpecializationId = -9, Nickname = "IndConst109", CreatedAt = DateTime.UtcNow },
-                new Classroom { ClassroomId = -10, Name = "Room 110", SpecializationId = -10, Nickname = "GenSub110", CreatedAt = DateTime.UtcNow }
+            // Seed data for Specialization
+            modelBuilder.Entity<Specialization>().HasData(
+                new Specialization { SpecializationId = -1, Name = "English" },
+                new Specialization { SpecializationId = -2, Name = "Chinese" },
+                new Specialization { SpecializationId = -3, Name = "Japanese" },
+                new Specialization { SpecializationId = -4, Name = "Economics and Management" },
+                new Specialization { SpecializationId = -5, Name = "Marketing" },
+                new Specialization { SpecializationId = -6, Name = "Media and Journalism" },
+                new Specialization { SpecializationId = -7, Name = "Design" },
+                new Specialization { SpecializationId = -8, Name = "Science and Technology" },
+                new Specialization { SpecializationId = -9, Name = "Industry and Construction" },
+                new Specialization { SpecializationId = -10, Name = "General Subjects" }
             );
+
+            // Seed data for Classroom
+            modelBuilder.Entity<Classroom>().HasData(
+     new Classroom { ClassroomId = -1, Name = "Room 101", SpecializationId = -1, Nickname = "Eng101", LinkUrl = "http://example.com/eng101", CreatedAt = DateTime.UtcNow, status = 1 },
+     new Classroom { ClassroomId = -2, Name = "Room 102", SpecializationId = -2, Nickname = "Chi102", LinkUrl = "http://example.com/chi102", CreatedAt = DateTime.UtcNow, status = 1 },
+     new Classroom { ClassroomId = -3, Name = "Room 103", SpecializationId = -3, Nickname = "Jap103", LinkUrl = "http://example.com/jap103", CreatedAt = DateTime.UtcNow, status = 1 },
+     new Classroom { ClassroomId = -4, Name = "Room 104", SpecializationId = -4, Nickname = "EconMgmt104", LinkUrl = "http://example.com/econmgmt104", CreatedAt = DateTime.UtcNow, status = 1 },
+     new Classroom { ClassroomId = -5, Name = "Room 105", SpecializationId = -5, Nickname = "Mkt105", LinkUrl = "http://example.com/mkt105", CreatedAt = DateTime.UtcNow, status = 1 },
+     new Classroom { ClassroomId = -6, Name = "Room 106", SpecializationId = -6, Nickname = "MediaJourn106", LinkUrl = "http://example.com/mediajourn106", CreatedAt = DateTime.UtcNow, status = 1 },
+     new Classroom { ClassroomId = -7, Name = "Room 107", SpecializationId = -7, Nickname = "Design107", LinkUrl = "http://example.com/design107", CreatedAt = DateTime.UtcNow, status = 1 },
+     new Classroom { ClassroomId = -8, Name = "Room 108", SpecializationId = -8, Nickname = "SciTech108", LinkUrl = "http://example.com/scitech108", CreatedAt = DateTime.UtcNow, status = 1 },
+     new Classroom { ClassroomId = -9, Name = "Room 109", SpecializationId = -9, Nickname = "IndConst109", LinkUrl = "http://example.com/indconst109", CreatedAt = DateTime.UtcNow, status = 1 },
+     new Classroom { ClassroomId = -10, Name = "Room 110", SpecializationId = -10, Nickname = "GenSub110", LinkUrl = "http://example.com/gensub110", CreatedAt = DateTime.UtcNow, status = 1 }
+ );
+
+
             base.OnModelCreating(modelBuilder);
         }
     }

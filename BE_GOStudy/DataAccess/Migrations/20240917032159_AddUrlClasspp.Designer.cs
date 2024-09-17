@@ -4,6 +4,7 @@ using DataAccess.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(GOStudyContext))]
-    partial class GOStudyContextModelSnapshot : ModelSnapshot
+    [Migration("20240917032159_AddUrlClasspp")]
+    partial class AddUrlClasspp
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -231,108 +233,6 @@ namespace DataAccess.Migrations
                     b.HasIndex("SpecializationId");
 
                     b.ToTable("Classrooms");
-
-                    b.HasData(
-                        new
-                        {
-                            ClassroomId = -1,
-                            CreatedAt = new DateTime(2024, 9, 17, 3, 27, 13, 849, DateTimeKind.Utc).AddTicks(4948),
-                            LinkUrl = "http://example.com/eng101",
-                            Name = "Room 101",
-                            Nickname = "Eng101",
-                            SpecializationId = -1,
-                            status = 1
-                        },
-                        new
-                        {
-                            ClassroomId = -2,
-                            CreatedAt = new DateTime(2024, 9, 17, 3, 27, 13, 849, DateTimeKind.Utc).AddTicks(4950),
-                            LinkUrl = "http://example.com/chi102",
-                            Name = "Room 102",
-                            Nickname = "Chi102",
-                            SpecializationId = -2,
-                            status = 1
-                        },
-                        new
-                        {
-                            ClassroomId = -3,
-                            CreatedAt = new DateTime(2024, 9, 17, 3, 27, 13, 849, DateTimeKind.Utc).AddTicks(4951),
-                            LinkUrl = "http://example.com/jap103",
-                            Name = "Room 103",
-                            Nickname = "Jap103",
-                            SpecializationId = -3,
-                            status = 1
-                        },
-                        new
-                        {
-                            ClassroomId = -4,
-                            CreatedAt = new DateTime(2024, 9, 17, 3, 27, 13, 849, DateTimeKind.Utc).AddTicks(4952),
-                            LinkUrl = "http://example.com/econmgmt104",
-                            Name = "Room 104",
-                            Nickname = "EconMgmt104",
-                            SpecializationId = -4,
-                            status = 1
-                        },
-                        new
-                        {
-                            ClassroomId = -5,
-                            CreatedAt = new DateTime(2024, 9, 17, 3, 27, 13, 849, DateTimeKind.Utc).AddTicks(4953),
-                            LinkUrl = "http://example.com/mkt105",
-                            Name = "Room 105",
-                            Nickname = "Mkt105",
-                            SpecializationId = -5,
-                            status = 1
-                        },
-                        new
-                        {
-                            ClassroomId = -6,
-                            CreatedAt = new DateTime(2024, 9, 17, 3, 27, 13, 849, DateTimeKind.Utc).AddTicks(4955),
-                            LinkUrl = "http://example.com/mediajourn106",
-                            Name = "Room 106",
-                            Nickname = "MediaJourn106",
-                            SpecializationId = -6,
-                            status = 1
-                        },
-                        new
-                        {
-                            ClassroomId = -7,
-                            CreatedAt = new DateTime(2024, 9, 17, 3, 27, 13, 849, DateTimeKind.Utc).AddTicks(4956),
-                            LinkUrl = "http://example.com/design107",
-                            Name = "Room 107",
-                            Nickname = "Design107",
-                            SpecializationId = -7,
-                            status = 1
-                        },
-                        new
-                        {
-                            ClassroomId = -8,
-                            CreatedAt = new DateTime(2024, 9, 17, 3, 27, 13, 849, DateTimeKind.Utc).AddTicks(4957),
-                            LinkUrl = "http://example.com/scitech108",
-                            Name = "Room 108",
-                            Nickname = "SciTech108",
-                            SpecializationId = -8,
-                            status = 1
-                        },
-                        new
-                        {
-                            ClassroomId = -9,
-                            CreatedAt = new DateTime(2024, 9, 17, 3, 27, 13, 849, DateTimeKind.Utc).AddTicks(4959),
-                            LinkUrl = "http://example.com/indconst109",
-                            Name = "Room 109",
-                            Nickname = "IndConst109",
-                            SpecializationId = -9,
-                            status = 1
-                        },
-                        new
-                        {
-                            ClassroomId = -10,
-                            CreatedAt = new DateTime(2024, 9, 17, 3, 27, 13, 849, DateTimeKind.Utc).AddTicks(4960),
-                            LinkUrl = "http://example.com/gensub110",
-                            Name = "Room 110",
-                            Nickname = "GenSub110",
-                            SpecializationId = -10,
-                            status = 1
-                        });
                 });
 
             modelBuilder.Entity("DataAccess.Model.Comment", b =>
@@ -785,58 +685,6 @@ namespace DataAccess.Migrations
                     b.HasKey("SpecializationId");
 
                     b.ToTable("Specializations");
-
-                    b.HasData(
-                        new
-                        {
-                            SpecializationId = -1,
-                            Name = "English"
-                        },
-                        new
-                        {
-                            SpecializationId = -2,
-                            Name = "Chinese"
-                        },
-                        new
-                        {
-                            SpecializationId = -3,
-                            Name = "Japanese"
-                        },
-                        new
-                        {
-                            SpecializationId = -4,
-                            Name = "Economics and Management"
-                        },
-                        new
-                        {
-                            SpecializationId = -5,
-                            Name = "Marketing"
-                        },
-                        new
-                        {
-                            SpecializationId = -6,
-                            Name = "Media and Journalism"
-                        },
-                        new
-                        {
-                            SpecializationId = -7,
-                            Name = "Design"
-                        },
-                        new
-                        {
-                            SpecializationId = -8,
-                            Name = "Science and Technology"
-                        },
-                        new
-                        {
-                            SpecializationId = -9,
-                            Name = "Industry and Construction"
-                        },
-                        new
-                        {
-                            SpecializationId = -10,
-                            Name = "General Subjects"
-                        });
                 });
 
             modelBuilder.Entity("DataAccess.Model.SupportTicket", b =>
