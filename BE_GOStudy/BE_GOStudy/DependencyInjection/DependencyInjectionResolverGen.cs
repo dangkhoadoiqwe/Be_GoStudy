@@ -44,6 +44,9 @@ namespace BE_GOStudy.DependencyInjection
 
             services.AddScoped<IBlogPostService, BlogPostService>();
             services.AddScoped<IBlogPostRepository, BlogPostRepository>();
+            
+            services.AddScoped<ICommentService, CommentService>();
+            services.AddScoped<ICommentRepository, CommentRepository>();
 
             services.AddScoped<IPaymentTransactionRepository, PaymentTransactionRepository>(); 
             services.AddScoped<IPaymentService, PaymentService>();
