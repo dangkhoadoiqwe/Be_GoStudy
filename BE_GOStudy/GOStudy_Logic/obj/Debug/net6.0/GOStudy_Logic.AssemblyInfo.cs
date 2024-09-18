@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GOStudy_Logic")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+406cb54eb01d67bdd33630acd8ff9c9fb9ec1199")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+952168edb2b537fd50bdaec9d8b48551fb63dac2")]
 [assembly: System.Reflection.AssemblyProductAttribute("GOStudy_Logic")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GOStudy_Logic")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

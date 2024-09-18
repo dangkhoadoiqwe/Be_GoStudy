@@ -13,12 +13,14 @@ namespace DataAccess.Repositories
         Task DeleteBlogPostAsync(BlogPost blogPost);
         Task<List<BlogPost>> GetTrendingBlogPosts();
         Task<List<BlogPost>> GetUserBlogPosts(int userId);
+        Task<List<BlogPost>> GetFavoriteBlogPosts(int userId);
     }
 
 
     public class BlogPostRepository : IBlogPostRepository
     {
         private GOStudyContext _context;
+        
         public BlogPostRepository(GOStudyContext context)
         {
             _context = context;
@@ -26,7 +28,8 @@ namespace DataAccess.Repositories
 
         public async Task<IEnumerable<BlogPost>> GetAllBlogPostsAsync()
         {
-            return await _context.BlogPosts.ToListAsync();
+            
+            return await _context.BlogPosts.Include(u => u.User).ToListAsync();
         }
         public async Task<BlogPost?> GetBlogPostByIdAsync(int postId)
         {
@@ -60,6 +63,11 @@ namespace DataAccess.Repositories
                 .Where(p => p.IsTrending && p.CreatedAt >= DateTime.Now.AddDays(-7))
                 .OrderByDescending(p => p.ViewCount + p.likeCount + p.Comments.Count)
                 .ToListAsync();
+        }
+
+        public async Task<List<BlogPost>> GetFavoriteBlogPosts(int userId)
+        {
+            return await _context.BlogPosts.Where(p => p.IsFavorite && p.UserId == userId).ToListAsync();
         }
         public async Task<List<BlogPost>> GetUserBlogPosts(int userId)
         {
