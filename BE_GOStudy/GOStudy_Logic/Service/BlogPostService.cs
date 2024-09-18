@@ -11,16 +11,18 @@ namespace GO_Study_Logic.Service
     {
         Task<IEnumerable<BlogPost_View_Model>> GetAllBlogPostsAsync();
         Task<BlogPost_View_Model> GetBlogPostByIdAsync(int postId);
-        Task AddBlogPostAsync(BlogPost_Create_Model blogPostCreateModel);
+        Task AddBlogPostAsync(BlogPost blogPostCreateModel);
         Task UpdateBlogPostAsync(BlogPost_View_Model blogPostViewModel);
         Task<bool> DeleteBlogPostAsync(int postId);
         Task<List<BlogPost>> GetTrendingBlogPosts();
         Task<List<BlogPost>> GetUserBlogPosts(int userId);
+        Task<List<BlogPost>> GetFavoriteBlogPosts(int userId);
     }
     public class BlogPostService : IBlogPostService
     {
         private readonly IBlogPostRepository _repository;
         private readonly IMapper _mapper;
+        
 
         public BlogPostService(
             IBlogPostRepository repository,
@@ -37,7 +39,7 @@ namespace GO_Study_Logic.Service
             return _mapper.Map<IEnumerable<BlogPost_View_Model>>(blogPost);
         }
 
-        public async Task AddBlogPostAsync(BlogPost_Create_Model blogPostCreateViewModel)
+        public async Task AddBlogPostAsync(BlogPost blogPostCreateViewModel)
         {
             var blogPostEntity = _mapper.Map<BlogPost>(blogPostCreateViewModel);
             await _repository.AddBlogPostAsync(blogPostEntity);
@@ -74,8 +76,6 @@ namespace GO_Study_Logic.Service
                 existingBlogPost.Title = updatedBlogPost.Title;
                 existingBlogPost.Content = updatedBlogPost.Content;
                 existingBlogPost.CreatedAt = updatedBlogPost.CreatedAt;
-                existingBlogPost.Category = updatedBlogPost.Category;
-                existingBlogPost.Tags = updatedBlogPost.Tags;
                 existingBlogPost.ViewCount = updatedBlogPost.ViewCount;
                 existingBlogPost.IsDraft = updatedBlogPost.IsDraft;
                 existingBlogPost.shareCount = updatedBlogPost.shareCount;
@@ -92,6 +92,10 @@ namespace GO_Study_Logic.Service
             return await _repository.GetTrendingBlogPosts();
         }
 
+        public async Task<List<BlogPost>> GetFavoriteBlogPosts(int userId)
+        {
+            return await _repository.GetFavoriteBlogPosts(userId);
+        }
         public async Task<List<BlogPost>> GetUserBlogPosts(int userId)
         {
             return await _repository.GetUserBlogPosts(userId);

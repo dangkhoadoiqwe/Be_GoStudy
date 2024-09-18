@@ -78,6 +78,14 @@ namespace BE_GOStudy.Controllers.BlogPost
             var trendingPosts = await _blogPostService.GetTrendingBlogPosts();
             return Ok(trendingPosts);
         }
+        [HttpGet("favorite/{userId}")]
+        public async Task<IActionResult> GetFavoriteBlogPosts(int userId)
+        {
+            
+            var trendingPosts = await _blogPostService.GetFavoriteBlogPosts(userId);
+            return Ok(trendingPosts);   
+        }
+        
         [HttpGet("yourblog/{userId}")]
         public async Task<IActionResult> GetUserBlogPosts(int userId)
         {
@@ -92,27 +100,21 @@ namespace BE_GOStudy.Controllers.BlogPost
                 return BadRequest(ModelState);
             }
 
-            var blogPost = new BlogPost_Create_Model()
+            var blogPost = new DataAccess.Model.BlogPost()
             {
-                UserId = userId, 
+                UserId = userId,
                 Content = blogPostCreateModel.Content,
-                image = blogPostCreateModel.image,
+                image = blogPostCreateModel.image, 
                 Title = blogPostCreateModel.Title ?? string.Empty, 
-                Category = blogPostCreateModel.Category ?? "Uncategorized", 
-                Tags = blogPostCreateModel.Tags ?? string.Empty,  
-                ViewCount = 0,
-                IsDraft = blogPostCreateModel.IsDraft,  
-                shareCount = 0,  
-                likeCount = 0,   
-                IsFavorite = blogPostCreateModel.IsFavorite, 
-                IsTrending = blogPostCreateModel.IsTrending, 
-                CreatedAt = DateTime.Now  
+                CreatedAt = DateTime.Now
             };
 
             await _blogPostService.AddBlogPostAsync(blogPost);
 
             return Ok(new { message = "Blog post created successfully." });
         }
+        
+        
     }
 }
 

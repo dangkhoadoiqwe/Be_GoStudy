@@ -15,13 +15,11 @@ namespace DataAccess.Model
         public int UserId { get; set; }
         [ForeignKey("UserId")]
         public User User { get; set; }
-
-        public string Title { get; set; } = null;
-        [Required]
+        public string Title { get; set; } 
         public string Content { get; set; }
         //New
-        public string Category { get; set; }
-        public string Tags { get; set; }
+        /*public string Category { get; set; }
+        public string Tags { get; set; }*/
         public int ViewCount { get; set; }
         public bool IsDraft { get; set; }
         public int shareCount { get; set; }
