@@ -11,7 +11,7 @@ namespace GO_Study_Logic.Service
     {
         Task<IEnumerable<BlogPost_View_Model>> GetAllBlogPostsAsync();
         Task<BlogPost_View_Model> GetBlogPostByIdAsync(int postId);
-        Task AddBlogPostAsync(BlogPost_View_Model blogPostViewModel);
+        Task AddBlogPostAsync(BlogPost_Create_Model blogPostCreateModel);
         Task UpdateBlogPostAsync(BlogPost_View_Model blogPostViewModel);
         Task<bool> DeleteBlogPostAsync(int postId);
         Task<List<BlogPost>> GetTrendingBlogPosts();
@@ -37,9 +37,9 @@ namespace GO_Study_Logic.Service
             return _mapper.Map<IEnumerable<BlogPost_View_Model>>(blogPost);
         }
 
-        public async Task AddBlogPostAsync(BlogPost_View_Model blogPostViewModel)
+        public async Task AddBlogPostAsync(BlogPost_Create_Model blogPostCreateViewModel)
         {
-            var blogPostEntity = _mapper.Map<BlogPost>(blogPostViewModel);
+            var blogPostEntity = _mapper.Map<BlogPost>(blogPostCreateViewModel);
             await _repository.AddBlogPostAsync(blogPostEntity);
         }
 

@@ -15,47 +15,13 @@ namespace BE_GOStudy.Controllers.BlogPost
     public class BlogPostController : ControllerBase
     {
         private IBlogPostService _blogPostService;
-         
         private IUserService _userService;
         public BlogPostController(IBlogPostService blogPostService,   IUserService userService)
         {
             _blogPostService = blogPostService;
-            
             _userService = userService;
         }
-
-        [HttpGet]
-         
-        public async Task<ActionResult<IEnumerable<BlogPost_View_Model>>> GetAllBlogPosts(int userid)
-        {
-             
-            var claims = HttpContext.User.Claims;
-            foreach (var claim in claims)
-            {
-                Console.WriteLine($"Claim Type: {claim.Type}, Claim Value: {claim.Value}");
-            }
-
-             
-            var user = await _userService.GetById(userid);  
-
-             
-            if (user.Role == 2 || user.Role == 3)  
-            {
-                 
-                var blogPosts = await _blogPostService.GetAllBlogPostsAsync();
-                if (blogPosts == null)
-                {
-                    return NotFound();
-                }
-                return Ok(blogPosts);
-            }
-            else
-            {
-                return StatusCode(403, "Bạn không có quyền vào");
-            }
-        }
-
-
+        
         [HttpGet("{id}")]
         public async Task<ActionResult<BlogPost_View_Model>> GetBlogPostById(int id)
         {
@@ -65,6 +31,16 @@ namespace BE_GOStudy.Controllers.BlogPost
                 return NotFound();
             }
             return Ok(blogPost);
+        }
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<BlogPost_View_Model>>> GetAllBlogPosts()
+        {
+            var blogPosts = await _blogPostService.GetAllBlogPostsAsync();
+            if (blogPosts == null)
+            {
+                return NotFound();
+            }
+            return Ok(blogPosts);
         }
 
         [HttpPut("{id}")]
@@ -109,14 +85,31 @@ namespace BE_GOStudy.Controllers.BlogPost
             return Ok(userPosts);
         }
         [HttpPost(Name = "CreateBlogPost")]
-        public async Task<IActionResult> CreateBlogPost([FromBody] BlogPost_View_Model blogPostViewModel)
+        public async Task<IActionResult> CreateBlogPost([FromBody] BlogPost_Create_Model blogPostCreateModel, [FromQuery] int userId)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            await _blogPostService.AddBlogPostAsync(blogPostViewModel);
+            var blogPost = new BlogPost_Create_Model()
+            {
+                UserId = userId, 
+                Content = blogPostCreateModel.Content,
+                image = blogPostCreateModel.image,
+                Title = blogPostCreateModel.Title ?? string.Empty, 
+                Category = blogPostCreateModel.Category ?? "Uncategorized", 
+                Tags = blogPostCreateModel.Tags ?? string.Empty,  
+                ViewCount = 0,
+                IsDraft = blogPostCreateModel.IsDraft,  
+                shareCount = 0,  
+                likeCount = 0,   
+                IsFavorite = blogPostCreateModel.IsFavorite, 
+                IsTrending = blogPostCreateModel.IsTrending, 
+                CreatedAt = DateTime.Now  
+            };
+
+            await _blogPostService.AddBlogPostAsync(blogPost);
 
             return Ok(new { message = "Blog post created successfully." });
         }
