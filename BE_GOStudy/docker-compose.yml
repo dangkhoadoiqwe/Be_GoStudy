@@ -1,0 +1,12 @@
+﻿
+services:
+  begostudy:
+    image: phucmarc0/gostudybe:v1.2
+    build:
+      context: .
+      dockerfile: BE_GOStudy/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=sql,1433;Database=GoStudyContext;User=SA;Password=MyStrongPass123;
+    ports:
+      - "8080:80"
