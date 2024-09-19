@@ -19,6 +19,8 @@ namespace DataAccess.Repositories
         Task<IEnumerable<Classroom>> GetUserRoomAsync( int userid );
 
         Task<IEnumerable<Classroom>> GetAllClassrooms();
+
+        Task<bool> CheckRoomUser(int userid , int roomId);
     }
     public class ClassroomRepository : IClassroomRepository
     {
@@ -115,6 +117,27 @@ namespace DataAccess.Repositories
                 .ToListAsync();
 
             return otherClassrooms;
+        }
+
+        public async Task<bool> CheckRoomUser(int userId, int roomId)
+        {
+            // Get the specialization ID associated with the given roomId (Classroom)
+            var specializationId = await _context.Classrooms
+                .Where(c => c.ClassroomId == roomId)
+                .Select(c => c.SpecializationId)
+                .FirstOrDefaultAsync();
+
+            // If no specialization is found for the room, return false
+            if (specializationId == 0)
+            {
+                return false;
+            }
+
+            // Check if the user has this specialization in their UserSpecializations
+            var userHasSpecialization = await _context.UserSpecializations
+                .AnyAsync(us => us.UserId == userId && us.SpecializationId == specializationId);
+
+            return userHasSpecialization;
         }
 
     }

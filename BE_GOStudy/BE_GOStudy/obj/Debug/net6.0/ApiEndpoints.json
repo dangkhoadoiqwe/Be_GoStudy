@@ -17,32 +17,6 @@
   },
   {
     "ContainingType": "BE_GOStudy.Controllers.BlogPost.BlogPostController",
-    "Method": "GetAllBlogPosts",
-    "RelativePath": "api/BlogPost",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "userid",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[GO_Study_Logic.ViewModel.BlogPost_View_Model, GOStudy_Logic, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "BE_GOStudy.Controllers.BlogPost.BlogPostController",
     "Method": "CreateBlogPost",
     "RelativePath": "api/BlogPost",
     "HttpMethod": "POST",
@@ -133,6 +107,32 @@
   },
   {
     "ContainingType": "BE_GOStudy.Controllers.BlogPost.BlogPostController",
+    "Method": "GetAllBlogPosts",
+    "RelativePath": "api/BlogPost/Userid",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userid",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[GO_Study_Logic.ViewModel.BlogPost_View_Model, GOStudy_Logic, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "BE_GOStudy.Controllers.BlogPost.BlogPostController",
     "Method": "GetUserBlogPosts",
     "RelativePath": "api/BlogPost/yourblog/{userId}",
     "HttpMethod": "GET",
@@ -149,8 +149,8 @@
   },
   {
     "ContainingType": "BE_GOStudy.Controllers.Room.ClassroomController",
-    "Method": "GetAllClassroomsforAdmin",
-    "RelativePath": "api/Classroom/AllClassroomsAdmin/{userid}",
+    "Method": "GetAllClassroomsforUserID",
+    "RelativePath": "api/Classroom/AllClass(User)/{userid}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -165,8 +165,8 @@
   },
   {
     "ContainingType": "BE_GOStudy.Controllers.Room.ClassroomController",
-    "Method": "GetAllClassroomsforUserID",
-    "RelativePath": "api/Classroom/AllClassUser/{userid}",
+    "Method": "GetAllClassroomsforAdmin",
+    "RelativePath": "api/Classroom/AllClassrooms(Admin)/{userid}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -182,7 +182,7 @@
   {
     "ContainingType": "BE_GOStudy.Controllers.Room.ClassroomController",
     "Method": "GetMeetingRoom",
-    "RelativePath": "api/Classroom/MeetingRoom/{userid}",
+    "RelativePath": "api/Classroom/GetMeetingRoom(User)/{userid}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -244,8 +244,49 @@
   },
   {
     "ContainingType": "BE_GOStudy.Controllers.PackageController",
+    "Method": "GetAllPackagesAsync",
+    "RelativePath": "api/Package/All_Package",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[GO_Study_Logic.ViewModel.PackageViewModel, GOStudy_Logic, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "BE_GOStudy.Controllers.PackageController",
+    "Method": "CreatePackage",
+    "RelativePath": "api/Package/Create_Package(Admin)",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "packageViewModel",
+        "Type": "GO_Study_Logic.ViewModel.PackageViewModel",
+        "IsRequired": true
+      },
+      {
+        "Name": "userid",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_GOStudy.Controllers.PackageController",
     "Method": "GetPackageById",
-    "RelativePath": "api/Package/{id}",
+    "RelativePath": "api/Package/GetPackageById{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -270,44 +311,8 @@
   },
   {
     "ContainingType": "BE_GOStudy.Controllers.PackageController",
-    "Method": "GetAllPackagesAsync",
-    "RelativePath": "api/Package/All_Package",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[GO_Study_Logic.ViewModel.PackageViewModel, GOStudy_Logic, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "BE_GOStudy.Controllers.PackageController",
-    "Method": "CreatePackage",
-    "RelativePath": "api/Package/Create_Package",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "packageViewModel",
-        "Type": "GO_Study_Logic.ViewModel.PackageViewModel",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "BE_GOStudy.Controllers.PackageController",
     "Method": "UpdatePackage",
-    "RelativePath": "api/Package/Update_Package",
+    "RelativePath": "api/Package/Update_Package(Admin)",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -316,131 +321,114 @@
         "Name": "packageViewModel",
         "Type": "GO_Study_Logic.ViewModel.PackageViewModel",
         "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "BE_GOStudy.Controllers.PaymentController",
-    "Method": "Create",
-    "RelativePath": "api/Payment",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "request",
-        "Type": "GO_Study_Logic.Service.VNPAY.CreatePayment",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "GO_Study_Logic.ViewModel.BaseResultWithData\u00601[[GO_Study_Logic.ViewModel.PaymentTransactionViewModel, GOStudy_Logic, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
       },
       {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 400
-      }
-    ]
-  },
-  {
-    "ContainingType": "BE_GOStudy.Controllers.PaymentController",
-    "Method": "InsertPaymentTransaction",
-    "RelativePath": "api/Payment/insert",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "dto",
-        "Type": "GO_Study_Logic.ViewModel.PaymentTransactionViewModel",
-        "IsRequired": true
+        "Name": "userid",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
   },
   {
     "ContainingType": "BE_GOStudy.Controllers.PaymentController",
-    "Method": "MomoReturn",
-    "RelativePath": "api/Payment/momo-return",
+    "Method": "GetTransactionStatus",
+    "RelativePath": "api/Payment/{id}/status",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "partnerCode",
-        "Type": "System.String",
-        "IsRequired": false
-      },
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_GOStudy.Controllers.PaymentController",
+    "Method": "Checkout",
+    "RelativePath": "api/Payment/checkout",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
       {
-        "Name": "orderId",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "requestId",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "amount",
-        "Type": "System.Int64",
-        "IsRequired": false
-      },
-      {
-        "Name": "orderInfo",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "orderType",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "transId",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "message",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "resultCode",
+        "Name": "userId",
         "Type": "System.Int32",
         "IsRequired": false
       },
       {
-        "Name": "payType",
+        "Name": "packageId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_GOStudy.Controllers.PaymentController",
+    "Method": "CreateTransaction",
+    "RelativePath": "api/Payment/Payos",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "transaction",
+        "Type": "GO_Study_Logic.ViewModel.PaymentTransactionDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_GOStudy.Controllers.PaymentController",
+    "Method": "CancelTransaction",
+    "RelativePath": "api/Payment/payos-cancel",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderCode",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_GOStudy.Controllers.PaymentController",
+    "Method": "PayosReturn",
+    "RelativePath": "api/Payment/payos-return",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Code",
         "Type": "System.String",
         "IsRequired": false
       },
       {
-        "Name": "responseTime",
-        "Type": "System.Int64",
-        "IsRequired": false
-      },
-      {
-        "Name": "extraData",
+        "Name": "Id",
         "Type": "System.String",
         "IsRequired": false
       },
       {
-        "Name": "signature",
+        "Name": "Cancel",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Status",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "OrderCode",
         "Type": "System.String",
         "IsRequired": false
       }
@@ -536,6 +524,26 @@
   },
   {
     "ContainingType": "BE_GOStudy.Controllers.SpecializationController",
+    "Method": "GetallSpecialization",
+    "RelativePath": "api/Specialization/GetAllSpecialization",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[GOStudy_Logic.ViewModel.SpecializationViewModel, GOStudy_Logic, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "BE_GOStudy.Controllers.SpecializationController",
     "Method": "SaveSpecialization",
     "RelativePath": "api/Specialization/save_Specialization",
     "HttpMethod": "POST",
@@ -545,6 +553,27 @@
       {
         "Name": "specialization",
         "Type": "GOStudy_Logic.ViewModel.SpecializationViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_GOStudy.Controllers.SpecializationController",
+    "Method": "SaveUserSpecialization",
+    "RelativePath": "api/Specialization/SaveSpecializationByUser",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "specializationIds",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.Int32, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": true
       }
     ],

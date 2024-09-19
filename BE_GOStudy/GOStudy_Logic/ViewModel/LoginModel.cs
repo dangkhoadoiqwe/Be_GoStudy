@@ -58,9 +58,9 @@ namespace GO_Study_Logic.ViewModel
 
     public enum RoleEnum
     {
-        Manager = 1,
-        Staff = 2,
-        Admin = 3,
+        User = 1,
+        Admin = 2,
+        
  
     }
 }

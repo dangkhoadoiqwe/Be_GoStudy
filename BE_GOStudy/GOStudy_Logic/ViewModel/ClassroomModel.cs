@@ -17,7 +17,14 @@ namespace GO_Study_Logic.ViewModel
         public string Name { get; set; }
         public string Nickname { get; set; }
 
-        public DateTime CreatedAt { get; set; } 
+        public DateTime CreatedAt { get; set; }
+    }
+    public class ClassroomNameModel
+    {
+        public int ClassroomId { get; set; }
+
+        public string Name { get; set; }
+        
     }
     public class AllClassModel
     {

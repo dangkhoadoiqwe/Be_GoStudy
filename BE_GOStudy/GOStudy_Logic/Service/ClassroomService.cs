@@ -22,7 +22,7 @@ namespace GO_Study_Logic.Service
 
         Task<IEnumerable<TaskViewMeeting>>GetRoomByUserID(int userId);
 
-        Task<IEnumerable<ClassroomModel>> GetAllClassrooms();
+        Task<IEnumerable<ClassroomNameModel>> GetAllClassrooms();
     }
 
     public class ClassroomService : IClassroomService
@@ -62,10 +62,10 @@ namespace GO_Study_Logic.Service
         {
             await _repository.UpdateClassroomLinkUrlAsync(classroomId, linkUrl);
         }
-        public async Task<IEnumerable<ClassroomModel>> GetAllClassrooms()
+        public async Task<IEnumerable<ClassroomNameModel>> GetAllClassrooms()
         {
             var classrooms = await _repository.GetAllClassrooms();
-            return _mapper.Map<IEnumerable<ClassroomModel>>(classrooms);
+            return _mapper.Map<IEnumerable<ClassroomNameModel>>(classrooms);
         }
 
         public async Task DeleteClassroomAsync(int classroomId)

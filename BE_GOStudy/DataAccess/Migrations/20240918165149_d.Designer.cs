@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(GOStudyContext))]
-    [Migration("20240916170057_UpdateData")]
-    partial class UpdateData
+    [Migration("20240918165149_d")]
+    partial class d
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -210,6 +210,10 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("LinkUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -219,6 +223,9 @@ namespace DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SpecializationId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("status")
                         .HasColumnType("int");
 
                     b.HasKey("ClassroomId");
@@ -231,82 +238,102 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = -1,
-                            CreatedAt = new DateTime(2024, 9, 16, 17, 0, 56, 921, DateTimeKind.Utc).AddTicks(6692),
+                            CreatedAt = new DateTime(2024, 9, 18, 16, 51, 49, 173, DateTimeKind.Utc).AddTicks(1711),
+                            LinkUrl = "http://example.com/eng101",
                             Name = "Room 101",
                             Nickname = "Eng101",
-                            SpecializationId = -1
+                            SpecializationId = -1,
+                            status = 1
                         },
                         new
                         {
                             ClassroomId = -2,
-                            CreatedAt = new DateTime(2024, 9, 16, 17, 0, 56, 921, DateTimeKind.Utc).AddTicks(6693),
+                            CreatedAt = new DateTime(2024, 9, 18, 16, 51, 49, 173, DateTimeKind.Utc).AddTicks(1714),
+                            LinkUrl = "http://example.com/chi102",
                             Name = "Room 102",
                             Nickname = "Chi102",
-                            SpecializationId = -2
+                            SpecializationId = -2,
+                            status = 1
                         },
                         new
                         {
                             ClassroomId = -3,
-                            CreatedAt = new DateTime(2024, 9, 16, 17, 0, 56, 921, DateTimeKind.Utc).AddTicks(6694),
+                            CreatedAt = new DateTime(2024, 9, 18, 16, 51, 49, 173, DateTimeKind.Utc).AddTicks(1716),
+                            LinkUrl = "http://example.com/jap103",
                             Name = "Room 103",
                             Nickname = "Jap103",
-                            SpecializationId = -3
+                            SpecializationId = -3,
+                            status = 1
                         },
                         new
                         {
                             ClassroomId = -4,
-                            CreatedAt = new DateTime(2024, 9, 16, 17, 0, 56, 921, DateTimeKind.Utc).AddTicks(6695),
+                            CreatedAt = new DateTime(2024, 9, 18, 16, 51, 49, 173, DateTimeKind.Utc).AddTicks(1718),
+                            LinkUrl = "http://example.com/econmgmt104",
                             Name = "Room 104",
                             Nickname = "EconMgmt104",
-                            SpecializationId = -4
+                            SpecializationId = -4,
+                            status = 1
                         },
                         new
                         {
                             ClassroomId = -5,
-                            CreatedAt = new DateTime(2024, 9, 16, 17, 0, 56, 921, DateTimeKind.Utc).AddTicks(6696),
+                            CreatedAt = new DateTime(2024, 9, 18, 16, 51, 49, 173, DateTimeKind.Utc).AddTicks(1720),
+                            LinkUrl = "http://example.com/mkt105",
                             Name = "Room 105",
                             Nickname = "Mkt105",
-                            SpecializationId = -5
+                            SpecializationId = -5,
+                            status = 1
                         },
                         new
                         {
                             ClassroomId = -6,
-                            CreatedAt = new DateTime(2024, 9, 16, 17, 0, 56, 921, DateTimeKind.Utc).AddTicks(6697),
+                            CreatedAt = new DateTime(2024, 9, 18, 16, 51, 49, 173, DateTimeKind.Utc).AddTicks(1721),
+                            LinkUrl = "http://example.com/mediajourn106",
                             Name = "Room 106",
                             Nickname = "MediaJourn106",
-                            SpecializationId = -6
+                            SpecializationId = -6,
+                            status = 1
                         },
                         new
                         {
                             ClassroomId = -7,
-                            CreatedAt = new DateTime(2024, 9, 16, 17, 0, 56, 921, DateTimeKind.Utc).AddTicks(6698),
+                            CreatedAt = new DateTime(2024, 9, 18, 16, 51, 49, 173, DateTimeKind.Utc).AddTicks(1723),
+                            LinkUrl = "http://example.com/design107",
                             Name = "Room 107",
                             Nickname = "Design107",
-                            SpecializationId = -7
+                            SpecializationId = -7,
+                            status = 1
                         },
                         new
                         {
                             ClassroomId = -8,
-                            CreatedAt = new DateTime(2024, 9, 16, 17, 0, 56, 921, DateTimeKind.Utc).AddTicks(6699),
+                            CreatedAt = new DateTime(2024, 9, 18, 16, 51, 49, 173, DateTimeKind.Utc).AddTicks(1724),
+                            LinkUrl = "http://example.com/scitech108",
                             Name = "Room 108",
                             Nickname = "SciTech108",
-                            SpecializationId = -8
+                            SpecializationId = -8,
+                            status = 1
                         },
                         new
                         {
                             ClassroomId = -9,
-                            CreatedAt = new DateTime(2024, 9, 16, 17, 0, 56, 921, DateTimeKind.Utc).AddTicks(6700),
+                            CreatedAt = new DateTime(2024, 9, 18, 16, 51, 49, 173, DateTimeKind.Utc).AddTicks(1726),
+                            LinkUrl = "http://example.com/indconst109",
                             Name = "Room 109",
                             Nickname = "IndConst109",
-                            SpecializationId = -9
+                            SpecializationId = -9,
+                            status = 1
                         },
                         new
                         {
                             ClassroomId = -10,
-                            CreatedAt = new DateTime(2024, 9, 16, 17, 0, 56, 921, DateTimeKind.Utc).AddTicks(6701),
+                            CreatedAt = new DateTime(2024, 9, 18, 16, 51, 49, 173, DateTimeKind.Utc).AddTicks(1727),
+                            LinkUrl = "http://example.com/gensub110",
                             Name = "Room 110",
                             Nickname = "GenSub110",
-                            SpecializationId = -10
+                            SpecializationId = -10,
+                            status = 1
                         });
                 });
 

@@ -6,6 +6,7 @@ using GO_Study_Logic.ViewModel.User;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
@@ -25,6 +26,8 @@ namespace GO_Study_Logic.Service
 
         Task<UserViewModel> GetById(int userId);
         string GenerateJwtToken(CustomTokenInfo customTokenInfo, string secretKey);
+
+        Task<bool> checktoken(int userid);
     }
     public class UserService : IUserService
     {
@@ -53,7 +56,7 @@ namespace GO_Study_Logic.Service
                 FullName = user.FullName,
                 Email = user.Email,
                 ProfileImage = user.ProfileImage,
-                UserId = user.UserId,  
+               UserId = user.UserId,  
                                       
             };
         }
@@ -196,9 +199,16 @@ namespace GO_Study_Logic.Service
              //   Specialization = SpecializationViewModel,
                 ProfileImage = user.ProfileImage,
                 PrivacySetting = privacySettingViewModel,
-                PasswordHash = user.PasswordHash 
+                PasswordHash = user.PasswordHash ,
+                role = user.Role,
             };
             return userProfile;
+        }
+
+        public async Task<bool> checktoken(int userid)
+        {
+            var usercheck = await _userRepository.CheckToken(userid);
+            return usercheck;
         }
     }
 }

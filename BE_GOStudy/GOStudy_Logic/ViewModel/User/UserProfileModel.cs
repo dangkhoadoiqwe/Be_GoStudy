@@ -22,6 +22,8 @@ namespace GO_Study_Logic.ViewModel.User
         
         public string PasswordHash { get; set; }
 
+        public int role { get; set; }
+
         public string ProfileImage { get; set; }
     }
 }

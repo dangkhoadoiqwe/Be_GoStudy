@@ -14,6 +14,11 @@ namespace DataAccess.Repositories
         Task<Specialization?> GetByIdAsync(int? id);
 
         Task<bool> SaveSpecializationAsync(Specialization specialization);
+
+        Task<bool> SaveUserSpecializationAsync(UserSpecialization userSpecialization);
+        Task<IEnumerable<Specialization>> GetAllSpecializationsByUserIDAsync(int userid);
+
+        Task<IEnumerable<Specialization>> GetAllAsync();
     }
 
     public partial class SpecializationRepository : BaseRepository<Specialization>, ISpecializationRepository
@@ -29,6 +34,26 @@ namespace DataAccess.Repositories
         public async Task<Specialization?> GetByIdAsync(int? id)
         {
             return await _dbContext.Set<Specialization>().FindAsync(id);
+        }
+        public async Task<IEnumerable<Specialization>> GetAllAsync()
+        {
+            return await _dbContext.Set<Specialization>().AsNoTracking().ToListAsync();
+
+        }
+
+        public async Task<bool> SaveUserSpecializationAsync(UserSpecialization userSpecialization)
+        {
+            await _dbContext.Set<UserSpecialization>().AddAsync(userSpecialization);
+
+            try
+            {
+                var changes = await _dbContext.SaveChangesAsync();
+                return changes > 0;
+            }
+            catch (DbUpdateException)
+            {
+                return false;
+            }
         }
         public async Task<bool> SaveSpecializationAsync(Specialization specialization)
         {
@@ -55,6 +80,16 @@ namespace DataAccess.Repositories
             {
                 return false;
             }
+        }
+
+        public async Task<IEnumerable<Specialization>> GetAllSpecializationsByUserIDAsync(int userid)
+        {
+              return await _dbContext.Set<UserSpecialization>().Where(US =>US.UserId == userid).Join(
+            _dbContext.Set<Specialization>(),
+            us => us.SpecializationId,
+            s => s.SpecializationId,
+            (us, s) => s
+        ).ToListAsync();
         }
     }
 

@@ -3,24 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{00897EB2-4210-490B-B37E-9EB1FCC7971A}|BE_GOStudy\\BE_GOStudy.csproj|c:\\users\\admin\\onedrive\\documents\\github\\dream\\duan\\be_gostudy\\be_gostudy\\be_gostudy\\controllers\\user\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{00897EB2-4210-490B-B37E-9EB1FCC7971A}|BE_GOStudy\\BE_GOStudy.csproj|solutionrelative:be_gostudy\\controllers\\user\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{00897EB2-4210-490B-B37E-9EB1FCC7971A}|BE_GOStudy\\BE_GOStudy.csproj|c:\\users\\admin\\onedrive\\documents\\github\\dream\\duan\\be_gostudy\\be_gostudy\\be_gostudy\\controllers\\paymentcontrollner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{00897EB2-4210-490B-B37E-9EB1FCC7971A}|BE_GOStudy\\BE_GOStudy.csproj|solutionrelative:be_gostudy\\controllers\\paymentcontrollner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9561139D-3E3E-4E13-8245-8A1E3666C882}|GOStudy_Logic\\GOStudy_Logic.csproj|c:\\users\\admin\\onedrive\\documents\\github\\dream\\duan\\be_gostudy\\be_gostudy\\gostudy_logic\\service\\specializationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9561139D-3E3E-4E13-8245-8A1E3666C882}|GOStudy_Logic\\GOStudy_Logic.csproj|solutionrelative:gostudy_logic\\service\\specializationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0B164705-DED2-4D26-9075-E844DCD4CC2E}|DataAccess\\DataAccess.csproj|c:\\users\\admin\\onedrive\\documents\\github\\dream\\duan\\be_gostudy\\be_gostudy\\dataaccess\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B164705-DED2-4D26-9075-E844DCD4CC2E}|DataAccess\\DataAccess.csproj|solutionrelative:dataaccess\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0B164705-DED2-4D26-9075-E844DCD4CC2E}|DataAccess\\DataAccess.csproj|c:\\users\\admin\\onedrive\\documents\\github\\dream\\duan\\be_gostudy\\be_gostudy\\dataaccess\\repositories\\specializationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0B164705-DED2-4D26-9075-E844DCD4CC2E}|DataAccess\\DataAccess.csproj|solutionrelative:dataaccess\\repositories\\specializationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9561139D-3E3E-4E13-8245-8A1E3666C882}|GOStudy_Logic\\GOStudy_Logic.csproj|c:\\users\\admin\\onedrive\\documents\\github\\dream\\duan\\be_gostudy\\be_gostudy\\gostudy_logic\\service\\vnpay\\paymentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9561139D-3E3E-4E13-8245-8A1E3666C882}|GOStudy_Logic\\GOStudy_Logic.csproj|solutionrelative:gostudy_logic\\service\\vnpay\\paymentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{00897EB2-4210-490B-B37E-9EB1FCC7971A}|BE_GOStudy\\BE_GOStudy.csproj|c:\\users\\admin\\onedrive\\documents\\github\\dream\\duan\\be_gostudy\\be_gostudy\\be_gostudy\\controllers\\blogpost\\blogpostcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{00897EB2-4210-490B-B37E-9EB1FCC7971A}|BE_GOStudy\\BE_GOStudy.csproj|solutionrelative:be_gostudy\\controllers\\blogpost\\blogpostcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9561139D-3E3E-4E13-8245-8A1E3666C882}|GOStudy_Logic\\GOStudy_Logic.csproj|c:\\users\\admin\\onedrive\\documents\\github\\dream\\duan\\be_gostudy\\be_gostudy\\gostudy_logic\\viewmodel\\zalopay\\paymenttransactionmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9561139D-3E3E-4E13-8245-8A1E3666C882}|GOStudy_Logic\\GOStudy_Logic.csproj|solutionrelative:gostudy_logic\\viewmodel\\zalopay\\paymenttransactionmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{00897EB2-4210-490B-B37E-9EB1FCC7971A}|BE_GOStudy\\BE_GOStudy.csproj|c:\\users\\admin\\onedrive\\documents\\github\\dream\\duan\\be_gostudy\\be_gostudy\\be_gostudy\\controllers\\specializationcontrollner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{00897EB2-4210-490B-B37E-9EB1FCC7971A}|BE_GOStudy\\BE_GOStudy.csproj|solutionrelative:be_gostudy\\controllers\\specializationcontrollner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0B164705-DED2-4D26-9075-E844DCD4CC2E}|DataAccess\\DataAccess.csproj|c:\\users\\admin\\onedrive\\documents\\github\\dream\\duan\\be_gostudy\\be_gostudy\\dataaccess\\repositories\\packagerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B164705-DED2-4D26-9075-E844DCD4CC2E}|DataAccess\\DataAccess.csproj|solutionrelative:dataaccess\\repositories\\packagerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9561139D-3E3E-4E13-8245-8A1E3666C882}|GOStudy_Logic\\GOStudy_Logic.csproj|c:\\users\\admin\\onedrive\\documents\\github\\dream\\duan\\be_gostudy\\be_gostudy\\gostudy_logic\\service\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9561139D-3E3E-4E13-8245-8A1E3666C882}|GOStudy_Logic\\GOStudy_Logic.csproj|solutionrelative:gostudy_logic\\service\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -29,7 +33,7 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 786,
+          "DockedWidth": 307,
           "SelectedChildIndex": 3,
           "Children": [
             {
@@ -47,72 +51,85 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "UserController.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\BE_GOStudy\\Controllers\\User\\UserController.cs",
-              "RelativeDocumentMoniker": "BE_GOStudy\\Controllers\\User\\UserController.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\BE_GOStudy\\Controllers\\User\\UserController.cs",
-              "RelativeToolTip": "BE_GOStudy\\Controllers\\User\\UserController.cs",
-              "ViewState": "AgIAAC8AAAAAAAAAAAAwwD0AAAAJAAAAAAAAAA==",
+              "Title": "PaymentControllner.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\BE_GOStudy\\Controllers\\PaymentControllner.cs",
+              "RelativeDocumentMoniker": "BE_GOStudy\\Controllers\\PaymentControllner.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\BE_GOStudy\\Controllers\\PaymentControllner.cs",
+              "RelativeToolTip": "BE_GOStudy\\Controllers\\PaymentControllner.cs",
+              "ViewState": "AgIAAMAAAAAAAAAAAAAAAMkAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-17T08:38:50.265Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "SpecializationRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\DataAccess\\Repositories\\SpecializationRepository.cs",
-              "RelativeDocumentMoniker": "DataAccess\\Repositories\\SpecializationRepository.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\DataAccess\\Repositories\\SpecializationRepository.cs",
-              "RelativeToolTip": "DataAccess\\Repositories\\SpecializationRepository.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAUwCMAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-17T08:22:06.79Z",
+              "WhenOpened": "2024-09-19T16:45:56.405Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "SpecializationService.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\GOStudy_Logic\\Service\\SpecializationService.cs",
-              "RelativeDocumentMoniker": "GOStudy_Logic\\Service\\SpecializationService.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\GOStudy_Logic\\Service\\SpecializationService.cs",
-              "RelativeToolTip": "GOStudy_Logic\\Service\\SpecializationService.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAAwwCkAAAANAAAAAAAAAA==",
+              "Title": "UserRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\DataAccess\\Repositories\\UserRepository.cs",
+              "RelativeDocumentMoniker": "DataAccess\\Repositories\\UserRepository.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\DataAccess\\Repositories\\UserRepository.cs",
+              "RelativeToolTip": "DataAccess\\Repositories\\UserRepository.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAnwA8AAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-17T08:21:57.701Z",
+              "WhenOpened": "2024-09-19T16:38:38.197Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "BlogPostController.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\BE_GOStudy\\Controllers\\BlogPost\\BlogPostController.cs",
-              "RelativeDocumentMoniker": "BE_GOStudy\\Controllers\\BlogPost\\BlogPostController.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\BE_GOStudy\\Controllers\\BlogPost\\BlogPostController.cs",
-              "RelativeToolTip": "BE_GOStudy\\Controllers\\BlogPost\\BlogPostController.cs",
-              "ViewState": "AgIAAGEAAAAAAAAAAAAcwAwAAAAfAAAAAAAAAA==",
+              "Title": "PaymentTransactionModel.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\GOStudy_Logic\\ViewModel\\ZaloPay\\PaymentTransactionModel.cs",
+              "RelativeDocumentMoniker": "GOStudy_Logic\\ViewModel\\ZaloPay\\PaymentTransactionModel.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\GOStudy_Logic\\ViewModel\\ZaloPay\\PaymentTransactionModel.cs",
+              "RelativeToolTip": "GOStudy_Logic\\ViewModel\\ZaloPay\\PaymentTransactionModel.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAIA0wBwAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-17T08:20:42.017Z",
+              "WhenOpened": "2024-09-19T16:33:27.22Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PaymentService.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\GOStudy_Logic\\Service\\VNPAY\\PaymentService.cs",
+              "RelativeDocumentMoniker": "GOStudy_Logic\\Service\\VNPAY\\PaymentService.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\GOStudy_Logic\\Service\\VNPAY\\PaymentService.cs",
+              "RelativeToolTip": "GOStudy_Logic\\Service\\VNPAY\\PaymentService.cs",
+              "ViewState": "AgIAAJ0AAAAAAAAAAAAMwBoAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T16:31:12.078Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\GOStudy_Logic\\Service\\UserService.cs",
+              "RelativeDocumentMoniker": "GOStudy_Logic\\Service\\UserService.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\GOStudy_Logic\\Service\\UserService.cs",
+              "RelativeToolTip": "GOStudy_Logic\\Service\\UserService.cs",
+              "ViewState": "AgIAAKIAAAAAAAAAAAArwMYAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T16:28:58.895Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "SpecializationControllner.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\BE_GOStudy\\Controllers\\SpecializationControllner.cs",
-              "RelativeDocumentMoniker": "BE_GOStudy\\Controllers\\SpecializationControllner.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\BE_GOStudy\\Controllers\\SpecializationControllner.cs",
-              "RelativeToolTip": "BE_GOStudy\\Controllers\\SpecializationControllner.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAA1wBIAAAA7AAAAAAAAAA==",
+              "Title": "PackageRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\DataAccess\\Repositories\\PackageRepository.cs",
+              "RelativeDocumentMoniker": "DataAccess\\Repositories\\PackageRepository.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\DataAccess\\Repositories\\PackageRepository.cs",
+              "RelativeToolTip": "DataAccess\\Repositories\\PackageRepository.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAQwA0AAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-17T08:20:12.572Z",
+              "WhenOpened": "2024-09-19T16:28:23.649Z",
               "EditorCaption": ""
             }
           ]
         },
         {
-          "DockedWidth": 118,
+          "DockedWidth": 74,
           "SelectedChildIndex": -1,
           "Children": [
             {

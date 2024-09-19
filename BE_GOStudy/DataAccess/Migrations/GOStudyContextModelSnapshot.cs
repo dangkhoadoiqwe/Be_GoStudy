@@ -236,7 +236,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = -1,
-                            CreatedAt = new DateTime(2024, 9, 17, 3, 27, 13, 849, DateTimeKind.Utc).AddTicks(4948),
+                            CreatedAt = new DateTime(2024, 9, 19, 10, 23, 53, 156, DateTimeKind.Utc).AddTicks(7413),
                             LinkUrl = "http://example.com/eng101",
                             Name = "Room 101",
                             Nickname = "Eng101",
@@ -246,7 +246,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = -2,
-                            CreatedAt = new DateTime(2024, 9, 17, 3, 27, 13, 849, DateTimeKind.Utc).AddTicks(4950),
+                            CreatedAt = new DateTime(2024, 9, 19, 10, 23, 53, 156, DateTimeKind.Utc).AddTicks(7414),
                             LinkUrl = "http://example.com/chi102",
                             Name = "Room 102",
                             Nickname = "Chi102",
@@ -256,7 +256,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = -3,
-                            CreatedAt = new DateTime(2024, 9, 17, 3, 27, 13, 849, DateTimeKind.Utc).AddTicks(4951),
+                            CreatedAt = new DateTime(2024, 9, 19, 10, 23, 53, 156, DateTimeKind.Utc).AddTicks(7416),
                             LinkUrl = "http://example.com/jap103",
                             Name = "Room 103",
                             Nickname = "Jap103",
@@ -266,7 +266,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = -4,
-                            CreatedAt = new DateTime(2024, 9, 17, 3, 27, 13, 849, DateTimeKind.Utc).AddTicks(4952),
+                            CreatedAt = new DateTime(2024, 9, 19, 10, 23, 53, 156, DateTimeKind.Utc).AddTicks(7417),
                             LinkUrl = "http://example.com/econmgmt104",
                             Name = "Room 104",
                             Nickname = "EconMgmt104",
@@ -276,7 +276,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = -5,
-                            CreatedAt = new DateTime(2024, 9, 17, 3, 27, 13, 849, DateTimeKind.Utc).AddTicks(4953),
+                            CreatedAt = new DateTime(2024, 9, 19, 10, 23, 53, 156, DateTimeKind.Utc).AddTicks(7418),
                             LinkUrl = "http://example.com/mkt105",
                             Name = "Room 105",
                             Nickname = "Mkt105",
@@ -286,7 +286,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = -6,
-                            CreatedAt = new DateTime(2024, 9, 17, 3, 27, 13, 849, DateTimeKind.Utc).AddTicks(4955),
+                            CreatedAt = new DateTime(2024, 9, 19, 10, 23, 53, 156, DateTimeKind.Utc).AddTicks(7419),
                             LinkUrl = "http://example.com/mediajourn106",
                             Name = "Room 106",
                             Nickname = "MediaJourn106",
@@ -296,7 +296,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = -7,
-                            CreatedAt = new DateTime(2024, 9, 17, 3, 27, 13, 849, DateTimeKind.Utc).AddTicks(4956),
+                            CreatedAt = new DateTime(2024, 9, 19, 10, 23, 53, 156, DateTimeKind.Utc).AddTicks(7420),
                             LinkUrl = "http://example.com/design107",
                             Name = "Room 107",
                             Nickname = "Design107",
@@ -306,7 +306,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = -8,
-                            CreatedAt = new DateTime(2024, 9, 17, 3, 27, 13, 849, DateTimeKind.Utc).AddTicks(4957),
+                            CreatedAt = new DateTime(2024, 9, 19, 10, 23, 53, 156, DateTimeKind.Utc).AddTicks(7420),
                             LinkUrl = "http://example.com/scitech108",
                             Name = "Room 108",
                             Nickname = "SciTech108",
@@ -316,7 +316,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = -9,
-                            CreatedAt = new DateTime(2024, 9, 17, 3, 27, 13, 849, DateTimeKind.Utc).AddTicks(4959),
+                            CreatedAt = new DateTime(2024, 9, 19, 10, 23, 53, 156, DateTimeKind.Utc).AddTicks(7421),
                             LinkUrl = "http://example.com/indconst109",
                             Name = "Room 109",
                             Nickname = "IndConst109",
@@ -326,7 +326,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = -10,
-                            CreatedAt = new DateTime(2024, 9, 17, 3, 27, 13, 849, DateTimeKind.Utc).AddTicks(4960),
+                            CreatedAt = new DateTime(2024, 9, 19, 10, 23, 53, 156, DateTimeKind.Utc).AddTicks(7422),
                             LinkUrl = "http://example.com/gensub110",
                             Name = "Room 110",
                             Nickname = "GenSub110",

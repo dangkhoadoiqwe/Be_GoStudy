@@ -24,7 +24,7 @@ namespace BE_GOStudy.Controllers.BlogPost
             _userService = userService;
         }
 
-        [HttpGet]
+        [HttpGet("Userid")]
          
         public async Task<ActionResult<IEnumerable<BlogPost_View_Model>>> GetAllBlogPosts(int userid)
         {
@@ -39,7 +39,7 @@ namespace BE_GOStudy.Controllers.BlogPost
             var user = await _userService.GetById(userid);  
 
              
-            if (user.Role == 2 || user.Role == 3)  
+            if (user.Role == 1)  
             {
                  
                 var blogPosts = await _blogPostService.GetAllBlogPostsAsync();

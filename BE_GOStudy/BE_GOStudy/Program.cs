@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Net.payOS;
 using Newtonsoft.Json;
 using System.Text;
 
@@ -27,12 +28,18 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
 // Add AutoMapper for dependency injection
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+PayOS payOS = new PayOS(
+    builder.Configuration["Environment:PAYOS_CLIENT_ID"] ?? throw new Exception("Cannot find Client ID"),
+    builder.Configuration["Environment:PAYOS_API_KEY"] ?? throw new Exception("Cannot find API Key"),
+    builder.Configuration["Environment:PAYOS_CHECKSUM_KEY"] ?? throw new Exception("Cannot find Checksum Key")
+);
+
 // Register MediatR and other services
 builder.Services.AddMediatR(typeof(CreatePaymentHandler).Assembly);
 builder.Services.AddHttpContextAccessor();
 builder.Services.InitializerDependencyInjection();
 builder.Services.ConfigureAutoMapper();
-
+builder.Services.AddSingleton(payOS);
 // JWT Key from configuration
 var key = Encoding.ASCII.GetBytes(builder.Configuration["JwtSettings:Key"]
     ?? throw new Exception("JwtSettings:Key is not found"));
@@ -56,7 +63,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactApp", policy =>
     {
-        policy.WithOrigins("http://localhost:3000", "https://localhost:3000")
+        policy.WithOrigins("http://localhost:3000", "https://localhost:3000", "https://localhost:3002", "https://pay.payos.vn")
               .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials();
@@ -144,7 +151,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseCors("AllowSpecificOrigins");
 app.UseCors("AllowReactApp"); // Enable CORS
 app.UseAuthentication(); // Enable authentication middleware
 app.UseAuthorization(); // Enable authorization middleware
