@@ -127,6 +127,10 @@
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
               "version": "[8.0.2, )"
+            },
+            "payOS": {
+              "target": "Package",
+              "version": "[1.0.6, )"
             }
           },
           "imports": [
@@ -348,6 +352,10 @@
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"
+            },
+            "payOS": {
+              "target": "Package",
+              "version": "[1.0.6, )"
             }
           },
           "imports": [

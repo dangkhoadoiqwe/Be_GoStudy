@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 using System.Xml.Linq;
 using DataAccess.Model;
 using NTQ.Sdk.Core.BaseConnect;
+using System.Linq.Dynamic.Core.Tokenizer;
 namespace DataAccess.Repositories
 {
 
@@ -20,7 +21,8 @@ namespace DataAccess.Repositories
         Task<PrivacySetting?> GetPrivacySettingByuserIDAsync(int userid);
         Task<BlogPost?> Get1BlogPostAsync(int id);
         Task<int> TotalAttendance(int userid);
-       
+
+        Task<bool> CheckToken(int userid);
         Task<IEnumerable<Analytic>> GetUserIdAnalyticAsync(int userid);
     }
     public partial class UserRepository : BaseRepository<User>, IUserRepository
@@ -91,6 +93,14 @@ namespace DataAccess.Repositories
         }
 
         
+
+        public async Task<bool> CheckToken(int userid)
+        {
+            var tokenExists = await _dbContext.Set<RefreshToken>()
+       .AnyAsync(token => token.UserId == userid && token.IsUsed == true);
+
+            return tokenExists;
+        }
     }
 }
 

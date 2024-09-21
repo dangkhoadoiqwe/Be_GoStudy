@@ -694,6 +694,22 @@
           "lib/net5.0/NTQ.Sdk.Core.dll": {}
         }
       },
+      "payOS/1.0.6": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3"
+        },
+        "compile": {
+          "lib/net6.0/payos-lib-backend-dotnet.dll": {
+            "related": ".runtimeconfig.json"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/payos-lib-backend-dotnet.dll": {
+            "related": ".runtimeconfig.json"
+          }
+        }
+      },
       "Swashbuckle.AspNetCore/5.6.3": {
         "type": "package",
         "dependencies": {
@@ -2097,6 +2113,19 @@
         "ntq.sdk.core.nuspec"
       ]
     },
+    "payOS/1.0.6": {
+      "sha512": "/zDlJWtu7F7GCr1Q+JdH9Q2w8hNjduHb7mZRtoIiuLbTNnjfCFK7OMAzf7DPrf/MWMv7hRFW+lEmWsiHpMmF0A==",
+      "type": "package",
+      "path": "payos/1.0.6",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net6.0/payos-lib-backend-dotnet.dll",
+        "lib/net6.0/payos-lib-backend-dotnet.runtimeconfig.json",
+        "payos.1.0.6.nupkg.sha512",
+        "payos.nuspec"
+      ]
+    },
     "Swashbuckle.AspNetCore/5.6.3": {
       "sha512": "UkL9GU0mfaA+7RwYjEaBFvAzL8qNQhNqAeV5uaWUu/Z+fVgvK9FHkGCpTXBqSQeIHuZaIElzxnLDdIqGzuCnVg==",
       "type": "package",
@@ -2709,7 +2738,8 @@
       "Microsoft.EntityFrameworkCore.SqlServer >= 6.0.33",
       "Microsoft.EntityFrameworkCore.Tools >= 6.0.33",
       "Microsoft.Extensions.Configuration >= 8.0.0",
-      "Newtonsoft.Json >= 13.0.3"
+      "Newtonsoft.Json >= 13.0.3",
+      "payOS >= 1.0.6"
     ]
   },
   "packageFolders": {
@@ -2798,6 +2828,10 @@
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[13.0.3, )"
+          },
+          "payOS": {
+            "target": "Package",
+            "version": "[1.0.6, )"
           }
         },
         "imports": [

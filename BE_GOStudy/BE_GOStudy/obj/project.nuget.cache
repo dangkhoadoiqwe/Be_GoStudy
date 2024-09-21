@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "TNDPtR92pcI=",
+  "dgSpecHash": "5zUzRqmdgbs=",
   "success": true,
   "projectFilePath": "/Users/toanphuc/Desktop/EXE/BEGoStudy/Be_GoStudy/BE_GOStudy/BE_GOStudy/BE_GOStudy.csproj",
   "expectedPackageFiles": [
@@ -61,6 +61,7 @@
     "/Users/toanphuc/.nuget/packages/mimekit/4.7.1/mimekit.4.7.1.nupkg.sha512",
     "/Users/toanphuc/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512",
     "/Users/toanphuc/.nuget/packages/ntq.sdk.core/1.1.7/ntq.sdk.core.1.1.7.nupkg.sha512",
+    "/Users/toanphuc/.nuget/packages/payos/1.0.6/payos.1.0.6.nupkg.sha512",
     "/Users/toanphuc/.nuget/packages/serilog/4.0.1/serilog.4.0.1.nupkg.sha512",
     "/Users/toanphuc/.nuget/packages/serilog.sinks.file/5.0.0/serilog.sinks.file.5.0.0.nupkg.sha512",
     "/Users/toanphuc/.nuget/packages/serilog.sinks.seq/8.0.0/serilog.sinks.seq.8.0.0.nupkg.sha512",

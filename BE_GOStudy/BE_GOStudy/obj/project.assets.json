@@ -938,6 +938,22 @@
           "lib/net5.0/NTQ.Sdk.Core.dll": {}
         }
       },
+      "payOS/1.0.6": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3"
+        },
+        "compile": {
+          "lib/net6.0/payos-lib-backend-dotnet.dll": {
+            "related": ".runtimeconfig.json"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/payos-lib-backend-dotnet.dll": {
+            "related": ".runtimeconfig.json"
+          }
+        }
+      },
       "Serilog/4.0.1": {
         "type": "package",
         "compile": {
@@ -1389,7 +1405,8 @@
           "Microsoft.EntityFrameworkCore.Analyzers": "6.0.33",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.33",
           "Microsoft.Extensions.Configuration": "8.0.0",
-          "Newtonsoft.Json": "13.0.3"
+          "Newtonsoft.Json": "13.0.3",
+          "payOS": "1.0.6"
         },
         "compile": {
           "bin/placeholder/GOStudy_Logic.dll": {}
@@ -3073,6 +3090,19 @@
         "ntq.sdk.core.nuspec"
       ]
     },
+    "payOS/1.0.6": {
+      "sha512": "/zDlJWtu7F7GCr1Q+JdH9Q2w8hNjduHb7mZRtoIiuLbTNnjfCFK7OMAzf7DPrf/MWMv7hRFW+lEmWsiHpMmF0A==",
+      "type": "package",
+      "path": "payos/1.0.6",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net6.0/payos-lib-backend-dotnet.dll",
+        "lib/net6.0/payos-lib-backend-dotnet.runtimeconfig.json",
+        "payos.1.0.6.nupkg.sha512",
+        "payos.nuspec"
+      ]
+    },
     "Serilog/4.0.1": {
       "sha512": "pzeDRXdpSLSsgBHpZcmpIDxqMy845Ab4s+dfnBg0sN9h8q/4Wo3vAoe0QCGPze1Q06EVtEPupS+UvLm8iXQmTQ==",
       "type": "package",
@@ -3802,7 +3832,8 @@
       "Serilog >= 4.0.1",
       "Serilog.Sinks.Seq >= 8.0.0",
       "Swashbuckle.AspNetCore >= 6.5.0",
-      "System.IdentityModel.Tokens.Jwt >= 8.0.2"
+      "System.IdentityModel.Tokens.Jwt >= 8.0.2",
+      "payOS >= 1.0.6"
     ]
   },
   "packageFolders": {
@@ -3931,6 +3962,10 @@
           "System.IdentityModel.Tokens.Jwt": {
             "target": "Package",
             "version": "[8.0.2, )"
+          },
+          "payOS": {
+            "target": "Package",
+            "version": "[1.0.6, )"
           }
         },
         "imports": [

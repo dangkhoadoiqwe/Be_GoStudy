@@ -58,8 +58,9 @@ namespace BE_GOStudy.DependencyInjection
             services.AddScoped<IPackageService, PackageService>();
             services.AddScoped<IPackageRepository, PackageRepository>();
 
-          
-
+            services.AddScoped<IAttendanceService, AttendanceService>();
+            services.AddScoped<IAttendanceRepository, AttendanceRepository>();
+            
             services.AddScoped<ISqlService, SqlService>();
             services.AddScoped<ICurrentUserService, CurrentUserService>();
             services.AddScoped<IConnectionService, ConnectionService>();
