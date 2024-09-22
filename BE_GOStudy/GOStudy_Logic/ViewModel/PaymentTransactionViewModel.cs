@@ -26,8 +26,7 @@ public class PaymentTransactionDto
         public string PaymentRefId { get; set; } = string.Empty; // Mã tham chiếu thanh toán
         public int PackageID { get; set; } // ID của gói dịch vụ
         public int UserId { get; set; } // ID của người dùng
-        public string PaymentMethod { get; set; } // Phương thức thanh toán
-
+        public string PaymentMethod { get; set; } // Phương thức thanh toán 
         [Required]
         public string BuyerName { get; set; } // Tên người mua
         [Required]

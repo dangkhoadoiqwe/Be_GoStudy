@@ -24,9 +24,24 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "blogPostViewModel",
-        "Type": "GO_Study_Logic.ViewModel.BlogPost_View_Model",
-        "IsRequired": true
+        "Name": "UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Title",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Content",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "imageFile",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [],
@@ -72,9 +87,79 @@
         "IsRequired": true
       },
       {
-        "Name": "blogPostViewModel",
-        "Type": "GO_Study_Logic.ViewModel.BlogPost_View_Model",
-        "IsRequired": true
+        "Name": "PostId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Title",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Content",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Category",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tags",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ViewCount",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "IsDraft",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "shareCount",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "likeCount",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "image",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "IsFavorite",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "IsTrending",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "CreatedAt",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "imageFile",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -350,7 +435,7 @@
     "ContainingType": "BE_GOStudy.Controllers.PaymentController",
     "Method": "Checkout",
     "RelativePath": "api/Payment/checkout",
-    "HttpMethod": "POST",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [

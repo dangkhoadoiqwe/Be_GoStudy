@@ -97,7 +97,7 @@ namespace DataAccess.Repositories
         public async Task<bool> CheckToken(int userid)
         {
             var tokenExists = await _dbContext.Set<RefreshToken>()
-       .AnyAsync(token => token.UserId == userid && token.IsUsed == true);
+       .AnyAsync(token => token.UserId == userid );
 
             return tokenExists;
         }

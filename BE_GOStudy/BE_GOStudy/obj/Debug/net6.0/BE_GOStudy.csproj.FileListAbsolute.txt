@@ -223,3 +223,7 @@ C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GOStudy\BE_GOS
 C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GOStudy\BE_GOStudy\obj\Debug\net6.0\BE_GOStudy.genruntimeconfig.cache
 C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GOStudy\BE_GOStudy\obj\Debug\net6.0\ref\BE_GOStudy.dll
 C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GOStudy\BE_GOStudy\bin\Debug\net6.0\payos-lib-backend-dotnet.dll
+C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GOStudy\BE_GOStudy\bin\Debug\net6.0\Quartz.dll
+C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GOStudy\BE_GOStudy\bin\Debug\net6.0\Quartz.Extensions.DependencyInjection.dll
+C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GOStudy\BE_GOStudy\bin\Debug\net6.0\Quartz.Extensions.Hosting.dll
+C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GOStudy\BE_GOStudy\bin\Debug\net6.0\BE_GOStudy.staticwebassets.runtime.json

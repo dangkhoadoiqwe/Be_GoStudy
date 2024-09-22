@@ -5,6 +5,7 @@ using DataAccess.Model;
 using GO_Study_Logic.Helper.CustomExceptions;
 using GO_Study_Logic.Service.VNPAY;
 using GO_Study_Logic.ViewModel;
+using GOStudy_Logic.Service.Sentmail;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -13,11 +14,13 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Net.payOS;
 using Newtonsoft.Json;
+using Quartz;
+using Quartz.Spi;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Register the DbContext with SQL Server
+// Register DbContext with SQL Server
 builder.Services.AddDbContext<GOStudyContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -28,6 +31,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
 // Add AutoMapper for dependency injection
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+// Register PayOS
 PayOS payOS = new PayOS(
     builder.Configuration["Environment:PAYOS_CLIENT_ID"] ?? throw new Exception("Cannot find Client ID"),
     builder.Configuration["Environment:PAYOS_API_KEY"] ?? throw new Exception("Cannot find API Key"),
@@ -40,6 +44,29 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.InitializerDependencyInjection();
 builder.Services.ConfigureAutoMapper();
 builder.Services.AddSingleton(payOS);
+
+// Register TaskReminderJob for Quartz
+builder.Services.AddQuartz(q =>
+{
+    q.UseMicrosoftDependencyInjectionJobFactory();
+
+    // Cấu hình Quartz để thực hiện job TaskReminderJob mỗi giờ
+    var jobKey = new JobKey("taskReminderJob");
+
+    q.AddJob<TaskReminderJob>(opts => opts.WithIdentity(jobKey));
+
+    q.AddTrigger(opts => opts
+        .ForJob(jobKey)  // Liên kết trigger với TaskReminderJob
+        .WithIdentity("taskReminderTrigger")
+        .StartNow()
+        .WithSimpleSchedule(x => x
+            .WithIntervalInHours(1)  // Chạy mỗi giờ
+            .RepeatForever()));
+});
+
+// Thêm Quartz làm dịch vụ background
+builder.Services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
+
 // JWT Key from configuration
 var key = Encoding.ASCII.GetBytes(builder.Configuration["JwtSettings:Key"]
     ?? throw new Exception("JwtSettings:Key is not found"));
@@ -51,8 +78,8 @@ var tokenValidationParameter = new TokenValidationParameters
     ValidateAudience = true,
     ValidateLifetime = true,
     ValidateIssuerSigningKey = true,
-    ValidIssuer = builder.Configuration["JwtSettings:Issuer"], // Set this in appsettings.json or environment
-    ValidAudience = builder.Configuration["JwtSettings:Audience"], // Set this in appsettings.json or environment
+    ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
+    ValidAudience = builder.Configuration["JwtSettings:Audience"],
     IssuerSigningKey = new SymmetricSecurityKey(key),
     RequireExpirationTime = true,
     ClockSkew = TimeSpan.Zero
@@ -116,7 +143,6 @@ builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo { Title = "GOStudy", Version = "v1" });
 
-    // Define the JWT Bearer scheme used across the API
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Description = "JWT Authorization header using the Bearer scheme. Example: 'Bearer {token}'",
@@ -151,7 +177,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseCors("AllowSpecificOrigins");
+
 app.UseCors("AllowReactApp"); // Enable CORS
 app.UseAuthentication(); // Enable authentication middleware
 app.UseAuthorization(); // Enable authorization middleware

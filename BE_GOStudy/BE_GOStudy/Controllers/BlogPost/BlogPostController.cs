@@ -1,12 +1,11 @@
 ﻿using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using DataAccess.Model;
 using GO_Study_Logic.Service;
 using GO_Study_Logic.ViewModel;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
 
 namespace BE_GOStudy.Controllers.BlogPost
 {
@@ -14,47 +13,33 @@ namespace BE_GOStudy.Controllers.BlogPost
     [ApiController]
     public class BlogPostController : ControllerBase
     {
-        private IBlogPostService _blogPostService;
-         
-        private IUserService _userService;
-        public BlogPostController(IBlogPostService blogPostService,   IUserService userService)
+        private readonly IBlogPostService _blogPostService;
+        private readonly IUserService _userService;
+
+        public BlogPostController(IBlogPostService blogPostService, IUserService userService)
         {
             _blogPostService = blogPostService;
-            
             _userService = userService;
         }
 
         [HttpGet("Userid")]
-         
         public async Task<ActionResult<IEnumerable<BlogPost_View_Model>>> GetAllBlogPosts(int userid)
         {
-             
-            var claims = HttpContext.User.Claims;
-            foreach (var claim in claims)
-            {
-                Console.WriteLine($"Claim Type: {claim.Type}, Claim Value: {claim.Value}");
-            }
+            var user = await _userService.GetById(userid);
 
-             
-            var user = await _userService.GetById(userid);  
-
-             
-            if (user.Role == 1)  
-            {
-                 
-                var blogPosts = await _blogPostService.GetAllBlogPostsAsync();
-                if (blogPosts == null)
-                {
-                    return NotFound();
-                }
-                return Ok(blogPosts);
-            }
-            else
+            if (user == null || user.Role != 1)
             {
                 return StatusCode(403, "Bạn không có quyền vào");
             }
-        }
 
+            var blogPosts = await _blogPostService.GetAllBlogPostsAsync();
+            if (blogPosts == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(blogPosts);
+        }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<BlogPost_View_Model>> GetBlogPostById(int id)
@@ -68,11 +53,11 @@ namespace BE_GOStudy.Controllers.BlogPost
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateBlogPost(int id, BlogPost_View_Model blogPostViewModel)
+        public async Task<ActionResult> UpdateBlogPost(int id, [FromForm] BlogPost_Create_Model blogPostCreateModel, IFormFile imageFile)
         {
-            if (id != blogPostViewModel.PostId)
+            if (id != blogPostCreateModel.PostId)
             {
-                return BadRequest();
+                return BadRequest("ID mismatch.");
             }
 
             var existingPost = await _blogPostService.GetBlogPostByIdAsync(id);
@@ -81,9 +66,11 @@ namespace BE_GOStudy.Controllers.BlogPost
                 return NotFound();
             }
 
-            await _blogPostService.UpdateBlogPostAsync(blogPostViewModel);
+            await _blogPostService.UpdateBlogPostAsync(blogPostCreateModel);
+
             return NoContent();
         }
+     
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteBlogPost(int id)
         {
@@ -96,30 +83,32 @@ namespace BE_GOStudy.Controllers.BlogPost
             await _blogPostService.DeleteBlogPostAsync(id);
             return NoContent();
         }
+
         [HttpGet("trending")]
         public async Task<IActionResult> GetTrendingBlogPosts()
         {
             var trendingPosts = await _blogPostService.GetTrendingBlogPosts();
             return Ok(trendingPosts);
         }
+
         [HttpGet("yourblog/{userId}")]
         public async Task<IActionResult> GetUserBlogPosts(int userId)
         {
             var userPosts = await _blogPostService.GetUserBlogPosts(userId);
             return Ok(userPosts);
         }
+
         [HttpPost(Name = "CreateBlogPost")]
-        public async Task<IActionResult> CreateBlogPost([FromBody] BlogPost_View_Model blogPostViewModel)
+        public async Task<IActionResult> CreateBlogPost([FromForm] BlogPost_Create_Model1 blogPostCreateModel, IFormFile imageFile)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            await _blogPostService.AddBlogPostAsync(blogPostViewModel);
+            await _blogPostService.AddBlogPostAsync(blogPostCreateModel, imageFile);
 
             return Ok(new { message = "Blog post created successfully." });
         }
     }
 }
-

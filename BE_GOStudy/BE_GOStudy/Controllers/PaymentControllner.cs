@@ -27,11 +27,11 @@ namespace BE_GOStudy.Controllers
 public PaymentController(IPaymentService paymentService, IConfiguration configuration, PayOS payOS
     , ILogger<PaymentController> logger, IUserRepository userRepository)
 {
-    _paymentService = paymentService;
-    _configuration = configuration;
-    _payOS = payOS;
-    _logger = logger;
-            _userRepository = userRepository;
+       _paymentService = paymentService;
+       _configuration = configuration;
+       _payOS = payOS;
+       _logger = logger;
+       _userRepository = userRepository;
 }
 
         // Define the PaymentData class
@@ -197,7 +197,7 @@ public PaymentController(IPaymentService paymentService, IConfiguration configur
                 return BadRequest(new { message = "Payment failed", responseCode = request.vnp_ResponseCode });
             }
         }
-        [HttpPost("checkout")]
+        [HttpGet("checkout")]
         public async Task<IActionResult> Checkout(int userId, int packageId)
         {
             // Lấy thông tin người dùng
@@ -205,16 +205,18 @@ public PaymentController(IPaymentService paymentService, IConfiguration configur
             if (user == null)
             {
                 return NotFound("User not found.");
-            } 
+            }
+
+            // Gọi phương thức thanh toán
             var package = await _paymentService.Checkout(userId, packageId); // Phương thức này cũng cần có
             if (package == null)
             {
                 return NotFound("Package not found.");
-            } 
+            }
+
             return Ok(package);
-            
-            
         }
+
 
         [HttpPost]
         [Route("update-status")]

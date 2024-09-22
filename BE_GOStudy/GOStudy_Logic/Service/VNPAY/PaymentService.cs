@@ -63,8 +63,7 @@ namespace GO_Study_Logic.Service.VNPAY
         public async Task<PaymentTransaction> GetTransactionByOrderCodeAsync(string orderCode)
         {
             // Tìm giao dịch trong cơ sở dữ liệu dựa trên PaymentRefId (orderCode)
-            return await _context.PaymentTransactions
-                .FirstOrDefaultAsync(pt => pt.PaymentRefId == orderCode);
+            return await _context.PaymentTransactions.FirstOrDefaultAsync(pt => pt.PaymentRefId == orderCode);
         }
         public async Task<bool> UpdatePaymentTransactionStatusByOrderCodeAsync(string orderCode, string status)
         {
@@ -203,6 +202,7 @@ namespace GO_Study_Logic.Service.VNPAY
 
             return checkoutPayment;
         }
+
 
     }
 }

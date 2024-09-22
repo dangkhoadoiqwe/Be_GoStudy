@@ -1,0 +1,33 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\BE_GOStudy\\wwwroot\\uploads\\bc40eb21-88b4-4732-b59f-f7e76139f5b1_battle-with-4-heavenly-kings-black-myth-wukong-thumb.jpg",
+      "PackagePath": "staticwebassets\\uploads\\bc40eb21-88b4-4732-b59f-f7e76139f5b1_battle-with-4-heavenly-kings-black-myth-wukong-thumb.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\BE_GOStudy\\wwwroot\\uploads\\d44d8060-57b9-4c6f-b2f5-a50ccb73bb8c_battle-with-4-heavenly-kings-black-myth-wukong-thumb.jpg",
+      "PackagePath": "staticwebassets\\uploads\\d44d8060-57b9-4c6f-b2f5-a50ccb73bb8c_battle-with-4-heavenly-kings-black-myth-wukong-thumb.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\BE_GOStudy\\wwwroot\\uploads\\e565c914-d7ae-47cc-a27d-7e47f138f1f2_battle-with-4-heavenly-kings-black-myth-wukong-thumb.jpg",
+      "PackagePath": "staticwebassets\\uploads\\e565c914-d7ae-47cc-a27d-7e47f138f1f2_battle-with-4-heavenly-kings-black-myth-wukong-thumb.jpg"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.BE_GOStudy.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.build.BE_GOStudy.props",
+      "PackagePath": "build\\BE_GOStudy.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildMultiTargeting.BE_GOStudy.props",
+      "PackagePath": "buildMultiTargeting\\BE_GOStudy.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildTransitive.BE_GOStudy.props",
+      "PackagePath": "buildTransitive\\BE_GOStudy.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

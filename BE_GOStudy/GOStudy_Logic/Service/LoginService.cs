@@ -51,7 +51,7 @@ namespace GO_Study_Logic.Service
             {
                 throw new ErrorResponse(404, 4, "Wrong Password");
             }
-            var userchecktoken = await _userRepository.CheckToken(userExist.UserId);
+            var userchecktoken = true;//await _userRepository.CheckToken(userExist.UserId);
             if (userchecktoken == true)
             {
                 var userModel = _mapper.Map<UserViewModel1>(userExist);
@@ -100,7 +100,7 @@ namespace GO_Study_Logic.Service
             new Claim("picture", user.ProfileImage),                                      // Profile picture
             new Claim(ClaimTypes.Role, user.Role.ToString())                              // Role as a claim
         }),
-                Expires = expires,
+               Expires = expires,
                 Issuer = "https://securetoken.google.com/meet-jit-si-66cbd",                      // Issuer
                 Audience = "meet-jit-si-66cbd",                                                  // Audience
                 SigningCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature)
