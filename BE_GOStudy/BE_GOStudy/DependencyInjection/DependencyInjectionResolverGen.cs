@@ -65,7 +65,8 @@ namespace BE_GOStudy.DependencyInjection
             services.AddScoped<ICurrentUserService, CurrentUserService>();
             services.AddScoped<IConnectionService, ConnectionService>();
             
-
+    //Test
+    services.AddScoped<ContactInfoService>();
 
         }
     }
