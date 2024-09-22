@@ -149,16 +149,23 @@ public PaymentController(IPaymentService paymentService, IConfiguration configur
                 return NotFound("Transaction not found");
             }
 
-            // Trả về phản hồi cho client
-            if (responseCode == "00" && transactionStatus == "PAID") // Chỉ cần kiểm tra "PAID" cho thành công
-            {
-                return Ok(new { message = "Payment successful", orderCode });
-            }
-            else
-            {
-                return BadRequest(new { message = "Payment failed", responseCode });
-            }
+            // JavaScript để gửi thông tin thanh toán về frontend
+            var paymentResult = (responseCode == "00" && transactionStatus == "PAID") ? "true" : "false";
+
+            string html = $@"
+        <html>
+        <body>
+            <script>
+                // Gửi kết quả thanh toán về frontend qua postMessage
+                window.opener.postMessage({{ success: {paymentResult} }}, '*');
+                window.close(); // Tự động đóng tab thanh toán
+            </script>
+        </body>
+        </html>";
+
+            return Content(html, "text/html");
         }
+
 
 
 
