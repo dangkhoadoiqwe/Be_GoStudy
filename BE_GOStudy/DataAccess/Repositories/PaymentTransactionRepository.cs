@@ -1,20 +1,20 @@
-﻿    using DataAccess.Model;
-    using Microsoft.EntityFrameworkCore;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
+﻿using DataAccess.Model;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-    namespace DataAccess.Repositories
-    {
-        public interface IPaymentTransactionRepository
+namespace DataAccess.Repositories
+{
+    public interface IPaymentTransactionRepository
     {
         Task<IEnumerable<PaymentTransaction>> GetAllTransactionsAsync();
         Task<PaymentTransaction> GetTransactionByIdAsync(int id);
         Task AddTransactionAsync(PaymentTransaction transaction);
         Task UpdateTransactionAsync(PaymentTransaction transaction);
         Task DeleteTransactionAsync(int id);
-         }
+    }
 
     public class PaymentTransactionRepository : IPaymentTransactionRepository
     {

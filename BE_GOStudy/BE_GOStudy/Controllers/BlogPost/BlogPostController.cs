@@ -1,10 +1,5 @@
-﻿using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using DataAccess.Model;
-using GO_Study_Logic.Service;
+﻿using GO_Study_Logic.Service;
 using GO_Study_Logic.ViewModel;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -15,13 +10,10 @@ namespace BE_GOStudy.Controllers.BlogPost
     public class BlogPostController : ControllerBase
     {
         private IBlogPostService _blogPostService;
-        private IUserService _userService;
         public BlogPostController(IBlogPostService blogPostService,   IUserService userService)
         {
             _blogPostService = blogPostService;
-            _userService = userService;
         }
-        
         [HttpGet("{id}")]
         public async Task<ActionResult<BlogPost_View_Model>> GetBlogPostById(int id)
         {
@@ -42,22 +34,20 @@ namespace BE_GOStudy.Controllers.BlogPost
             }
             return Ok(blogPosts);
         }
-
-        [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateBlogPost(int id, BlogPost_View_Model blogPostViewModel)
+        [HttpPut]
+        public async Task<ActionResult> UpdateBlogPost(BlogPost_Create_Model blogPostCreateModel)
         {
-            if (id != blogPostViewModel.PostId)
+            var id = blogPostCreateModel.PostId;
+            if (id != blogPostCreateModel.PostId)
             {
                 return BadRequest();
             }
-
             var existingPost = await _blogPostService.GetBlogPostByIdAsync(id);
             if (existingPost == null)
             {
                 return NotFound();
             }
-
-            await _blogPostService.UpdateBlogPostAsync(blogPostViewModel);
+            await _blogPostService.UpdateBlogPostAsync(blogPostCreateModel);
             return NoContent();
         }
         [HttpDelete("{id}")]
@@ -105,13 +95,28 @@ namespace BE_GOStudy.Controllers.BlogPost
                 UserId = userId,
                 Content = blogPostCreateModel.Content,
                 image = blogPostCreateModel.image, 
-                Title = blogPostCreateModel.Title ?? string.Empty, 
+                Title = blogPostCreateModel.Title ?? string.Empty,
+                IsFavorite = false,
+                IsTrending = false,
                 CreatedAt = DateTime.Now
             };
 
             await _blogPostService.AddBlogPostAsync(blogPost);
 
             return Ok(new { message = "Blog post created successfully." });
+        }
+        
+        [HttpPut("{id}/favorite")]
+        public async Task<IActionResult> UpdateFavorite(int id, [FromBody] Blogpost_Update_Model model)
+        {
+            bool updated = await _blogPostService.UpdateFavoriteBlogPost(id, model.IsFavorite);
+
+            if (!updated)
+            {
+                return NotFound(new { message = "Blog post not found." });
+            }
+
+            return Ok(new { message = "Favorite status updated successfully." });
         }
         
         

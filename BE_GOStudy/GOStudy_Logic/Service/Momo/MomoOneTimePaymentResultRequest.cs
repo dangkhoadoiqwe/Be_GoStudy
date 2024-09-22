@@ -28,18 +28,18 @@ namespace GO_Study_Logic.Service.Momo
         public bool IsValidSignature(string accessKey, string secretKey)
         {
             var rawHash = "accessKey=" + accessKey +
-                   "&amount=" + this.amount +
-                   "&extraData=" + this.extraData +
-                   "&message=" + this.message +
-                   "&orderId=" + this.orderId +
-                   "&orderInfo=" + this.orderInfo +
-                   "&orderType=" + this.orderType +
-                   "&partnerCode=" + this.partnerCode +
-                   "&payType=" + this.payType +
-                   "&requestId=" + this.requestId +
-                   "&responseTime=" + this.responseTime +
-                   "&resultCode=" + this.resultCode +
-                   "&transId=" + this.transId;
+                          "&amount=" + this.amount +
+                          "&extraData=" + this.extraData +
+                          "&message=" + this.message +
+                          "&orderId=" + this.orderId +
+                          "&orderInfo=" + this.orderInfo +
+                          "&orderType=" + this.orderType +
+                          "&partnerCode=" + this.partnerCode +
+                          "&payType=" + this.payType +
+                          "&requestId=" + this.requestId +
+                          "&responseTime=" + this.responseTime +
+                          "&resultCode=" + this.resultCode +
+                          "&transId=" + this.transId;
             var checkSignature = HashHelper.HmacSHA256(rawHash, secretKey);
             return this.signature.Equals(checkSignature);
         }

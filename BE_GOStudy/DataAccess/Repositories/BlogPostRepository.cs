@@ -14,6 +14,7 @@ namespace DataAccess.Repositories
         Task<List<BlogPost>> GetTrendingBlogPosts();
         Task<List<BlogPost>> GetUserBlogPosts(int userId);
         Task<List<BlogPost>> GetFavoriteBlogPosts(int userId);
+        Task UpdateBlogPostFavorite(BlogPost blogPost);
     }
 
 
@@ -28,7 +29,6 @@ namespace DataAccess.Repositories
 
         public async Task<IEnumerable<BlogPost>> GetAllBlogPostsAsync()
         {
-            
             return await _context.BlogPosts.Include(u => u.User).ToListAsync();
         }
         public async Task<BlogPost?> GetBlogPostByIdAsync(int postId)
@@ -69,10 +69,18 @@ namespace DataAccess.Repositories
         {
             return await _context.BlogPosts.Where(p => p.IsFavorite && p.UserId == userId).ToListAsync();
         }
+
+        public async Task UpdateBlogPostFavorite(BlogPost blogPost)
+        {
+            _context.BlogPosts.Update(blogPost);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<List<BlogPost>> GetUserBlogPosts(int userId)
         {
             return await _context.BlogPosts
                 .Where(p => p.UserId == userId)
+                .Include(u => u.User)
                 .OrderByDescending(p => p.CreatedAt)
                 .ToListAsync();
         }

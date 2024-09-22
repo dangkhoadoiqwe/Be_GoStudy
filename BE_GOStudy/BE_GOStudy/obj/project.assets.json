@@ -86,10 +86,11 @@
           }
         }
       },
-      "MailKit/4.7.1": {
+      "MailKit/4.7.1.1": {
         "type": "package",
         "dependencies": {
-          "MimeKit": "4.7.1"
+          "MimeKit": "4.7.1",
+          "System.Formats.Asn1": "8.0.1"
         },
         "compile": {
           "lib/net6.0/MailKit.dll": {
@@ -938,6 +939,22 @@
           "lib/net5.0/NTQ.Sdk.Core.dll": {}
         }
       },
+      "payOS/1.0.6": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3"
+        },
+        "compile": {
+          "lib/net6.0/payos-lib-backend-dotnet.dll": {
+            "related": ".runtimeconfig.json"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/payos-lib-backend-dotnet.dll": {
+            "related": ".runtimeconfig.json"
+          }
+        }
+      },
       "Serilog/4.0.1": {
         "type": "package",
         "compile": {
@@ -1366,6 +1383,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
+          "MailKit": "4.7.1.1",
           "MediatR": "11.0.0",
           "MediatR.Extensions.Microsoft.DependencyInjection": "11.1.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.33",
@@ -1386,10 +1404,12 @@
           "AutoMapper": "13.0.1",
           "BCrypt.Net-Next": "4.0.3",
           "DataAccess": "1.0.0",
+          "MailKit": "4.7.1.1",
           "Microsoft.EntityFrameworkCore.Analyzers": "6.0.33",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.33",
           "Microsoft.Extensions.Configuration": "8.0.0",
-          "Newtonsoft.Json": "13.0.3"
+          "Newtonsoft.Json": "13.0.3",
+          "payOS": "1.0.6"
         },
         "compile": {
           "bin/placeholder/GOStudy_Logic.dll": {}
@@ -1539,10 +1559,10 @@
         "logo.png"
       ]
     },
-    "MailKit/4.7.1": {
-      "sha512": "mDTq1tWZfsgpCPVfgHF3FDixczPSh5wU22lzo2buDu8OrSAqV3ybPKojjOoUygkLpPRmZ4VAZ+k+PBi5+igGdQ==",
+    "MailKit/4.7.1.1": {
+      "sha512": "Y3okmIxu8g/ZcoJiE2i+dCeKgnNyddsXmcJslZnCPGVPP0aRyeVINHV1h97V+OVMdqjQI6O12J2p8Duwq5UEqQ==",
       "type": "package",
-      "path": "mailkit/4.7.1",
+      "path": "mailkit/4.7.1.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1579,7 +1599,7 @@
         "lib/netstandard2.1/MailKit.dll.config",
         "lib/netstandard2.1/MailKit.pdb",
         "lib/netstandard2.1/MailKit.xml",
-        "mailkit.4.7.1.nupkg.sha512",
+        "mailkit.4.7.1.1.nupkg.sha512",
         "mailkit.nuspec"
       ]
     },
@@ -3073,6 +3093,19 @@
         "ntq.sdk.core.nuspec"
       ]
     },
+    "payOS/1.0.6": {
+      "sha512": "/zDlJWtu7F7GCr1Q+JdH9Q2w8hNjduHb7mZRtoIiuLbTNnjfCFK7OMAzf7DPrf/MWMv7hRFW+lEmWsiHpMmF0A==",
+      "type": "package",
+      "path": "payos/1.0.6",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net6.0/payos-lib-backend-dotnet.dll",
+        "lib/net6.0/payos-lib-backend-dotnet.runtimeconfig.json",
+        "payos.1.0.6.nupkg.sha512",
+        "payos.nuspec"
+      ]
+    },
     "Serilog/4.0.1": {
       "sha512": "pzeDRXdpSLSsgBHpZcmpIDxqMy845Ab4s+dfnBg0sN9h8q/4Wo3vAoe0QCGPze1Q06EVtEPupS+UvLm8iXQmTQ==",
       "type": "package",
@@ -3787,7 +3820,7 @@
       "BCrypt.Net-Next >= 4.0.3",
       "GOStudy_Logic >= 1.0.0",
       "Hangfire.Core >= 1.8.14",
-      "MailKit >= 4.7.1",
+      "MailKit >= 4.7.1.1",
       "Mapster >= 7.4.0",
       "Microsoft.AspNetCore.Authentication.Google >= 6.0.33",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.33",
@@ -3802,7 +3835,8 @@
       "Serilog >= 4.0.1",
       "Serilog.Sinks.Seq >= 8.0.0",
       "Swashbuckle.AspNetCore >= 6.5.0",
-      "System.IdentityModel.Tokens.Jwt >= 8.0.2"
+      "System.IdentityModel.Tokens.Jwt >= 8.0.2",
+      "payOS >= 1.0.6"
     ]
   },
   "packageFolders": {
@@ -3866,7 +3900,7 @@
           },
           "MailKit": {
             "target": "Package",
-            "version": "[4.7.1, )"
+            "version": "[4.7.1.1, )"
           },
           "Mapster": {
             "target": "Package",
@@ -3931,6 +3965,10 @@
           "System.IdentityModel.Tokens.Jwt": {
             "target": "Package",
             "version": "[8.0.2, )"
+          },
+          "payOS": {
+            "target": "Package",
+            "version": "[1.0.6, )"
           }
         },
         "imports": [

@@ -16,7 +16,8 @@ namespace BE_GOStudy.AppStart
                 mc.ConfigTasksModule();
                 mc.ConfigPaymentModule();
                 mc.ConfigBlogModule();
-                mc.ConfigPackageModeule();
+                mc.ConfigPackageModeule(); 
+                mc.ConfigCommentModule();
             });
             IMapper mapper = mapperConfiguration.CreateMapper();
             services.AddSingleton(mapper);

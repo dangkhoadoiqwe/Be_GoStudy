@@ -48,6 +48,17 @@ namespace GO_Study_Logic.ViewModel
         // URL được VNPAY gọi lại sau khi thanh toán hoàn tất
         public string PaymentBackReturnUrl { get; set; } = string.Empty;
     }
+    public class PayosReturnRequest
+    {
+        public string Code { get; set; } // Mã lỗi từ PayOS (00, 01, ...)
+        public string Id { get; set; } // Payment Link Id
+        public bool Cancel { get; set; } // Trạng thái hủy
+        public string Status { get; set; } // Trạng thái thanh toán
+        public string OrderCode { get; set; } // Mã đơn hàng
+    }
+
+
+
     public class PaymentDtos
     {
         public string PaymentId { get; set; } // ID giao dịch thanh toán

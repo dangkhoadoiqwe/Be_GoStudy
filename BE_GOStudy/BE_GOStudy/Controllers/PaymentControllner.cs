@@ -1,18 +1,17 @@
-﻿using BE_GOStudy.AppStart;
-using GO_Study_Logic.Service.Momo;
+﻿using DataAccess.Model;
 using GO_Study_Logic.Service.VNPAY;
 using GO_Study_Logic.ViewModel;
 using Mapster;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Payment.Application.Features.Commands;
+using Net.payOS.Types;
+using Net.payOS;
 using System.Net;
-using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web;
+using GO_Study_Logic.ViewModel.User;
+using GO_Study_Logic.ViewModel.ZaloPay;
+using DataAccess.Repositories;
 
 namespace BE_GOStudy.Controllers
 {
@@ -21,107 +20,202 @@ namespace BE_GOStudy.Controllers
     public class PaymentController : ControllerBase
     {
         private readonly IPaymentService _paymentService;
-        private readonly IMediator _mediator;
         private readonly IConfiguration _configuration;
+        private readonly PayOS _payOS;
+        private readonly ILogger<PaymentController> _logger;
+        private readonly IUserRepository _userRepository;
+public PaymentController(IPaymentService paymentService, IConfiguration configuration, PayOS payOS
+    , ILogger<PaymentController> logger, IUserRepository userRepository)
+{
+    _paymentService = paymentService;
+    _configuration = configuration;
+    _payOS = payOS;
+    _logger = logger;
+            _userRepository = userRepository;
+}
 
-        public PaymentController(IPaymentService paymentService, IMediator mediator, IConfiguration configuration)
-        {
-            _paymentService = paymentService;
-            _mediator = mediator;
-            _configuration = configuration;
-        }
+        // Define the PaymentData class
 
-        [HttpPost]
-        [ProducesResponseType(typeof(BaseResultWithData<PaymentTransactionViewModel>), 200)]
-        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public async Task<IActionResult> Create([FromBody] GO_Study_Logic.Service.VNPAY.CreatePayment request)
+        [HttpPost("Payos")]
+        public async Task<IActionResult> CreateTransaction([FromBody] PaymentTransactionDto transaction)
         {
+            if (transaction == null)
+                return BadRequest("Transaction cannot be null.");
+
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
 
-            var response = await _mediator.Send(request);
-
-            if (!response.Success)
+            // Create a new PaymentTransaction object to store in the database
+            var paymentTransaction = new PaymentTransaction
             {
-                return BadRequest(response.Errors);
+                Amount = transaction.Amount,
+                PaymentCurrency = transaction.PaymentCurrency,
+                PaymentContent = transaction.PaymentContent,
+                PaymentRefId = transaction.PaymentRefId,
+                PaymentMethod = transaction.PaymentMethod,
+                Status = "Pending", // Default status
+                TransactionDate = DateTime.UtcNow, // Current date and time
+                PackageId = transaction.PackageID, // PackageId
+                UserId = transaction.UserId
+            };
+
+            // Ensure that PaymentRefId is convertible to a smaller long value
+            if (!long.TryParse(transaction.PaymentRefId, out long orderCode) || orderCode > 999999999999999)
+            {
+                return BadRequest("PaymentRefId is not in the correct format or is out of range.");
             }
 
-            return Ok(response);
+            // Save the transaction to the database
+            await _paymentService.AddTransactionAsync(paymentTransaction);
+
+            // Create ItemData for PayOS
+            var item = new ItemData(paymentTransaction.PaymentContent, 1, (int)paymentTransaction.Amount);
+            List<ItemData> items = new List<ItemData> { item };
+
+            // Log the order code for debugging
+            _logger.LogInformation($"Order Code: {orderCode}");
+
+            // Create PaymentData object for PayOS
+            PaymentData paymentData = new PaymentData(
+                orderCode: orderCode,
+                amount: (int)paymentTransaction.Amount,
+                description: paymentTransaction.PaymentContent,
+                items: items,
+                cancelUrl: "https://localhost:7173/api/Payment/payos-cancel",
+                returnUrl: "https://localhost:7173/api/Payment/payos-return", // Ensure this is the correct endpoint
+                buyerName: transaction.BuyerName, // Replace with actual user data from FE
+                buyerEmail: transaction.BuyerEmail, // Replace with actual user data from FE
+                buyerPhone: transaction.BuyerPhone, // Replace with actual user data from FE
+                signature: "se161076" // You might want to calculate this dynamically based on the transaction
+            );
+
+            // Call PayOS to create the payment link
+            CreatePaymentResult createPayment = await _payOS.createPaymentLink(paymentData);
+
+            if (createPayment == null || string.IsNullOrEmpty(createPayment.checkoutUrl))
+            {
+                return StatusCode(500, "Failed to create payment link.");
+            }
+
+            return Ok(createPayment); // Return the payment link for the frontend to redirect to
         }
 
+
+
+        [HttpGet("payos-cancel")]
+        public async Task<IActionResult> CancelTransaction([FromQuery] string orderCode)
+        {
+            // Lấy thông tin giao dịch từ cơ sở dữ liệu bằng OrderCode
+            var transaction = await _paymentService.GetTransactionByOrderCodeAsync(orderCode);
+            if (transaction == null)
+                return NotFound("Transaction not found.");
+
+            // Kiểm tra trạng thái giao dịch để quyết định xem có thể hủy hay không
+            if (transaction.Status != "Pending")
+            {
+                return BadRequest("Transaction cannot be canceled.");
+            }
+
+            // Cập nhật trạng thái giao dịch thành "Canceled"
+            var success = await _paymentService.UpdatePaymentTransactionStatusAsync(transaction.TransactionId, "Canceled");
+
+            if (!success)
+            {
+                return StatusCode(500, "Failed to update transaction status.");
+            }
+
+            return Ok("Transaction has been canceled.");
+        }
+
+
+        [HttpGet("payos-return")]
+        public async Task<IActionResult> PayosReturn([FromQuery] PayosReturnRequest request)
+        {
+            // Kiểm tra các trường bắt buộc
+            if (string.IsNullOrEmpty(request.Code) || string.IsNullOrEmpty(request.Status) || string.IsNullOrEmpty(request.OrderCode))
+            {
+                return BadRequest("Code, Status, and OrderCode are required.");
+            }
+
+            var responseCode = request.Code; // Mã phản hồi từ PayOS
+            var transactionStatus = request.Status; // Trạng thái giao dịch
+            var orderCode = request.OrderCode; // Mã đơn hàng
+
+            // Cập nhật trạng thái giao dịch trong cơ sở dữ liệu dựa trên OrderCode
+            var success = await _paymentService.UpdatePaymentTransactionStatusByOrderCodeAsync(orderCode, transactionStatus);
+
+            if (!success)
+            {
+                return NotFound("Transaction not found");
+            }
+
+            // Trả về phản hồi cho client
+            if (responseCode == "00" && transactionStatus == "PAID") // Chỉ cần kiểm tra "PAID" cho thành công
+            {
+                return Ok(new { message = "Payment successful", orderCode });
+            }
+            else
+            {
+                return BadRequest(new { message = "Payment failed", responseCode });
+            }
+        }
+
+
+
+        [HttpGet("{id}/status")]
+        public async Task<IActionResult> GetTransactionStatus(int id)
+        {
+            var transaction = await _paymentService.GetTransactionByIdAsync(id);
+            if (transaction == null)
+                return NotFound();
+
+            var status = await _paymentService.GetPaymentStatus(transaction.TransactionId.ToString());
+            return Ok(new { Status = status });
+        }
+
+   
         [HttpGet("vnpay-return")]
         public IActionResult VnPayReturn([FromQuery] VnPayReturnRequest request)
         {
             var vnp_HashSecret = _configuration["Vnpay:HashSecret"];
-
-            // 1. Verify the secure hash to validate the payment response
             var vnp_SecureHash = request.vnp_SecureHash;
-            var paymentUrl = _paymentService.GenerateQueryString(request); // Create query string from response parameters to generate the signature
-            var validHash = GenerateSecureHash(paymentUrl, vnp_HashSecret); // Generate secure hash from response parameters
+
+            var paymentUrl = _paymentService.GenerateQueryString(request);
+            var validHash = GenerateSecureHash(paymentUrl, vnp_HashSecret);
 
             if (vnp_SecureHash != validHash)
             {
                 return BadRequest("Invalid payment response");
             }
 
-            // 2. Check the transaction status (vnp_TransactionStatus)
             if (request.vnp_ResponseCode == "00" && request.vnp_TransactionStatus == "00")
             {
-                // Handle successful transaction
                 return Ok(new { message = "Payment successful", transactionId = request.vnp_TransactionNo });
             }
             else
             {
-                // Handle failed transaction
                 return BadRequest(new { message = "Payment failed", responseCode = request.vnp_ResponseCode });
             }
         }
-
-  
-
-        private string GenerateSecureHash(string queryString, string hashSecret)
+        [HttpPost("checkout")]
+        public async Task<IActionResult> Checkout(int userId, int packageId)
         {
-            using (var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(hashSecret)))
+            // Lấy thông tin người dùng
+            var user = await _userRepository.GetByIdAsync(userId); // Phương thức này cần có trong dịch vụ
+            if (user == null)
             {
-                var hashBytes = hmac.ComputeHash(Encoding.UTF8.GetBytes(queryString));
-                return BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
-            }
+                return NotFound("User not found.");
+            } 
+            var package = await _paymentService.Checkout(userId, packageId); // Phương thức này cũng cần có
+            if (package == null)
+            {
+                return NotFound("Package not found.");
+            } 
+            return Ok(package);
+            
+            
         }
 
-        [HttpPost]
-        [Route("insert")]
-        public async Task<IActionResult> InsertPaymentTransaction([FromBody] PaymentTransactionViewModel dto)
-        {
-            var transaction = await _paymentService.InsertPaymentTransactionAsync(dto);
-
-            if (transaction == null)
-            {
-                return BadRequest("Failed to insert payment transaction");
-            }
-
-            return Ok(transaction);
-        }
-        [HttpGet]
-        [Route("momo-return")]
-        public async Task<IActionResult> MomoReturn([FromQuery] MomoOneTimePaymentResultRequest response)
-        {
-            string returnUrl = string.Empty;
-            var returnModel = new PaymentReturnDtos();
-            var processResult = await _mediator.Send(response.Adapt<ProcessMomoPaymentReturn>());
-
-            if (processResult.Success)
-            {
-                returnModel = processResult.Data.Item1 as PaymentReturnDtos;
-                returnUrl = processResult.Data.Item2 as string;
-            }
-
-            if (returnUrl.EndsWith("/"))
-                returnUrl = returnUrl.Remove(returnUrl.Length - 1, 1);
-            return Redirect($"{returnUrl}?{returnModel.ToQueryString()}");
-        }
-        
         [HttpPost]
         [Route("update-status")]
         public async Task<IActionResult> UpdatePaymentTransactionStatus([FromBody] UpdateStatusDto dto)
@@ -134,6 +228,15 @@ namespace BE_GOStudy.Controllers
             }
 
             return Ok("Transaction status updated");
+        }
+
+        private string GenerateSecureHash(string queryString, string hashSecret)
+        {
+            using (var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(hashSecret)))
+            {
+                var hashBytes = hmac.ComputeHash(Encoding.UTF8.GetBytes(queryString));
+                return BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
+            }
         }
     }
 }

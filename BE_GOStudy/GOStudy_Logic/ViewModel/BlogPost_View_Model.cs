@@ -30,7 +30,8 @@ namespace GO_Study_Logic.ViewModel
         public string Content { get; set; }
         public DateTime CreatedAt { get; set; }
         public String image { get; set; }
-        
+        public bool IsFavorite { get; set; }
+        public bool IsTrending { get; set; }
         /*
         public string Category { get; set; }
         public string Tags { get; set; }
@@ -38,12 +39,15 @@ namespace GO_Study_Logic.ViewModel
         public bool IsDraft { get; set; }
         public int shareCount { get; set; }
         public int likeCount { get; set; }
-        public bool IsFavorite { get; set; }
-        public bool IsTrending { get; set; }
+        
         public ICollection<Comment_View_Model> Comments { get; set; }
         public ICollection<Bookmark_View_Model> Bookmarks { get; set; }*/
     }
 
+    public class Blogpost_Update_Model
+    {
+        public bool IsFavorite { get; set; }
+    }
     public class Comment_View_Model
     {
         public int CommentId { get; set; }

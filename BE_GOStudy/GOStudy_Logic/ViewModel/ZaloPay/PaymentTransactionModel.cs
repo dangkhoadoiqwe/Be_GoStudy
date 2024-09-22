@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GO_Study_Logic.ViewModel.User;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,5 +22,11 @@ namespace GO_Study_Logic.ViewModel.ZaloPay
         public DateTime CreatedDate { get; set; } // The date and time when the transaction was created
 
         public string Status { get; set; } = "Pending"; // The status of the transaction (Pending, Success, Failed)
+    }
+    public class CheckoutPayment
+    {
+        public UserViewModel user { get; set; }
+        public PackageViewModel package { get; set; }
+
     }
 }

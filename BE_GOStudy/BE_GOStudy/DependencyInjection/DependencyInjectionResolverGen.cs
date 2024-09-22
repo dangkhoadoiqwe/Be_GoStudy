@@ -44,6 +44,9 @@ namespace BE_GOStudy.DependencyInjection
 
             services.AddScoped<IBlogPostService, BlogPostService>();
             services.AddScoped<IBlogPostRepository, BlogPostRepository>();
+            
+            services.AddScoped<ICommentService, CommentService>();
+            services.AddScoped<ICommentRepository, CommentRepository>();
 
             services.AddScoped<IPaymentTransactionRepository, PaymentTransactionRepository>(); 
             services.AddScoped<IPaymentService, PaymentService>();
@@ -55,13 +58,15 @@ namespace BE_GOStudy.DependencyInjection
             services.AddScoped<IPackageService, PackageService>();
             services.AddScoped<IPackageRepository, PackageRepository>();
 
-          
-
+            services.AddScoped<IAttendanceService, AttendanceService>();
+            services.AddScoped<IAttendanceRepository, AttendanceRepository>();
+            
             services.AddScoped<ISqlService, SqlService>();
             services.AddScoped<ICurrentUserService, CurrentUserService>();
             services.AddScoped<IConnectionService, ConnectionService>();
             
-
+    //Test
+    services.AddScoped<ContactInfoService>();
 
         }
     }
