@@ -31,16 +31,7 @@ namespace BE_GOStudy.Controllers
         }
 
         // Lấy package theo ID
-        [HttpGet("GetPackageById{id}")]
-        public async Task<ActionResult<PackageViewModel>> GetPackageById(int id)
-        {
-            var package = await _packageService.GetPackageByIdAsync(id);
-            if (package == null)
-            {
-                return NotFound($"Package with ID {id} not found.");
-            }
-            return Ok(package);
-        }
+      
 
         // Thêm package mới
         [HttpPost("Create_Package(Admin)")]

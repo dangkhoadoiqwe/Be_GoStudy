@@ -10,6 +10,7 @@ using Net.payOS;
 using Microsoft.EntityFrameworkCore;
 using GO_Study_Logic.ViewModel.ZaloPay;
 using GO_Study_Logic.ViewModel.User;
+using Microsoft.AspNetCore.Mvc;
 namespace GO_Study_Logic.Service.VNPAY
 {
     public interface IPaymentService
@@ -18,13 +19,13 @@ namespace GO_Study_Logic.Service.VNPAY
         Task<bool> UpdatePaymentTransactionStatusAsync(int transactionId, string status);
         string GenerateQueryString(VnPayReturnRequest request);
         Task<bool> UpdatePaymentTransactionStatusByOrderCodeAsync(string orderCode, string status);
-        Task<string> GetPaymentStatus(string transactionId);
+       
         Task AddTransactionAsync(PaymentTransaction transaction);
         Task<PaymentTransaction> GetTransactionByIdAsync(int id);
 
         Task<PaymentTransaction> GetTransactionByOrderCodeAsync(string orderCode);
 
-        Task<PaymentTransaction> GetPaymentbyPaymentRefefid(string code); 
+        Task<PaymentStatusViewModel> GetPaymentByPaymentRefefid(string paymentRefId);
         Task<CheckoutPayment> Checkout(int userId, int packageId);
     }
 
@@ -93,20 +94,7 @@ namespace GO_Study_Logic.Service.VNPAY
             await _paymentTransactionRepository.AddTransactionAsync(transaction);
         }
 
-        public async Task<string> GetPaymentStatus(string transactionId)
-        {
-            var statusUrl = $"{ApiUrl}/status/{transactionId}";
-
-            using (var client = _httpClientFactory.CreateClient())
-            {
-                client.DefaultRequestHeaders.Add("Api-Key", ApiKey);
-                var response = await client.GetAsync(statusUrl);
-                response.EnsureSuccessStatusCode();
-
-                var responseContent = await response.Content.ReadAsStringAsync();
-                return responseContent; // Trả về trạng thái thanh toán
-            }
-        }
+       
 
         public async Task<PaymentTransaction> InsertPaymentTransactionAsync(PaymentTransactionViewModel dto)
         {
@@ -204,13 +192,25 @@ namespace GO_Study_Logic.Service.VNPAY
             return checkoutPayment;
         }
 
-        public async Task<PaymentTransaction> GetPaymentbyPaymentRefefid(string code)
+        public async Task<PaymentStatusViewModel> GetPaymentByPaymentRefefid(string paymentRefId)
         {
-            // Attempt to retrieve the payment transaction by PaymentRefId (code)
+            // Thực hiện truy vấn dữ liệu bằng cách tìm kiếm theo PaymentRefId
             var paymentTransaction = await _context.PaymentTransactions
-                .FirstOrDefaultAsync(pt => pt.PaymentRefId == code);
+                .FirstOrDefaultAsync(pt => pt.PaymentRefId == paymentRefId);
 
-            return paymentTransaction; // Will return null if not found
+            // Nếu không tìm thấy giao dịch, ném ngoại lệ
+            if (paymentTransaction == null)
+            {
+                throw new Exception("Payment transaction not found.");
+            }
+
+            // Trả về đối tượng PaymentStatusViewModel
+            return new PaymentStatusViewModel
+            {
+                PaymentRefId = paymentTransaction.PaymentRefId,
+                Status = paymentTransaction.Status
+            };
         }
+
     }
 }

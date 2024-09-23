@@ -15,7 +15,10 @@ namespace GO_Study_Logic.AutoMapperModule
         public static void ConfigPaymentModule(this IMapperConfigurationExpression mc)
         {
             mc.CreateMap<PaymentTransaction, PaymentTransactionModel>().ReverseMap();
-             ;
+             
+
+                            mc.CreateMap<PaymentTransaction, PaymentStatusViewModel>().ReverseMap();
+
         }
     }
 }

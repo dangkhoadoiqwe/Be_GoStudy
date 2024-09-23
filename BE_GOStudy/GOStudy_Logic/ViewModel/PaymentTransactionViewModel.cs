@@ -39,7 +39,11 @@ public class PaymentTransactionDto
         [Required]
         public string Description { get; set; } // Mô tả chi tiết về giao dịch
     }
-
+    public class PaymentStatusViewModel
+    {
+        public string PaymentRefId { get; set; }
+        public string Status { get; set; }
+    }
     public class PaymentLink
     {
         public string PaymentId { get; set; } = string.Empty;

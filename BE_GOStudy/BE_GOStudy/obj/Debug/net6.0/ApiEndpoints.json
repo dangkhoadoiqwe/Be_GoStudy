@@ -370,32 +370,6 @@
   },
   {
     "ContainingType": "BE_GOStudy.Controllers.PackageController",
-    "Method": "GetPackageById",
-    "RelativePath": "api/Package/GetPackageById{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "GO_Study_Logic.ViewModel.PackageViewModel",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "BE_GOStudy.Controllers.PackageController",
     "Method": "UpdatePackage",
     "RelativePath": "api/Package/Update_Package(Admin)",
     "HttpMethod": "PUT",
@@ -418,30 +392,14 @@
   {
     "ContainingType": "BE_GOStudy.Controllers.PaymentController",
     "Method": "GetPaymentByPaymentRefId",
-    "RelativePath": "api/Payment/{code}",
+    "RelativePath": "api/Payment/{paymentRefId}/status",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "code",
+        "Name": "paymentRefId",
         "Type": "System.String",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "BE_GOStudy.Controllers.PaymentController",
-    "Method": "GetTransactionStatus",
-    "RelativePath": "api/Payment/{id}/status",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
         "IsRequired": true
       }
     ],

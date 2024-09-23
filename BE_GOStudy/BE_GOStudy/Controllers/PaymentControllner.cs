@@ -100,15 +100,24 @@ public PaymentController(IPaymentService paymentService, IConfiguration configur
             return Ok(createPayment); // Return the payment link for the frontend to redirect to
         }
 
-        [HttpGet("{code}")]
-        public async Task<IActionResult> GetPaymentByPaymentRefId(string code)
+        [HttpGet("{paymentRefId}/status")]  // Không còn tham số trong đường dẫn
+        public async Task<IActionResult> GetPaymentByPaymentRefId(string paymentRefId)
         {
-            var paymentTransaction = await _paymentService.GetPaymentbyPaymentRefefid(code);
-            if (paymentTransaction == null)
+            if (string.IsNullOrEmpty(paymentRefId))
             {
-                return NotFound("Payment transaction not found.");
+                return BadRequest("Invalid Payment Reference ID.");
             }
-            return Ok(paymentTransaction);
+
+            try
+            {
+                // Gọi phương thức trong service để lấy thông tin thanh toán
+                var paymentStatus = await _paymentService.GetPaymentByPaymentRefefid(paymentRefId);
+                return Ok(paymentStatus);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
 
@@ -179,16 +188,7 @@ public PaymentController(IPaymentService paymentService, IConfiguration configur
 
 
 
-        [HttpGet("{id}/status")]
-        public async Task<IActionResult> GetTransactionStatus(int id)
-        {
-            var transaction = await _paymentService.GetTransactionByIdAsync(id);
-            if (transaction == null)
-                return NotFound();
-
-            var status = await _paymentService.GetPaymentStatus(transaction.TransactionId.ToString());
-            return Ok(new { Status = status });
-        }
+      
 
    
         [HttpGet("vnpay-return")]
