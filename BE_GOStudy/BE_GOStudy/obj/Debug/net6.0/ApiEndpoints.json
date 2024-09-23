@@ -417,6 +417,22 @@
   },
   {
     "ContainingType": "BE_GOStudy.Controllers.PaymentController",
+    "Method": "GetPaymentByPaymentRefId",
+    "RelativePath": "api/Payment/{code}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "code",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_GOStudy.Controllers.PaymentController",
     "Method": "GetTransactionStatus",
     "RelativePath": "api/Payment/{id}/status",
     "HttpMethod": "GET",

@@ -24,6 +24,7 @@ namespace GO_Study_Logic.Service.VNPAY
 
         Task<PaymentTransaction> GetTransactionByOrderCodeAsync(string orderCode);
 
+        Task<PaymentTransaction> GetPaymentbyPaymentRefefid(string code); 
         Task<CheckoutPayment> Checkout(int userId, int packageId);
     }
 
@@ -203,6 +204,13 @@ namespace GO_Study_Logic.Service.VNPAY
             return checkoutPayment;
         }
 
+        public async Task<PaymentTransaction> GetPaymentbyPaymentRefefid(string code)
+        {
+            // Attempt to retrieve the payment transaction by PaymentRefId (code)
+            var paymentTransaction = await _context.PaymentTransactions
+                .FirstOrDefaultAsync(pt => pt.PaymentRefId == code);
 
+            return paymentTransaction; // Will return null if not found
+        }
     }
 }

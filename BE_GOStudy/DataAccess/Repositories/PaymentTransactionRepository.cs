@@ -13,8 +13,12 @@
         Task<PaymentTransaction> GetTransactionByIdAsync(int id);
         Task AddTransactionAsync(PaymentTransaction transaction);
         Task UpdateTransactionAsync(PaymentTransaction transaction);
-        Task DeleteTransactionAsync(int id);
-         }
+        Task DeleteTransactionAsync(int id); 
+        Task<bool> CheckPaymentStatus(string code);
+        Task<PaymentTransaction> GetPaymentByPaymentRefId(string code);
+
+
+    }
 
     public class PaymentTransactionRepository : IPaymentTransactionRepository
     {
@@ -34,6 +38,19 @@
         {
             return await _context.PaymentTransactions.FindAsync(id);
         }
+        public async Task<bool> CheckPaymentStatus(string code)
+        {
+            var paystatus = await _context.PaymentTransactions.FirstOrDefaultAsync(pay => pay.PaymentRefId == code);
+
+            // Check if paystatus is null
+            if (paystatus == null)
+            {
+                return false; // No payment found for the provided code
+            }
+
+            // Check the payment status
+            return paystatus.Status == "PAID" || paystatus.Status == "Canceled";
+        }
 
         public async Task AddTransactionAsync(PaymentTransaction transaction)
         {
@@ -45,6 +62,15 @@
         {
             _context.PaymentTransactions.Update(transaction);
             await _context.SaveChangesAsync();
+        }
+        public async Task<PaymentTransaction> GetPaymentByPaymentRefId(string code)
+        {
+          
+            var paymentTransaction = await _context.PaymentTransactions
+                .FirstOrDefaultAsync(pay => pay.PaymentRefId == code);
+
+            // Return the found transaction or null if not found
+            return paymentTransaction;
         }
 
         public async Task DeleteTransactionAsync(int id)

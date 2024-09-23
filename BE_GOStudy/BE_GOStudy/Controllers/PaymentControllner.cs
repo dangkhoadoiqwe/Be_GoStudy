@@ -100,6 +100,16 @@ public PaymentController(IPaymentService paymentService, IConfiguration configur
             return Ok(createPayment); // Return the payment link for the frontend to redirect to
         }
 
+        [HttpGet("{code}")]
+        public async Task<IActionResult> GetPaymentByPaymentRefId(string code)
+        {
+            var paymentTransaction = await _paymentService.GetPaymentbyPaymentRefefid(code);
+            if (paymentTransaction == null)
+            {
+                return NotFound("Payment transaction not found.");
+            }
+            return Ok(paymentTransaction);
+        }
 
 
         [HttpGet("payos-cancel")]

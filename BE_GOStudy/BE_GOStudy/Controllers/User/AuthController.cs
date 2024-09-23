@@ -43,9 +43,7 @@ public class AuthController : ControllerBase
 
             // Convert Google token info to custom token format
             var customTokenInfo = ConvertToCustomFormat(googleTokenInfo);
-            var checktokenuser = _userService.checktoken(user.UserId);
-            if (checktokenuser != null)
-            {
+           
                 // Generate JWT token
                 var appUser = _userService.ConvertToAppUser(user);
 
@@ -54,11 +52,7 @@ public class AuthController : ControllerBase
 
                 // Return the token
                 return Ok(new { Token = jwtToken });
-            }
-            else
-            {
-                return BadRequest("The account is already in use ");
-            }
+            
             
         }
 

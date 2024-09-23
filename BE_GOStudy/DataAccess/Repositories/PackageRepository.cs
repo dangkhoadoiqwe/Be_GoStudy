@@ -13,7 +13,8 @@ namespace DataAccess.Repositories
         Task<IEnumerable<Package>> GetAllPackage();
         Task<Package?> GetPackageByIdAsync(int id); 
         Task<bool> SavePackageAsync(Package package); 
-        Task<bool> UpdatePackageAsync(Package package); 
+        Task<bool> UpdatePackageAsync(Package package);
+     //   Task<bool> CheckPaymentstatus(long code);
     }
     public class PackageRepository : IPackageRepository
     {
@@ -22,6 +23,8 @@ namespace DataAccess.Repositories
         public PackageRepository(GOStudyContext context) {
             _context = context;
            }
+      
+
         public async Task<IEnumerable<Package>> GetAllPackage()
         {
             return await _context.Packages.ToListAsync();
