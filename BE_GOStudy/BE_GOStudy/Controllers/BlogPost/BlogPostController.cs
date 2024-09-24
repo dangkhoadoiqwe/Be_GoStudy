@@ -99,14 +99,14 @@ namespace BE_GOStudy.Controllers.BlogPost
         }
 
         [HttpPost(Name = "CreateBlogPost")]
-        public async Task<IActionResult> CreateBlogPost([FromForm] BlogPost_Create_Model1 blogPostCreateModel)
+        public async Task<IActionResult> CreateBlogPost([FromBody] BlogPost_Create_Model1 blogPostCreateModel, [FromQuery] int userid)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            await _blogPostService.AddBlogPostAsync(blogPostCreateModel);
+            await _blogPostService.AddBlogPostAsync(blogPostCreateModel, userid);
 
             return Ok(new { message = "Blog post created successfully." });
         }

@@ -13,7 +13,7 @@ namespace GO_Study_Logic.Service
     {
         Task<IEnumerable<BlogPost_View_Model>> GetAllBlogPostsAsync();
         Task<BlogPost_View_Model> GetBlogPostByIdAsync(int postId);
-        Task AddBlogPostAsync(BlogPost_Create_Model1 blogPostCreateModel);
+        Task AddBlogPostAsync(BlogPost_Create_Model1 blogPostCreateModel, int userid);
         Task UpdateBlogPostAsync(BlogPost_Create_Model blogPostCreateModel);
         Task<bool> DeleteBlogPostAsync(int postId);
         Task<List<BlogPost>> GetTrendingBlogPosts();
@@ -39,10 +39,10 @@ namespace GO_Study_Logic.Service
             return _mapper.Map<IEnumerable<BlogPost_View_Model>>(blogPosts);
         }
 
-        public async Task AddBlogPostAsync(BlogPost_Create_Model1 blogPostCreateModel)
+        public async Task AddBlogPostAsync(BlogPost_Create_Model1 blogPostCreateModel, int userid)
         {
             var blogPost = _mapper.Map<BlogPost>(blogPostCreateModel);
-
+            blogPost.UserId = userid;
             blogPost.CreatedAt = DateTime.Now;
             blogPost.ViewCount = 0;
             blogPost.shareCount = 0;
@@ -55,7 +55,7 @@ namespace GO_Study_Logic.Service
             blogPost.ViewCount = 0;
             blogPost.shareCount = 0;
             blogPost.likeCount = 0;
-
+            blogPost.Category = "123";
             await _repository.AddBlogPostAsync(blogPost);
         }
 

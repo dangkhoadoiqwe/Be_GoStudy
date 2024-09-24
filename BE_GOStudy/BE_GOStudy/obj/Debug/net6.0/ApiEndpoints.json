@@ -24,23 +24,13 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "UserId",
+        "Name": "blogPostCreateModel",
+        "Type": "GO_Study_Logic.ViewModel.BlogPost_Create_Model1",
+        "IsRequired": true
+      },
+      {
+        "Name": "userid",
         "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Title",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Content",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Image",
-        "Type": "System.String",
         "IsRequired": false
       }
     ],

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GOStudy_Logic")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3ca691a0f63f2293ae8854f97dadc13e9f77d3f4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+eebf5605df7bafffef87ce6b4402dd0bdbe56c6b")]
 [assembly: System.Reflection.AssemblyProductAttribute("GOStudy_Logic")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GOStudy_Logic")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

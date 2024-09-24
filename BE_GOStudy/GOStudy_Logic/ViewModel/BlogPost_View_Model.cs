@@ -39,7 +39,7 @@ namespace GO_Study_Logic.ViewModel
     public class BlogPost_Create_Model1
     {
    
-        public int UserId { get; set; }
+     //   public int UserId { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
 
