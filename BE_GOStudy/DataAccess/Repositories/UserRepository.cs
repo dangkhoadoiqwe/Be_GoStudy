@@ -21,7 +21,7 @@ namespace DataAccess.Repositories
         Task<PrivacySetting?> GetPrivacySettingByuserIDAsync(int userid);
         Task<BlogPost?> Get1BlogPostAsync(int id);
         Task<int> TotalAttendance(int userid);
-
+        Task UpdateUserAsync(User user);
         Task<bool> CheckToken(int userid);
         Task<IEnumerable<Analytic>> GetUserIdAnalyticAsync(int userid);
     }
@@ -53,6 +53,27 @@ namespace DataAccess.Repositories
         {
             return await _dbContext.Set<Tasks>().Where(t => t.UserId == userId ).ToListAsync();
         }
+        public async Task UpdateUserAsync(User user)
+        {
+            var existingUser = await _dbContext.Set<User>().FindAsync(user.UserId);
+            if (existingUser == null)
+            {
+                throw new Exception("User not found.");
+            }
+
+            // Update the user entity with modified fields
+            existingUser.FullName = user.FullName;
+            existingUser.PasswordHash = user.PasswordHash;
+            existingUser.ProfileImage = user.ProfileImage;
+            existingUser.phone = user.phone;
+            existingUser.birthday = user.birthday;
+            existingUser.sex = user.sex;
+
+            // Mark the user as modified and save changes
+            _dbContext.Set<User>().Update(existingUser);
+            await _dbContext.SaveChangesAsync();
+        }
+
 
         public async Task<IEnumerable<Attendance>> GetUserIdAtendanceAsync(int id)
         {

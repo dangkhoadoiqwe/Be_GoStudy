@@ -30,6 +30,12 @@ namespace BE_GOStudy.Controllers.Room
 
             return Ok("Task saved successfully.");
         }
+        [HttpGet("today/{userId}")]
+        public async Task<ActionResult<IEnumerable<TaskViewModel>>> GetTasksForToday(int userId)
+        {
+            var tasks = await _taskService.GetTasksByUserIdForTodayAsync(userId);
+            return Ok(tasks);
+        }
 
         // API to get tasks for the current week
         [HttpGet("GetTasksForWeek/{userId}")]

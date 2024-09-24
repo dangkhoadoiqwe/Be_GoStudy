@@ -19,6 +19,8 @@ namespace GO_Study_Logic.Service
         Task<IEnumerable<TaskViewModel>> GetTasksByUserIdForMonthAsync(int userId);
         Task<IEnumerable<TaskViewModel>> GetTasksByUserIdForNextMonthAsync(int userId);
         Task<IEnumerable<TaskViewModel>> GetTasksByUserIdForPreviousMonthAsync(int userId);
+        Task<IEnumerable<TaskViewModel>> GetTasksByUserIdForTodayAsync(int userId);
+
     }
 
     public class TaskService : ITaskService
@@ -43,6 +45,11 @@ namespace GO_Study_Logic.Service
         public async Task<IEnumerable<TaskViewModel>> GetTasksByUserIdForNextWeekAsync(int userId)
         {
             var tasks = await _taskRepository.GetTaskByUserIdForNextWeek(userId);
+            return _mapper.Map<IEnumerable<TaskViewModel>>(tasks);
+        }
+        public async Task<IEnumerable<TaskViewModel>> GetTasksByUserIdForTodayAsync(int userId)
+        {
+            var tasks = await _taskRepository.GetTaskByUserIdForToday(userId);
             return _mapper.Map<IEnumerable<TaskViewModel>>(tasks);
         }
 

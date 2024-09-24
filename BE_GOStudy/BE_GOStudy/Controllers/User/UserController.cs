@@ -57,6 +57,32 @@ namespace BE_GO_Study.Controllers.User
 
             return Ok(attendanceList);
         }
+
+        [HttpPut("update-profile")]
+        public async Task<IActionResult> UpdateUserProfile([FromBody] updateUserProfileModel userProfileModel, [FromQuery] int userid)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                var result = await _userService.UpdateUserProfileAsync(userid, userProfileModel);
+                if (result)
+                {
+                    return Ok("User profile updated successfully.");
+                }
+                return BadRequest("User update failed.");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+
         [HttpGet("GetUserProfile/{userid}")]
         public async Task<IActionResult> GetUserProfile(int userid)
         {

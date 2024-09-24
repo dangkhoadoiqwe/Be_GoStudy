@@ -17,6 +17,7 @@ namespace DataAccess.Repositories
         Task<IEnumerable<Tasks>> GetTaskByUserIdForPreviousMonth(int userId);
         Task SaveTaskAsync(Tasks task);
         Task<IEnumerable<Tasks>> GetTaskByID(int id);
+        Task<IEnumerable<Tasks>> GetTaskByUserIdForToday(int userId);
     }
 
     public class TaskRepository : ITaskRepository
@@ -48,7 +49,22 @@ namespace DataAccess.Repositories
                             t.ScheduledTime <= endOfWeek)
                 .ToListAsync();
         }
+        public async Task<IEnumerable<Tasks>> GetTaskByUserIdForToday(int userId)
+        {
+            // Get the current UTC date
+            DateTime currentDate = DateTime.UtcNow.Date;
 
+            // Define start and end of the current day
+            DateTime startOfDay = currentDate;
+            DateTime endOfDay = currentDate.AddDays(1).AddTicks(-1);
+
+            // Fetch tasks for the current day
+            return await _studyContext.Tasks
+                .Where(t => t.UserId == userId &&
+                            t.ScheduledTime >= startOfDay &&
+                            t.ScheduledTime <= endOfDay)
+                .ToListAsync();
+        }
         // Get tasks by user ID for the next week
         public async Task<IEnumerable<Tasks>> GetTaskByUserIdForNextWeek(int userId)
         {

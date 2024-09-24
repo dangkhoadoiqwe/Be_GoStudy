@@ -40,7 +40,7 @@
   {
     "ContainingType": "BE_GOStudy.Controllers.BlogPost.BlogPostController",
     "Method": "GetBlogPostById",
-    "RelativePath": "api/BlogPost/{id}",
+    "RelativePath": "api/BlogPost/{DetailbyBlogid}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -48,6 +48,11 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "DetailbyBlogid",
+        "Type": "",
         "IsRequired": true
       }
     ],
@@ -172,24 +177,77 @@
   },
   {
     "ContainingType": "BE_GOStudy.Controllers.BlogPost.BlogPostController",
-    "Method": "GetTrendingBlogPosts",
-    "RelativePath": "api/BlogPost/trending",
-    "HttpMethod": "GET",
+    "Method": "AddComment",
+    "RelativePath": "api/BlogPost/comments",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "commentViewModel",
+        "Type": "GO_Study_Logic.ViewModel.CommentModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_GOStudy.Controllers.BlogPost.BlogPostController",
+    "Method": "LikePost",
+    "RelativePath": "api/BlogPost/like/{blogId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "blogId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_GOStudy.Controllers.BlogPost.BlogPostController",
+    "Method": "PostVip",
+    "RelativePath": "api/BlogPost/postvip",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "blogPostCreateModel",
+        "Type": "GO_Study_Logic.ViewModel.BlogPost_Create_Model2",
+        "IsRequired": true
+      },
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": []
   },
   {
     "ContainingType": "BE_GOStudy.Controllers.BlogPost.BlogPostController",
     "Method": "GetAllBlogPosts",
-    "RelativePath": "api/BlogPost/Userid",
+    "RelativePath": "api/BlogPost/trending",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "userid",
+        "Name": "pageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
         "Type": "System.Int32",
         "IsRequired": false
       }
@@ -816,6 +874,27 @@
         "Name": "attendanceRequest",
         "Type": "GOStudy_Logic.ViewModel.AttendanceRequestModel",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_GO_Study.Controllers.User.UserController",
+    "Method": "UpdateUserProfile",
+    "RelativePath": "api/User/update-profile",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userProfileModel",
+        "Type": "GO_Study_Logic.ViewModel.User.updateUserProfileModel",
+        "IsRequired": true
+      },
+      {
+        "Name": "userid",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

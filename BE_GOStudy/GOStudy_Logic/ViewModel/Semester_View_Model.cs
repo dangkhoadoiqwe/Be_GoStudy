@@ -8,7 +8,7 @@ namespace GO_Study_Logic.ViewModel
 {
     public class Semester_View_Model
     {
-         
+         public  int SemesterId { get; set; }
         public string Name { get; set; }
         
     }

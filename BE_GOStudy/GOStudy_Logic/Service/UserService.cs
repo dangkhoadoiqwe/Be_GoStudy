@@ -28,6 +28,8 @@ namespace GO_Study_Logic.Service
         string GenerateJwtToken(CustomTokenInfo customTokenInfo, string secretKey);
 
         Task<bool> checktoken(int userid);
+
+        Task<bool> UpdateUserProfileAsync(int userId, updateUserProfileModel userProfileModel);
     }
     public class UserService : IUserService
     {
@@ -60,6 +62,56 @@ namespace GO_Study_Logic.Service
                                       
             };
         }
+        public async Task<bool> UpdateUserProfileAsync(int userId, updateUserProfileModel userProfileModel)
+        {
+            try
+            {
+                var user = await _userRepository.GetByIdAsync(userId);
+                if (user == null)
+                {
+                    throw new Exception("User not found.");
+                }
+
+                // Only update fields that are not default or placeholder values
+                user.FullName = !string.IsNullOrEmpty(userProfileModel.FullName) && userProfileModel.FullName != "string"
+                                ? userProfileModel.FullName
+                                : user.FullName;
+
+                user.PasswordHash = !string.IsNullOrEmpty(userProfileModel.PasswordHash) && userProfileModel.PasswordHash != "string"
+                                    ? userProfileModel.PasswordHash
+                                    : user.PasswordHash;
+
+                user.ProfileImage = !string.IsNullOrEmpty(userProfileModel.ProfileImage) && userProfileModel.ProfileImage != "string"
+                                    ? userProfileModel.ProfileImage
+                                    : user.ProfileImage;
+
+                user.phone = !string.IsNullOrEmpty(userProfileModel.Phone) && userProfileModel.Phone != "string"
+                             ? userProfileModel.Phone
+                             : user.phone;
+
+                user.birthday = userProfileModel.Birthday != DateTime.MinValue
+                                ? userProfileModel.Birthday
+                                : user.birthday;
+
+                user.sex = !string.IsNullOrEmpty(userProfileModel.Sex) && userProfileModel.Sex != "string"
+                           ? userProfileModel.Sex
+                           : user.sex;
+
+                // Update the user in the repository
+                await _userRepository.UpdateUserAsync(user);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error updating user profile: {ex.Message}");
+                throw;  // Re-throw the exception after logging it
+            }
+        }
+
+
+
+
 
         public async Task<User_View_Home_Model> GetHomeUserID(int userid)
         {
@@ -196,11 +248,14 @@ namespace GO_Study_Logic.Service
                 FullName = user.FullName,
                 Semester  = semsterViewModel,
                 Email = user.Email,
-             //   Specialization = SpecializationViewModel,
+           //   Specialization = SpecializationViewModel,
                 ProfileImage = user.ProfileImage,
                 PrivacySetting = privacySettingViewModel,
                 PasswordHash = user.PasswordHash ,
                 role = user.Role,
+                birthday = user.birthday,
+                sex = user.sex,
+                phone = user.phone,
             };
             return userProfile;
         }

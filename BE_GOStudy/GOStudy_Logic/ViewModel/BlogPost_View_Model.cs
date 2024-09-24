@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace GO_Study_Logic.ViewModel
 {
@@ -35,6 +36,23 @@ namespace GO_Study_Logic.ViewModel
         public bool IsFavorite { get; set; }
         public bool IsTrending { get; set; }
         public DateTime CreatedAt { get; set; }
+    }
+    public class BlogPost_Create_Model2
+    {
+        public string Title { get; set; }
+        public string Content { get; set; }
+        public List<string> Images { get; set; } // Allow multiple images
+    }
+    public class CommentModel
+    {
+        
+        public int PostId { get; set; }  
+
+       
+        public int UserId { get; set; }  
+        public string Content { get; set; }  
+
+        public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
     }
     public class BlogPost_Create_Model1
     {

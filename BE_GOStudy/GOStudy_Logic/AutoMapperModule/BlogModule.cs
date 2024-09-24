@@ -12,8 +12,10 @@ namespace GO_Study_Logic.AutoMapperModule
         {
             mc.CreateMap<BlogPost, BlogPost_View_Model>().ReverseMap();
             // mc.CreateMap<Comment, Comment_View_Model>().ReverseMap();
-              mc.CreateMap<BlogPost, BlogPost_Create_Model1>().ReverseMap();
+            mc.CreateMap<BlogPost, BlogPost_Create_Model1>().ReverseMap();
             mc.CreateMap<BlogPost, BlogPost_Create_Model>().ReverseMap();
+            mc.CreateMap<Comment, CommentModel>().ReverseMap();
+
         }
     }
 }
