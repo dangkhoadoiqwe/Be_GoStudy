@@ -119,7 +119,21 @@ public PaymentController(IPaymentService paymentService, IConfiguration configur
                 return NotFound(ex.Message);
             }
         }
+        [HttpDelete("{paymentRefId}")]
+        public async Task<IActionResult> DeletePaymentTransaction(string paymentRefId)
+        {
+            // Gọi hàm xóa trong PaymentService
+            var result = await _paymentService.DeletePaymentTransactionByPaymentRefIdAsync(paymentRefId);
 
+            // Nếu không tìm thấy PaymentTransaction thì trả về NotFound (404)
+            if (!result)
+            {
+                return NotFound(new { Message = "Payment transaction not found" });
+            }
+
+            // Trả về NoContent (204) nếu xóa thành công
+            return NoContent();
+        }
 
         [HttpGet("payos-cancel")]
         public async Task<IActionResult> CancelTransaction([FromQuery] string orderCode)
@@ -127,12 +141,16 @@ public PaymentController(IPaymentService paymentService, IConfiguration configur
             // Lấy thông tin giao dịch từ cơ sở dữ liệu bằng OrderCode
             var transaction = await _paymentService.GetTransactionByOrderCodeAsync(orderCode);
             if (transaction == null)
-                return NotFound("Transaction not found.");
+            {
+                _logger.LogError($"Transaction not found for order code: {orderCode}");
+                return Redirect($"{_configuration.GetValue<string>("FrontendUrl")}/payment/result?orderCode={orderCode}&success=false");
+            }
 
-            // Kiểm tra trạng thái giao dịch để quyết định xem có thể hủy hay không
+            // Kiểm tra trạng thái giao dịch 
+            // (Có thể bỏ qua bước này nếu logic của bạn cho phép hủy giao dịch ở bất kỳ trạng thái nào)
             if (transaction.Status != "Pending")
             {
-                return BadRequest("Transaction cannot be canceled.");
+                return Redirect($"{_configuration.GetValue<string>("FrontendUrl")}/payment/result?orderCode={orderCode}&success=false");
             }
 
             // Cập nhật trạng thái giao dịch thành "Canceled"
@@ -140,13 +158,13 @@ public PaymentController(IPaymentService paymentService, IConfiguration configur
 
             if (!success)
             {
-                return StatusCode(500, "Failed to update transaction status.");
+                _logger.LogError($"Failed to update transaction status to 'Cancelled' for order code: {orderCode}");
+                return Redirect($"{_configuration.GetValue<string>("FrontendUrl")}/payment/result?orderCode={orderCode}&success=false");
             }
 
-            return Ok("Transaction has been canceled.");
+            // Redirect về frontend với thông tin hủy
+            return Redirect($"{_configuration.GetValue<string>("FrontendUrl")}/payment/result?orderCode={orderCode}&success=false&cancelled=true");
         }
-
-
         [HttpGet("payos-return")]
         public async Task<IActionResult> PayosReturn([FromQuery] PayosReturnRequest request)
         {
@@ -156,41 +174,29 @@ public PaymentController(IPaymentService paymentService, IConfiguration configur
                 return BadRequest("Code, Status, and OrderCode are required.");
             }
 
-            var responseCode = request.Code; // Mã phản hồi từ PayOS
-            var transactionStatus = request.Status; // Trạng thái giao dịch
-            var orderCode = request.OrderCode; // Mã đơn hàng
+            var responseCode = request.Code;
+            var transactionStatus = request.Status;
+            var orderCode = request.OrderCode;
 
-            // Cập nhật trạng thái giao dịch trong cơ sở dữ liệu dựa trên OrderCode
+            // Cập nhật trạng thái giao dịch
             var success = await _paymentService.UpdatePaymentTransactionStatusByOrderCodeAsync(orderCode, transactionStatus);
 
             if (!success)
             {
-                return NotFound("Transaction not found");
+                _logger.LogError($"Transaction not found for order code: {orderCode}");
+                // Redirect về trang lỗi hoặc trang thông báo lỗi trên frontend
+                return Redirect($"{_configuration.GetValue<string>("FrontendUrl")}/payment/result?orderCode={orderCode}&success=false");
             }
 
-            // JavaScript để gửi thông tin thanh toán về frontend
-            var paymentResult = (responseCode == "00" && transactionStatus == "PAID") ? "true" : "false";
-
-            string html = $@"
-        <html>
-        <body>
-            <script>
-                // Gửi kết quả thanh toán về frontend qua postMessage
-                window.opener.postMessage({{ success: {paymentResult} }}, '*');
-                window.close(); // Tự động đóng tab thanh toán
-            </script>
-        </body>
-        </html>";
-
-            return Content(html, "text/html");
+            // Redirect về frontend với kết quả
+            return Redirect($"{_configuration.GetValue<string>("FrontendUrl")}/payment/result?orderCode={orderCode}&success=true&cancelled=false");
         }
 
 
 
 
-      
 
-   
+
         [HttpGet("vnpay-return")]
         public IActionResult VnPayReturn([FromQuery] VnPayReturnRequest request)
         {

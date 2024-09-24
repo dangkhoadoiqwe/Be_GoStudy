@@ -40,10 +40,7 @@ namespace DataAccess.Repositories
 
         public async Task AddBlogPostAsync(BlogPost blogPost)
         {
-            blogPost.CreatedAt = DateTime.Now;
-            blogPost.ViewCount = 0;
-            blogPost.shareCount = 0;
-            blogPost.likeCount = 0;
+       
 
             _context.BlogPosts.Add(blogPost);
             await _context.SaveChangesAsync();

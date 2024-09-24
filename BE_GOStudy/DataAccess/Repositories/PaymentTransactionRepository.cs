@@ -17,7 +17,7 @@
         Task<bool> CheckPaymentStatus(string code);
         Task<PaymentTransaction> GetPaymentByPaymentRefId(string code);
 
-
+        Task<bool> DeletePaymentByPaymentRefId(string code);
     }
 
     public class PaymentTransactionRepository : IPaymentTransactionRepository
@@ -71,6 +71,27 @@
 
             // Return the found transaction or null if not found
             return paymentTransaction;
+        }
+        public async Task<bool> DeletePaymentByPaymentRefId(string code)
+        {
+            // Tìm đối tượng paymentTransaction theo PaymentRefId
+            var paymentTransaction = await _context.PaymentTransactions
+                .FirstOrDefaultAsync(pay => pay.PaymentRefId == code);
+
+            // Nếu không tìm thấy thì trả về false
+            if (paymentTransaction == null)
+            {
+                return false;
+            }
+
+            // Xóa đối tượng nếu tìm thấy
+            _context.PaymentTransactions.Remove(paymentTransaction);
+
+            // Lưu thay đổi vào database
+            await _context.SaveChangesAsync();
+
+            // Trả về true nếu xóa thành công
+            return true;
         }
 
         public async Task DeleteTransactionAsync(int id)

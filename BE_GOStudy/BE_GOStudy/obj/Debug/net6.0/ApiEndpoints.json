@@ -39,8 +39,8 @@
         "IsRequired": false
       },
       {
-        "Name": "imageFile",
-        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "Name": "Image",
+        "Type": "System.String",
         "IsRequired": false
       }
     ],
@@ -385,6 +385,22 @@
         "Name": "userid",
         "Type": "System.Int32",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_GOStudy.Controllers.PaymentController",
+    "Method": "DeletePaymentTransaction",
+    "RelativePath": "api/Payment/{paymentRefId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "paymentRefId",
+        "Type": "System.String",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []

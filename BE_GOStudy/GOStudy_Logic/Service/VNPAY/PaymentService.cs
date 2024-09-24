@@ -27,6 +27,7 @@ namespace GO_Study_Logic.Service.VNPAY
 
         Task<PaymentStatusViewModel> GetPaymentByPaymentRefefid(string paymentRefId);
         Task<CheckoutPayment> Checkout(int userId, int packageId);
+        Task<bool> DeletePaymentTransactionByPaymentRefIdAsync(string paymentRefId);
     }
 
     public class PaymentService : IPaymentService
@@ -51,7 +52,26 @@ namespace GO_Study_Logic.Service.VNPAY
             _userRepository = user;
         }
 
-       
+        public async Task<bool> DeletePaymentTransactionByPaymentRefIdAsync(string paymentRefId)
+        {
+            // Kiểm tra và lấy thông tin PaymentTransaction từ repository
+            var paymentTransaction = await _paymentTransactionRepository.GetPaymentByPaymentRefId(paymentRefId);
+
+            if (paymentTransaction == null)
+            {
+                // Nếu không tìm thấy, trả về false
+                return false;
+            }
+
+            // Xóa PaymentTransaction khỏi repository
+            _paymentTransactionRepository.DeletePaymentByPaymentRefId(paymentTransaction.PaymentRefId);
+
+            // Lưu thay đổi vào context
+            await _context.SaveChangesAsync();
+
+            // Trả về true nếu thành công
+            return true;
+        }
 
         private string GenerateChecksum(string data, string key)
         {

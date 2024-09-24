@@ -13,7 +13,7 @@ namespace GO_Study_Logic.Service
     {
         Task<IEnumerable<BlogPost_View_Model>> GetAllBlogPostsAsync();
         Task<BlogPost_View_Model> GetBlogPostByIdAsync(int postId);
-        Task AddBlogPostAsync(BlogPost_Create_Model1 blogPostCreateModel, IFormFile imageFile);
+        Task AddBlogPostAsync(BlogPost_Create_Model1 blogPostCreateModel);
         Task UpdateBlogPostAsync(BlogPost_Create_Model blogPostCreateModel);
         Task<bool> DeleteBlogPostAsync(int postId);
         Task<List<BlogPost>> GetTrendingBlogPosts();
@@ -39,35 +39,10 @@ namespace GO_Study_Logic.Service
             return _mapper.Map<IEnumerable<BlogPost_View_Model>>(blogPosts);
         }
 
-        public async Task AddBlogPostAsync(BlogPost_Create_Model1 blogPostCreateModel, IFormFile imageFile)
+        public async Task AddBlogPostAsync(BlogPost_Create_Model1 blogPostCreateModel)
         {
             var blogPost = _mapper.Map<BlogPost>(blogPostCreateModel);
 
-            // Lưu ảnh nếu có file ảnh được upload
-            if (imageFile != null && imageFile.Length > 0)
-            {
-                // Tạo đường dẫn lưu ảnh
-                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads");
-                if (!Directory.Exists(uploadsFolder))
-                {
-                    Directory.CreateDirectory(uploadsFolder);
-                }
-
-                // Tạo tên file duy nhất để tránh trùng
-                var uniqueFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(imageFile.FileName);
-                var filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-                // Lưu file ảnh vào thư mục server
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    await imageFile.CopyToAsync(fileStream);
-                }
-
-                // Lưu đường dẫn ảnh vào cơ sở dữ liệu
-                blogPost.image = Path.Combine("uploads", uniqueFileName);
-            }
-
-            // Gán giá trị mặc định cho các trường
             blogPost.CreatedAt = DateTime.Now;
             blogPost.ViewCount = 0;
             blogPost.shareCount = 0;
@@ -75,10 +50,15 @@ namespace GO_Study_Logic.Service
             blogPost.IsDraft = false;
             blogPost.IsFavorite = false;
             blogPost.IsTrending = false;
-            blogPost.Category = "support project";
-            blogPost.Tags = "not";
-             await _repository.AddBlogPostAsync(blogPost);
+            blogPost.Tags = "123";
+            blogPost.CreatedAt = DateTime.Now;
+            blogPost.ViewCount = 0;
+            blogPost.shareCount = 0;
+            blogPost.likeCount = 0;
+
+            await _repository.AddBlogPostAsync(blogPost);
         }
+
 
         public async Task<BlogPost_View_Model> GetBlogPostByIdAsync(int postId)
         {

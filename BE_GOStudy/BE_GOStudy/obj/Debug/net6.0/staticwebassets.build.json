@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "wm+H3doOG8v3s9Dtv41GDxV3xUJziND5pNmmlcIB5LM=",
+  "Hash": "DxPznxEt5NfBc7ogjUyBZ+ahm/l6levbf2SQHiTU6Vk=",
   "Source": "BE_GOStudy",
   "BasePath": "_content/BE_GOStudy",
   "Mode": "Default",
@@ -72,6 +72,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\e565c914-d7ae-47cc-a27d-7e47f138f1f2_battle-with-4-heavenly-kings-black-myth-wukong-thumb.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\BE_GOStudy\\wwwroot\\uploads\\e7ad68d8-10b0-4766-8773-972067ea8130_458999591_122100328490517413_7618050607156865058_n.jpg",
+      "SourceId": "BE_GOStudy",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\BE_GOStudy\\wwwroot\\",
+      "BasePath": "_content/BE_GOStudy",
+      "RelativePath": "uploads/e7ad68d8-10b0-4766-8773-972067ea8130_458999591_122100328490517413_7618050607156865058_n.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\e7ad68d8-10b0-4766-8773-972067ea8130_458999591_122100328490517413_7618050607156865058_n.jpg"
     }
   ]
 }

@@ -6,7 +6,7 @@ namespace GO_Study_Logic.ViewModel
     {
         public int PostId { get; set; }
         public int UserId { get; set; }
-        public DataAccess.Model.User User { get; set; }
+    //    public DataAccess.Model.User User { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
         public DateTime CreatedAt { get; set; }
@@ -42,6 +42,8 @@ namespace GO_Study_Logic.ViewModel
         public int UserId { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
- 
+
+        public string Image { get; set; }
+
     }
 }
