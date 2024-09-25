@@ -51,6 +51,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Google.Apis.Calendar.v3": {
+              "target": "Package",
+              "version": "[1.68.0.3536, )"
+            },
             "MediatR": {
               "target": "Package",
               "version": "[11.0.0, )"

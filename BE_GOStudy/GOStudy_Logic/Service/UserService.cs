@@ -134,8 +134,8 @@ namespace GO_Study_Logic.Service
             var anlyst = await _userRepository.GetUserIdAnalyticAsync(userid);
             var tasks = await _taskRepository.GetTaskByUserIdForToday(userid);
             var packageUser = await _packageRepository.GetPackageNamesByUserIdAsync(userid);
-
-
+            var GetSpecializationDetails = await _userRepository.GetSpecializationDetailsByUserIdAsync(userid);
+            var specializationUserDetails = GetSpecializationDetails.ToList();
             var taskviewmodel = _mapper.Map<List<TaskViewModel>>(tasks);
             var attendanceViewModels = _mapper.Map<List<Attendance_View_Model>>(attendances);
             var blogPostViewModel = _mapper.Map<BlogPost_View_Model>(blogPost);
@@ -151,7 +151,7 @@ namespace GO_Study_Logic.Service
                 Email = user.Email, 
                 ProfileImage = user.ProfileImage,
                 PakageUser = packageUser != null && packageUser.Any() ? string.Join(", ", packageUser) : "NO package",
-
+                SpecializationUserDetails = specializationUserDetails,
                 BlogPost = blogPostViewModel,
                 Rankings = rankingViewModels, 
                 Attendances = attendanceViewModels,

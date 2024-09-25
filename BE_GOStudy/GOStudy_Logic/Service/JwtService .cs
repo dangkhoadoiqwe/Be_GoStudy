@@ -15,7 +15,7 @@ namespace GO_Study_Logic.Service
 {
     public interface IJwtService
     {
-        TokenModel GenerateJwtToken(User user);
+        TokenModel GenerateJwtToken(User user,string accesstokengoogle);
         string GenerateJwtToke(AppUser user);
     }
 
@@ -117,7 +117,7 @@ namespace GO_Study_Logic.Service
             return handler.WriteToken(token);
         }
 
-        public TokenModel GenerateJwtToken(User user)
+        public TokenModel GenerateJwtToken(User user, string accesstokengoogle)
         {
             if (user == null)
             {
@@ -158,7 +158,7 @@ namespace GO_Study_Logic.Service
             {
                 AccessToken = accessToken,
                 RefreshToken = refreshToken.Token,
-
+                AccessTokenGoogle = accesstokengoogle,
             };
         }
     }

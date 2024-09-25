@@ -115,7 +115,6 @@ C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GOStudy\BE_GOS
 C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GOStudy\BE_GOStudy\obj\Debug\net6.0\BE_GOStudy.AssemblyInfoInputs.cache
 C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GOStudy\BE_GOStudy\obj\Debug\net6.0\BE_GOStudy.AssemblyInfo.cs
 C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GOStudy\BE_GOStudy\obj\Debug\net6.0\BE_GOStudy.csproj.CoreCompileInputs.cache
-C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GOStudy\BE_GOStudy\obj\Debug\net6.0\BE_GOStudy.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GOStudy\BE_GOStudy\obj\Debug\net6.0\BE_GOStudy.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GOStudy\BE_GOStudy\obj\Debug\net6.0\BE_GOStudy.sourcelink.json
 C:\Users\Admin\OneDrive\Documents\GitHub\Dream\DUAN\Be_GoStudy\BE_GOStudy\BE_GOStudy\bin\Debug\net6.0\appsettings.Development.json

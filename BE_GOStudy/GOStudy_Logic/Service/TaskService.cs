@@ -3,6 +3,7 @@ using DataAccess.Model;
 using DataAccess.Repositories;
 using GO_Study_Logic.ViewModel;
 using GO_Study_Logic.ViewModel.User;
+ 
 using Quartz.Util;
 using System;
 using System.Collections.Generic;
@@ -27,18 +28,23 @@ namespace GO_Study_Logic.Service
 
         Task<bool> UpdateTaskComplete(int taskid);
         Task<bool> UpdateTask(TaskViewModel taskViewModel);
+
+      //  Task AddTaskAsync(TaskViewModel taskViewModel);
     }
 
     public class TaskService : ITaskService
     {
         private readonly ITaskRepository _taskRepository;
         private readonly IMapper _mapper;
+      
 
         public TaskService(ITaskRepository taskRepository, IMapper mapper)
         {
             _taskRepository = taskRepository;
             _mapper = mapper;
+           
         }
+
 
         // Get tasks for the current week
         public async Task<IEnumerable<TaskViewModel>> GetTasksByUserIdForWeekAsync(int userId)
@@ -46,7 +52,7 @@ namespace GO_Study_Logic.Service
             var tasks = await _taskRepository.GetTaskByUserIdForWeek(userId);
             return _mapper.Map<IEnumerable<TaskViewModel>>(tasks);
         }
-
+        
         // Get tasks for the next week
         public async Task<IEnumerable<TaskViewModel>> GetTasksByUserIdForNextWeekAsync(int userId)
         {

@@ -1604,6 +1604,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
+          "Google.Apis.Calendar.v3": "1.68.0.3536",
           "MediatR": "11.0.0",
           "MediatR.Extensions.Microsoft.DependencyInjection": "11.1.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.33",
@@ -1625,6 +1626,7 @@
           "AutoMapper": "13.0.1",
           "BCrypt.Net-Next": "4.0.3",
           "DataAccess": "1.0.0",
+          "Google.Apis.Calendar.v3": "1.68.0.3536",
           "Microsoft.EntityFrameworkCore.Analyzers": "6.0.33",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.33",
           "Microsoft.Extensions.Configuration": "8.0.0",

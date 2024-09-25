@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using DataAccess.Model;
+using static DataAccess.Repositories.UserRepository;
 
 namespace GO_Study_Logic.ViewModel.User
 {
@@ -23,6 +24,7 @@ namespace GO_Study_Logic.ViewModel.User
         public int UserId { get; set; }
     }
 
+  
 
     public class FriendRequest_View_Model
     {
@@ -77,7 +79,8 @@ namespace GO_Study_Logic.ViewModel.User
 
         public List<FriendRequest_View_Model> FriendRequests { get; set; } = new List<FriendRequest_View_Model>();
 
-       
+        public List<SpecializationUserDetailViewModel> SpecializationUserDetails { get; set; } = new List<SpecializationUserDetailViewModel>();
+
 
         public List<TaskViewModel> taskViewModels { get; set; } = new List<TaskViewModel>();
     }
