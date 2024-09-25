@@ -15,6 +15,11 @@ namespace GO_Study_Logic.AutoMapperModule
         {
             mc.CreateMap<Package, PackageViewModel>().ReverseMap();
 
+            mc.CreateMap<Feature, FeatuerViewModel>().ReverseMap();
+
+            mc.CreateMap<Package, PackageViewModel1>()
+          .ForMember(dest => dest.Features, opt => opt.MapFrom(src => src.Feature));
+
         }
     }
 }

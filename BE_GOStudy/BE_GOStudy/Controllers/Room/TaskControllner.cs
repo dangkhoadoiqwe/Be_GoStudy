@@ -17,6 +17,48 @@ namespace BE_GOStudy.Controllers.Room
             _taskService = taskService;
         }
 
+        [HttpDelete("SoftDelete/{taskId}")]
+        public async Task<IActionResult> SoftDeleteTask(int taskId)
+        {
+            try
+            {
+                var result = await _taskService.UpdateTaskDelete(taskId);
+                if (result)
+                {
+                    return Ok("Task soft-deleted successfully.");
+                }
+                else
+                {
+                    return StatusCode(500, "Failed to soft delete the task.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred: {ex.Message}");
+            }
+        }
+        [HttpPut("Completetask/{taskId}")]
+        public async Task<IActionResult> CompleteTask(int taskId)
+        {
+            try
+            {
+                var result = await _taskService.UpdateTaskComplete(taskId);
+                if (result)
+                {
+                    return Ok("Task Complete successfully.");
+                }
+                else
+                {
+                    return StatusCode(500, "Failed to Completethe task.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred: {ex.Message}");
+            }
+        }
+
+
         // API to save a task
         [HttpPost("SaveTask")]
         public async Task<IActionResult> SaveTask([FromBody] TaskViewModel taskViewModel)
@@ -24,6 +66,10 @@ namespace BE_GOStudy.Controllers.Room
             if (taskViewModel == null)
             {
                 return BadRequest("Task is null.");
+            }
+            if(string.IsNullOrEmpty(taskViewModel.Status)|| taskViewModel.Status == "string")
+            {
+                taskViewModel.Status = "Not Complete";
             }
 
             await _taskService.SaveTaskAsync(taskViewModel);
@@ -92,7 +138,34 @@ namespace BE_GOStudy.Controllers.Room
 
             return Ok(tasks);
         }
+        [HttpPut("UpdateTask")]
+        public async Task<IActionResult> UpdateTask([FromBody] TaskViewModel taskViewModel)
+        {
+            if (taskViewModel == null || taskViewModel.TaskId <= 0)
+            {
+                return BadRequest("Invalid task data.");
+            }
 
+            try
+            {
+                // Call the UpdateTask method from TaskService
+                var result = await _taskService.UpdateTask(taskViewModel);
+
+                if (result)
+                {
+                    return Ok("Task updated successfully.");
+                }
+                else
+                {
+                    return StatusCode(500, "Task update failed.");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception here if needed
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
         // API to get tasks for the next month
         [HttpGet("GetTasksForNextMonth/{userId}")]
         public async Task<IActionResult> GetTasksForNextMonth(int userId)

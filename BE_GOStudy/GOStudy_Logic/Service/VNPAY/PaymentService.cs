@@ -206,7 +206,7 @@ namespace GO_Study_Logic.Service.VNPAY
                 PackageId = package.PackageId,
                 Name = package.Name,
                 Price = package.Price,
-                Features = package.Features
+             //   Features = package.Features
             };
 
             return checkoutPayment;

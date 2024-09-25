@@ -281,6 +281,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "BE_GOStudy.Controllers.ChatController",
+    "Method": "SendMessage",
+    "RelativePath": "api/Chat/send",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "message",
+        "Type": "BE_GOStudy.Controllers.ChatMessage",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "BE_GOStudy.Controllers.Room.ClassroomController",
     "Method": "GetAllClassroomsforUserID",
     "RelativePath": "api/Classroom/AllClass(User)/{userid}",
@@ -383,17 +399,7 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[GO_Study_Logic.ViewModel.PackageViewModel, GOStudy_Logic, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "BE_GOStudy.Controllers.PackageController",
@@ -704,6 +710,22 @@
   },
   {
     "ContainingType": "BE_GOStudy.Controllers.Room.TaskController",
+    "Method": "CompleteTask",
+    "RelativePath": "api/Task/Completetask/{taskId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "taskId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_GOStudy.Controllers.Room.TaskController",
     "Method": "GetTasksForMonth",
     "RelativePath": "api/Task/GetTasksForMonth/{userId}",
     "HttpMethod": "GET",
@@ -803,6 +825,64 @@
     "Method": "SaveTask",
     "RelativePath": "api/Task/SaveTask",
     "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "taskViewModel",
+        "Type": "GO_Study_Logic.ViewModel.TaskViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_GOStudy.Controllers.Room.TaskController",
+    "Method": "SoftDeleteTask",
+    "RelativePath": "api/Task/SoftDelete/{taskId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "taskId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_GOStudy.Controllers.Room.TaskController",
+    "Method": "GetTasksForToday",
+    "RelativePath": "api/Task/today/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[GO_Study_Logic.ViewModel.TaskViewModel, GOStudy_Logic, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "BE_GOStudy.Controllers.Room.TaskController",
+    "Method": "UpdateTask",
+    "RelativePath": "api/Task/UpdateTask",
+    "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [

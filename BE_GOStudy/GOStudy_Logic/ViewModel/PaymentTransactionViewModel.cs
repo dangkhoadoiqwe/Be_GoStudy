@@ -60,6 +60,8 @@ public class PaymentTransactionDto
         public string PaymentMethod { get; set; }
         public decimal Amount { get; set; }
     }
+
+
     public class UpdateStatusDto
     {
         public int TransactionId { get; set; }

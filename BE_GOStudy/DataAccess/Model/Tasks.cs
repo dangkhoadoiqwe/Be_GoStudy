@@ -22,6 +22,8 @@ namespace DataAccess.Model
 
         public int TimeComplete {  get; set; }
 
+        public bool IsDeleted { get; set; }
+
         public string Description { get; set; }
 
         [Required]

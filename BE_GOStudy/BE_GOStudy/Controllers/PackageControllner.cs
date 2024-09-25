@@ -20,7 +20,7 @@ namespace BE_GOStudy.Controllers
 
         // Lấy tất cả các gói (packages)
         [HttpGet("All_Package")]
-        public async Task<ActionResult<IEnumerable<PackageViewModel>>> GetAllPackagesAsync()
+        public async Task<IActionResult> GetAllPackagesAsync()
         {
             var packages = await _packageService.GetAllPackagesAsync();
             if (packages == null || !packages.Any())

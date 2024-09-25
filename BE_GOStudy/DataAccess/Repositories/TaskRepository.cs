@@ -18,6 +18,12 @@ namespace DataAccess.Repositories
         Task SaveTaskAsync(Tasks task);
         Task<IEnumerable<Tasks>> GetTaskByID(int id);
         Task<IEnumerable<Tasks>> GetTaskByUserIdForToday(int userId);
+    
+        Task UpdateTask(Tasks task);
+        
+
+        Task<Tasks> GetTaskByTaskId(int TaskId);
+
     }
 
     public class TaskRepository : ITaskRepository
@@ -179,5 +185,26 @@ namespace DataAccess.Repositories
             _studyContext.Tasks.Add(task);
             await _studyContext.SaveChangesAsync();
         }
+
+        public async Task UpdateTask(Tasks task)
+        {
+            var exciting = await _studyContext.Users.FindAsync(task.UserId);
+            if (exciting == null)
+            {
+                throw new Exception("User not found");
+            }
+
+            _studyContext.Tasks.Update(task);
+            await _studyContext.SaveChangesAsync(); // Lưu thay đổi vào cơ sở dữ liệu
+        }
+        
+
+
+        public async Task<Tasks> GetTaskByTaskId(int TaskId)
+        {
+          return await _studyContext.Tasks.FirstOrDefaultAsync(t => t.TaskId == TaskId);
+        }
+
+        
     }
 }

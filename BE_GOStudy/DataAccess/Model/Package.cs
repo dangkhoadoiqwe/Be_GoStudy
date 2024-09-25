@@ -18,9 +18,8 @@ namespace DataAccess.Model
         [Required]
         public decimal Price { get; set; }
 
-        [Required]
-        public string Features { get; set; }
+       
         public ICollection<PaymentTransaction> PaymentTransactions { get; set; }
-
+        public ICollection<Feature> Feature { get; set; }
     }
 }

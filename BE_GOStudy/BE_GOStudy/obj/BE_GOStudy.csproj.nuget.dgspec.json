@@ -63,6 +63,14 @@
               "target": "Package",
               "version": "[4.0.3, )"
             },
+            "Google.Apis.Auth": {
+              "target": "Package",
+              "version": "[1.68.0, )"
+            },
+            "Google.Apis.Calendar.v3": {
+              "target": "Package",
+              "version": "[1.68.0.3536, )"
+            },
             "Hangfire.Core": {
               "target": "Package",
               "version": "[1.8.14, )"
@@ -118,6 +126,10 @@
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"
+            },
+            "PusherServer": {
+              "target": "Package",
+              "version": "[5.0.0, )"
             },
             "Quartz": {
               "target": "Package",

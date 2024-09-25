@@ -2,6 +2,8 @@
 using DataAccess.Model;
 using DataAccess.Repositories;
 using GO_Study_Logic.ViewModel;
+using GO_Study_Logic.ViewModel.User;
+using Quartz.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +22,11 @@ namespace GO_Study_Logic.Service
         Task<IEnumerable<TaskViewModel>> GetTasksByUserIdForNextMonthAsync(int userId);
         Task<IEnumerable<TaskViewModel>> GetTasksByUserIdForPreviousMonthAsync(int userId);
         Task<IEnumerable<TaskViewModel>> GetTasksByUserIdForTodayAsync(int userId);
+      //  Task<bool> DeletTask(int taskid);
+      Task<bool> UpdateTaskDelete(int  taskid);
 
+        Task<bool> UpdateTaskComplete(int taskid);
+        Task<bool> UpdateTask(TaskViewModel taskViewModel);
     }
 
     public class TaskService : ITaskService
@@ -84,11 +90,92 @@ namespace GO_Study_Logic.Service
         // Save a new task
         public async Task SaveTaskAsync(TaskViewModel taskViewModel)
         {
-            // Convert from TaskViewModel to Tasks entity
+            
             var taskEntity = _mapper.Map<Tasks>(taskViewModel);
 
             // Save the task entity
             await _taskRepository.SaveTaskAsync(taskEntity);
         }
+
+        public async Task<bool> UpdateTask(TaskViewModel taskViewModel)
+        {
+            try
+            {
+                var task = await _taskRepository.GetTaskByTaskId(taskViewModel.TaskId);
+                if (task == null)
+                {
+                    throw new Exception("Task not found"); 
+                }
+                task.Title = !string.IsNullOrEmpty(taskViewModel.Title) && taskViewModel.Title != "string" ? taskViewModel.Title : task.Title;
+                task.Description = !string.IsNullOrEmpty(taskViewModel.Description) && taskViewModel.Description != "string" ? taskViewModel.Description : task.Description;
+
+                task.ScheduledTime = taskViewModel.ScheduledTime != DateTime.MinValue
+                                           ? taskViewModel.ScheduledTime
+                                               : task.ScheduledTime;
+
+
+
+                await _taskRepository.UpdateTask(task);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ;
+ 
+            }
+        }
+         
+
+              public async Task<bool> UpdateTaskComplete(int taskId)
+        {
+            try
+            {
+                // Tìm task theo taskId
+                var task = await _taskRepository.GetTaskByTaskId(taskId);
+                if (task == null)
+                {
+                    throw new Exception("Task not found");
+                }
+
+                // Cập nhật IsDeleted thành true (1)
+                task.Status = "Completed";
+
+                // Gọi phương thức cập nhật task trong repository để lưu thay đổi
+                await _taskRepository.UpdateTask(task);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // Ghi log lỗi nếu cần thiết
+                throw new Exception($"An error occurred while deleting the task: {ex.Message}");
+            }
+        }
+        public async Task<bool> UpdateTaskDelete(int taskId)
+        {
+            try
+            {
+                // Tìm task theo taskId
+                var task = await _taskRepository.GetTaskByTaskId(taskId);
+                if (task == null)
+                {
+                    throw new Exception("Task not found");
+                }
+
+                // Cập nhật IsDeleted thành true (1)
+                task.IsDeleted = true;
+
+                // Gọi phương thức cập nhật task trong repository để lưu thay đổi
+                await _taskRepository.UpdateTask(task);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // Ghi log lỗi nếu cần thiết
+                throw new Exception($"An error occurred while deleting the task: {ex.Message}");
+            }
+        }
+
     }
 }

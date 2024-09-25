@@ -38,6 +38,8 @@ namespace DataAccess.Model
         public virtual DbSet<RefreshToken> RefreshTokens { get; set; } = null!;
         public DbSet<UserSpecialization> UserSpecializations { get; set; }
         public DbSet<BlogImg> BlogImgs { get; set; }
+
+        public DbSet<Feature> Features { get; set; }
         public DbSet<UserLike> UserLikes { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -75,6 +77,12 @@ namespace DataAccess.Model
              .WithMany(u => u.UserLikes)
              .HasForeignKey(ul => ul.UserId)
              .OnDelete(DeleteBehavior.NoAction); // Prevent cascading delete
+
+            modelBuilder.Entity<Package>()
+          .HasMany(p => p.Feature)
+          .WithOne(f => f.Package)
+          .HasForeignKey(f => f.PackageId)
+          .OnDelete(DeleteBehavior.Cascade);
 
             // Foreign key for BlogId (cascade delete allowed)
             modelBuilder.Entity<UserLike>()

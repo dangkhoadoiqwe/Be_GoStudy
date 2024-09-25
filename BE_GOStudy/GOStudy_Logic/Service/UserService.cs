@@ -37,13 +37,18 @@ namespace GO_Study_Logic.Service
         private readonly IMapper _mapper;
         private readonly ISemestersRepository _semestersRepository;
         private readonly ISpecializationRepository _specializationRepository;
+        public readonly ITaskRepository _taskRepository;
+        public readonly IPackageRepository _packageRepository;
+
         public UserService(IUserRepository userRepository, IMapper mapper, ISemestersRepository semestersRepository
-            , ISpecializationRepository specializationRepository )
+            , ISpecializationRepository specializationRepository ,ITaskRepository taskRepository, IPackageRepository packageRepository)
         {
             _userRepository = userRepository;
             _mapper = mapper;
             _semestersRepository = semestersRepository;
             _specializationRepository = specializationRepository;
+            _taskRepository = taskRepository;
+            _packageRepository = packageRepository;
         }
         public async Task<UserViewModel> GetById(int userId)
         {
@@ -127,8 +132,11 @@ namespace GO_Study_Logic.Service
             var rankings = await _userRepository.GetAllRankingAsync();
             var privacySetting = await _userRepository.GetPrivacySettingByuserIDAsync(userid);
             var anlyst = await _userRepository.GetUserIdAnalyticAsync(userid);
+            var tasks = await _taskRepository.GetTaskByUserIdForToday(userid);
+            var packageUser = await _packageRepository.GetPackageNamesByUserIdAsync(userid);
 
 
+            var taskviewmodel = _mapper.Map<List<TaskViewModel>>(tasks);
             var attendanceViewModels = _mapper.Map<List<Attendance_View_Model>>(attendances);
             var blogPostViewModel = _mapper.Map<BlogPost_View_Model>(blogPost);
             var friendRequestViewModels = _mapper.Map<List<FriendRequest_View_Model>>(friendRequests);
@@ -142,12 +150,15 @@ namespace GO_Study_Logic.Service
                 FullName = user.FullName,
                 Email = user.Email, 
                 ProfileImage = user.ProfileImage,
+                PakageUser = packageUser != null && packageUser.Any() ? string.Join(", ", packageUser) : "NO package",
+
                 BlogPost = blogPostViewModel,
                 Rankings = rankingViewModels, 
                 Attendances = attendanceViewModels,
                 PrivacySetting = privacySettingViewModel,
                 Analytics = anaylystViewModel,
                 FriendRequests = friendRequestViewModels,
+                taskViewModels = taskviewmodel,
                 totalAttendace = totalattendance
             };
 
@@ -237,8 +248,7 @@ namespace GO_Study_Logic.Service
             var semsterss = await _semestersRepository.GetByIdAsync(user.SemesterId);
        //     var Specialization = await _specializationRepository.GetByIdAsync(user.SpecializationId);
             var privacySetting = await _userRepository.GetPrivacySettingByuserIDAsync(userid);
-
-
+           
          //   var SpecializationViewModel = _mapper.Map<Specialization_View_Model>(Specialization);
             var semsterViewModel = _mapper.Map<Semester_View_Model>(semsterss);
             var privacySettingViewModel = _mapper.Map<PrivacySetting_View_Model>(privacySetting);

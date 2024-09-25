@@ -26,7 +26,7 @@ namespace GOStudy_Logic.Service.Sentmail
                 // Lấy danh sách các task mà ScheduledTime <= thời gian hiện tại và chưa hoàn thành, đồng thời lấy thông tin user
                 var pendingTasks = await _context.Tasks
                     .Include(t => t.User)  // Lấy thông tin User cùng với Task
-                    .Where(t => t.ScheduledTime == DateTime.Now && t.Status != "Completed")
+                    .Where(t => t.ScheduledTime == DateTime.Now && t.Status != "Completed" && t.IsDeleted == true)
                     .ToListAsync();
 
                 foreach (var task in pendingTasks)

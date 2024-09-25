@@ -18,6 +18,8 @@
         Task<PaymentTransaction> GetPaymentByPaymentRefId(string code);
 
         Task<bool> DeletePaymentByPaymentRefId(string code);
+
+        Task<IEnumerable<int>> GetPackageIdsByUserIdAsync(int userId);
     }
 
     public class PaymentTransactionRepository : IPaymentTransactionRepository
@@ -50,6 +52,14 @@
 
             // Check the payment status
             return paystatus.Status == "PAID" || paystatus.Status == "Canceled";
+        }
+        public async Task<IEnumerable<int>> GetPackageIdsByUserIdAsync(int userId)
+        {
+            return await _context.PaymentTransactions
+       .Where(pt => pt.UserId == userId && pt.Status == "PAID") // Thêm điều kiện Status là "PAID"
+       .Select(pt => pt.PackageId)
+       .Distinct() // Đảm bảo không có trùng lặp
+       .ToListAsync();
         }
 
         public async Task AddTransactionAsync(PaymentTransaction transaction)
