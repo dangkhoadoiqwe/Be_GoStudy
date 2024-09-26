@@ -40,7 +40,7 @@ namespace GO_Study_Logic.Service
             }
         }
 
-        private RefreshToken CreateRefreshToken(string jwtId, int userId)
+        private RefreshToken CreateRefreshToken(string jwtId, int userId, string accessTokenGoogle)
         {
             var refreshToken = new RefreshToken
             {
@@ -51,13 +51,15 @@ namespace GO_Study_Logic.Service
                 ExpriedAt = DateTime.UtcNow.AddMonths(1),
                 IsRevoked = false,
                 IsUsed = false,
-                UserId = userId
+                UserId = userId,
+                AccessTokenGoogle = accessTokenGoogle  // Lưu Access Token từ Google
             };
 
             _refreshTokenRepository.Create(refreshToken);
             _refreshTokenRepository.Save();
             return refreshToken;
         }
+
 
         public string GenerateJwtToke(AppUser user)
         {
@@ -116,7 +118,7 @@ namespace GO_Study_Logic.Service
             var token = handler.CreateToken(tokenDescriptor);
             return handler.WriteToken(token);
         }
-
+       
         public TokenModel GenerateJwtToken(User user, string accesstokengoogle)
         {
             if (user == null)
@@ -137,29 +139,32 @@ namespace GO_Study_Logic.Service
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-                    new Claim(JwtRegisteredClaimNames.Sid, user.UserId.ToString()),  // User ID
-                    new Claim(ClaimTypes.Role, Enum.GetName(typeof(RoleEnum), user.Role)),  // sub, same as User ID
-                    new Claim(JwtRegisteredClaimNames.Email, user.Email),           // Email
-                    new Claim(JwtRegisteredClaimNames.Iss, "https://securetoken.google.com/meet-jit-si-66cbd"), // Issuer
-                    new Claim(JwtRegisteredClaimNames.Aud, "meet-jit-si-66cbd"),    // Audience
-                    new Claim("picture", user.ProfileImage),                        // Profile image
-                    new Claim("email_verified", true.ToString().ToLower()),         // Email verified status
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()) // Token ID (JTI)
-                }),
+            new Claim(JwtRegisteredClaimNames.Sid, user.UserId.ToString()),  // User ID
+            new Claim(ClaimTypes.Role, Enum.GetName(typeof(RoleEnum), user.Role)),  // sub, same as User ID
+            new Claim(JwtRegisteredClaimNames.Email, user.Email),           // Email
+            new Claim(JwtRegisteredClaimNames.Iss, "https://securetoken.google.com/meet-jit-si-66cbd"), // Issuer
+            new Claim(JwtRegisteredClaimNames.Aud, "meet-jit-si-66cbd"),    // Audience
+            new Claim("picture", user.ProfileImage),                        // Profile image
+            new Claim("email_verified", true.ToString().ToLower()),         // Email verified status
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()) // Token ID (JTI)
+        }),
                 Expires = expires,
                 SigningCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature)
             };
 
             var token = handler.CreateToken(tokenDescription);
             var accessToken = handler.WriteToken(token);
-            var refreshToken = CreateRefreshToken(token.Id, user.UserId);
+
+            // Lưu Google Access Token cùng với refresh token
+            var refreshToken = CreateRefreshToken(token.Id, user.UserId, accesstokengoogle);
 
             return new TokenModel
             {
                 AccessToken = accessToken,
                 RefreshToken = refreshToken.Token,
-                AccessTokenGoogle = accesstokengoogle,
+                AccessTokenGoogle = accesstokengoogle, // Trả lại Google Access Token trong model nếu cần sử dụng sau
             };
         }
+
     }
 }

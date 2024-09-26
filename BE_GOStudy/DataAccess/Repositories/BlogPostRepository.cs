@@ -15,13 +15,14 @@ namespace DataAccess.Repositories
         Task UpdateBlogPostAsync(BlogPost blogPost);
         Task DeleteBlogPostAsync(BlogPost blogPost);
         Task<List<BlogPost>> GetTrendingBlogPosts();
-        Task<List<BlogPost>> GetUserBlogPosts(int userId);
+        Task<List<BlogPost>> GetUserBlogPosts(int userId, int pageNumber);
         Task<List<BlogPost>> GetFavoriteBlogPosts(int userId);
         Task AddBlogImgAsync(BlogImg blogImg);
         Task AddCommentAsync(Comment comment);
         Task<IEnumerable<BlogPost>> GetPaginatedBlogPostsAsync(int pageNumber, int pageSize);
         Task<bool> HasUserLikedPostAsync(int userId, int blogId);
 
+        Task UpdateBlogImagesAsync(int blogPostId, List<string> newImages);
         Task AddUserLikeAsync(UserLike userLike);
 
         Task<int> CountUserCommentsTodayAsync(int userId, int blogPostId);
@@ -38,16 +39,24 @@ namespace DataAccess.Repositories
 
         public async Task<IEnumerable<BlogPost>> GetAllBlogPostsAsync()
         {
-            return await _context.BlogPosts.Include(u => u.User).ToListAsync();
+            return await _context.BlogPosts
+                                 .Where(bp => !bp.IsDraft) 
+                                 .Include(bp => bp.BlogImgs) 
+                                 .ToListAsync();
         }
+
+
         public async Task<IEnumerable<BlogPost>> GetPaginatedBlogPostsAsync(int pageNumber, int pageSize)
         {
             return await _context.BlogPosts
-                .OrderByDescending(bp => bp.CreatedAt)  // Optional: order by creation date
-                .Skip((pageNumber - 1) * pageSize)      // Skip posts for previous pages
-                .Take(pageSize)                         // Take the posts for the current page
+                .Include(bp => bp.BlogImgs)      
+                .Include(bp => bp.User)          
+                .OrderByDescending(bp => bp.CreatedAt)  
+                .Skip((pageNumber - 1) * pageSize)      
+                .Take(pageSize)                         
                 .ToListAsync();
         }
+
         public async Task AddUserLikeAsync(UserLike userLike)
         {
             _context.UserLikes.Add(userLike);
@@ -55,8 +64,50 @@ namespace DataAccess.Repositories
         }
         public async Task<BlogPost?> GetBlogPostByIdAsync(int postId)
         {
-            return await _context.BlogPosts.FindAsync(postId);
+            return await _context.BlogPosts
+                .Include(bp => bp.BlogImgs)                          // Include hình ảnh của blog
+                .Include(bp => bp.User)                              // Include thông tin user của blog
+                .Include(bp => bp.Comments)                          // Include các bình luận
+                    .ThenInclude(c => c.User)                        // Include thông tin user của từng bình luận
+                .Where(bp => bp.PostId == postId)                    // Lọc theo postId
+                .FirstOrDefaultAsync();
         }
+        public async Task UpdateBlogImagesAsync(int blogPostId, List<string> newImages)
+        {
+            // Lấy tất cả hình ảnh hiện tại của bài viết từ bảng BlogImg
+            var existingImages = await _context.BlogImgs
+                .Where(bi => bi.BlogId == blogPostId)
+                .ToListAsync();
+
+            // Xóa các hình ảnh cũ không còn trong danh sách hình ảnh mới
+            var imagesToRemove = existingImages
+                .Where(img => !newImages.Contains(img.Img))  // Nếu hình ảnh hiện tại không có trong danh sách mới, xóa nó
+                .ToList();
+
+            if (imagesToRemove.Any())
+            {
+                _context.BlogImgs.RemoveRange(imagesToRemove);  // Xóa hình ảnh cũ khỏi bảng BlogImg
+            }
+
+            // Thêm các hình ảnh mới vào bảng BlogImg nếu chưa có trong danh sách hiện tại
+            var imagesToAdd = newImages
+                .Where(imgUrl => !existingImages.Any(bi => bi.Img == imgUrl))  // Nếu hình ảnh mới không có trong database, thêm nó
+                .Select(imgUrl => new BlogImg
+                {
+                    BlogId = blogPostId,  // Liên kết với bài viết hiện tại
+                    Img = imgUrl
+                })
+                .ToList();
+
+            if (imagesToAdd.Any())
+            {
+                await _context.BlogImgs.AddRangeAsync(imagesToAdd);  // Thêm các hình ảnh mới vào bảng BlogImg
+            }
+
+            // Lưu thay đổi vào database
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<Comment>> GetCommentsByPostIdAsync(int postId)
         {
             return await _context.Comments
@@ -102,13 +153,19 @@ namespace DataAccess.Repositories
                 .ToListAsync();
         }
 
-        public async Task<List<BlogPost>> GetUserBlogPosts(int userId)
+        public async Task<List<BlogPost>> GetUserBlogPosts(int userId, int pageNumber)
         {
+            int pageSize = 10; // 10 items per page
+
             return await _context.BlogPosts
                 .Where(p => p.UserId == userId)
-                .OrderByDescending(p => p.CreatedAt)
+                .Include(p => p.User)  // Lấy tất cả thông tin của user liên quan
+                .OrderByDescending(p => p.CreatedAt)  // Sắp xếp theo CreatedAt giảm dần
+                .Skip((pageNumber - 1) * pageSize)  // Bỏ qua các bài viết của các trang trước
+                .Take(pageSize)  // Lấy 10 bài viết của trang hiện tại
                 .ToListAsync();
         }
+
 
         public async Task<List<BlogPost>> GetFavoriteBlogPosts(int userId)
         {

@@ -12,19 +12,21 @@ namespace GO_Study_Logic.Service
 {
     public interface IBlogPostService
     {
-        Task<IEnumerable<BlogPost_View_Model>> GetAllBlogPostsAsync();
-        Task<BlogPost_View_Model> GetBlogPostByIdAsync(int postId);
+        Task<IEnumerable<BlogPost_View_Model_All>> GetAllBlogPostsAsync();
+        Task<BlogPostViewdetailModel> GetBlogPostByIdAsync(int postId);
         Task AddBlogPostAsync(BlogPost_Create_Model1 blogPostCreateModel, int userid);
         Task UpdateBlogPostAsync(BlogPost_Create_Model blogPostCreateModel);
         Task<bool> DeleteBlogPostAsync(int postId);
         Task<List<BlogPost>> GetTrendingBlogPosts();
-        Task<List<BlogPost>> GetUserBlogPosts(int userId);
+        Task<List<BlogPost>> GetUserBlogPosts(int userId, int pageNumber);
         Task<List<BlogPost>> GetFavoriteBlogPosts(int userId);
         Task<bool> UpdateFavoriteBlogPost(int blogPostId, bool favorite);
         Task AddBlogPostVIPAsync(BlogPost_Create_Model2 blogPostCreateModel, int userId);
         Task<bool> UpdateLikeCountAsync(int userId, int blogId);
         Task<bool> AddCommentAsync(Comment comment);
-        Task<IEnumerable<BlogPost_View_Model>> GetPaginatedBlogPostsAsync(int pageNumber, int pageSize);
+       
+        Task UpdateBlogPostTitleAndImagesAsync(BlogPost_Upadte_Model blogPostCreateModel);
+            Task<IEnumerable<BlogPost_View_Model_All>> GetPaginatedBlogPostsAsync(int pageNumber, int pageSize);
     }
 }
 
@@ -32,24 +34,27 @@ namespace GO_Study_Logic.Service
     {
         private readonly IBlogPostRepository _repository;
         private readonly IMapper _mapper;
-
-        public BlogPostService(IBlogPostRepository repository, IMapper mapper)
+          private readonly IUserRepository _userRepository;
+         public BlogPostService(IBlogPostRepository repository, IMapper mapper, IUserRepository userRepository)
         {
             _repository = repository;
             _mapper = mapper;
+        _userRepository = userRepository;
         }
 
-        public async Task<IEnumerable<BlogPost_View_Model>> GetAllBlogPostsAsync()
+        public async Task<IEnumerable<BlogPost_View_Model_All>> GetAllBlogPostsAsync()
         {
             var blogPosts = await _repository.GetAllBlogPostsAsync();
-            return _mapper.Map<IEnumerable<BlogPost_View_Model>>(blogPosts);
+            
+            return _mapper.Map<IEnumerable<BlogPost_View_Model_All>>(blogPosts);
         }
 
 
-    public async Task<IEnumerable<BlogPost_View_Model>> GetPaginatedBlogPostsAsync(int pageNumber, int pageSize)
+    public async Task<IEnumerable<BlogPost_View_Model_All>> GetPaginatedBlogPostsAsync(int pageNumber, int pageSize)
     {
         var blogPosts = await _repository.GetPaginatedBlogPostsAsync(pageNumber, pageSize);
-        return _mapper.Map<IEnumerable<BlogPost_View_Model>>(blogPosts);
+       
+        return _mapper.Map<IEnumerable<BlogPost_View_Model_All>>(blogPosts);
     }
 
 
@@ -90,12 +95,12 @@ namespace GO_Study_Logic.Service
         }
 
 
-        public async Task<BlogPost_View_Model> GetBlogPostByIdAsync(int postId)
+        public async Task<BlogPostViewdetailModel> GetBlogPostByIdAsync(int postId)
         {
             var blogPost = await _repository.GetBlogPostByIdAsync(postId);
             if (blogPost == null) return null;
 
-            return _mapper.Map<BlogPost_View_Model>(blogPost);
+            return _mapper.Map<BlogPostViewdetailModel>(blogPost);
         }
 
         public async Task UpdateBlogPostAsync(BlogPost_Create_Model blogPostCreateModel)
@@ -113,8 +118,37 @@ namespace GO_Study_Logic.Service
                 existingBlogPost.IsTrending = updatedBlogPost.IsTrending;
                 await _repository.UpdateBlogPostAsync(existingBlogPost);
             }
+    }//BlogPost_Upadte_Model
+    public async Task UpdateBlogPostTitleAndImagesAsync(BlogPost_Upadte_Model blogPostCreateModel)
+    {
+        // Lấy blog post hiện tại từ repository
+        var existingBlogPost = await _repository.GetBlogPostByIdAsync(blogPostCreateModel.PostId);
+
+        if (existingBlogPost != null)
+        {
+            // Cập nhật các thuộc tính của bài viết
+            existingBlogPost.Title = blogPostCreateModel.Title;
+            existingBlogPost.Content = blogPostCreateModel.Content;
+            existingBlogPost.CreatedAt = DateTime.Now;  // Nếu bạn có trường UpdatedAt
+            existingBlogPost.UserId = blogPostCreateModel.userId;
+            existingBlogPost.Category = "updated_category";  // Bạn có thể thêm logic cập nhật category nếu cần
+            existingBlogPost.Tags = "updated_tags";          // Bạn có thể thêm logic cập nhật tags nếu cần
+
+            // Cập nhật tiêu đề hình ảnh chính nếu có
+            existingBlogPost.image = blogPostCreateModel.Images != null && blogPostCreateModel.Images.Count > 0
+                ? blogPostCreateModel.Images[0] : null;
+
+            // Cập nhật bài viết trong database
+            await _repository.UpdateBlogPostAsync(existingBlogPost);
+
+            // Xử lý các hình ảnh liên quan
+            await _repository.UpdateBlogImagesAsync(blogPostCreateModel.PostId, blogPostCreateModel.Images);
         }
-        public async Task AddBlogPostVIPAsync(BlogPost_Create_Model2 blogPostCreateModel, int userId)
+    }
+
+
+
+    public async Task AddBlogPostVIPAsync(BlogPost_Create_Model2 blogPostCreateModel, int userId)
         {
             // Map the BlogPost_Create_Model1 to BlogPost
             var blogPost = _mapper.Map<BlogPost>(blogPostCreateModel);
@@ -180,9 +214,9 @@ namespace GO_Study_Logic.Service
             return true;
         }
 
-        public async Task<List<BlogPost>> GetUserBlogPosts(int userId)
+        public async Task<List<BlogPost>> GetUserBlogPosts(int userId, int pageNumber)
         {
-            return await _repository.GetUserBlogPosts(userId);
+            return await _repository.GetUserBlogPosts(userId, pageNumber);
         }
 
     public async Task<bool> UpdateLikeCountAsync(int userId, int blogId)
@@ -221,6 +255,6 @@ namespace GO_Study_Logic.Service
         return true; // Like was successfully added
     }
 
-
+   
 }
 

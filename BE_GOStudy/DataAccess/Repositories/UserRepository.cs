@@ -45,12 +45,7 @@ namespace DataAccess.Repositories
         {
             return await _dbContext.Set<User>().FindAsync(id);
         }
-        public class SpecializationUserDetailViewModel
-        {
-            public string SpecializationName { get; set; }
-            public bool Status { get; set; }
-        }
-
+       
         public async Task<IEnumerable<SpecializationUserDetailViewModel>> GetSpecializationDetailsByUserIdAsync(int userId)
         {
             var currentDate = DateTime.Now;
@@ -145,7 +140,12 @@ namespace DataAccess.Repositories
                 .CountAsync(a => a.UserId == userid);
         }
 
-        
+        public class SpecializationUserDetailViewModel
+        {
+            public string SpecializationName { get; set; }
+            public bool Status { get; set; }
+        }
+
 
         public async Task<bool> CheckToken(int userid)
         {

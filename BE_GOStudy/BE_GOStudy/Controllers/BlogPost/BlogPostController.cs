@@ -74,7 +74,7 @@ namespace BE_GOStudy.Controllers.BlogPost
             return Ok(new { message = "Blog post created successfully." });
         }
         [HttpGet("trending")]
-        public async Task<ActionResult<IEnumerable<BlogPost_View_Model>>> GetAllBlogPosts([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        public async Task<IActionResult> GetAllBlogPosts([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
             var blogPosts = await _blogPostService.GetPaginatedBlogPostsAsync(pageNumber, pageSize);
             if (blogPosts == null || !blogPosts.Any())
@@ -84,8 +84,8 @@ namespace BE_GOStudy.Controllers.BlogPost
 
             return Ok(blogPosts);
         }
-        [HttpGet("{DetailbyBlogid}")]
-        public async Task<ActionResult<BlogPost_View_Model>> GetBlogPostById(int id)
+        [HttpGet("Detail")]
+        public async Task<ActionResult<BlogPostViewdetailModel>> GetBlogPostById(int id)
         {
             var blogPost = await _blogPostService.GetBlogPostByIdAsync(id);
             if (blogPost == null)
@@ -95,25 +95,33 @@ namespace BE_GOStudy.Controllers.BlogPost
             return Ok(blogPost);
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateBlogPost(int id, [FromForm] BlogPost_Create_Model blogPostCreateModel, IFormFile imageFile)
+        [HttpPut("UpdateBlog")]
+        public async Task<ActionResult> UpdateBlogPost([FromBody] BlogPost_Upadte_Model blogPostCreateModel)
         {
-            if (id != blogPostCreateModel.PostId)
+            // Kiểm tra nếu PostId không hợp lệ
+            if (blogPostCreateModel == null || blogPostCreateModel.PostId == 0)
             {
-                return BadRequest("ID mismatch.");
+                return BadRequest("Invalid blog post data.");
             }
 
-            var existingPost = await _blogPostService.GetBlogPostByIdAsync(id);
+            // Tìm bài viết hiện tại
+            var existingPost = await _blogPostService.GetBlogPostByIdAsync(blogPostCreateModel.PostId);
+
             if (existingPost == null)
             {
-                return NotFound();
+                // Trả về thông báo nếu bài viết không tồn tại
+                return NotFound(new { message = "Blog post not found." });
             }
 
-            await _blogPostService.UpdateBlogPostAsync(blogPostCreateModel);
+            // Chỉ cập nhật title và image
+            await _blogPostService.UpdateBlogPostTitleAndImagesAsync(blogPostCreateModel);
 
-            return NoContent();
+            // Trả về thông báo thành công
+            return Ok(new { message = "Blog post updated successfully with title and image." });
         }
-     
+
+
+
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteBlogPost(int id)
         {
@@ -152,14 +160,21 @@ namespace BE_GOStudy.Controllers.BlogPost
         }
 
 
-        [HttpGet("yourblog/{userId}")]
-        public async Task<IActionResult> GetUserBlogPosts(int userId)
+        [HttpGet("UserPosts")]
+        public async Task<IActionResult> GetUserBlogPosts(int userId, int pageNumber = 1)
         {
-            var userPosts = await _blogPostService.GetUserBlogPosts(userId);
-            return Ok(userPosts);
+            // Lấy danh sách bài viết của user kèm phân trang
+            var blogPosts = await _blogPostService.GetUserBlogPosts(userId, pageNumber);
+
+            if (blogPosts == null || !blogPosts.Any())
+            {
+                return NotFound(new { message = "No blog posts found for the user." });
+            }
+
+            return Ok(blogPosts);
         }
 
-       
+
 
     }
 }

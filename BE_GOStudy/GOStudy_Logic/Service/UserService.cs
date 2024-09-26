@@ -185,6 +185,9 @@ namespace GO_Study_Logic.Service
                     PrivacySettingId = 1,
                     Role = 1,
                     SemesterId = 1,
+                    phone ="NoPhone",
+                    sex ="Nosex",
+                    birthday =  DateTime.Today,
                 };
 
                 // Save the new AppUser to the database

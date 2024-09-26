@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DataAccess.Model;
+using GO_Study_Logic.ViewModel.User;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace GO_Study_Logic.ViewModel
@@ -19,7 +21,56 @@ namespace GO_Study_Logic.ViewModel
         public bool IsFavorite { get; set; }
         public bool IsTrending { get; set; }
     }
+    public class BlogPost_View_Model_All
+    {
+        public int PostId { get; set; }
+        public int UserId { get; set; }
+        //    public DataAccess.Model.User User { get; set; }
+        public string Title { get; set; }
+        public string Content { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public int ViewCount { get; set; }
+        public bool IsDraft { get; set; }
+        public int shareCount { get; set; }
+        public int likeCount { get; set; }
+   
+        public bool IsFavorite { get; set; }
+        public bool IsTrending { get; set; }
 
+        public UserViewBlogModel UserViewModel { get; set; }
+        public ICollection<BlogImgViewModel> BlogImgs { get; set; }
+    }
+    public class BlogPostViewdetailModel
+    {
+        public int PostId { get; set; }
+        public string Title { get; set; }
+        public string Content { get; set; }
+        public DateTime CreatedAt { get; set; }
+
+        public UserViewModel User { get; set; }
+        public ICollection<BlogImgViewModel> BlogImgs { get; set; }
+        public ICollection<CommentViewModel> Comments { get; set; }
+    }
+    public class CommentViewModel
+    {
+        public int CommentId { get; set; }
+        public string Content { get; set; }
+        public DateTime CreatedAt { get; set; }
+
+        public UserViewModel User { get; set; }  // Thông tin user của comment
+    }
+    public class UserViewBlogModel
+    {
+        public string FullName { get; set; }
+        public string Email { get; set; }
+
+        public string ProfileImage { get; set; }
+    }
+    public class BlogImgViewModel
+    {
+        public int BlogImgId { get; set; }
+        public string Img { get; set; }
+    }
     public class BlogPost_Create_Model
     {
         public int PostId { get; set; }
@@ -53,6 +104,19 @@ namespace GO_Study_Logic.ViewModel
         public string Content { get; set; }  
 
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
+    }
+    public class BlogPost_Upadte_Model
+    {
+
+        public int PostId { get; set; }
+        public string Title { get; set; }
+        public string Content { get; set; }
+
+        public int userId { get; set; }
+
+        public List<string> Images { get; set; }
+
+
     }
     public class BlogPost_Create_Model1
     {
