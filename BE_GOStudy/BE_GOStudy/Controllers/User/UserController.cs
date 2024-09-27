@@ -31,7 +31,7 @@ namespace BE_GO_Study.Controllers.User
             return Ok(userHomeData);
         }
         [HttpPost("SaveAttendance")]
-        public async Task<IActionResult> SaveAttendance([FromBody] AttendanceRequestModel attendanceRequest)
+        public async Task<IActionResult> SaveAttendance([FromQuery] AttendanceRequestModel attendanceRequest)
         {
             if (attendanceRequest == null || attendanceRequest.UserId <= 0)
             {
@@ -39,7 +39,7 @@ namespace BE_GO_Study.Controllers.User
             }
 
             // Lưu attendance (thêm mới hoặc cập nhật)
-            await _attendanceService.SaveAttendanceAsync(attendanceRequest.UserId, attendanceRequest.IsPresent, attendanceRequest.Notes);
+            await _attendanceService.SaveAttendanceAsync(attendanceRequest.UserId);
 
             return Ok("Attendance saved successfully.");
         }

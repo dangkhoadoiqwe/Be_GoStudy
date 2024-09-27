@@ -75,9 +75,9 @@ namespace BE_GOStudy.Controllers.Room
                 return BadRequest("Task is null.");
             }
 
-            if (string.IsNullOrEmpty(taskViewModel.Status) || taskViewModel.Status == "string")
+            if (taskViewModel.Status == false)
             {
-                taskViewModel.Status = "Not Complete";
+                taskViewModel.Status = false;
             }
 
             // Lưu task vào cơ sở dữ liệu SQL
@@ -226,6 +226,7 @@ namespace BE_GOStudy.Controllers.Room
 
             return Ok(tasks);
         }
+        
         [HttpPut("UpdateTask")]
         public async Task<IActionResult> UpdateTask([FromBody] TaskViewModel taskViewModel)
         {

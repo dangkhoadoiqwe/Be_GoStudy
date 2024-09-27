@@ -23,6 +23,8 @@ namespace GO_Study_Logic.Service
         Task<IEnumerable<TaskViewModel>> GetTasksByUserIdForNextMonthAsync(int userId);
         Task<IEnumerable<TaskViewModel>> GetTasksByUserIdForPreviousMonthAsync(int userId);
         Task<IEnumerable<TaskViewModel>> GetTasksByUserIdForTodayAsync(int userId);
+
+       // Task<bool> UpdateStatusTaskCompleteAsync(int id);
       //  Task<bool> DeletTask(int taskid);
       Task<bool> UpdateTaskDelete(int  taskid);
 
@@ -98,11 +100,22 @@ namespace GO_Study_Logic.Service
         {
             
             var taskEntity = _mapper.Map<Tasks>(taskViewModel);
-
+            taskEntity.Status = false;
+            taskEntity.IsDeleted = false;
             // Save the task entity
             await _taskRepository.SaveTaskAsync(taskEntity);
         }
-
+        public async Task<bool> UpdateStatusTaskCompleteAsync(int id)
+        {
+            var task = await _taskRepository.GetTaskByTaskId(id);
+            if (task == null)
+            {
+                throw new Exception("Task not found");
+            }
+            task.Status = true;
+            await _taskRepository.UpdateTask(task);
+            return true;
+        }
         public async Task<bool> UpdateTask(TaskViewModel taskViewModel)
         {
             try
@@ -144,7 +157,7 @@ namespace GO_Study_Logic.Service
                 }
 
                 // Cập nhật IsDeleted thành true (1)
-                task.Status = "Completed";
+                task.Status = true;
 
                 // Gọi phương thức cập nhật task trong repository để lưu thay đổi
                 await _taskRepository.UpdateTask(task);

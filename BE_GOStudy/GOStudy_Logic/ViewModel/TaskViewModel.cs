@@ -14,9 +14,12 @@ namespace GO_Study_Logic.ViewModel
         public int TimeComplete { get; set; }
         public string Description { get; set; }
         public DateTime ScheduledTime { get; set; }
-        public string Status { get; set; } 
 
-        public bool IsDeleted { get; set; }
+        public DateTime ScheduledEndTime { get; set; }
+        public bool Status { get; set; } 
+
+       
+        public bool IsDeleted { get; set; } 
     }
 
 }

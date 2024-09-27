@@ -9,7 +9,7 @@ namespace GOStudy_Logic.ViewModel
     public class AttendanceRequestModel
     {
         public int UserId { get; set; }
-        public bool IsPresent { get; set; }
-        public string Notes { get; set; }
+   //     public bool IsPresent { get; set; }
+   //     public string Notes { get; set; }
     }
 }

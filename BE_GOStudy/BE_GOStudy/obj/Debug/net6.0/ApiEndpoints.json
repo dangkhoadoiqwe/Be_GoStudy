@@ -866,9 +866,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "attendanceRequest",
-        "Type": "GOStudy_Logic.ViewModel.AttendanceRequestModel",
-        "IsRequired": true
+        "Name": "UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

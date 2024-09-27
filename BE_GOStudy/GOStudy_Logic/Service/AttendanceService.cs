@@ -9,7 +9,7 @@ namespace GO_Study_Logic.Service
     {
         Task AddAttendanceAsync(int userId, bool isPresent, string notes); // Thêm điểm danh
         Task<IEnumerable<Attendance>> GetAttendanceByUserIdAsync(int userId); // Lấy danh sách điểm danh của user
-        Task SaveAttendanceAsync(int userId, bool isPresent, string notes); // Lưu attendance (thêm mới hoặc cập nhật)
+        Task SaveAttendanceAsync(int userId); // Lưu attendance (thêm mới hoặc cập nhật)
     }
 
     public class AttendanceService : IAttendanceService
@@ -42,14 +42,15 @@ namespace GO_Study_Logic.Service
         }
 
         // Lưu (thêm mới hoặc cập nhật) attendance
-        public async Task SaveAttendanceAsync(int userId, bool isPresent, string notes)
+        public async Task SaveAttendanceAsync(int userId)
         {
             var attendance = new Attendance
             {
                 UserId = userId,
                 Date = DateTime.UtcNow, // Lưu theo ngày hiện tại
-                IsPresent = isPresent,
-                Notes = notes
+                IsPresent = true,
+                Notes = "Attendance",
+                
             };
 
             await _attendanceRepository.SaveAttendanceAsync(attendance);
