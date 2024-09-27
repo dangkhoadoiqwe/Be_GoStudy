@@ -15,7 +15,7 @@ namespace GO_Study_Logic.Service
 {
     public interface IJwtService
     {
-        TokenModel GenerateJwtToken(User user,string accesstokengoogle);
+        TokenModel GenerateJwtToken(User user);
         string GenerateJwtToke(AppUser user);
     }
 
@@ -40,7 +40,7 @@ namespace GO_Study_Logic.Service
             }
         }
 
-        private RefreshToken CreateRefreshToken(string jwtId, int userId, string accessTokenGoogle)
+        private RefreshToken CreateRefreshToken(string jwtId, int userId)
         {
             var refreshToken = new RefreshToken
             {
@@ -52,7 +52,7 @@ namespace GO_Study_Logic.Service
                 IsRevoked = false,
                 IsUsed = false,
                 UserId = userId,
-                AccessTokenGoogle = accessTokenGoogle  // Lưu Access Token từ Google
+             //   AccessTokenGoogle = accessTokenGoogle  // Lưu Access Token từ Google
             };
 
             _refreshTokenRepository.Create(refreshToken);
@@ -119,7 +119,7 @@ namespace GO_Study_Logic.Service
             return handler.WriteToken(token);
         }
        
-        public TokenModel GenerateJwtToken(User user, string accesstokengoogle)
+        public TokenModel GenerateJwtToken(User user)
         {
             if (user == null)
             {
@@ -156,13 +156,13 @@ namespace GO_Study_Logic.Service
             var accessToken = handler.WriteToken(token);
 
             // Lưu Google Access Token cùng với refresh token
-            var refreshToken = CreateRefreshToken(token.Id, user.UserId, accesstokengoogle);
+            var refreshToken = CreateRefreshToken(token.Id, user.UserId);
 
             return new TokenModel
             {
                 AccessToken = accessToken,
                 RefreshToken = refreshToken.Token,
-                AccessTokenGoogle = accesstokengoogle, // Trả lại Google Access Token trong model nếu cần sử dụng sau
+                 // Trả lại Google Access Token trong model nếu cần sử dụng sau
             };
         }
 

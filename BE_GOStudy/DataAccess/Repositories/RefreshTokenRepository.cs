@@ -14,7 +14,7 @@ namespace DataAccess.Repositories
 {
     public partial interface IRefreshTokenRepository : IBaseRepository<RefreshToken>
     {
-        Task<string?> GetGoogleAccessTokenByUserIdAsync(int userId);
+        //Task<string?> GetGoogleAccessTokenByUserIdAsync(int userId);
         Task<string?> RefreshAccessTokenAsync(string refreshToken);
         Task<string?> GetRefreshTokenByUserIdAsync(int userId); // Thêm phương thức này
     }
@@ -54,23 +54,23 @@ namespace DataAccess.Repositories
             return null; // Hoặc xử lý lỗi
         }
 
-        public async Task<string?> GetGoogleAccessTokenByUserIdAsync(int userId)
-        {
-            // Lấy refresh token mới nhất của người dùng
-            var refreshToken = await _dbContext.Set<RefreshToken>()
-                .Where(rt => rt.UserId == userId && !rt.IsRevoked && !rt.IsUsed)
-                .OrderByDescending(rt => rt.IssuedAt)  // Sắp xếp theo thời gian phát hành để lấy token mới nhất
-                .FirstOrDefaultAsync();
+        //public async Task<string?> GetGoogleAccessTokenByUserIdAsync(int userId)
+        //{
+        //    // Lấy refresh token mới nhất của người dùng
+        //    var refreshToken = await _dbContext.Set<RefreshToken>()
+        //        .Where(rt => rt.UserId == userId && !rt.IsRevoked && !rt.IsUsed)
+        //        .OrderByDescending(rt => rt.IssuedAt)  // Sắp xếp theo thời gian phát hành để lấy token mới nhất
+        //        .FirstOrDefaultAsync();
 
-            // Kiểm tra xem token có tồn tại và có hợp lệ không
-            if (refreshToken == null || refreshToken.ExpriedAt < DateTime.UtcNow)
-            {
-                return null;  // Token không tồn tại hoặc đã hết hạn
-            }
+        //    // Kiểm tra xem token có tồn tại và có hợp lệ không
+        //    if (refreshToken == null || refreshToken.ExpriedAt < DateTime.UtcNow)
+        //    {
+        //        return null;  // Token không tồn tại hoặc đã hết hạn
+        //    }
 
-            // Trả về Google Access Token
-            return refreshToken.AccessTokenGoogle;
-        }
+        //    // Trả về Google Access Token
+        //    return refreshToken.AccessTokenGoogle;
+        //}
 
         public async Task<string?> GetRefreshTokenByUserIdAsync(int userId)
         {

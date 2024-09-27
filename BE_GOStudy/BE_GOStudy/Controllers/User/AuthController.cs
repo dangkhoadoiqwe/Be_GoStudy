@@ -48,7 +48,7 @@ public class AuthController : ControllerBase
                 var appUser = _userService.ConvertToAppUser(user);
 
                 // Generate JWT token using AppUser
-                var jwtToken = _jwtService.GenerateJwtToken(user, request.IdToken);
+                var jwtToken = _jwtService.GenerateJwtToken(user);
 
                 // Return the token
                 return Ok(new { Token = jwtToken });
