@@ -76,14 +76,16 @@ namespace BE_GOStudy.Controllers.BlogPost
         [HttpGet("trending")]
         public async Task<IActionResult> GetAllBlogPosts([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
-            var blogPosts = await _blogPostService.GetPaginatedBlogPostsAsync(pageNumber, pageSize);
-            if (blogPosts == null || !blogPosts.Any())
+            var paginatedResult = await _blogPostService.GetPaginatedBlogPostsAsync(pageNumber, pageSize);
+
+            if (paginatedResult == null || !paginatedResult.Data.Any())
             {
                 return NotFound("No blog posts found.");
             }
 
-            return Ok(blogPosts);
+            return Ok(paginatedResult);
         }
+
         [HttpGet("Detail")]
         public async Task<ActionResult<BlogPostViewdetailModel>> GetBlogPostById(int id)
         {

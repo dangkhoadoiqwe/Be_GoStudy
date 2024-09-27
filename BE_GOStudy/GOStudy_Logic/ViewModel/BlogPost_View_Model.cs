@@ -21,6 +21,15 @@ namespace GO_Study_Logic.ViewModel
         public bool IsFavorite { get; set; }
         public bool IsTrending { get; set; }
     }
+    public class PaginatedResult<T>
+    {
+        public int CurrentPage { get; set; }
+        public int PageSize { get; set; }
+        public int TotalCount { get; set; }
+        public int TotalPages => (int)Math.Ceiling((double)TotalCount / PageSize);
+        public IEnumerable<T> Data { get; set; }
+    }
+
     public class BlogPost_View_Model_All
     {
         public int PostId { get; set; }

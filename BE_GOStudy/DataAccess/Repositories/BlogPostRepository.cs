@@ -26,6 +26,8 @@ namespace DataAccess.Repositories
         Task AddUserLikeAsync(UserLike userLike);
 
         Task<int> CountUserCommentsTodayAsync(int userId, int blogPostId);
+
+        Task<int> CountTotalBlogs();
     }
 
     public class BlogPostRepository : IBlogPostRepository
@@ -191,6 +193,11 @@ namespace DataAccess.Repositories
                             c.PostId == blogPostId &&
                             c.CreatedAt.Date == today)
                 .CountAsync();
+        }
+
+        public async Task<int> CountTotalBlogs()
+        {
+            return await _context.BlogPosts.CountAsync();
         }
     }
 }

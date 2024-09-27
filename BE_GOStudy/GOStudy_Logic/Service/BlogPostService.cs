@@ -26,7 +26,7 @@ namespace GO_Study_Logic.Service
         Task<bool> AddCommentAsync(Comment comment);
        
         Task UpdateBlogPostTitleAndImagesAsync(BlogPost_Upadte_Model blogPostCreateModel);
-            Task<IEnumerable<BlogPost_View_Model_All>> GetPaginatedBlogPostsAsync(int pageNumber, int pageSize);
+            Task<PaginatedResult<BlogPost_View_Model_All>> GetPaginatedBlogPostsAsync(int pageNumber, int pageSize);
     }
 }
 
@@ -50,11 +50,19 @@ namespace GO_Study_Logic.Service
         }
 
 
-    public async Task<IEnumerable<BlogPost_View_Model_All>> GetPaginatedBlogPostsAsync(int pageNumber, int pageSize)
+    public async Task<PaginatedResult<BlogPost_View_Model_All>> GetPaginatedBlogPostsAsync(int pageNumber, int pageSize)
     {
         var blogPosts = await _repository.GetPaginatedBlogPostsAsync(pageNumber, pageSize);
        
-        return _mapper.Map<IEnumerable<BlogPost_View_Model_All>>(blogPosts);
+        var blogPostsViewModels = _mapper.Map<IEnumerable<BlogPost_View_Model_All>>(blogPosts);
+        var totalBlogPostsCount = await _repository.CountTotalBlogs();
+        return new PaginatedResult<BlogPost_View_Model_All>
+        {
+            CurrentPage = pageNumber,
+            PageSize = pageSize,
+            TotalCount = totalBlogPostsCount,
+            Data = blogPostsViewModels
+        };
     }
 
 
