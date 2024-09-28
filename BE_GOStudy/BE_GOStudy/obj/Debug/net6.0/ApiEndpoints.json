@@ -191,6 +191,11 @@
         "Name": "pageNumber",
         "Type": "System.Int32",
         "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -491,77 +496,6 @@
         "Name": "dto",
         "Type": "GO_Study_Logic.ViewModel.UpdateStatusDto",
         "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "BE_GOStudy.Controllers.PaymentController",
-    "Method": "VnPayReturn",
-    "RelativePath": "api/Payment/vnpay-return",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "vnp_Amount",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "vnp_BankCode",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "vnp_BankTranNo",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "vnp_CardType",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "vnp_OrderInfo",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "vnp_PayDate",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "vnp_ResponseCode",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "vnp_TmnCode",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "vnp_TransactionNo",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "vnp_TransactionStatus",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "vnp_TxnRef",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "vnp_SecureHash",
-        "Type": "System.String",
-        "IsRequired": false
       }
     ],
     "ReturnTypes": []

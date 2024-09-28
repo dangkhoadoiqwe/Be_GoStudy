@@ -17,6 +17,8 @@ namespace GO_Study_Logic.ViewModel
         public string Name { get; set; }
         public string Nickname { get; set; }
 
+        public string LinkUrl { get; set; }
+
         public DateTime CreatedAt { get; set; }
     }
     public class ClassroomNameModel

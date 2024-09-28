@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 using DataAccess.Model;
 using GO_Study_Logic.Service;
 using GO_Study_Logic.ViewModel;
+using GOStudy_Logic.Service.Responses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,48 +20,69 @@ namespace BE_GOStudy.Controllers.BlogPost
 
         public BlogPostController(IBlogPostService blogPostService, IUserService userService)
         {
-            _blogPostService = blogPostService;
-            _userService = userService;
+            _blogPostService = blogPostService ?? throw new ArgumentNullException(nameof(blogPostService));
+            _userService = userService ?? throw new ArgumentNullException(nameof(userService));
         }
 
         [HttpPost("like/{blogId}")]
         public async Task<IActionResult> LikePost(int blogId, int userId)
         {
-            // Attempt to update the like count for the blog post
             var result = await _blogPostService.UpdateLikeCountAsync(userId, blogId);
 
             if (result == null)
             {
-                return NotFound("Blog post not found.");
+                return NotFound(new BaseResponse
+                {
+                    StatusCode = StatusCodes.Status404NotFound,
+                    Message = "Blog post not found.",
+                    IsSuccess = false
+                });
             }
-            else if (!result)
+
+            if (!result)
             {
-                return BadRequest("You have already liked this blog.");
+                return BadRequest(new BaseResponse
+                {
+                    StatusCode = StatusCodes.Status400BadRequest,
+                    Message = "You have already liked this blog.",
+                    IsSuccess = false
+                });
             }
-            else
+
+            return Ok(new BaseResponse
             {
-                return Ok("Blog post liked successfully.");
-            }
+                StatusCode = StatusCodes.Status200OK,
+                Message = "Blog post liked successfully.",
+                IsSuccess = true
+            });
         }
 
-
-         
         [HttpPost("postvip")]
-        public async Task<IActionResult> PostVip([FromBody] BlogPost_Create_Model2 blogPostCreateModel,int userId)
+        public async Task<IActionResult> PostVip([FromBody] BlogPost_Create_Model2 blogPostCreateModel, int userId)
         {
-     
             try
             {
-                // Call the service method to add the blog post
                 await _blogPostService.AddBlogPostVIPAsync(blogPostCreateModel, userId);
-                return Ok(new { Message = "Blog post created successfully!" });
+                return Ok(new BaseResponse
+                {
+                    StatusCode = StatusCodes.Status200OK,
+                    Message = "Blog post created successfully!",
+                    IsSuccess = true
+                });
             }
             catch (Exception ex)
             {
-                // Log the error and return a bad request response
-                return BadRequest(new { Message = "An error occurred while creating the blog post.", Details = ex.Message });
+                // Log the error (consider logging to a file or external service)
+                return BadRequest(new BaseResponse
+                {
+                    StatusCode = StatusCodes.Status400BadRequest,
+                    Message = "An error occurred while creating the blog post.",
+                   // Details = ex.Message,
+                    IsSuccess = false
+                });
             }
         }
+
         [HttpPost(Name = "CreateBlogPost")]
         public async Task<IActionResult> CreateBlogPost([FromBody] BlogPost_Create_Model1 blogPostCreateModel, [FromQuery] int userid)
         {
@@ -70,20 +92,70 @@ namespace BE_GOStudy.Controllers.BlogPost
             }
 
             await _blogPostService.AddBlogPostAsync(blogPostCreateModel, userid);
+            return Ok(new BaseResponse
+            {
+                StatusCode = StatusCodes.Status200OK,
+                Message = "Blog post created successfully.",
+                IsSuccess = true
+            });
+        }
+        [HttpGet("UserPosts")]
+        public async Task<IActionResult> GetUserBlogPosts(int userId,[FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        {
+            var blogPosts = await _blogPostService.GetUserBlogPosts(userId, pageNumber, pageSize);
 
-            return Ok(new { message = "Blog post created successfully." });
+            if (blogPosts == null)
+            {
+                return NotFound(new BaseResponse
+                {
+                    StatusCode = StatusCodes.Status404NotFound,
+                    Message = "No blog posts found for the user.",
+                    IsSuccess = false
+                });
+            }
+
+            return Ok(new BaseResponse
+            {
+                StatusCode = StatusCodes.Status200OK,
+                Message = "User blog posts retrieved successfully.",
+                Data = blogPosts,
+                IsSuccess = true
+            });
         }
         [HttpGet("trending")]
         public async Task<IActionResult> GetAllBlogPosts([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
-            var paginatedResult = await _blogPostService.GetPaginatedBlogPostsAsync(pageNumber, pageSize);
-
-            if (paginatedResult == null || !paginatedResult.Data.Any())
+            try
             {
-                return NotFound("No blog posts found.");
-            }
+                var paginatedResult = await _blogPostService.GetPaginatedBlogPostsAsync(pageNumber, pageSize);
 
-            return Ok(paginatedResult);
+                if (paginatedResult == null || !paginatedResult.Data.Any())
+                {
+                    return NotFound(new BaseResponse
+                    {
+                        StatusCode = StatusCodes.Status404NotFound,
+                        Message = "No blog posts found.",
+                        IsSuccess = false
+                    });
+                }
+
+                return Ok(new BaseResponse
+                {
+                    StatusCode = StatusCodes.Status200OK,
+                    Message = "Get All Blogs Success",
+                    Data = paginatedResult,
+                    IsSuccess = true
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new BaseResponse
+                {
+                    StatusCode = StatusCodes.Status400BadRequest,
+                    Message = ex.Message,
+                    IsSuccess = false
+                });
+            }
         }
 
         [HttpGet("Detail")]
@@ -92,37 +164,55 @@ namespace BE_GOStudy.Controllers.BlogPost
             var blogPost = await _blogPostService.GetBlogPostByIdAsync(id);
             if (blogPost == null)
             {
-                return NotFound();
+                return NotFound(new BaseResponse
+                {
+                    StatusCode = StatusCodes.Status404NotFound,
+                    Message = "Blog post not found.",
+                    IsSuccess = false
+                });
             }
-            return Ok(blogPost);
+
+            return Ok(new BaseResponse
+            {
+                StatusCode = StatusCodes.Status200OK,
+                Message = "Blog post retrieved successfully.",
+                Data = blogPost,
+                IsSuccess = true
+            });
         }
 
         [HttpPut("UpdateBlog")]
         public async Task<ActionResult> UpdateBlogPost([FromBody] BlogPost_Upadte_Model blogPostCreateModel)
         {
-            // Kiểm tra nếu PostId không hợp lệ
             if (blogPostCreateModel == null || blogPostCreateModel.PostId == 0)
             {
-                return BadRequest("Invalid blog post data.");
+                return BadRequest(new BaseResponse
+                {
+                    StatusCode = StatusCodes.Status400BadRequest,
+                    Message = "Invalid blog post data.",
+                    IsSuccess = false
+                });
             }
 
-            // Tìm bài viết hiện tại
             var existingPost = await _blogPostService.GetBlogPostByIdAsync(blogPostCreateModel.PostId);
-
             if (existingPost == null)
             {
-                // Trả về thông báo nếu bài viết không tồn tại
-                return NotFound(new { message = "Blog post not found." });
+                return NotFound(new BaseResponse
+                {
+                    StatusCode = StatusCodes.Status404NotFound,
+                    Message = "Blog post not found.",
+                    IsSuccess = false
+                });
             }
 
-            // Chỉ cập nhật title và image
             await _blogPostService.UpdateBlogPostTitleAndImagesAsync(blogPostCreateModel);
-
-            // Trả về thông báo thành công
-            return Ok(new { message = "Blog post updated successfully with title and image." });
+            return Ok(new BaseResponse
+            {
+                StatusCode = StatusCodes.Status200OK,
+                Message = "Blog post updated successfully with title and image.",
+                IsSuccess = true
+            });
         }
-
-
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteBlogPost(int id)
@@ -130,7 +220,12 @@ namespace BE_GOStudy.Controllers.BlogPost
             var blogPost = await _blogPostService.GetBlogPostByIdAsync(id);
             if (blogPost == null)
             {
-                return NotFound();
+                return NotFound(new BaseResponse
+                {
+                    StatusCode = StatusCodes.Status404NotFound,
+                    Message = "Blog post not found.",
+                    IsSuccess = false
+                });
             }
 
             await _blogPostService.DeleteBlogPostAsync(id);
@@ -140,8 +235,6 @@ namespace BE_GOStudy.Controllers.BlogPost
         [HttpPost("comments")]
         public async Task<IActionResult> AddComment([FromBody] CommentModel commentViewModel)
         {
-           
-
             var comment = new Comment
             {
                 PostId = commentViewModel.PostId,
@@ -150,33 +243,26 @@ namespace BE_GOStudy.Controllers.BlogPost
                 CreatedAt = commentViewModel.CreatedAt ?? DateTime.UtcNow
             };
 
-
             var result = await _blogPostService.AddCommentAsync(comment);
 
             if (!result)
             {
-                return BadRequest("You have reached the comment limit for today (3 comments per post).");
+                return BadRequest(new BaseResponse
+                {
+                    StatusCode = StatusCodes.Status400BadRequest,
+                    Message = "You have reached the comment limit for today (3 comments per post).",
+                    IsSuccess = false
+                });
             }
 
-            return Ok("Comment added successfully.");
-        }
-
-
-        [HttpGet("UserPosts")]
-        public async Task<IActionResult> GetUserBlogPosts(int userId, int pageNumber = 1)
-        {
-            // Lấy danh sách bài viết của user kèm phân trang
-            var blogPosts = await _blogPostService.GetUserBlogPosts(userId, pageNumber);
-
-            if (blogPosts == null || !blogPosts.Any())
+            return Ok(new BaseResponse
             {
-                return NotFound(new { message = "No blog posts found for the user." });
-            }
-
-            return Ok(blogPosts);
+                StatusCode = StatusCodes.Status200OK,
+                Message = "Comment added successfully.",
+                IsSuccess = true
+            });
         }
 
-
-
+         
     }
 }

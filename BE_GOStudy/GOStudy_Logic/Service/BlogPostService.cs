@@ -18,7 +18,7 @@ namespace GO_Study_Logic.Service
         Task UpdateBlogPostAsync(BlogPost_Create_Model blogPostCreateModel);
         Task<bool> DeleteBlogPostAsync(int postId);
         Task<List<BlogPost>> GetTrendingBlogPosts();
-        Task<List<BlogPost>> GetUserBlogPosts(int userId, int pageNumber);
+        Task<PaginatedResult<BlogPost_View_Model_All>> GetUserBlogPosts(int userId, int pageNumber, int pageSize);
         Task<List<BlogPost>> GetFavoriteBlogPosts(int userId);
         Task<bool> UpdateFavoriteBlogPost(int blogPostId, bool favorite);
         Task AddBlogPostVIPAsync(BlogPost_Create_Model2 blogPostCreateModel, int userId);
@@ -49,7 +49,19 @@ namespace GO_Study_Logic.Service
             return _mapper.Map<IEnumerable<BlogPost_View_Model_All>>(blogPosts);
         }
 
-
+    public async Task<PaginatedResult<BlogPost_View_Model_All>> GetUserBlogPosts(int userId, int pageNumber, int pageSize)
+    {
+        var blogPosts =  await _repository.GetUserBlogPosts(userId, pageNumber, pageSize);
+        var blogPostsViewModels = _mapper.Map<IEnumerable<BlogPost_View_Model_All>>(blogPosts);
+        var totalBlogPostsCount = await _repository.CountUserLikedPostsAsync(userId, pageNumber);
+        return new PaginatedResult<BlogPost_View_Model_All>
+        {
+            CurrentPage = pageNumber,
+            PageSize = pageSize,
+            TotalCount = totalBlogPostsCount,
+            Data = blogPostsViewModels
+        };
+    }
     public async Task<PaginatedResult<BlogPost_View_Model_All>> GetPaginatedBlogPostsAsync(int pageNumber, int pageSize)
     {
         var blogPosts = await _repository.GetPaginatedBlogPostsAsync(pageNumber, pageSize);
@@ -222,10 +234,7 @@ namespace GO_Study_Logic.Service
             return true;
         }
 
-        public async Task<List<BlogPost>> GetUserBlogPosts(int userId, int pageNumber)
-        {
-            return await _repository.GetUserBlogPosts(userId, pageNumber);
-        }
+        
 
     public async Task<bool> UpdateLikeCountAsync(int userId, int blogId)
     {

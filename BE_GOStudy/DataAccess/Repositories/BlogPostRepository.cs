@@ -15,7 +15,7 @@ namespace DataAccess.Repositories
         Task UpdateBlogPostAsync(BlogPost blogPost);
         Task DeleteBlogPostAsync(BlogPost blogPost);
         Task<List<BlogPost>> GetTrendingBlogPosts();
-        Task<List<BlogPost>> GetUserBlogPosts(int userId, int pageNumber);
+        Task<List<BlogPost>> GetUserBlogPosts(int userId, int pageNumber, int pageSize);
         Task<List<BlogPost>> GetFavoriteBlogPosts(int userId);
         Task AddBlogImgAsync(BlogImg blogImg);
         Task AddCommentAsync(Comment comment);
@@ -28,6 +28,8 @@ namespace DataAccess.Repositories
         Task<int> CountUserCommentsTodayAsync(int userId, int blogPostId);
 
         Task<int> CountTotalBlogs();
+
+        Task<int> CountUserLikedPostsAsync(int userId, int blogPostId);
     }
 
     public class BlogPostRepository : IBlogPostRepository
@@ -155,9 +157,9 @@ namespace DataAccess.Repositories
                 .ToListAsync();
         }
 
-        public async Task<List<BlogPost>> GetUserBlogPosts(int userId, int pageNumber)
+        public async Task<List<BlogPost>> GetUserBlogPosts(int userId, int pageNumber, int pageSize)
         {
-            int pageSize = 10; // 10 items per page
+           // int pageSize = 10; // 10 items per page
 
             return await _context.BlogPosts
                 .Where(p => p.UserId == userId)
@@ -198,6 +200,11 @@ namespace DataAccess.Repositories
         public async Task<int> CountTotalBlogs()
         {
             return await _context.BlogPosts.CountAsync();
+        }
+        
+        public async Task<int> CountUserLikedPostsAsync(int userId, int blogPostId)
+        {
+            return await _context.BlogPosts.Where(c => c.UserId == userId && c.PostId == blogPostId).CountAsync();
         }
     }
 }

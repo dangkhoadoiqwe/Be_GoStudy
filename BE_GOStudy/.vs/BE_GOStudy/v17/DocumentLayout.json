@@ -3,10 +3,6 @@
   "WorkspaceRootPath": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{00897EB2-4210-490B-B37E-9EB1FCC7971A}|BE_GOStudy\\BE_GOStudy.csproj|c:\\users\\admin\\onedrive\\documents\\github\\dream\\duan\\be_gostudy\\be_gostudy\\be_gostudy\\controllers\\blogpost\\blogpostcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{00897EB2-4210-490B-B37E-9EB1FCC7971A}|BE_GOStudy\\BE_GOStudy.csproj|solutionrelative:be_gostudy\\controllers\\blogpost\\blogpostcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{9561139D-3E3E-4E13-8245-8A1E3666C882}|GOStudy_Logic\\GOStudy_Logic.csproj|c:\\users\\admin\\onedrive\\documents\\github\\dream\\duan\\be_gostudy\\be_gostudy\\gostudy_logic\\service\\blogpostservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9561139D-3E3E-4E13-8245-8A1E3666C882}|GOStudy_Logic\\GOStudy_Logic.csproj|solutionrelative:gostudy_logic\\service\\blogpostservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -15,20 +11,8 @@
       "RelativeMoniker": "D:0:0:{0B164705-DED2-4D26-9075-E844DCD4CC2E}|DataAccess\\DataAccess.csproj|solutionrelative:dataaccess\\repositories\\blogpostrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9561139D-3E3E-4E13-8245-8A1E3666C882}|GOStudy_Logic\\GOStudy_Logic.csproj|c:\\users\\admin\\onedrive\\documents\\github\\dream\\duan\\be_gostudy\\be_gostudy\\gostudy_logic\\viewmodel\\blogpost_view_model.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9561139D-3E3E-4E13-8245-8A1E3666C882}|GOStudy_Logic\\GOStudy_Logic.csproj|solutionrelative:gostudy_logic\\viewmodel\\blogpost_view_model.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9561139D-3E3E-4E13-8245-8A1E3666C882}|GOStudy_Logic\\GOStudy_Logic.csproj|c:\\users\\admin\\onedrive\\documents\\github\\dream\\duan\\be_gostudy\\be_gostudy\\gostudy_logic\\service\\sentmail\\taskreminderjob.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9561139D-3E3E-4E13-8245-8A1E3666C882}|GOStudy_Logic\\GOStudy_Logic.csproj|solutionrelative:gostudy_logic\\service\\sentmail\\taskreminderjob.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9561139D-3E3E-4E13-8245-8A1E3666C882}|GOStudy_Logic\\GOStudy_Logic.csproj|c:\\users\\admin\\onedrive\\documents\\github\\dream\\duan\\be_gostudy\\be_gostudy\\gostudy_logic\\service\\taskservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9561139D-3E3E-4E13-8245-8A1E3666C882}|GOStudy_Logic\\GOStudy_Logic.csproj|solutionrelative:gostudy_logic\\service\\taskservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{00897EB2-4210-490B-B37E-9EB1FCC7971A}|BE_GOStudy\\BE_GOStudy.csproj|c:\\users\\admin\\onedrive\\documents\\github\\dream\\duan\\be_gostudy\\be_gostudy\\be_gostudy\\controllers\\room\\taskcontrollner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{00897EB2-4210-490B-B37E-9EB1FCC7971A}|BE_GOStudy\\BE_GOStudy.csproj|solutionrelative:be_gostudy\\controllers\\room\\taskcontrollner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{00897EB2-4210-490B-B37E-9EB1FCC7971A}|BE_GOStudy\\BE_GOStudy.csproj|c:\\users\\admin\\onedrive\\documents\\github\\dream\\duan\\be_gostudy\\be_gostudy\\be_gostudy\\controllers\\blogpost\\blogpostcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{00897EB2-4210-490B-B37E-9EB1FCC7971A}|BE_GOStudy\\BE_GOStudy.csproj|solutionrelative:be_gostudy\\controllers\\blogpost\\blogpostcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 165,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -54,93 +38,42 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "BlogPost_View_Model.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\GOStudy_Logic\\ViewModel\\BlogPost_View_Model.cs",
-              "RelativeDocumentMoniker": "GOStudy_Logic\\ViewModel\\BlogPost_View_Model.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\GOStudy_Logic\\ViewModel\\BlogPost_View_Model.cs",
-              "RelativeToolTip": "GOStudy_Logic\\ViewModel\\BlogPost_View_Model.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAA4wBoAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-27T13:38:09.324Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "BlogPostService.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\GOStudy_Logic\\Service\\BlogPostService.cs",
-              "RelativeDocumentMoniker": "GOStudy_Logic\\Service\\BlogPostService.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\GOStudy_Logic\\Service\\BlogPostService.cs",
-              "RelativeToolTip": "GOStudy_Logic\\Service\\BlogPostService.cs",
-              "ViewState": "AgIAACoAAAAAAAAAAAAmwDQAAABHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-27T13:37:48.612Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "BlogPostRepository.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\DataAccess\\Repositories\\BlogPostRepository.cs",
               "RelativeDocumentMoniker": "DataAccess\\Repositories\\BlogPostRepository.cs",
               "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\DataAccess\\Repositories\\BlogPostRepository.cs",
               "RelativeToolTip": "DataAccess\\Repositories\\BlogPostRepository.cs",
-              "ViewState": "AgIAALMAAAAAAAAAAAAQwMUAAAAuAAAAAAAAAA==",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAhwBUAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-27T04:55:47.943Z",
+              "WhenOpened": "2024-09-28T08:12:44.406Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "BlogPostService.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\GOStudy_Logic\\Service\\BlogPostService.cs",
+              "RelativeDocumentMoniker": "GOStudy_Logic\\Service\\BlogPostService.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\GOStudy_Logic\\Service\\BlogPostService.cs",
+              "RelativeToolTip": "GOStudy_Logic\\Service\\BlogPostService.cs",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAjwEAAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-28T08:12:15.853Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "BlogPostController.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\BE_GOStudy\\Controllers\\BlogPost\\BlogPostController.cs",
               "RelativeDocumentMoniker": "BE_GOStudy\\Controllers\\BlogPost\\BlogPostController.cs",
               "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\BE_GOStudy\\Controllers\\BlogPost\\BlogPostController.cs",
               "RelativeToolTip": "BE_GOStudy\\Controllers\\BlogPost\\BlogPostController.cs",
-              "ViewState": "AgIAAD8AAAAAAAAAAAD4v0YAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAGUAAAAAAAAAAAAAwGgAAABDAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-27T04:55:13.801Z",
+              "WhenOpened": "2024-09-28T08:11:35.891Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "TaskReminderJob.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\GOStudy_Logic\\Service\\Sentmail\\TaskReminderJob.cs",
-              "RelativeDocumentMoniker": "GOStudy_Logic\\Service\\Sentmail\\TaskReminderJob.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\GOStudy_Logic\\Service\\Sentmail\\TaskReminderJob.cs",
-              "RelativeToolTip": "GOStudy_Logic\\Service\\Sentmail\\TaskReminderJob.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAjwBcAAAAPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-27T04:27:34.389Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "TaskService.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\GOStudy_Logic\\Service\\TaskService.cs",
-              "RelativeDocumentMoniker": "GOStudy_Logic\\Service\\TaskService.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\GOStudy_Logic\\Service\\TaskService.cs",
-              "RelativeToolTip": "GOStudy_Logic\\Service\\TaskService.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAA3wBgAAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-27T04:13:45.924Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "TaskControllner.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\BE_GOStudy\\Controllers\\Room\\TaskControllner.cs",
-              "RelativeDocumentMoniker": "BE_GOStudy\\Controllers\\Room\\TaskControllner.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy\\BE_GOStudy\\BE_GOStudy\\Controllers\\Room\\TaskControllner.cs",
-              "RelativeToolTip": "BE_GOStudy\\Controllers\\Room\\TaskControllner.cs",
-              "ViewState": "AgIAACIAAAAAAAAAAAASwCgAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-27T04:23:26.513Z"
             }
           ]
         },

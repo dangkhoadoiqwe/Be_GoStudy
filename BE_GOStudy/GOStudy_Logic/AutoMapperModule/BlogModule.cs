@@ -25,7 +25,7 @@ namespace GO_Study_Logic.AutoMapperModule
 
             mc.CreateMap<BlogPost, BlogPost_Create_Model1>().ReverseMap();
             mc.CreateMap<BlogPost, BlogPost_Create_Model>().ReverseMap();
-
+            mc.CreateMap<BlogPost, BlogPost_Create_Model2>().ReverseMap();
             mc.CreateMap<Comment, CommentModel>().ReverseMap();
             mc.CreateMap<User, UserViewBlogModel>().ReverseMap();
             mc.CreateMap<BlogImg, BlogImgViewModel>().ReverseMap();

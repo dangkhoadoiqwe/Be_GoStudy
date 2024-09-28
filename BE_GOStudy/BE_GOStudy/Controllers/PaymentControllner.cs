@@ -197,29 +197,29 @@ public PaymentController(IPaymentService paymentService, IConfiguration configur
 
 
 
-        [HttpGet("vnpay-return")]
-        public IActionResult VnPayReturn([FromQuery] VnPayReturnRequest request)
-        {
-            var vnp_HashSecret = _configuration["Vnpay:HashSecret"];
-            var vnp_SecureHash = request.vnp_SecureHash;
+        //[HttpGet("vnpay-return")]
+        //public IActionResult VnPayReturn([FromQuery] VnPayReturnRequest request)
+        //{
+        //    var vnp_HashSecret = _configuration["Vnpay:HashSecret"];
+        //    var vnp_SecureHash = request.vnp_SecureHash;
 
-            var paymentUrl = _paymentService.GenerateQueryString(request);
-            var validHash = GenerateSecureHash(paymentUrl, vnp_HashSecret);
+        //    var paymentUrl = _paymentService.GenerateQueryString(request);
+        //    var validHash = GenerateSecureHash(paymentUrl, vnp_HashSecret);
 
-            if (vnp_SecureHash != validHash)
-            {
-                return BadRequest("Invalid payment response");
-            }
+        //    if (vnp_SecureHash != validHash)
+        //    {
+        //        return BadRequest("Invalid payment response");
+        //    }
 
-            if (request.vnp_ResponseCode == "00" && request.vnp_TransactionStatus == "00")
-            {
-                return Ok(new { message = "Payment successful", transactionId = request.vnp_TransactionNo });
-            }
-            else
-            {
-                return BadRequest(new { message = "Payment failed", responseCode = request.vnp_ResponseCode });
-            }
-        }
+        //    if (request.vnp_ResponseCode == "00" && request.vnp_TransactionStatus == "00")
+        //    {
+        //        return Ok(new { message = "Payment successful", transactionId = request.vnp_TransactionNo });
+        //    }
+        //    else
+        //    {
+        //        return BadRequest(new { message = "Payment failed", responseCode = request.vnp_ResponseCode });
+        //    }
+        //}
         [HttpGet("checkout")]
         public async Task<IActionResult> Checkout(int userId, int packageId)
         {
