@@ -24,9 +24,12 @@ namespace GO_Study_Logic.Service
         Task AddBlogPostVIPAsync(BlogPost_Create_Model2 blogPostCreateModel, int userId);
         Task<bool> UpdateLikeCountAsync(int userId, int blogId);
         Task<bool> AddCommentAsync(Comment comment);
-       
+
+        Task<bool> UpdateBlogPostAsync(BlogPost blogPost);
+
+        Task<BlogPost?> GetBlogPostsByIdAsync(int postId);
         Task UpdateBlogPostTitleAndImagesAsync(BlogPost_Upadte_Model blogPostCreateModel);
-            Task<PaginatedResult<BlogPost_View_Model_All>> GetPaginatedBlogPostsAsync(int pageNumber, int pageSize);
+        Task<PaginatedResult<BlogPost_View_Model_All>> GetPaginatedBlogPostsAsync(int pageNumber, int pageSize);
     }
 }
 
@@ -62,6 +65,32 @@ namespace GO_Study_Logic.Service
             Data = blogPostsViewModels
         };
     }
+
+    public async Task<bool> UpdateBlogPostAsync(BlogPost blogPost)
+    {
+        var existingPost = await _repository.GetBlogPostByIdAsync(blogPost.PostId);
+        if (existingPost == null)
+        {
+            return false; // Bài viết không tồn tại
+        }
+
+        // Cập nhật thông tin bài viết
+        existingPost.Title = blogPost.Title;
+        existingPost.Content = blogPost.Content;
+        existingPost.IsDraft = blogPost.IsDraft;
+        existingPost.CreatedAt = blogPost.CreatedAt; // Cập nhật thời gian sửa đổi
+
+        // Cập nhật các hình ảnh (nếu có)
+        if (blogPost.BlogImgs != null && blogPost.BlogImgs.Any())
+        {
+            existingPost.BlogImgs = blogPost.BlogImgs;
+        }
+
+        // Gọi phương thức cập nhật trong repository
+        await _repository.UpdateBlogPostAsync(existingPost);
+        return true;
+    }
+
     public async Task<PaginatedResult<BlogPost_View_Model_All>> GetPaginatedBlogPostsAsync(int pageNumber, int pageSize)
     {
         var blogPosts = await _repository.GetPaginatedBlogPostsAsync(pageNumber, pageSize);
@@ -205,16 +234,19 @@ namespace GO_Study_Logic.Service
             }
         }
 
-        public async Task<bool> DeleteBlogPostAsync(int postId)
-        {
-            var blogPost = await _repository.GetBlogPostByIdAsync(postId);
-            if (blogPost == null) return false;
+    public async Task<bool> DeleteBlogPostAsync(int postId)
+    {
+        var blogPost = await _repository.GetBlogPostByIdAsync(postId);
+        if (blogPost == null) return false;
 
-            await _repository.DeleteBlogPostAsync(blogPost);
-            return true;
-        }
+        // Cập nhật thuộc tính IsDraft thành true
+        blogPost.IsDraft = true;
+        await _repository.UpdateBlogPostAsync(blogPost);
+        return true;
+    }
 
-        public async Task<List<BlogPost>> GetTrendingBlogPosts()
+
+    public async Task<List<BlogPost>> GetTrendingBlogPosts()
         {
             return await _repository.GetTrendingBlogPosts();
         }
@@ -272,6 +304,9 @@ namespace GO_Study_Logic.Service
         return true; // Like was successfully added
     }
 
-   
+    public async Task<BlogPost?> GetBlogPostsByIdAsync(int postId)
+    {
+        return await _repository.GetBlogPostsByIdAsync(postId);
+    }
 }
 

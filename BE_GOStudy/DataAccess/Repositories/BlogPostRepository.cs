@@ -30,6 +30,10 @@ namespace DataAccess.Repositories
         Task<int> CountTotalBlogs();
 
         Task<int> CountUserLikedPostsAsync(int userId, int blogPostId);
+
+        Task<BlogPost?> GetBlogPostsByIdAsync(int postId);
+
+        Task UpdateBlogPostsAsync(BlogPost blogPost);
     }
 
     public class BlogPostRepository : IBlogPostRepository
@@ -49,10 +53,33 @@ namespace DataAccess.Repositories
                                  .ToListAsync();
         }
 
+        public async Task UpdateBlogPostsAsync(BlogPost blogPost)
+        {
+            // Kiểm tra nếu bài viết có tồn tại trong cơ sở dữ liệu
+            var existingPost = await _context.BlogPosts.FindAsync(blogPost.PostId);
+            if (existingPost != null)
+            {
+                // Cập nhật các thuộc tính của bài viết
+                existingPost.Title = blogPost.Title;
+                existingPost.Content = blogPost.Content;
+                existingPost.IsDraft = blogPost.IsDraft;
+                existingPost.CreatedAt = blogPost.CreatedAt; // Cập nhật thời gian sửa đổi
+
+                // Cập nhật các hình ảnh (nếu có)
+                if (blogPost.BlogImgs != null && blogPost.BlogImgs.Any())
+                {
+                    existingPost.BlogImgs = blogPost.BlogImgs;
+                }
+
+                // Lưu thay đổi vào cơ sở dữ liệu
+                await _context.SaveChangesAsync();
+            }
+        }
 
         public async Task<IEnumerable<BlogPost>> GetPaginatedBlogPostsAsync(int pageNumber, int pageSize)
         {
             return await _context.BlogPosts
+                 .Where(bp => !bp.IsDraft)
                 .Include(bp => bp.BlogImgs)      
                 .Include(bp => bp.User)          
                 .OrderByDescending(bp => bp.CreatedAt)  
@@ -142,6 +169,16 @@ namespace DataAccess.Repositories
             _context.BlogPosts.Update(blogPost);
             await _context.SaveChangesAsync();
         }
+        public async Task<BlogPost?> GetBlogPostsByIdAsync(int postId)
+        {
+            return await _context.BlogPosts
+                .Include(bp => bp.BlogImgs)                          // Bao gồm hình ảnh của blog
+                .Include(bp => bp.User)                              // Bao gồm thông tin người dùng của blog
+                .Include(bp => bp.Comments)                          // Bao gồm các bình luận
+                    .ThenInclude(c => c.User)                        // Bao gồm thông tin người dùng của từng bình luận
+                .Where(bp => bp.PostId == postId && !bp.IsDraft)    // Lọc theo postId và đảm bảo không phải là bản nháp
+                .FirstOrDefaultAsync();
+        }
 
         public async Task DeleteBlogPostAsync(BlogPost blogPost)
         {
@@ -162,6 +199,8 @@ namespace DataAccess.Repositories
            // int pageSize = 10; // 10 items per page
 
             return await _context.BlogPosts
+                 .Where(bp => !bp.IsDraft)
+                 .Include(bp => bp.BlogImgs)
                 .Where(p => p.UserId == userId)
                 .Include(p => p.User)  // Lấy tất cả thông tin của user liên quan
                 .OrderByDescending(p => p.CreatedAt)  // Sắp xếp theo CreatedAt giảm dần
@@ -204,7 +243,7 @@ namespace DataAccess.Repositories
         
         public async Task<int> CountUserLikedPostsAsync(int userId, int blogPostId)
         {
-            return await _context.BlogPosts.Where(c => c.UserId == userId && c.PostId == blogPostId).CountAsync();
+            return await _context.BlogPosts.Where(c => c.UserId == userId).CountAsync();
         }
     }
 }

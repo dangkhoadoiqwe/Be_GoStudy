@@ -217,7 +217,7 @@ namespace BE_GOStudy.Controllers.BlogPost
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteBlogPost(int id)
         {
-            var blogPost = await _blogPostService.GetBlogPostByIdAsync(id);
+            var blogPost = await _blogPostService.GetBlogPostsByIdAsync(id);
             if (blogPost == null)
             {
                 return NotFound(new BaseResponse
@@ -228,9 +228,13 @@ namespace BE_GOStudy.Controllers.BlogPost
                 });
             }
 
-            await _blogPostService.DeleteBlogPostAsync(id);
+            // Cập nhật thuộc tính IsDraft thành true thay vì xóa
+            blogPost.IsDraft = true;
+            await _blogPostService.UpdateBlogPostAsync(blogPost);
+
             return NoContent();
         }
+
 
         [HttpPost("comments")]
         public async Task<IActionResult> AddComment([FromBody] CommentModel commentViewModel)
