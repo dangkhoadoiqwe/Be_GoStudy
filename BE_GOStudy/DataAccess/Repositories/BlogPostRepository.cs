@@ -79,6 +79,7 @@ namespace DataAccess.Repositories
         public async Task<IEnumerable<BlogPost>> GetPaginatedBlogPostsAsync(int pageNumber, int pageSize)
         {
             return await _context.BlogPosts
+                  .Include(bp => bp.Comments)
                  .Where(bp => !bp.IsDraft)
                 .Include(bp => bp.BlogImgs)      
                 .Include(bp => bp.User)          
@@ -175,7 +176,7 @@ namespace DataAccess.Repositories
                 .Include(bp => bp.BlogImgs)                          // Bao gồm hình ảnh của blog
                 .Include(bp => bp.User)                              // Bao gồm thông tin người dùng của blog
                 .Include(bp => bp.Comments)                          // Bao gồm các bình luận
-                    .ThenInclude(c => c.User)                        // Bao gồm thông tin người dùng của từng bình luận
+                .ThenInclude(c => c.User)                        // Bao gồm thông tin người dùng của từng bình luận
                 .Where(bp => bp.PostId == postId && !bp.IsDraft)    // Lọc theo postId và đảm bảo không phải là bản nháp
                 .FirstOrDefaultAsync();
         }
@@ -200,6 +201,7 @@ namespace DataAccess.Repositories
 
             return await _context.BlogPosts
                  .Where(bp => !bp.IsDraft)
+                 .Include(bp => bp.Comments)
                  .Include(bp => bp.BlogImgs)
                 .Where(p => p.UserId == userId)
                 .Include(p => p.User)  // Lấy tất cả thông tin của user liên quan

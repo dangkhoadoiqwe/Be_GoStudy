@@ -161,6 +161,8 @@ namespace DataAccess.Repositories
             _studyContext.Tasks.Update(task);
             await _studyContext.SaveChangesAsync(); // Lưu thay đổi vào cơ sở dữ liệu
         }
+        // Get tasks by user ID for the current month
+        
 
         public async Task<Tasks> GetTaskByTaskId(int TaskId)
         {

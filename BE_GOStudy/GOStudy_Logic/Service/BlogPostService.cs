@@ -71,22 +71,22 @@ namespace GO_Study_Logic.Service
         var existingPost = await _repository.GetBlogPostByIdAsync(blogPost.PostId);
         if (existingPost == null)
         {
-            return false; // Bài viết không tồn tại
+            return false;
         }
 
-        // Cập nhật thông tin bài viết
+      
         existingPost.Title = blogPost.Title;
         existingPost.Content = blogPost.Content;
         existingPost.IsDraft = blogPost.IsDraft;
-        existingPost.CreatedAt = blogPost.CreatedAt; // Cập nhật thời gian sửa đổi
+        existingPost.CreatedAt = blogPost.CreatedAt; 
 
-        // Cập nhật các hình ảnh (nếu có)
+      
         if (blogPost.BlogImgs != null && blogPost.BlogImgs.Any())
         {
             existingPost.BlogImgs = blogPost.BlogImgs;
         }
 
-        // Gọi phương thức cập nhật trong repository
+        
         await _repository.UpdateBlogPostAsync(existingPost);
         return true;
     }

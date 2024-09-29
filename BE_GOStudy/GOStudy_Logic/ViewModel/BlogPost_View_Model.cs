@@ -48,6 +48,8 @@ namespace GO_Study_Logic.ViewModel
 
         public UserViewBlogModel UserViewModel { get; set; }
         public ICollection<BlogImgViewModel> BlogImgs { get; set; }
+
+        public ICollection<CommentViewModel> Comments { get; set; }
     }
     public class BlogPostViewdetailModel
     {

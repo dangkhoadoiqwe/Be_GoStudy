@@ -170,6 +170,7 @@ namespace GO_Study_Logic.Service
                 throw new Exception($"An error occurred while deleting the task: {ex.Message}");
             }
         }
+
         public async Task<bool> UpdateTaskDelete(int taskId)
         {
             try
