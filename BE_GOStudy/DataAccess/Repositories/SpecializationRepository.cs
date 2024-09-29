@@ -17,7 +17,7 @@ namespace DataAccess.Repositories
 
         Task<bool> SaveUserSpecializationAsync(UserSpecialization userSpecialization);
         Task<IEnumerable<Specialization>> GetAllSpecializationsByUserIDAsync(int userid);
-
+        Task<IEnumerable<Specialization?>> GetByUserIdAsync(int? id);
         Task<IEnumerable<Specialization>> GetAllAsync();
     }
 
@@ -90,6 +90,11 @@ namespace DataAccess.Repositories
             s => s.SpecializationId,
             (us, s) => s
         ).ToListAsync();
+        }
+
+        public Task<IEnumerable<Specialization?>> GetByUserIdAsync(int? id)
+        {
+            throw new NotImplementedException();
         }
     }
 

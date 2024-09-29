@@ -15,7 +15,7 @@ namespace GO_Study_Logic.ViewModel.User
         public int UserId { get; set; } 
         public string FullName { get; set; } 
         public Semester_View_Model Semester { get; set; }
-        public Specialization_View_Model Specialization { get; set; }
+        public List<Specialization_View_Model> Specialization { get; set; }
 
         public PrivacySetting_View_Model PrivacySetting { get; set; }
         public string Email { get; set; }  
