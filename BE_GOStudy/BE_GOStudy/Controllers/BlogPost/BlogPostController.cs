@@ -28,8 +28,8 @@ namespace BE_GOStudy.Controllers.BlogPost
         public async Task<IActionResult> LikePost(int blogId, int userId)
         {
             var result = await _blogPostService.UpdateLikeCountAsync(userId, blogId);
-
-            if (result == null)
+            var blogPost = await _blogPostService.GetBlogPostByIdAsync(blogId);
+            if (blogPost == null)
             {
                 return NotFound(new BaseResponse
                 {

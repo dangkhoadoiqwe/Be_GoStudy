@@ -101,7 +101,7 @@ namespace DataAccess.Repositories
                 .Include(bp => bp.User)                              // Include thông tin user của blog
                 .Include(bp => bp.Comments)                          // Include các bình luận
                     .ThenInclude(c => c.User)                        // Include thông tin user của từng bình luận
-                .Where(bp => bp.PostId == postId)                    // Lọc theo postId
+                .Where(bp => bp.PostId == postId && !bp.IsDraft)                    // Lọc theo postId
                 .FirstOrDefaultAsync();
         }
         public async Task UpdateBlogImagesAsync(int blogPostId, List<string> newImages)
@@ -240,12 +240,12 @@ namespace DataAccess.Repositories
 
         public async Task<int> CountTotalBlogs()
         {
-            return await _context.BlogPosts.CountAsync();
+            return await _context.BlogPosts.Where( bp => !bp.IsDraft).CountAsync();
         }
         
         public async Task<int> CountUserLikedPostsAsync(int userId, int blogPostId)
         {
-            return await _context.BlogPosts.Where(c => c.UserId == userId).CountAsync();
+            return await _context.BlogPosts.Where(c => c.UserId == userId && !c.IsDraft).CountAsync();
         }
     }
 }
