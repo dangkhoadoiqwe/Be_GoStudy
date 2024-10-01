@@ -190,5 +190,10 @@ app.UseCors("AllowReactApp"); // Enable CORS
 app.UseAuthentication(); // Enable authentication middleware
 app.UseAuthorization(); // Enable authorization middleware
 
+using (var scope = app.Services.CreateScope()) {
+    var context = scope.ServiceProvider.GetRequiredService<GOStudyContext>();
+    context.Database.Migrate();
+}
+
 app.MapControllers(); // Map the controllers
 app.Run();
