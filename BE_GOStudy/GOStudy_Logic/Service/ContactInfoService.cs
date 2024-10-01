@@ -6,7 +6,7 @@ namespace GOStudy_Logic.Service;
 
 public class ContactInfoService
 {
-    private readonly string _emailFrom = "minhhanguyen13072002@gmail.com"; 
+    private readonly string _emailFrom = "nguyenthaitoanphuc156@gmail.com"; 
     private readonly string _smtpHost = "smtp.gmail.com";        
     private readonly int _smtpPort = 587;                       
     private readonly string _smtpUser = "nguyenthaitoanphuc156@gmail.com";  
