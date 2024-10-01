@@ -17,12 +17,20 @@ using Newtonsoft.Json;
 using Quartz;
 using Quartz.Spi;
 using System.Text;
+using Microsoft.AspNetCore.Http.Features;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Register DbContext with SQL Server
 builder.Services.AddDbContext<GOStudyContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+//Config Email ContactInfo
+builder.Services.Configure<FormOptions>(options =>
+{
+    options.MultipartBodyLengthLimit = 10 * 1024 * 1024;
+});
+
 
 // Add Identity for user management
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()

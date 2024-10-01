@@ -16,7 +16,7 @@ namespace DataAccess.Model
         public string Email { get; set; }
 
         [Required]
-        public int Role { get; set; }
+        public int Role { get; set; } //1 user 2 admin
 
         [Required]
         public string PasswordHash { get; set; }
