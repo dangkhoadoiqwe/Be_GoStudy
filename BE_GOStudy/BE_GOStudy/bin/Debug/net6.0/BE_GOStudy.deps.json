@@ -129,7 +129,7 @@
         "runtime": {
           "lib/netstandard2.0/Hangfire.Core.dll": {
             "assemblyVersion": "1.8.14.0",
-            "fileVersion": "1.8.14.0"
+            "fileVersion": "0.0.0.0"
           }
         }
       },
@@ -310,22 +310,22 @@
           "runtimes/win-arm/native/Microsoft.Data.SqlClient.SNI.dll": {
             "rid": "win-arm",
             "assetType": "native",
-            "fileVersion": "2.1.1.0"
+            "fileVersion": "0.0.0.0"
           },
           "runtimes/win-arm64/native/Microsoft.Data.SqlClient.SNI.dll": {
             "rid": "win-arm64",
             "assetType": "native",
-            "fileVersion": "2.1.1.0"
+            "fileVersion": "0.0.0.0"
           },
           "runtimes/win-x64/native/Microsoft.Data.SqlClient.SNI.dll": {
             "rid": "win-x64",
             "assetType": "native",
-            "fileVersion": "2.1.1.0"
+            "fileVersion": "0.0.0.0"
           },
           "runtimes/win-x86/native/Microsoft.Data.SqlClient.SNI.dll": {
             "rid": "win-x86",
             "assetType": "native",
-            "fileVersion": "2.1.1.0"
+            "fileVersion": "0.0.0.0"
           }
         }
       },
@@ -1055,10 +1055,7 @@
           "payOS": "1.0.6"
         },
         "runtime": {
-          "DataAccess.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "DataAccess.dll": {}
         }
       },
       "GOStudy_Logic/1.0.0": {
@@ -1068,18 +1065,17 @@
           "BCrypt.Net-Next": "4.0.3",
           "DataAccess": "1.0.0",
           "Google.Apis.Calendar.v3": "1.68.0.3536",
+          "MailKit": "4.7.1",
           "Microsoft.EntityFrameworkCore.Analyzers": "6.0.33",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.33",
           "Microsoft.Extensions.Configuration": "8.0.0",
+          "MimeKit": "4.7.1",
           "Newtonsoft.Json": "13.0.3",
           "Quartz": "3.13.0",
           "Quartz.Extensions.DependencyInjection": "3.13.0"
         },
         "runtime": {
-          "GOStudy_Logic.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "GOStudy_Logic.dll": {}
         }
       }
     }

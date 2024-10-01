@@ -45,7 +45,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Accounts");
+                    b.ToTable("Accounts", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.Analytic", b =>
@@ -84,7 +84,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Analytics");
+                    b.ToTable("Analytics", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.Attendance", b =>
@@ -112,7 +112,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Attendances");
+                    b.ToTable("Attendances", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.BlogImg", b =>
@@ -134,7 +134,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("BlogId");
 
-                    b.ToTable("BlogImgs");
+                    b.ToTable("BlogImgs", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.BlogPost", b =>
@@ -193,7 +193,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("BlogPosts");
+                    b.ToTable("BlogPosts", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.Bookmark", b =>
@@ -216,7 +216,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Bookmarks");
+                    b.ToTable("Bookmarks", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.Classroom", b =>
@@ -252,7 +252,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("SpecializationId");
 
-                    b.ToTable("Classrooms");
+                    b.ToTable("Classrooms", (string)null);
 
                     b.HasData(
                         new
@@ -384,7 +384,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Comments");
+                    b.ToTable("Comments", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.ContactInfo", b =>
@@ -405,7 +405,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("ContactInfoId");
 
-                    b.ToTable("ContactInfos");
+                    b.ToTable("ContactInfos", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.Data", b =>
@@ -431,7 +431,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Data");
+                    b.ToTable("Data", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.EncryptionKey", b =>
@@ -453,7 +453,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("DataId");
 
-                    b.ToTable("EncryptionKeys");
+                    b.ToTable("EncryptionKeys", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.FAQ", b =>
@@ -474,7 +474,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("FaqId");
 
-                    b.ToTable("FAQs");
+                    b.ToTable("FAQs", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.Feature", b =>
@@ -496,7 +496,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("PackageId");
 
-                    b.ToTable("Features");
+                    b.ToTable("Features", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.FriendRequest", b =>
@@ -526,7 +526,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("RequesterId");
 
-                    b.ToTable("FriendRequests");
+                    b.ToTable("FriendRequests", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.Message", b =>
@@ -561,7 +561,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("SenderId");
 
-                    b.ToTable("Messages");
+                    b.ToTable("Messages", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.Notification", b =>
@@ -591,7 +591,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Notifications");
+                    b.ToTable("Notifications", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.Package", b =>
@@ -611,7 +611,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("PackageId");
 
-                    b.ToTable("Packages");
+                    b.ToTable("Packages", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.PaymentTransaction", b =>
@@ -679,7 +679,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("PaymentTransactions");
+                    b.ToTable("PaymentTransactions", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.PrivacySetting", b =>
@@ -696,7 +696,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("PrivacySettingId");
 
-                    b.ToTable("PrivacySettings");
+                    b.ToTable("PrivacySettings", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.Ranking", b =>
@@ -724,7 +724,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Rankings");
+                    b.ToTable("Rankings", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.Reaction", b =>
@@ -751,7 +751,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Reactions");
+                    b.ToTable("Reactions", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.RefreshToken", b =>
@@ -807,7 +807,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("SemesterId");
 
-                    b.ToTable("Semesters");
+                    b.ToTable("Semesters", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.Specialization", b =>
@@ -824,7 +824,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("SpecializationId");
 
-                    b.ToTable("Specializations");
+                    b.ToTable("Specializations", (string)null);
 
                     b.HasData(
                         new
@@ -905,7 +905,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("SupportTickets");
+                    b.ToTable("SupportTickets", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.Tasks", b =>
@@ -946,7 +946,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Tasks");
+                    b.ToTable("Tasks", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.User", b =>
@@ -1001,7 +1001,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("SemesterId");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.UserLike", b =>
@@ -1024,7 +1024,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserLikes");
+                    b.ToTable("UserLikes", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.UserSpecialization", b =>
@@ -1053,7 +1053,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserSpecializations");
+                    b.ToTable("UserSpecializations", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.Account", b =>
