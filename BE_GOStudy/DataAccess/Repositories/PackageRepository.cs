@@ -13,7 +13,10 @@ namespace DataAccess.Repositories
         Task<IEnumerable<Package>> GetAllPackage();
         Task<Package?> GetPackageByIdAsync(int id); 
         Task<bool> SavePackageAsync(Package package); 
-        Task<bool> UpdatePackageAsync(Package package); 
+        Task<bool> UpdatePackageAsync(Package package);
+        Task<IEnumerable<string>> GetPackageNamesByUserIdAsync(int userId);
+
+        //   Task<bool> CheckPaymentstatus(long code);
     }
     public class PackageRepository : IPackageRepository
     {
@@ -22,10 +25,27 @@ namespace DataAccess.Repositories
         public PackageRepository(GOStudyContext context) {
             _context = context;
            }
+
+
         public async Task<IEnumerable<Package>> GetAllPackage()
         {
-            return await _context.Packages.ToListAsync();
+            return await _context.Packages
+                .Include(p => p.Feature)  // Include related Features for each Package
+                .ToListAsync();
         }
+
+        public async Task<IEnumerable<string>> GetPackageNamesByUserIdAsync(int userId)
+        {
+            return await _context.PaymentTransactions
+                .Where(pt => pt.UserId == userId && pt.Status == "PAID") // Lọc theo UserId và Status là "PAID"
+                .Join(_context.Packages, // Join với bảng Packages
+                      pt => pt.PackageId,
+                      p => p.PackageId,
+                      (pt, p) => p.Name) // Lấy tên Package
+                .Distinct() // Loại bỏ tên trùng lặp
+                .ToListAsync();
+        }
+
         public async Task<Package?> GetPackageByIdAsync(int id)
         {
             return await _context.Packages.FindAsync(id);

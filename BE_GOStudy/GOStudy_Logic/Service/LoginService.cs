@@ -51,16 +51,24 @@ namespace GO_Study_Logic.Service
             {
                 throw new ErrorResponse(404, 4, "Wrong Password");
             }
-
-            var userModel = _mapper.Map<UserViewModel1>(userExist);
-            return new LoginModel
+            var userchecktoken = true;//await _userRepository.CheckToken(userExist.UserId);
+            if (userchecktoken == true)
             {
-                Success = true,
-                UserName = userModel.Email,
-                Role = Enum.GetName(typeof(RoleEnum), userModel.Role),
-                Data = GenerateJwtToken(userModel),
-                userId = userModel.UserId,
-            };
+                var userModel = _mapper.Map<UserViewModel1>(userExist);
+                return new LoginModel
+                {
+                    Success = true,
+                    UserName = userModel.Email,
+                    Role = Enum.GetName(typeof(RoleEnum), userModel.Role),
+                    Data = GenerateJwtToken(userModel),
+                    userId = userModel.UserId,
+                };
+            }
+            else
+            {
+                throw new ErrorResponse(401, 5, "Invalid or expired token");
+            }
+                
         }
 
         private bool VerifyPassword(string inputPassword, string storedPassword)
@@ -92,7 +100,7 @@ namespace GO_Study_Logic.Service
             new Claim("picture", user.ProfileImage),                                      // Profile picture
             new Claim(ClaimTypes.Role, user.Role.ToString())                              // Role as a claim
         }),
-                Expires = expires,
+               Expires = expires,
                 Issuer = "https://securetoken.google.com/meet-jit-si-66cbd",                      // Issuer
                 Audience = "meet-jit-si-66cbd",                                                  // Audience
                 SigningCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature)

@@ -14,6 +14,11 @@ namespace DataAccess.Repositories
         Task<Specialization?> GetByIdAsync(int? id);
 
         Task<bool> SaveSpecializationAsync(Specialization specialization);
+
+        Task<bool> SaveUserSpecializationAsync(UserSpecialization userSpecialization);
+        Task<IEnumerable<Specialization>> GetAllSpecializationsByUserIDAsync(int userid);
+        Task<IEnumerable<Specialization?>> GetByUserIdAsync(int? id);
+        Task<IEnumerable<Specialization>> GetAllAsync();
     }
 
     public partial class SpecializationRepository : BaseRepository<Specialization>, ISpecializationRepository
@@ -30,35 +35,67 @@ namespace DataAccess.Repositories
         {
             return await _dbContext.Set<Specialization>().FindAsync(id);
         }
+        public async Task<IEnumerable<Specialization>> GetAllAsync()
+        {
+            return await _dbContext.Set<Specialization>().AsNoTracking().ToListAsync();
+
+        }
+
+        public async Task<bool> SaveUserSpecializationAsync(UserSpecialization userSpecialization)
+        {
+            await _dbContext.Set<UserSpecialization>().AddAsync(userSpecialization);
+
+            try
+            {
+                var changes = await _dbContext.SaveChangesAsync();
+                return changes > 0;
+            }
+            catch (DbUpdateException)
+            {
+                return false;
+            }
+        }
         public async Task<bool> SaveSpecializationAsync(Specialization specialization)
         {
             if (specialization == null)
             {
-                return false; // Có thể thêm throw new ArgumentNullException nếu cần thiết.
+                return false;
             }
 
-            if (specialization.SpecializationId == 0)  // Nếu chưa có ID, tức là thêm mới
+            if (specialization.SpecializationId == 0)  // Thêm mới nếu ID chưa tồn tại
             {
                 await _dbContext.Set<Specialization>().AddAsync(specialization);
             }
-            else  // Nếu đã có ID, tức là cập nhật
+            else  // Cập nhật nếu ID đã tồn tại
             {
                 _dbContext.Set<Specialization>().Update(specialization);
             }
 
             try
             {
-                var changes = await _dbContext.SaveChangesAsync();  // Lưu thay đổi vào cơ sở dữ liệu
-                return changes > 0;  // Trả về true nếu có thay đổi
+                var changes = await _dbContext.SaveChangesAsync();
+                return changes > 0;
             }
-            catch (DbUpdateException ex)
+            catch (DbUpdateException)
             {
-                // Log exception (nếu cần) và xử lý lỗi nếu xảy ra
-                // Có thể trả về false hoặc throw exception tùy yêu cầu.
                 return false;
             }
         }
 
+        public async Task<IEnumerable<Specialization>> GetAllSpecializationsByUserIDAsync(int userid)
+        {
+              return await _dbContext.Set<UserSpecialization>().Where(US =>US.UserId == userid).Join(
+            _dbContext.Set<Specialization>(),
+            us => us.SpecializationId,
+            s => s.SpecializationId,
+            (us, s) => s
+        ).ToListAsync();
+        }
+
+        public Task<IEnumerable<Specialization?>> GetByUserIdAsync(int? id)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

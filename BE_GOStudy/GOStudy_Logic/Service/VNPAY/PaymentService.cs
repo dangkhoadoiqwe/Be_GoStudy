@@ -10,6 +10,7 @@ using Net.payOS;
 using Microsoft.EntityFrameworkCore;
 using GO_Study_Logic.ViewModel.ZaloPay;
 using GO_Study_Logic.ViewModel.User;
+using Microsoft.AspNetCore.Mvc;
 namespace GO_Study_Logic.Service.VNPAY
 {
     public interface IPaymentService
@@ -18,13 +19,15 @@ namespace GO_Study_Logic.Service.VNPAY
         Task<bool> UpdatePaymentTransactionStatusAsync(int transactionId, string status);
         string GenerateQueryString(VnPayReturnRequest request);
         Task<bool> UpdatePaymentTransactionStatusByOrderCodeAsync(string orderCode, string status);
-        Task<string> GetPaymentStatus(string transactionId);
+       
         Task AddTransactionAsync(PaymentTransaction transaction);
         Task<PaymentTransaction> GetTransactionByIdAsync(int id);
 
         Task<PaymentTransaction> GetTransactionByOrderCodeAsync(string orderCode);
 
+        Task<PaymentStatusViewModel> GetPaymentByPaymentRefefid(string paymentRefId);
         Task<CheckoutPayment> Checkout(int userId, int packageId);
+        Task<bool> DeletePaymentTransactionByPaymentRefIdAsync(string paymentRefId);
     }
 
     public class PaymentService : IPaymentService
@@ -49,7 +52,26 @@ namespace GO_Study_Logic.Service.VNPAY
             _userRepository = user;
         }
 
-       
+        public async Task<bool> DeletePaymentTransactionByPaymentRefIdAsync(string paymentRefId)
+        {
+            // Kiểm tra và lấy thông tin PaymentTransaction từ repository
+            var paymentTransaction = await _paymentTransactionRepository.GetPaymentByPaymentRefId(paymentRefId);
+
+            if (paymentTransaction == null)
+            {
+                // Nếu không tìm thấy, trả về false
+                return false;
+            }
+
+            // Xóa PaymentTransaction khỏi repository
+            _paymentTransactionRepository.DeletePaymentByPaymentRefId(paymentTransaction.PaymentRefId);
+
+            // Lưu thay đổi vào context
+            await _context.SaveChangesAsync();
+
+            // Trả về true nếu thành công
+            return true;
+        }
 
         private string GenerateChecksum(string data, string key)
         {
@@ -63,8 +85,7 @@ namespace GO_Study_Logic.Service.VNPAY
         public async Task<PaymentTransaction> GetTransactionByOrderCodeAsync(string orderCode)
         {
             // Tìm giao dịch trong cơ sở dữ liệu dựa trên PaymentRefId (orderCode)
-            return await _context.PaymentTransactions
-                .FirstOrDefaultAsync(pt => pt.PaymentRefId == orderCode);
+            return await _context.PaymentTransactions.FirstOrDefaultAsync(pt => pt.PaymentRefId == orderCode);
         }
         public async Task<bool> UpdatePaymentTransactionStatusByOrderCodeAsync(string orderCode, string status)
         {
@@ -93,20 +114,7 @@ namespace GO_Study_Logic.Service.VNPAY
             await _paymentTransactionRepository.AddTransactionAsync(transaction);
         }
 
-        public async Task<string> GetPaymentStatus(string transactionId)
-        {
-            var statusUrl = $"{ApiUrl}/status/{transactionId}";
-
-            using (var client = _httpClientFactory.CreateClient())
-            {
-                client.DefaultRequestHeaders.Add("Api-Key", ApiKey);
-                var response = await client.GetAsync(statusUrl);
-                response.EnsureSuccessStatusCode();
-
-                var responseContent = await response.Content.ReadAsStringAsync();
-                return responseContent; // Trả về trạng thái thanh toán
-            }
-        }
+       
 
         public async Task<PaymentTransaction> InsertPaymentTransactionAsync(PaymentTransactionViewModel dto)
         {
@@ -198,10 +206,30 @@ namespace GO_Study_Logic.Service.VNPAY
                 PackageId = package.PackageId,
                 Name = package.Name,
                 Price = package.Price,
-                Features = package.Features
+             //   Features = package.Features
             };
 
             return checkoutPayment;
+        }
+
+        public async Task<PaymentStatusViewModel> GetPaymentByPaymentRefefid(string paymentRefId)
+        {
+            // Thực hiện truy vấn dữ liệu bằng cách tìm kiếm theo PaymentRefId
+            var paymentTransaction = await _context.PaymentTransactions
+                .FirstOrDefaultAsync(pt => pt.PaymentRefId == paymentRefId);
+
+            // Nếu không tìm thấy giao dịch, ném ngoại lệ
+            if (paymentTransaction == null)
+            {
+                throw new Exception("Payment transaction not found.");
+            }
+
+            // Trả về đối tượng PaymentStatusViewModel
+            return new PaymentStatusViewModel
+            {
+                PaymentRefId = paymentTransaction.PaymentRefId,
+                Status = paymentTransaction.Status
+            };
         }
 
     }

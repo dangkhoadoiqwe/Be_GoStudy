@@ -6,30 +6,36 @@ namespace GOStudy_Logic.Service;
 
 public class ContactInfoService
 {
-    private readonly string _emailFrom = "nguyenthaitoanphuc156@gmail.com"; // Email của bạn
-    private readonly string _smtpHost = "smtp.gmail.com";        // Sử dụng SMTP của Gmail
-    private readonly int _smtpPort = 587;                        // Cổng SMTP
-    private readonly string _smtpUser = "nguyenthaitoanphuc156@gmail.com";  // Email của bạn
-    private readonly string _smtpPass = "pcrm xzok bwwa vltj";   // Mật khẩu ứng dụng hoặc mật khẩu của bạn
+    private readonly string _emailFrom = "minhhanguyen13072002@gmail.com"; 
+    private readonly string _smtpHost = "smtp.gmail.com";        
+    private readonly int _smtpPort = 587;                       
+    private readonly string _smtpUser = "nguyenthaitoanphuc156@gmail.com";  
+    private readonly string _smtpPass = "pcrm xzok bwwa vltj";  
 
     public async Task SendContactEmailAsync(ContactInfo contactInfo)
     {
         // Tạo đối tượng email
         var message = new MimeMessage();
         message.From.Add(new MailboxAddress("Website Feedback", _emailFrom));
-        message.To.Add(new MailboxAddress("Your Name", _emailFrom)); // Email nhận phản hồi
+        message.To.Add(new MailboxAddress("Your Name", _emailFrom));
         message.Subject = "New Feedback from Website";
 
         // Nội dung email
         var bodyBuilder = new BodyBuilder
         {
-            TextBody = $@"
-                Contact Name: {contactInfo.ContactName}
-                Email: {contactInfo.Email}
-                Phone: {contactInfo.ContactPhone}
-                Address: {contactInfo.StreetAddress}, {contactInfo.City}
-                Feedback Content: {contactInfo.Content}
-            "
+            HtmlBody = $@"
+        <html>
+            <body>
+                <h2>New Feedback Submission</h2>
+                <p><strong>Contact Name:</strong> {contactInfo.ContactName}</p>
+                <p><strong>Email:</strong> {contactInfo.Email}</p>
+                <p><strong>Phone:</strong> {contactInfo.ContactPhone}</p>
+                <p><strong>Address:</strong> {contactInfo.StreetAddress}, {contactInfo.City}</p>
+                <p><strong>Feedback Content:</strong></p>
+                <p>{contactInfo.Content}</p>
+            </body>
+        </html>
+    "
         };
 
         // Đính kèm file nếu có

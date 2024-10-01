@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/toanphuc/Desktop/EXE/BEGoStudy/Be_GoStudy/BE_GOStudy/GOStudy_Logic/GOStudy_Logic.csproj": {}
+    "/Users/toanphuc/Desktop/EXE/BEGoStudy/temp-khoa/Be_GoStudy/BE_GOStudy/GOStudy_Logic/GOStudy_Logic.csproj": {}
   },
   "projects": {
-    "/Users/toanphuc/Desktop/EXE/BEGoStudy/Be_GoStudy/BE_GOStudy/DataAccess/DataAccess.csproj": {
+    "/Users/toanphuc/Desktop/EXE/BEGoStudy/temp-khoa/Be_GoStudy/BE_GOStudy/DataAccess/DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/toanphuc/Desktop/EXE/BEGoStudy/Be_GoStudy/BE_GOStudy/DataAccess/DataAccess.csproj",
+        "projectUniqueName": "/Users/toanphuc/Desktop/EXE/BEGoStudy/temp-khoa/Be_GoStudy/BE_GOStudy/DataAccess/DataAccess.csproj",
         "projectName": "DataAccess",
-        "projectPath": "/Users/toanphuc/Desktop/EXE/BEGoStudy/Be_GoStudy/BE_GOStudy/DataAccess/DataAccess.csproj",
+        "projectPath": "/Users/toanphuc/Desktop/EXE/BEGoStudy/temp-khoa/Be_GoStudy/BE_GOStudy/DataAccess/DataAccess.csproj",
         "packagesPath": "/Users/toanphuc/.nuget/packages/",
-        "outputPath": "/Users/toanphuc/Desktop/EXE/BEGoStudy/Be_GoStudy/BE_GOStudy/DataAccess/obj/",
+        "outputPath": "/Users/toanphuc/Desktop/EXE/BEGoStudy/temp-khoa/Be_GoStudy/BE_GOStudy/DataAccess/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/toanphuc/.nuget/NuGet/NuGet.Config"
@@ -44,9 +44,9 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "MailKit": {
+            "Google.Apis.Calendar.v3": {
               "target": "Package",
-              "version": "[4.7.1.1, )"
+              "version": "[1.68.0.3536, )"
             },
             "MediatR": {
               "target": "Package",
@@ -75,6 +75,10 @@
             "NTQ.Sdk.Core": {
               "target": "Package",
               "version": "[1.1.7, )"
+            },
+            "payOS": {
+              "target": "Package",
+              "version": "[1.0.6, )"
             }
           },
           "imports": [
@@ -107,14 +111,14 @@
         }
       }
     },
-    "/Users/toanphuc/Desktop/EXE/BEGoStudy/Be_GoStudy/BE_GOStudy/GOStudy_Logic/GOStudy_Logic.csproj": {
+    "/Users/toanphuc/Desktop/EXE/BEGoStudy/temp-khoa/Be_GoStudy/BE_GOStudy/GOStudy_Logic/GOStudy_Logic.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/toanphuc/Desktop/EXE/BEGoStudy/Be_GoStudy/BE_GOStudy/GOStudy_Logic/GOStudy_Logic.csproj",
+        "projectUniqueName": "/Users/toanphuc/Desktop/EXE/BEGoStudy/temp-khoa/Be_GoStudy/BE_GOStudy/GOStudy_Logic/GOStudy_Logic.csproj",
         "projectName": "GOStudy_Logic",
-        "projectPath": "/Users/toanphuc/Desktop/EXE/BEGoStudy/Be_GoStudy/BE_GOStudy/GOStudy_Logic/GOStudy_Logic.csproj",
+        "projectPath": "/Users/toanphuc/Desktop/EXE/BEGoStudy/temp-khoa/Be_GoStudy/BE_GOStudy/GOStudy_Logic/GOStudy_Logic.csproj",
         "packagesPath": "/Users/toanphuc/.nuget/packages/",
-        "outputPath": "/Users/toanphuc/Desktop/EXE/BEGoStudy/Be_GoStudy/BE_GOStudy/GOStudy_Logic/obj/",
+        "outputPath": "/Users/toanphuc/Desktop/EXE/BEGoStudy/temp-khoa/Be_GoStudy/BE_GOStudy/GOStudy_Logic/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/toanphuc/.nuget/NuGet/NuGet.Config"
@@ -130,8 +134,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "/Users/toanphuc/Desktop/EXE/BEGoStudy/Be_GoStudy/BE_GOStudy/DataAccess/DataAccess.csproj": {
-                "projectPath": "/Users/toanphuc/Desktop/EXE/BEGoStudy/Be_GoStudy/BE_GOStudy/DataAccess/DataAccess.csproj"
+              "/Users/toanphuc/Desktop/EXE/BEGoStudy/temp-khoa/Be_GoStudy/BE_GOStudy/DataAccess/DataAccess.csproj": {
+                "projectPath": "/Users/toanphuc/Desktop/EXE/BEGoStudy/temp-khoa/Be_GoStudy/BE_GOStudy/DataAccess/DataAccess.csproj"
               }
             }
           }
@@ -163,9 +167,13 @@
               "target": "Package",
               "version": "[4.0.3, )"
             },
+            "Google.Apis.Calendar.v3": {
+              "target": "Package",
+              "version": "[1.68.0.3536, )"
+            },
             "MailKit": {
               "target": "Package",
-              "version": "[4.7.1.1, )"
+              "version": "[4.7.1, )"
             },
             "Microsoft.EntityFrameworkCore.Analyzers": {
               "target": "Package",
@@ -191,13 +199,21 @@
               "target": "Package",
               "version": "[8.0.0, )"
             },
+            "MimeKit": {
+              "target": "Package",
+              "version": "[4.7.1, )"
+            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"
             },
-            "payOS": {
+            "Quartz": {
               "target": "Package",
-              "version": "[1.0.6, )"
+              "version": "[3.13.0, )"
+            },
+            "Quartz.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[3.13.0, )"
             }
           },
           "imports": [

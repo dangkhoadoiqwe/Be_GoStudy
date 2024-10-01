@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/toanphuc/Desktop/EXE/BEGoStudy/Be_GoStudy/BE_GOStudy/DataAccess/DataAccess.csproj": {}
+    "/Users/toanphuc/Desktop/EXE/BEGoStudy/temp-khoa/Be_GoStudy/BE_GOStudy/DataAccess/DataAccess.csproj": {}
   },
   "projects": {
-    "/Users/toanphuc/Desktop/EXE/BEGoStudy/Be_GoStudy/BE_GOStudy/DataAccess/DataAccess.csproj": {
+    "/Users/toanphuc/Desktop/EXE/BEGoStudy/temp-khoa/Be_GoStudy/BE_GOStudy/DataAccess/DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/toanphuc/Desktop/EXE/BEGoStudy/Be_GoStudy/BE_GOStudy/DataAccess/DataAccess.csproj",
+        "projectUniqueName": "/Users/toanphuc/Desktop/EXE/BEGoStudy/temp-khoa/Be_GoStudy/BE_GOStudy/DataAccess/DataAccess.csproj",
         "projectName": "DataAccess",
-        "projectPath": "/Users/toanphuc/Desktop/EXE/BEGoStudy/Be_GoStudy/BE_GOStudy/DataAccess/DataAccess.csproj",
+        "projectPath": "/Users/toanphuc/Desktop/EXE/BEGoStudy/temp-khoa/Be_GoStudy/BE_GOStudy/DataAccess/DataAccess.csproj",
         "packagesPath": "/Users/toanphuc/.nuget/packages/",
-        "outputPath": "/Users/toanphuc/Desktop/EXE/BEGoStudy/Be_GoStudy/BE_GOStudy/DataAccess/obj/",
+        "outputPath": "/Users/toanphuc/Desktop/EXE/BEGoStudy/temp-khoa/Be_GoStudy/BE_GOStudy/DataAccess/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/toanphuc/.nuget/NuGet/NuGet.Config"
@@ -44,9 +44,9 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "MailKit": {
+            "Google.Apis.Calendar.v3": {
               "target": "Package",
-              "version": "[4.7.1.1, )"
+              "version": "[1.68.0.3536, )"
             },
             "MediatR": {
               "target": "Package",
@@ -75,6 +75,10 @@
             "NTQ.Sdk.Core": {
               "target": "Package",
               "version": "[1.1.7, )"
+            },
+            "payOS": {
+              "target": "Package",
+              "version": "[1.0.6, )"
             }
           },
           "imports": [

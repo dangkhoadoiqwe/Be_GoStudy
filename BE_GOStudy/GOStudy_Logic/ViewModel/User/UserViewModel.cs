@@ -13,6 +13,7 @@ namespace GO_Study_Logic.ViewModel.User
         public string Email { get; set; }
         public int Role { get; set; }
         public string PasswordHash { get; set; }
+        public string ProfileImage { get; set; }
 
     }
 }

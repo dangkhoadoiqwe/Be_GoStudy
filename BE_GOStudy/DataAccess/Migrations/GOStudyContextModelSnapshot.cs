@@ -45,7 +45,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Accounts");
+                    b.ToTable("Accounts", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.Analytic", b =>
@@ -84,7 +84,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Analytics");
+                    b.ToTable("Analytics", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.Attendance", b =>
@@ -112,7 +112,29 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Attendances");
+                    b.ToTable("Attendances", (string)null);
+                });
+
+            modelBuilder.Entity("DataAccess.Model.BlogImg", b =>
+                {
+                    b.Property<int>("BlogImgId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BlogImgId"), 1L, 1);
+
+                    b.Property<int>("BlogId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Img")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("BlogImgId");
+
+                    b.HasIndex("BlogId");
+
+                    b.ToTable("BlogImgs", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.BlogPost", b =>
@@ -122,6 +144,10 @@ namespace DataAccess.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PostId"), 1L, 1);
+
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Content")
                         .IsRequired()
@@ -138,6 +164,10 @@ namespace DataAccess.Migrations
 
                     b.Property<bool>("IsTrending")
                         .HasColumnType("bit");
+
+                    b.Property<string>("Tags")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -163,7 +193,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("BlogPosts");
+                    b.ToTable("BlogPosts", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.Bookmark", b =>
@@ -186,7 +216,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Bookmarks");
+                    b.ToTable("Bookmarks", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.Classroom", b =>
@@ -222,13 +252,13 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("SpecializationId");
 
-                    b.ToTable("Classrooms");
+                    b.ToTable("Classrooms", (string)null);
 
                     b.HasData(
                         new
                         {
                             ClassroomId = -1,
-                            CreatedAt = new DateTime(2024, 9, 22, 6, 44, 26, 791, DateTimeKind.Utc).AddTicks(2460),
+                            CreatedAt = new DateTime(2024, 9, 27, 4, 29, 37, 442, DateTimeKind.Utc).AddTicks(3952),
                             LinkUrl = "http://example.com/eng101",
                             Name = "Room 101",
                             Nickname = "Eng101",
@@ -238,7 +268,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = -2,
-                            CreatedAt = new DateTime(2024, 9, 22, 6, 44, 26, 791, DateTimeKind.Utc).AddTicks(2460),
+                            CreatedAt = new DateTime(2024, 9, 27, 4, 29, 37, 442, DateTimeKind.Utc).AddTicks(3953),
                             LinkUrl = "http://example.com/chi102",
                             Name = "Room 102",
                             Nickname = "Chi102",
@@ -248,7 +278,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = -3,
-                            CreatedAt = new DateTime(2024, 9, 22, 6, 44, 26, 791, DateTimeKind.Utc).AddTicks(2460),
+                            CreatedAt = new DateTime(2024, 9, 27, 4, 29, 37, 442, DateTimeKind.Utc).AddTicks(3954),
                             LinkUrl = "http://example.com/jap103",
                             Name = "Room 103",
                             Nickname = "Jap103",
@@ -258,7 +288,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = -4,
-                            CreatedAt = new DateTime(2024, 9, 22, 6, 44, 26, 791, DateTimeKind.Utc).AddTicks(2460),
+                            CreatedAt = new DateTime(2024, 9, 27, 4, 29, 37, 442, DateTimeKind.Utc).AddTicks(3955),
                             LinkUrl = "http://example.com/econmgmt104",
                             Name = "Room 104",
                             Nickname = "EconMgmt104",
@@ -268,7 +298,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = -5,
-                            CreatedAt = new DateTime(2024, 9, 22, 6, 44, 26, 791, DateTimeKind.Utc).AddTicks(2460),
+                            CreatedAt = new DateTime(2024, 9, 27, 4, 29, 37, 442, DateTimeKind.Utc).AddTicks(3956),
                             LinkUrl = "http://example.com/mkt105",
                             Name = "Room 105",
                             Nickname = "Mkt105",
@@ -278,7 +308,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = -6,
-                            CreatedAt = new DateTime(2024, 9, 22, 6, 44, 26, 791, DateTimeKind.Utc).AddTicks(2460),
+                            CreatedAt = new DateTime(2024, 9, 27, 4, 29, 37, 442, DateTimeKind.Utc).AddTicks(3957),
                             LinkUrl = "http://example.com/mediajourn106",
                             Name = "Room 106",
                             Nickname = "MediaJourn106",
@@ -288,7 +318,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = -7,
-                            CreatedAt = new DateTime(2024, 9, 22, 6, 44, 26, 791, DateTimeKind.Utc).AddTicks(2460),
+                            CreatedAt = new DateTime(2024, 9, 27, 4, 29, 37, 442, DateTimeKind.Utc).AddTicks(3958),
                             LinkUrl = "http://example.com/design107",
                             Name = "Room 107",
                             Nickname = "Design107",
@@ -298,7 +328,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = -8,
-                            CreatedAt = new DateTime(2024, 9, 22, 6, 44, 26, 791, DateTimeKind.Utc).AddTicks(2460),
+                            CreatedAt = new DateTime(2024, 9, 27, 4, 29, 37, 442, DateTimeKind.Utc).AddTicks(3959),
                             LinkUrl = "http://example.com/scitech108",
                             Name = "Room 108",
                             Nickname = "SciTech108",
@@ -308,7 +338,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = -9,
-                            CreatedAt = new DateTime(2024, 9, 22, 6, 44, 26, 791, DateTimeKind.Utc).AddTicks(2460),
+                            CreatedAt = new DateTime(2024, 9, 27, 4, 29, 37, 442, DateTimeKind.Utc).AddTicks(3960),
                             LinkUrl = "http://example.com/indconst109",
                             Name = "Room 109",
                             Nickname = "IndConst109",
@@ -318,7 +348,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = -10,
-                            CreatedAt = new DateTime(2024, 9, 22, 6, 44, 26, 791, DateTimeKind.Utc).AddTicks(2460),
+                            CreatedAt = new DateTime(2024, 9, 27, 4, 29, 37, 442, DateTimeKind.Utc).AddTicks(3961),
                             LinkUrl = "http://example.com/gensub110",
                             Name = "Room 110",
                             Nickname = "GenSub110",
@@ -354,7 +384,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Comments");
+                    b.ToTable("Comments", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.ContactInfo", b =>
@@ -365,37 +395,17 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ContactInfoId"), 1L, 1);
 
-                    b.Property<string>("City")
+                    b.Property<string>("ContactType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ContactName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ContactPhone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StreetAddress")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UploadedFilePath")
+                    b.Property<string>("Detail")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ContactInfoId");
 
-                    b.ToTable("ContactInfos");
+                    b.ToTable("ContactInfos", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.Data", b =>
@@ -421,7 +431,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Data");
+                    b.ToTable("Data", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.EncryptionKey", b =>
@@ -443,7 +453,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("DataId");
 
-                    b.ToTable("EncryptionKeys");
+                    b.ToTable("EncryptionKeys", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.FAQ", b =>
@@ -464,7 +474,29 @@ namespace DataAccess.Migrations
 
                     b.HasKey("FaqId");
 
-                    b.ToTable("FAQs");
+                    b.ToTable("FAQs", (string)null);
+                });
+
+            modelBuilder.Entity("DataAccess.Model.Feature", b =>
+                {
+                    b.Property<int>("FeatureId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FeatureId"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PackageId")
+                        .HasColumnType("int");
+
+                    b.HasKey("FeatureId");
+
+                    b.HasIndex("PackageId");
+
+                    b.ToTable("Features", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.FriendRequest", b =>
@@ -494,7 +526,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("RequesterId");
 
-                    b.ToTable("FriendRequests");
+                    b.ToTable("FriendRequests", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.Message", b =>
@@ -529,7 +561,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("SenderId");
 
-                    b.ToTable("Messages");
+                    b.ToTable("Messages", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.Notification", b =>
@@ -559,7 +591,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Notifications");
+                    b.ToTable("Notifications", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.Package", b =>
@@ -570,10 +602,6 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PackageId"), 1L, 1);
 
-                    b.Property<string>("Features")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -583,7 +611,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("PackageId");
 
-                    b.ToTable("Packages");
+                    b.ToTable("Packages", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.PaymentTransaction", b =>
@@ -651,7 +679,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("PaymentTransactions");
+                    b.ToTable("PaymentTransactions", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.PrivacySetting", b =>
@@ -668,7 +696,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("PrivacySettingId");
 
-                    b.ToTable("PrivacySettings");
+                    b.ToTable("PrivacySettings", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.Ranking", b =>
@@ -696,7 +724,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Rankings");
+                    b.ToTable("Rankings", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.Reaction", b =>
@@ -723,7 +751,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Reactions");
+                    b.ToTable("Reactions", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.RefreshToken", b =>
@@ -779,7 +807,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("SemesterId");
 
-                    b.ToTable("Semesters");
+                    b.ToTable("Semesters", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.Specialization", b =>
@@ -796,7 +824,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("SpecializationId");
 
-                    b.ToTable("Specializations");
+                    b.ToTable("Specializations", (string)null);
 
                     b.HasData(
                         new
@@ -877,7 +905,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("SupportTickets");
+                    b.ToTable("SupportTickets", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.Tasks", b =>
@@ -892,12 +920,17 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("ScheduledEndTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("ScheduledTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
 
                     b.Property<int>("TimeComplete")
                         .HasColumnType("int");
@@ -913,7 +946,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Tasks");
+                    b.ToTable("Tasks", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.User", b =>
@@ -951,13 +984,47 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("birthday")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("sex")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("UserId");
 
                     b.HasIndex("PrivacySettingId");
 
                     b.HasIndex("SemesterId");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
+                });
+
+            modelBuilder.Entity("DataAccess.Model.UserLike", b =>
+                {
+                    b.Property<int>("UserLikeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserLikeId"), 1L, 1);
+
+                    b.Property<int>("BlogId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserLikeId");
+
+                    b.HasIndex("BlogId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserLikes", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.UserSpecialization", b =>
@@ -986,7 +1053,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserSpecializations");
+                    b.ToTable("UserSpecializations", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Model.Account", b =>
@@ -1036,6 +1103,17 @@ namespace DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("DataAccess.Model.BlogImg", b =>
+                {
+                    b.HasOne("DataAccess.Model.BlogPost", "BlogPost")
+                        .WithMany("BlogImgs")
+                        .HasForeignKey("BlogId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("BlogPost");
                 });
 
             modelBuilder.Entity("DataAccess.Model.BlogPost", b =>
@@ -1118,6 +1196,17 @@ namespace DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("Data");
+                });
+
+            modelBuilder.Entity("DataAccess.Model.Feature", b =>
+                {
+                    b.HasOne("DataAccess.Model.Package", "Package")
+                        .WithMany("Feature")
+                        .HasForeignKey("PackageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Package");
                 });
 
             modelBuilder.Entity("DataAccess.Model.FriendRequest", b =>
@@ -1282,6 +1371,25 @@ namespace DataAccess.Migrations
                     b.Navigation("Semester");
                 });
 
+            modelBuilder.Entity("DataAccess.Model.UserLike", b =>
+                {
+                    b.HasOne("DataAccess.Model.BlogPost", "BlogPost")
+                        .WithMany("UserLikes")
+                        .HasForeignKey("BlogId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DataAccess.Model.User", "User")
+                        .WithMany("UserLikes")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("BlogPost");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("DataAccess.Model.UserSpecialization", b =>
                 {
                     b.HasOne("DataAccess.Model.Specialization", "Specialization")
@@ -1303,9 +1411,13 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DataAccess.Model.BlogPost", b =>
                 {
+                    b.Navigation("BlogImgs");
+
                     b.Navigation("Bookmarks");
 
                     b.Navigation("Comments");
+
+                    b.Navigation("UserLikes");
                 });
 
             modelBuilder.Entity("DataAccess.Model.Classroom", b =>
@@ -1317,6 +1429,8 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DataAccess.Model.Package", b =>
                 {
+                    b.Navigation("Feature");
+
                     b.Navigation("PaymentTransactions");
                 });
 
@@ -1357,6 +1471,8 @@ namespace DataAccess.Migrations
                     b.Navigation("RefreshTokens");
 
                     b.Navigation("SentFriendRequests");
+
+                    b.Navigation("UserLikes");
 
                     b.Navigation("UserSpecializations");
                 });

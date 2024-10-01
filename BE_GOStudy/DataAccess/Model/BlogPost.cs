@@ -28,5 +28,9 @@ namespace DataAccess.Model
         public DateTime CreatedAt { get; set; }
         public ICollection<Bookmark> Bookmarks { get; set; }
         public ICollection<Comment> Comments { get; set; }
+
+        public ICollection<BlogImg> BlogImgs { get; set; }
+
+        public ICollection<UserLike> UserLikes { get; set; }
     }
 }

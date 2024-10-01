@@ -23,6 +23,12 @@ namespace DataAccess.Model
 
         public string ProfileImage { get; set; }
 
+        public DateTime birthday { get; set; }
+
+        public string sex { get; set; }
+
+        public string phone { get; set; }
+
         public int? PrivacySettingId { get; set; }
         [ForeignKey("PrivacySettingId")]
         public PrivacySetting PrivacySetting { get; set; }
@@ -45,6 +51,8 @@ namespace DataAccess.Model
         public ICollection<Attendance> Attendances { get; set; }
         public ICollection<RefreshToken> RefreshTokens { get; set; }
         public ICollection<PaymentTransaction> PaymentTransactions { get; set; }
+
+        public ICollection<UserLike> UserLikes { get; set; }
         // Removed direct relationship with
     }
 }

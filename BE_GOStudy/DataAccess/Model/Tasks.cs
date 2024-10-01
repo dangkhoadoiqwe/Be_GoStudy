@@ -22,13 +22,17 @@ namespace DataAccess.Model
 
         public int TimeComplete {  get; set; }
 
+        public bool IsDeleted { get; set; }
+
         public string Description { get; set; }
 
         [Required]
         public DateTime ScheduledTime { get; set; }
 
+        public DateTime ScheduledEndTime { get; set; }
+
         [Required]
-        public string Status { get; set; }
+        public bool Status { get; set; }
         public ICollection<Notification> Notifications { get; set; }
 
         public ICollection<Analytic> Analytics { get; set; }

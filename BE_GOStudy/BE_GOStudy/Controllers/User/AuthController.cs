@@ -43,15 +43,17 @@ public class AuthController : ControllerBase
 
             // Convert Google token info to custom token format
             var customTokenInfo = ConvertToCustomFormat(googleTokenInfo);
+           
+                // Generate JWT token
+                var appUser = _userService.ConvertToAppUser(user);
 
-            // Generate JWT token
-            var appUser = _userService.ConvertToAppUser(user);
+                // Generate JWT token using AppUser
+                var jwtToken = _jwtService.GenerateJwtToken(user);
 
-            // Generate JWT token using AppUser
-            var jwtToken = _jwtService.GenerateJwtToken(user);
-
-            // Return the token
-            return Ok(new { Token = jwtToken });
+                // Return the token
+                return Ok(new { Token = jwtToken });
+            
+            
         }
 
         return BadRequest("Invalid ID token.");

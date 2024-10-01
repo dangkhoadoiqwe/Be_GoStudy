@@ -26,8 +26,7 @@ public class PaymentTransactionDto
         public string PaymentRefId { get; set; } = string.Empty; // Mã tham chiếu thanh toán
         public int PackageID { get; set; } // ID của gói dịch vụ
         public int UserId { get; set; } // ID của người dùng
-        public string PaymentMethod { get; set; } // Phương thức thanh toán
-
+        public string PaymentMethod { get; set; } // Phương thức thanh toán 
         [Required]
         public string BuyerName { get; set; } // Tên người mua
         [Required]
@@ -40,7 +39,11 @@ public class PaymentTransactionDto
         [Required]
         public string Description { get; set; } // Mô tả chi tiết về giao dịch
     }
-
+    public class PaymentStatusViewModel
+    {
+        public string PaymentRefId { get; set; }
+        public string Status { get; set; }
+    }
     public class PaymentLink
     {
         public string PaymentId { get; set; } = string.Empty;
@@ -57,6 +60,8 @@ public class PaymentTransactionDto
         public string PaymentMethod { get; set; }
         public decimal Amount { get; set; }
     }
+
+
     public class UpdateStatusDto
     {
         public int TransactionId { get; set; }

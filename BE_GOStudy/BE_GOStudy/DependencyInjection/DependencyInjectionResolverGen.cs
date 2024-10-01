@@ -16,6 +16,7 @@ using GO_Study_Logic.Service.VNPAY;
 using GO_Study_Logic.Service.Interface;
 using GOStudy_Logic.Service;
 
+
 namespace BE_GOStudy.DependencyInjection
 {
     public static class DependencyInjectionResolverGen
@@ -44,9 +45,6 @@ namespace BE_GOStudy.DependencyInjection
 
             services.AddScoped<IBlogPostService, BlogPostService>();
             services.AddScoped<IBlogPostRepository, BlogPostRepository>();
-            
-            services.AddScoped<ICommentService, CommentService>();
-            services.AddScoped<ICommentRepository, CommentRepository>();
 
             services.AddScoped<IPaymentTransactionRepository, PaymentTransactionRepository>(); 
             services.AddScoped<IPaymentService, PaymentService>();
@@ -60,13 +58,14 @@ namespace BE_GOStudy.DependencyInjection
 
             services.AddScoped<IAttendanceService, AttendanceService>();
             services.AddScoped<IAttendanceRepository, AttendanceRepository>();
-            
+
             services.AddScoped<ISqlService, SqlService>();
             services.AddScoped<ICurrentUserService, CurrentUserService>();
             services.AddScoped<IConnectionService, ConnectionService>();
             
-    //Test
-    services.AddScoped<ContactInfoService>();
+            services.AddScoped<ICommentService, CommentService>();
+            services.AddScoped<ICommentRepository, CommentRepository>();
+
 
         }
     }

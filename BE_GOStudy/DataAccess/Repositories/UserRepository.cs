@@ -1,10 +1,12 @@
-
+﻿
 using Microsoft.EntityFrameworkCore; 
 using System.Linq.Expressions;
 using System.Xml.Linq;
 using DataAccess.Model;
+
 using NTQ.Sdk.Core.BaseConnect;
 using System.Linq.Dynamic.Core.Tokenizer;
+using static DataAccess.Repositories.UserRepository;
 namespace DataAccess.Repositories
 {
 
@@ -21,9 +23,10 @@ namespace DataAccess.Repositories
         Task<PrivacySetting?> GetPrivacySettingByuserIDAsync(int userid);
         Task<BlogPost?> Get1BlogPostAsync(int id);
         Task<int> TotalAttendance(int userid);
-
+        Task UpdateUserAsync(User user);
         Task<bool> CheckToken(int userid);
         Task<IEnumerable<Analytic>> GetUserIdAnalyticAsync(int userid);
+        Task<IEnumerable<SpecializationUserDetailViewModel>> GetSpecializationDetailsByUserIdAsync(int userId);
     }
     public partial class UserRepository : BaseRepository<User>, IUserRepository
     
@@ -42,7 +45,31 @@ namespace DataAccess.Repositories
         {
             return await _dbContext.Set<User>().FindAsync(id);
         }
-        
+       
+        public async Task<IEnumerable<SpecializationUserDetailViewModel>> GetSpecializationDetailsByUserIdAsync(int userId)
+        {
+            var currentDate = DateTime.Now;
+
+            var specializations = await _dbContext.Set<UserSpecialization>()
+                .Where(us => us.UserId == userId)
+                .Join(
+                    _dbContext.Set<Specialization>(),
+                    us => us.SpecializationId,
+                    s => s.SpecializationId,
+                    (us, s) => new SpecializationUserDetailViewModel
+                    {
+                        SpecializationName = s.Name,
+                        Status = (currentDate - us.DateStart).Days > 60 // true if > 60 days, else false
+                    }
+                )
+                .ToListAsync();
+
+            return specializations;
+        }
+
+
+
+
 
         public async Task<IEnumerable<Ranking>> GetAllRankingAsync()
         {
@@ -53,6 +80,27 @@ namespace DataAccess.Repositories
         {
             return await _dbContext.Set<Tasks>().Where(t => t.UserId == userId ).ToListAsync();
         }
+        public async Task UpdateUserAsync(User user)
+        {
+            var existingUser = await _dbContext.Set<User>().FindAsync(user.UserId);
+            if (existingUser == null)
+            {
+                throw new Exception("User not found.");
+            }
+
+            // Update the user entity with modified fields
+            existingUser.FullName = user.FullName;
+            existingUser.PasswordHash = user.PasswordHash;
+            existingUser.ProfileImage = user.ProfileImage;
+            existingUser.phone = user.phone;
+            existingUser.birthday = user.birthday;
+            existingUser.sex = user.sex;
+
+            // Mark the user as modified and save changes
+            _dbContext.Set<User>().Update(existingUser);
+            await _dbContext.SaveChangesAsync();
+        }
+
 
         public async Task<IEnumerable<Attendance>> GetUserIdAtendanceAsync(int id)
         {
@@ -92,12 +140,17 @@ namespace DataAccess.Repositories
                 .CountAsync(a => a.UserId == userid);
         }
 
-        
+        public class SpecializationUserDetailViewModel
+        {
+            public string SpecializationName { get; set; }
+            public bool Status { get; set; }
+        }
+
 
         public async Task<bool> CheckToken(int userid)
         {
             var tokenExists = await _dbContext.Set<RefreshToken>()
-       .AnyAsync(token => token.UserId == userid && token.IsUsed == true);
+       .AnyAsync(token => token.UserId == userid );
 
             return tokenExists;
         }

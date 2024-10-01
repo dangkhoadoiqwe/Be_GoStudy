@@ -16,7 +16,7 @@ namespace BE_GOStudy.Controllers.Room
             _userService = userService;
         }
 
-        [HttpGet("AllClassUser/{userid}")]
+        [HttpGet("AllClass(User)/{userid}")]
         public async Task<IActionResult> GetAllClassroomsforUserID(int userid)
         {
             try
@@ -34,8 +34,8 @@ namespace BE_GOStudy.Controllers.Room
                 return StatusCode(500, "Internal server error");
             }
         }
-
-        [HttpGet("AllClassroomsAdmin/{userid}")]
+      
+        [HttpGet("AllClassrooms(Admin)/{userid}")]
         public async Task<IActionResult> GetAllClassroomsforAdmin(int userid)
         {
             try
@@ -77,7 +77,7 @@ namespace BE_GOStudy.Controllers.Room
             }
         }
 
-        [HttpGet("MeetingRoom/{userid}")]
+        [HttpGet("GetMeetingRoom(User)/{userid}")]
         public async Task<IActionResult> GetMeetingRoom(int userid)
         {
             try

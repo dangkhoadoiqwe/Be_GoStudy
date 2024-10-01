@@ -16,6 +16,7 @@ namespace DataAccess.Model
         public DateTime ExpriedAt { get; set; }
         public string JwtId { get; set; } = null!;
         public bool IsUsed { get; set; }
+    //    public string AccessTokenGoogle { get; set; } = null!;
         public bool IsRevoked { get; set; }
         public int UserId { get; set; }
         [ForeignKey("UserId")] 

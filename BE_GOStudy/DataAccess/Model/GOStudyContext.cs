@@ -37,7 +37,10 @@ namespace DataAccess.Model
         public DbSet<PaymentTransaction> PaymentTransactions { get; set; }
         public virtual DbSet<RefreshToken> RefreshTokens { get; set; } = null!;
         public DbSet<UserSpecialization> UserSpecializations { get; set; }
+        public DbSet<BlogImg> BlogImgs { get; set; }
 
+        public DbSet<Feature> Features { get; set; }
+        public DbSet<UserLike> UserLikes { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var connectionString = _configuration.GetConnectionString("DefaultConnection");
@@ -68,6 +71,31 @@ namespace DataAccess.Model
             modelBuilder.Entity<Ranking>()
                 .Property(r => r.PerformanceScore)
                 .HasColumnType("decimal(18,2)");
+
+            modelBuilder.Entity<UserLike>()
+             .HasOne(ul => ul.User)
+             .WithMany(u => u.UserLikes)
+             .HasForeignKey(ul => ul.UserId)
+             .OnDelete(DeleteBehavior.NoAction); // Prevent cascading delete
+
+            modelBuilder.Entity<Package>()
+          .HasMany(p => p.Feature)
+          .WithOne(f => f.Package)
+          .HasForeignKey(f => f.PackageId)
+          .OnDelete(DeleteBehavior.Cascade);
+
+            // Foreign key for BlogId (cascade delete allowed)
+            modelBuilder.Entity<UserLike>()
+                .HasOne(ul => ul.BlogPost)
+                .WithMany(bp => bp.UserLikes)
+                .HasForeignKey(ul => ul.BlogId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<BlogImg>()
+           .HasOne(bi => bi.BlogPost)
+           .WithMany(bp => bp.BlogImgs)
+           .HasForeignKey(bi => bi.BlogId)
+           .OnDelete(DeleteBehavior.Cascade);
 
             // FriendRequest relationships
             modelBuilder.Entity<FriendRequest>()

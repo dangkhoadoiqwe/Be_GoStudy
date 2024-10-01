@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using DataAccess.Model;
+using static DataAccess.Repositories.UserRepository;
 
 namespace GO_Study_Logic.ViewModel.User
 {
@@ -23,6 +24,7 @@ namespace GO_Study_Logic.ViewModel.User
         public int UserId { get; set; }
     }
 
+  
 
     public class FriendRequest_View_Model
     {
@@ -63,7 +65,10 @@ namespace GO_Study_Logic.ViewModel.User
        
         public string ProfileImage { get; set; }
 
+        public string PakageUser { get; set; }
+
         public int totalAttendace { get; set; }
+        public BlogPost_View_Model BlogPost { get; set; }
         public PrivacySetting_View_Model PrivacySetting { get; set; }  
 
         public List<Analytic_View_Model> Analytics { get; set; } = new List<Analytic_View_Model>(); 
@@ -74,6 +79,9 @@ namespace GO_Study_Logic.ViewModel.User
 
         public List<FriendRequest_View_Model> FriendRequests { get; set; } = new List<FriendRequest_View_Model>();
 
-        public BlogPost_View_Model BlogPost { get; set; } 
+        public List<SpecializationUserDetailViewModel> SpecializationUserDetails { get; set; } = new List<SpecializationUserDetailViewModel>();
+
+
+        public List<TaskViewModel> taskViewModels { get; set; } = new List<TaskViewModel>();
     }
 }

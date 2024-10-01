@@ -23,6 +23,8 @@ namespace GO_Study_Logic.AutoMapperModule
             mc.CreateMap<User, GoogleTokenInfo>().ReverseMap();
             mc.CreateMap<User, AppUser>().ReverseMap();
             mc.CreateMap<User, TokenModel>().ReverseMap();
+
+            mc.CreateMap<User, updateUserProfileModel>().ReverseMap();
             mc.CreateMap<Analytic, Analytic_View_Model>().ReverseMap();
 
             mc.CreateMap<Attendance, Attendance_View_Model>().ReverseMap(); 

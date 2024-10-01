@@ -6,6 +6,7 @@ using GO_Study_Logic.ViewModel.User;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
@@ -25,6 +26,10 @@ namespace GO_Study_Logic.Service
 
         Task<UserViewModel> GetById(int userId);
         string GenerateJwtToken(CustomTokenInfo customTokenInfo, string secretKey);
+
+        Task<bool> checktoken(int userid);
+
+        Task<bool> UpdateUserProfileAsync(int userId, updateUserProfileModel userProfileModel);
     }
     public class UserService : IUserService
     {
@@ -32,13 +37,18 @@ namespace GO_Study_Logic.Service
         private readonly IMapper _mapper;
         private readonly ISemestersRepository _semestersRepository;
         private readonly ISpecializationRepository _specializationRepository;
+        public readonly ITaskRepository _taskRepository;
+        public readonly IPackageRepository _packageRepository;
+
         public UserService(IUserRepository userRepository, IMapper mapper, ISemestersRepository semestersRepository
-            , ISpecializationRepository specializationRepository )
+            , ISpecializationRepository specializationRepository ,ITaskRepository taskRepository, IPackageRepository packageRepository)
         {
             _userRepository = userRepository;
             _mapper = mapper;
             _semestersRepository = semestersRepository;
             _specializationRepository = specializationRepository;
+            _taskRepository = taskRepository;
+            _packageRepository = packageRepository;
         }
         public async Task<UserViewModel> GetById(int userId)
         {
@@ -53,10 +63,60 @@ namespace GO_Study_Logic.Service
                 FullName = user.FullName,
                 Email = user.Email,
                 ProfileImage = user.ProfileImage,
-                UserId = user.UserId,  
+               UserId = user.UserId,  
                                       
             };
         }
+        public async Task<bool> UpdateUserProfileAsync(int userId, updateUserProfileModel userProfileModel)
+        {
+            try
+            {
+                var user = await _userRepository.GetByIdAsync(userId);
+                if (user == null)
+                {
+                    throw new Exception("User not found.");
+                }
+
+                // Only update fields that are not default or placeholder values
+                user.FullName = !string.IsNullOrEmpty(userProfileModel.FullName) && userProfileModel.FullName != "string"
+                                ? userProfileModel.FullName
+                                : user.FullName;
+
+                user.PasswordHash = !string.IsNullOrEmpty(userProfileModel.PasswordHash) && userProfileModel.PasswordHash != "string"
+                                    ? userProfileModel.PasswordHash
+                                    : user.PasswordHash;
+
+                user.ProfileImage = !string.IsNullOrEmpty(userProfileModel.ProfileImage) && userProfileModel.ProfileImage != "string"
+                                    ? userProfileModel.ProfileImage
+                                    : user.ProfileImage;
+
+                user.phone = !string.IsNullOrEmpty(userProfileModel.Phone) && userProfileModel.Phone != "string"
+                             ? userProfileModel.Phone
+                             : user.phone;
+
+                user.birthday = userProfileModel.Birthday != DateTime.MinValue
+                                ? userProfileModel.Birthday
+                                : user.birthday;
+
+                user.sex = !string.IsNullOrEmpty(userProfileModel.Sex) && userProfileModel.Sex != "string"
+                           ? userProfileModel.Sex
+                           : user.sex;
+
+                // Update the user in the repository
+                await _userRepository.UpdateUserAsync(user);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error updating user profile: {ex.Message}");
+                throw;  // Re-throw the exception after logging it
+            }
+        }
+
+
+
+
 
         public async Task<User_View_Home_Model> GetHomeUserID(int userid)
         {
@@ -72,8 +132,11 @@ namespace GO_Study_Logic.Service
             var rankings = await _userRepository.GetAllRankingAsync();
             var privacySetting = await _userRepository.GetPrivacySettingByuserIDAsync(userid);
             var anlyst = await _userRepository.GetUserIdAnalyticAsync(userid);
-
-
+            var tasks = await _taskRepository.GetTaskByUserIdForToday(userid);
+            var packageUser = await _packageRepository.GetPackageNamesByUserIdAsync(userid);
+            var GetSpecializationDetails = await _userRepository.GetSpecializationDetailsByUserIdAsync(userid);
+            var specializationUserDetails = GetSpecializationDetails.ToList();
+            var taskviewmodel = _mapper.Map<List<TaskViewModel>>(tasks);
             var attendanceViewModels = _mapper.Map<List<Attendance_View_Model>>(attendances);
             var blogPostViewModel = _mapper.Map<BlogPost_View_Model>(blogPost);
             var friendRequestViewModels = _mapper.Map<List<FriendRequest_View_Model>>(friendRequests);
@@ -87,12 +150,15 @@ namespace GO_Study_Logic.Service
                 FullName = user.FullName,
                 Email = user.Email, 
                 ProfileImage = user.ProfileImage,
+                PakageUser = packageUser != null && packageUser.Any() ? string.Join(", ", packageUser) : "NO package",
+                SpecializationUserDetails = specializationUserDetails,
                 BlogPost = blogPostViewModel,
                 Rankings = rankingViewModels, 
                 Attendances = attendanceViewModels,
                 PrivacySetting = privacySettingViewModel,
                 Analytics = anaylystViewModel,
                 FriendRequests = friendRequestViewModels,
+                taskViewModels = taskviewmodel,
                 totalAttendace = totalattendance
             };
 
@@ -119,6 +185,9 @@ namespace GO_Study_Logic.Service
                     PrivacySettingId = 1,
                     Role = 1,
                     SemesterId = 1,
+                    phone ="NoPhone",
+                    sex ="Nosex",
+                    birthday =  DateTime.Today,
                 };
 
                 // Save the new AppUser to the database
@@ -180,11 +249,10 @@ namespace GO_Study_Logic.Service
                 return null; // Handle user not found scenario
             }
             var semsterss = await _semestersRepository.GetByIdAsync(user.SemesterId);
-       //     var Specialization = await _specializationRepository.GetByIdAsync(user.SpecializationId);
+         var Specialization = await _specializationRepository.GetAllSpecializationsByUserIDAsync(userid);
             var privacySetting = await _userRepository.GetPrivacySettingByuserIDAsync(userid);
-
-
-         //   var SpecializationViewModel = _mapper.Map<Specialization_View_Model>(Specialization);
+           
+            var SpecializationViewModel = _mapper.Map<List<Specialization_View_Model>>(Specialization);
             var semsterViewModel = _mapper.Map<Semester_View_Model>(semsterss);
             var privacySettingViewModel = _mapper.Map<PrivacySetting_View_Model>(privacySetting);
             var userProfile = new UserProfileModel
@@ -193,12 +261,22 @@ namespace GO_Study_Logic.Service
                 FullName = user.FullName,
                 Semester  = semsterViewModel,
                 Email = user.Email,
-             //   Specialization = SpecializationViewModel,
+              Specialization = SpecializationViewModel,
                 ProfileImage = user.ProfileImage,
                 PrivacySetting = privacySettingViewModel,
-                PasswordHash = user.PasswordHash 
+                PasswordHash = user.PasswordHash ,
+                role = user.Role,
+                birthday = user.birthday,
+                sex = user.sex,
+                phone = user.phone,
             };
             return userProfile;
+        }
+
+        public async Task<bool> checktoken(int userid)
+        {
+            var usercheck = await _userRepository.CheckToken(userid);
+            return usercheck;
         }
     }
 }

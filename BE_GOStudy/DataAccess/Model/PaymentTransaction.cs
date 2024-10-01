@@ -42,6 +42,8 @@ namespace DataAccess.Model
         public string PaymentLanguage { get; set; } = "vn"; // Ngôn ngữ thanh toán
         public string MerchantId { get; set; } = string.Empty; // ID của người bán
         public string PaymentDestinationId { get; set; } = string.Empty; // ID của điểm đến thanh toán
+
+        
     }
 
 }
