@@ -9,17 +9,22 @@ namespace DataAccess.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "Category",
-                table: "BlogPosts",
-                type: "nvarchar(max)",
-                nullable: true);
+            var columnExistsCheck1 = @"IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS 
+                                WHERE TABLE_NAME = 'BlogPosts' AND COLUMN_NAME = 'Category')
+                            BEGIN
+                                ALTER TABLE [BlogPosts] ADD [Category] nvarchar(max) NULL;
+                            END";
 
-            migrationBuilder.AddColumn<string>(
-                name: "Tags",
-                table: "BlogPosts",
-                type: "nvarchar(max)",
-                nullable: true);
+            migrationBuilder.Sql(columnExistsCheck1);
+
+            // Kiểm tra nếu cột 'Tags' chưa tồn tại trong bảng 'BlogPosts' thì mới thêm
+            var columnExistsCheck2 = @"IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS 
+                                WHERE TABLE_NAME = 'BlogPosts' AND COLUMN_NAME = 'Tags')
+                            BEGIN
+                                ALTER TABLE [BlogPosts] ADD [Tags] nvarchar(max) NULL;
+                            END";
+
+            migrationBuilder.Sql(columnExistsCheck2);
             
             migrationBuilder.UpdateData(
                 table: "Classrooms",
