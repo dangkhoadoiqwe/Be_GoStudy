@@ -9,6 +9,9 @@
       - ConnectionStrings__DefaultConnection=${CONNECTION_STRING}
     ports:
       - "8080:80"
+    labels:
+      io.portainer.accesscontrol.teams: go-study
+    restart: always
     networks:
       - go-study-networks
   
