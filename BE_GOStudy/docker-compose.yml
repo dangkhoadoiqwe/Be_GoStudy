@@ -11,6 +11,7 @@
       - "8080:80"
     labels:
       io.portainer.accesscontrol.teams: go-study
+      io.portainer.accesscontrol.restricted
     restart: always
     networks:
       - go-study-networks
