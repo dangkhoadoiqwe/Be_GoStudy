@@ -4362,11 +4362,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/toanphuc/Desktop/EXE/BEGoStudy/temp-khoa/Be_GoStudy/BE_GOStudy/BE_GOStudy/BE_GOStudy.csproj",
+      "projectUniqueName": "/Users/toanphuc/Desktop/PRM/BE/Be_GoStudy/BE_GOStudy/BE_GOStudy/BE_GOStudy.csproj",
       "projectName": "BE_GOStudy",
-      "projectPath": "/Users/toanphuc/Desktop/EXE/BEGoStudy/temp-khoa/Be_GoStudy/BE_GOStudy/BE_GOStudy/BE_GOStudy.csproj",
+      "projectPath": "/Users/toanphuc/Desktop/PRM/BE/Be_GoStudy/BE_GOStudy/BE_GOStudy/BE_GOStudy.csproj",
       "packagesPath": "/Users/toanphuc/.nuget/packages/",
-      "outputPath": "/Users/toanphuc/Desktop/EXE/BEGoStudy/temp-khoa/Be_GoStudy/BE_GOStudy/BE_GOStudy/obj/",
+      "outputPath": "/Users/toanphuc/Desktop/PRM/BE/Be_GoStudy/BE_GOStudy/BE_GOStudy/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/toanphuc/.nuget/NuGet/NuGet.Config"
@@ -4382,8 +4382,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "/Users/toanphuc/Desktop/EXE/BEGoStudy/temp-khoa/Be_GoStudy/BE_GOStudy/GOStudy_Logic/GOStudy_Logic.csproj": {
-              "projectPath": "/Users/toanphuc/Desktop/EXE/BEGoStudy/temp-khoa/Be_GoStudy/BE_GOStudy/GOStudy_Logic/GOStudy_Logic.csproj"
+            "/Users/toanphuc/Desktop/PRM/BE/Be_GoStudy/BE_GOStudy/GOStudy_Logic/GOStudy_Logic.csproj": {
+              "projectPath": "/Users/toanphuc/Desktop/PRM/BE/Be_GoStudy/BE_GOStudy/GOStudy_Logic/GOStudy_Logic.csproj"
             }
           }
         }

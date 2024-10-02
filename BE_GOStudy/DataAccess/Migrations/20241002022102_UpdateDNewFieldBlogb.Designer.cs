@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(GOStudyContext))]
-    [Migration("20240927042937_UpdateTask")]
-    partial class UpdateTask
+    [Migration("20241002022102_UpdateDNewFieldBlogb")]
+    partial class UpdateDNewFieldBlogb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -260,7 +260,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = -1,
-                            CreatedAt = new DateTime(2024, 9, 27, 4, 29, 37, 442, DateTimeKind.Utc).AddTicks(3952),
+                            CreatedAt = new DateTime(2024, 10, 2, 2, 21, 1, 912, DateTimeKind.Utc).AddTicks(3060),
                             LinkUrl = "http://example.com/eng101",
                             Name = "Room 101",
                             Nickname = "Eng101",
@@ -270,7 +270,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = -2,
-                            CreatedAt = new DateTime(2024, 9, 27, 4, 29, 37, 442, DateTimeKind.Utc).AddTicks(3953),
+                            CreatedAt = new DateTime(2024, 10, 2, 2, 21, 1, 912, DateTimeKind.Utc).AddTicks(3060),
                             LinkUrl = "http://example.com/chi102",
                             Name = "Room 102",
                             Nickname = "Chi102",
@@ -280,7 +280,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = -3,
-                            CreatedAt = new DateTime(2024, 9, 27, 4, 29, 37, 442, DateTimeKind.Utc).AddTicks(3954),
+                            CreatedAt = new DateTime(2024, 10, 2, 2, 21, 1, 912, DateTimeKind.Utc).AddTicks(3060),
                             LinkUrl = "http://example.com/jap103",
                             Name = "Room 103",
                             Nickname = "Jap103",
@@ -290,7 +290,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = -4,
-                            CreatedAt = new DateTime(2024, 9, 27, 4, 29, 37, 442, DateTimeKind.Utc).AddTicks(3955),
+                            CreatedAt = new DateTime(2024, 10, 2, 2, 21, 1, 912, DateTimeKind.Utc).AddTicks(3070),
                             LinkUrl = "http://example.com/econmgmt104",
                             Name = "Room 104",
                             Nickname = "EconMgmt104",
@@ -300,7 +300,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = -5,
-                            CreatedAt = new DateTime(2024, 9, 27, 4, 29, 37, 442, DateTimeKind.Utc).AddTicks(3956),
+                            CreatedAt = new DateTime(2024, 10, 2, 2, 21, 1, 912, DateTimeKind.Utc).AddTicks(3070),
                             LinkUrl = "http://example.com/mkt105",
                             Name = "Room 105",
                             Nickname = "Mkt105",
@@ -310,7 +310,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = -6,
-                            CreatedAt = new DateTime(2024, 9, 27, 4, 29, 37, 442, DateTimeKind.Utc).AddTicks(3957),
+                            CreatedAt = new DateTime(2024, 10, 2, 2, 21, 1, 912, DateTimeKind.Utc).AddTicks(3070),
                             LinkUrl = "http://example.com/mediajourn106",
                             Name = "Room 106",
                             Nickname = "MediaJourn106",
@@ -320,7 +320,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = -7,
-                            CreatedAt = new DateTime(2024, 9, 27, 4, 29, 37, 442, DateTimeKind.Utc).AddTicks(3958),
+                            CreatedAt = new DateTime(2024, 10, 2, 2, 21, 1, 912, DateTimeKind.Utc).AddTicks(3070),
                             LinkUrl = "http://example.com/design107",
                             Name = "Room 107",
                             Nickname = "Design107",
@@ -330,7 +330,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = -8,
-                            CreatedAt = new DateTime(2024, 9, 27, 4, 29, 37, 442, DateTimeKind.Utc).AddTicks(3959),
+                            CreatedAt = new DateTime(2024, 10, 2, 2, 21, 1, 912, DateTimeKind.Utc).AddTicks(3070),
                             LinkUrl = "http://example.com/scitech108",
                             Name = "Room 108",
                             Nickname = "SciTech108",
@@ -340,7 +340,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = -9,
-                            CreatedAt = new DateTime(2024, 9, 27, 4, 29, 37, 442, DateTimeKind.Utc).AddTicks(3960),
+                            CreatedAt = new DateTime(2024, 10, 2, 2, 21, 1, 912, DateTimeKind.Utc).AddTicks(3070),
                             LinkUrl = "http://example.com/indconst109",
                             Name = "Room 109",
                             Nickname = "IndConst109",
@@ -350,7 +350,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = -10,
-                            CreatedAt = new DateTime(2024, 9, 27, 4, 29, 37, 442, DateTimeKind.Utc).AddTicks(3961),
+                            CreatedAt = new DateTime(2024, 10, 2, 2, 21, 1, 912, DateTimeKind.Utc).AddTicks(3070),
                             LinkUrl = "http://example.com/gensub110",
                             Name = "Room 110",
                             Nickname = "GenSub110",
@@ -389,43 +389,42 @@ namespace DataAccess.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity<ContactInfo>(b =>
-            {
-                b.Property<int>("ContactInfoId")
-                    .ValueGeneratedOnAdd()
-                    .HasColumnType("int");
+            modelBuilder.Entity("DataAccess.Model.ContactInfo", b =>
+                {
+                    b.Property<int>("ContactInfoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ContactInfoId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ContactInfoId"), 1L, 1);
 
-                b.Property<string>("ContactName")
-                    .IsRequired()
-                    .HasColumnType("nvarchar(max)");
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
 
-                b.Property<string>("StreetAddress")
-                    .HasColumnType("nvarchar(max)");
+                    b.Property<string>("ContactName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                b.Property<string>("City")
-                    .HasColumnType("nvarchar(max)");
+                    b.Property<string>("ContactPhone")
+                        .HasColumnType("nvarchar(max)");
 
-                b.Property<string>("ContactPhone")
-                    .HasColumnType("nvarchar(max)");
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                b.Property<string>("Email")
-                    .IsRequired()
-                    .HasColumnType("nvarchar(max)");
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                b.Property<string>("Content")
-                    .IsRequired()
-                    .HasColumnType("nvarchar(max)");
-                
-                b.Property<string>("UploadedFilePath")
-                    .HasColumnType("nvarchar(max)");
+                    b.Property<string>("StreetAddress")
+                        .HasColumnType("nvarchar(max)");
 
-                b.HasKey("ContactInfoId");
+                    b.Property<string>("UploadedFilePath")
+                        .HasColumnType("nvarchar(max)");
 
-                b.ToTable("ContactInfos");
-            });
+                    b.HasKey("ContactInfoId");
 
+                    b.ToTable("ContactInfos");
+                });
 
             modelBuilder.Entity("DataAccess.Model.Data", b =>
                 {

@@ -9,19 +9,6 @@ namespace DataAccess.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "Category",
-                table: "BlogPosts");
-
-            migrationBuilder.DropColumn(
-                name: "Tags",
-                table: "BlogPosts");
-
-            migrationBuilder.RenameColumn(
-                name: "Detail",
-                table: "ContactInfos",
-                newName: "UploadedFilePath");
-
             migrationBuilder.RenameColumn(
                 name: "ContactType",
                 table: "ContactInfos",
