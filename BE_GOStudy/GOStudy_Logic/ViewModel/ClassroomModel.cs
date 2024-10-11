@@ -30,6 +30,10 @@ namespace GO_Study_Logic.ViewModel
     }
     public class AllClassModel
     {
+        public List<FriendRequest_View_Model> FriendRecipient { get; set; } = new List<FriendRequest_View_Model>();
+        public List<FriendViewModel> ListFriend { get; set; } = new List<FriendViewModel>();
+        public UserViewModel user { get; set; }
+        public IEnumerable<FriendRequest_View_Model> FriendRequests { get; set; }
         public IEnumerable<ClassroomModel> ClassUser { get; set; }
 
         public IEnumerable<ClassroomModel> Classroom { get; set; }
@@ -64,7 +68,11 @@ namespace GO_Study_Logic.ViewModel
     {
         public UserViewModel user { get; set; }
         public IEnumerable<FriendRequest_View_Model> FriendRequests { get; set; }
+        
         public IEnumerable<ClassroomModel> UserRooms { get; set; }
         public IEnumerable<ClassroomModel> OtherClassrooms { get; set; }
+
+        public List<FriendRequest_View_Model> FriendRecipient { get; set; } = new List<FriendRequest_View_Model>();
+        public List<FriendViewModel> ListFriend { get; set; } = new List<FriendViewModel>();
     }
 }

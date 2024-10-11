@@ -389,43 +389,26 @@ namespace DataAccess.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity<ContactInfo>(b =>
-            {
-                b.Property<int>("ContactInfoId")
-                    .ValueGeneratedOnAdd()
-                    .HasColumnType("int");
+            modelBuilder.Entity("DataAccess.Model.ContactInfo", b =>
+                {
+                    b.Property<int>("ContactInfoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ContactInfoId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ContactInfoId"), 1L, 1);
 
-                b.Property<string>("ContactName")
-                    .IsRequired()
-                    .HasColumnType("nvarchar(max)");
+                    b.Property<string>("ContactType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                b.Property<string>("StreetAddress")
-                    .HasColumnType("nvarchar(max)");
+                    b.Property<string>("Detail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                b.Property<string>("City")
-                    .HasColumnType("nvarchar(max)");
+                    b.HasKey("ContactInfoId");
 
-                b.Property<string>("ContactPhone")
-                    .HasColumnType("nvarchar(max)");
-
-                b.Property<string>("Email")
-                    .IsRequired()
-                    .HasColumnType("nvarchar(max)");
-
-                b.Property<string>("Content")
-                    .IsRequired()
-                    .HasColumnType("nvarchar(max)");
-                
-                b.Property<string>("UploadedFilePath")
-                    .HasColumnType("nvarchar(max)");
-
-                b.HasKey("ContactInfoId");
-
-                b.ToTable("ContactInfos");
-            });
-
+                    b.ToTable("ContactInfos");
+                });
 
             modelBuilder.Entity("DataAccess.Model.Data", b =>
                 {

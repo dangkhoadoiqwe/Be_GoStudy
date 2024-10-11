@@ -258,7 +258,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = -1,
-                            CreatedAt = new DateTime(2024, 10, 2, 2, 21, 1, 912, DateTimeKind.Utc).AddTicks(3060),
+                            CreatedAt = new DateTime(2024, 9, 27, 4, 29, 37, 442, DateTimeKind.Utc).AddTicks(3952),
                             LinkUrl = "http://example.com/eng101",
                             Name = "Room 101",
                             Nickname = "Eng101",
@@ -268,7 +268,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = -2,
-                            CreatedAt = new DateTime(2024, 10, 2, 2, 21, 1, 912, DateTimeKind.Utc).AddTicks(3060),
+                            CreatedAt = new DateTime(2024, 9, 27, 4, 29, 37, 442, DateTimeKind.Utc).AddTicks(3953),
                             LinkUrl = "http://example.com/chi102",
                             Name = "Room 102",
                             Nickname = "Chi102",
@@ -278,7 +278,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = -3,
-                            CreatedAt = new DateTime(2024, 10, 2, 2, 21, 1, 912, DateTimeKind.Utc).AddTicks(3060),
+                            CreatedAt = new DateTime(2024, 9, 27, 4, 29, 37, 442, DateTimeKind.Utc).AddTicks(3954),
                             LinkUrl = "http://example.com/jap103",
                             Name = "Room 103",
                             Nickname = "Jap103",
@@ -288,7 +288,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = -4,
-                            CreatedAt = new DateTime(2024, 10, 2, 2, 21, 1, 912, DateTimeKind.Utc).AddTicks(3070),
+                            CreatedAt = new DateTime(2024, 9, 27, 4, 29, 37, 442, DateTimeKind.Utc).AddTicks(3955),
                             LinkUrl = "http://example.com/econmgmt104",
                             Name = "Room 104",
                             Nickname = "EconMgmt104",
@@ -298,7 +298,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = -5,
-                            CreatedAt = new DateTime(2024, 10, 2, 2, 21, 1, 912, DateTimeKind.Utc).AddTicks(3070),
+                            CreatedAt = new DateTime(2024, 9, 27, 4, 29, 37, 442, DateTimeKind.Utc).AddTicks(3956),
                             LinkUrl = "http://example.com/mkt105",
                             Name = "Room 105",
                             Nickname = "Mkt105",
@@ -308,7 +308,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = -6,
-                            CreatedAt = new DateTime(2024, 10, 2, 2, 21, 1, 912, DateTimeKind.Utc).AddTicks(3070),
+                            CreatedAt = new DateTime(2024, 9, 27, 4, 29, 37, 442, DateTimeKind.Utc).AddTicks(3957),
                             LinkUrl = "http://example.com/mediajourn106",
                             Name = "Room 106",
                             Nickname = "MediaJourn106",
@@ -318,7 +318,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = -7,
-                            CreatedAt = new DateTime(2024, 10, 2, 2, 21, 1, 912, DateTimeKind.Utc).AddTicks(3070),
+                            CreatedAt = new DateTime(2024, 9, 27, 4, 29, 37, 442, DateTimeKind.Utc).AddTicks(3958),
                             LinkUrl = "http://example.com/design107",
                             Name = "Room 107",
                             Nickname = "Design107",
@@ -328,7 +328,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = -8,
-                            CreatedAt = new DateTime(2024, 10, 2, 2, 21, 1, 912, DateTimeKind.Utc).AddTicks(3070),
+                            CreatedAt = new DateTime(2024, 9, 27, 4, 29, 37, 442, DateTimeKind.Utc).AddTicks(3959),
                             LinkUrl = "http://example.com/scitech108",
                             Name = "Room 108",
                             Nickname = "SciTech108",
@@ -338,7 +338,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = -9,
-                            CreatedAt = new DateTime(2024, 10, 2, 2, 21, 1, 912, DateTimeKind.Utc).AddTicks(3070),
+                            CreatedAt = new DateTime(2024, 9, 27, 4, 29, 37, 442, DateTimeKind.Utc).AddTicks(3960),
                             LinkUrl = "http://example.com/indconst109",
                             Name = "Room 109",
                             Nickname = "IndConst109",
@@ -348,7 +348,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = -10,
-                            CreatedAt = new DateTime(2024, 10, 2, 2, 21, 1, 912, DateTimeKind.Utc).AddTicks(3070),
+                            CreatedAt = new DateTime(2024, 9, 27, 4, 29, 37, 442, DateTimeKind.Utc).AddTicks(3961),
                             LinkUrl = "http://example.com/gensub110",
                             Name = "Room 110",
                             Nickname = "GenSub110",
@@ -395,28 +395,12 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ContactInfoId"), 1L, 1);
 
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ContactName")
+                    b.Property<string>("ContactType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ContactPhone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Content")
+                    b.Property<string>("Detail")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StreetAddress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UploadedFilePath")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ContactInfoId");

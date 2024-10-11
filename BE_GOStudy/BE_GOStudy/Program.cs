@@ -1,6 +1,7 @@
 ﻿using BE_GOStudy.AppStart;
 using BE_GOStudy.DependencyInjection;
 using BE_GOStudy.GlobalExceptionHandler;
+using BE_GOStudy.Hubs;
 using DataAccess.Model;
 using GO_Study_Logic.Helper.CustomExceptions;
 using GO_Study_Logic.Service.VNPAY;
@@ -17,20 +18,12 @@ using Newtonsoft.Json;
 using Quartz;
 using Quartz.Spi;
 using System.Text;
-using Microsoft.AspNetCore.Http.Features;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Register DbContext with SQL Server
 builder.Services.AddDbContext<GOStudyContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-//Config Email ContactInfo
-builder.Services.Configure<FormOptions>(options =>
-{
-    options.MultipartBodyLengthLimit = 10 * 1024 * 1024;
-});
-
 
 // Add Identity for user management
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
@@ -52,6 +45,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.InitializerDependencyInjection();
 builder.Services.ConfigureAutoMapper();
 builder.Services.AddSingleton(payOS);
+builder.Services.AddSignalR(); // Thêm SignalR
 
 // Register TaskReminderJob for Quartz
 builder.Services.AddQuartz(q =>
@@ -98,7 +92,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactApp", policy =>
     {
-        policy.WithOrigins("http://localhost:3000", "https://localhost:3001","http://localhost:3001", "https://localhost:3000", "https://localhost:3002", "https://pay.payos.vn")
+        policy.WithOrigins("http://localhost:3000", "https://localhost:3001", "http://localhost:3001", "https://localhost:3000", "https://localhost:3002", "https://pay.payos.vn")
               .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials();
@@ -186,9 +180,21 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseHttpsRedirection(); // Chuyển hướng HTTPS
+
+app.UseStaticFiles(); // Sử dụng các file tĩnh nếu có
+
+app.UseRouting(); // Đảm bảo gọi UseRouting trước các middleware khác
+
 app.UseCors("AllowReactApp"); // Enable CORS
+
 app.UseAuthentication(); // Enable authentication middleware
 app.UseAuthorization(); // Enable authorization middleware
 
-app.MapControllers(); // Map the controllers
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers(); // Map các controller
+    endpoints.MapHub<UserStatusHub>("/userStatusHub"); // Route cho SignalR Hub
+});
+
 app.Run();
