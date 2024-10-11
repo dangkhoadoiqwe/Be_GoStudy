@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DataAccess.Model;
+using DataAccess.Repositories;
 using GO_Study_Logic.ViewModel;
 using GO_Study_Logic.ViewModel.User;
 using GOStudy_Logic.ViewModel;
@@ -15,6 +16,7 @@ namespace GO_Study_Logic.AutoMapperModule
     {
         public static void ConfigUserModule(this IMapperConfigurationExpression mc)
         {
+       
             mc.CreateMap<User, UserProfileModel>().ReverseMap();
             mc.CreateMap<User, UserViewModel>().ReverseMap();
             mc.CreateMap<User, UserViewModel1>().ReverseMap();
@@ -29,9 +31,9 @@ namespace GO_Study_Logic.AutoMapperModule
 
             mc.CreateMap<Attendance, Attendance_View_Model>().ReverseMap(); 
 
-            mc.CreateMap<BlogPost, BlogPost_View_Model>().ReverseMap(); 
+            mc.CreateMap<BlogPost, BlogPost_View_Model>().ReverseMap();
 
-            mc.CreateMap<FriendRequest, FriendRequest_View_Model>().ReverseMap(); 
+            mc.CreateMap<FriendRequest, FriendRequest_View_Model>();
 
             mc.CreateMap<Ranking, Ranking_View_Model>().ReverseMap();
 

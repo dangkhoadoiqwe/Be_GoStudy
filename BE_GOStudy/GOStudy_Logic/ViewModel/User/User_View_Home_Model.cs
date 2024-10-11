@@ -29,9 +29,11 @@ namespace GO_Study_Logic.ViewModel.User
     public class FriendRequest_View_Model
     {
         public int FriendRequestId { get; set; }
-        public int RequesterId { get; set; }
-        public int RecipientId { get; set; }
-        public int Status { get; set; }
+        public UserViewModel Requester { get; set; }
+      //  public int RequesterId { get; set; }
+        public UserViewModel Recipient { get; set; }
+ //       public int RecipientId { get; set; }
+        public string Status { get; set; }
 
         public DateTime SentAt { get; set; }
     }
@@ -55,11 +57,18 @@ namespace GO_Study_Logic.ViewModel.User
         public string Visibility { get; set; }
 
     }
+
+    public class FriendViewModel
+    {
+        public UserViewModel? Requester { get; set; } // Thông tin người gửi
+        public UserViewModel? Recipient { get; set; } // Thông tin người nhận
+    }
+
     public class User_View_Home_Model
     {
         public int UserId { get; set; }
 
-        public int role { get; set; }
+     //   public int role { get; set; }
         public string FullName { get; set; }
         public string Email { get; set; }
        
@@ -76,8 +85,9 @@ namespace GO_Study_Logic.ViewModel.User
         public List<Attendance_View_Model> Attendances { get; set; } = new List<Attendance_View_Model>(); 
 
         public List<Ranking_View_Model> Rankings { get; set; } = new List<Ranking_View_Model>();
-
+        public List<FriendViewModel> ListFriend { get; set; } = new List<FriendViewModel>();
         public List<FriendRequest_View_Model> FriendRequests { get; set; } = new List<FriendRequest_View_Model>();
+        public List<FriendRequest_View_Model> FriendRecipient { get; set; } = new List<FriendRequest_View_Model>();
 
         public List<SpecializationUserDetailViewModel> SpecializationUserDetails { get; set; } = new List<SpecializationUserDetailViewModel>();
 
