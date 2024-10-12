@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace DataAccess.Model
 {
@@ -11,11 +13,17 @@ namespace DataAccess.Model
     {
         [Key]
         public int ContactInfoId { get; set; }
-
         [Required]
-        public string ContactType { get; set; }
-
+        public String ContactName { get; set; }
+        public String? StreetAddress { get; set; }
+        public String? City { get; set; }
+        public String? ContactPhone { get; set; }
         [Required]
-        public string Detail { get; set; }
+        public String Email { get; set; }
+        [Required]
+        public String Content { get; set; }
+        [NotMapped]
+        public IFormFile? File { get; set; } 
+        public String? UploadedFilePath { get; set; }
     }
 }
