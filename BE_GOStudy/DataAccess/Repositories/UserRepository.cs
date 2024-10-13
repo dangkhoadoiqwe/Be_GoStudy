@@ -27,6 +27,9 @@ namespace DataAccess.Repositories
         Task<bool> CheckToken(int userid);
         Task<IEnumerable<Analytic>> GetUserIdAnalyticAsync(int userid);
         Task<IEnumerable<SpecializationUserDetailViewModel>> GetSpecializationDetailsByUserIdAsync(int userId);
+        Task<IEnumerable<FriendRequest>> GetAllFriendRecipientsAsync(int userId);
+
+        Task<IEnumerable<FriendRequest>> GetFriendsListAsync(int userId);
     }
     public partial class UserRepository : BaseRepository<User>, IUserRepository
     
@@ -37,10 +40,15 @@ namespace DataAccess.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<BlogPost?> Get1BlogPostAsync(int id)
+        public async Task<BlogPost?> Get1BlogPostAsync(int userId)
         {
-            return await _dbContext.Set<BlogPost>().FirstOrDefaultAsync(Bl =>Bl.UserId == id);
+            return await _dbContext.Set<BlogPost>()
+                .Where(bl => bl.UserId == userId) // Lọc theo UserId
+                .OrderByDescending(bl => bl.CreatedAt) // Sắp xếp theo CreateAt giảm dần
+                .FirstOrDefaultAsync(); // Lấy bài đăng đầu tiên
         }
+
+
         public async Task<User?> GetByIdAsync(int id)
         {
             return await _dbContext.Set<User>().FindAsync(id);
@@ -110,19 +118,39 @@ namespace DataAccess.Repositories
         {
             return await _dbContext.Set<User>().FirstOrDefaultAsync(u => u.Email == email);
         }
+        public async Task<IEnumerable<FriendRequest>> GetFriendsListAsync(int userId)
+        {
+            return await _dbContext.Set<FriendRequest>()
+                .Where(fr => (fr.RequesterId == userId || fr.RecipientId == userId) && fr.Status == "Accepted")
+                .Select(fr => new FriendRequest
+                {
+                    Requester = fr.Requester, // Thông tin người gửi
+                    Recipient = fr.Recipient  // Thông tin người nhận
+                })
+                .ToListAsync();
+        }
 
         public async Task CreateUserAsync(User user)
         {
             _dbContext.Set<User>().Add(user);
             await _dbContext.SaveChangesAsync();
         }
-        public async Task<IEnumerable<FriendRequest>> GetAllFriendRequestsAsync(int userid)
+        public async Task<IEnumerable<FriendRequest>> GetAllFriendRequestsAsync(int userId)
         {
             return await _dbContext.Set<FriendRequest>()
-                .Where(Fr => Fr.RecipientId == userid) 
+                .Where(fr => fr.RequesterId == userId)
+                .Include(fr => fr.Requester) // Bao gồm thông tin người gửi (Requester)
+                .Include(fr => fr.Recipient) // Bao gồm thông tin người nhận (Recipient)
                 .ToListAsync();
         }
-
+        public async Task<IEnumerable<FriendRequest>> GetAllFriendRecipientsAsync(int userId)
+        {
+            return await _dbContext.Set<FriendRequest>()
+                .Where(fr => fr.RecipientId == userId)
+                .Include(fr => fr.Requester) // Bao gồm thông tin người gửi (Requester)
+                .Include(fr => fr.Recipient) // Bao gồm thông tin người nhận (Recipient)
+                .ToListAsync();
+        }
         public async Task<PrivacySetting?> GetPrivacySettingByuserIDAsync(int userid)
         {
             var user = await _dbContext.Set<User>().Include(u=>u.PrivacySetting).FirstOrDefaultAsync( u=>u.UserId == userid);

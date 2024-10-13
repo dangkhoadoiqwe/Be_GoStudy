@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/toanphuc/Desktop/EXE/BEGoStudy/temp-khoa/Be_GoStudy/BE_GOStudy/DataAccess/DataAccess.csproj": {}
+    "/Users/toanphuc/Desktop/PRM/BE/Be_GoStudy/BE_GOStudy/DataAccess/DataAccess.csproj": {}
   },
   "projects": {
-    "/Users/toanphuc/Desktop/EXE/BEGoStudy/temp-khoa/Be_GoStudy/BE_GOStudy/DataAccess/DataAccess.csproj": {
+    "/Users/toanphuc/Desktop/PRM/BE/Be_GoStudy/BE_GOStudy/DataAccess/DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/toanphuc/Desktop/EXE/BEGoStudy/temp-khoa/Be_GoStudy/BE_GOStudy/DataAccess/DataAccess.csproj",
+        "projectUniqueName": "/Users/toanphuc/Desktop/PRM/BE/Be_GoStudy/BE_GOStudy/DataAccess/DataAccess.csproj",
         "projectName": "DataAccess",
-        "projectPath": "/Users/toanphuc/Desktop/EXE/BEGoStudy/temp-khoa/Be_GoStudy/BE_GOStudy/DataAccess/DataAccess.csproj",
+        "projectPath": "/Users/toanphuc/Desktop/PRM/BE/Be_GoStudy/BE_GOStudy/DataAccess/DataAccess.csproj",
         "packagesPath": "/Users/toanphuc/.nuget/packages/",
-        "outputPath": "/Users/toanphuc/Desktop/EXE/BEGoStudy/temp-khoa/Be_GoStudy/BE_GOStudy/DataAccess/obj/",
+        "outputPath": "/Users/toanphuc/Desktop/PRM/BE/Be_GoStudy/BE_GOStudy/DataAccess/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/toanphuc/.nuget/NuGet/NuGet.Config"

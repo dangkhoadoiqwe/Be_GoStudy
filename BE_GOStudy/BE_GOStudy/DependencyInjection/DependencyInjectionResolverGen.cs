@@ -25,6 +25,8 @@ namespace BE_GOStudy.DependencyInjection
         {
             services.AddScoped<DbContext, GOStudyContext>();
 
+            services.AddScoped<IFriendRequestsRepository, FriendRequestsRepository>();
+
             services.AddScoped<IClassroomRepository, ClassroomRepository>();
             services.AddScoped<IClassroomService, ClassroomService>();
             
@@ -65,7 +67,8 @@ namespace BE_GOStudy.DependencyInjection
             
             services.AddScoped<ICommentService, CommentService>();
             services.AddScoped<ICommentRepository, CommentRepository>();
-
+            
+            services.AddScoped<ContactInfoService>();
 
         }
     }

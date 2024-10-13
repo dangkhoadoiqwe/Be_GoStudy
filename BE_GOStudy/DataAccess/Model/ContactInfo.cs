@@ -1,5 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
 namespace DataAccess.Model
@@ -20,6 +25,5 @@ namespace DataAccess.Model
         [NotMapped]
         public IFormFile? File { get; set; } 
         public String? UploadedFilePath { get; set; }
-        
     }
 }

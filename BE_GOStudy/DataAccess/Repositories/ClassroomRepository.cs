@@ -83,41 +83,58 @@ namespace DataAccess.Repositories
                 .Where(c => specializationIds.Contains(c.SpecializationId))
                 .ToListAsync();
         }
-      
+
         public async Task<IEnumerable<Classroom>> GetAllClassroomsAsync(int userId)
         {
+            // Lấy danh sách ID của các lớp học mà người dùng đã tham gia
             var userClassroomIds = await _context.UserSpecializations
                 .Where(us => us.UserId == userId)
                 .Select(us => us.SpecializationId)
                 .Distinct()
                 .ToListAsync();
 
-
-            var otherClassrooms = await _context.Classrooms
-                .Where(c => !userClassroomIds.Contains(c.ClassroomId))
-                .Distinct()
+            // Lấy danh sách các lớp học mà người dùng đã tham gia
+            var userClassrooms = await _context.Classrooms
+                .Where(c => userClassroomIds.Contains(c.SpecializationId)) // Lưu ý là so sánh với SpecializationId
                 .ToListAsync();
 
+            // Lấy danh sách các lớp học khác mà người dùng chưa tham gia
+            var otherClassrooms = await _context.Classrooms
+                .Where(c => !userClassroomIds.Contains(c.SpecializationId)) // Lưu ý là so sánh với SpecializationId
+                .Take(3) // Giới hạn số lượng lớp học khác trả về
+                .ToListAsync();
 
-            return otherClassrooms;
+            // Kết hợp danh sách lớp học của người dùng và lớp học khác
+            return userClassrooms.Concat(otherClassrooms);
         }
+
+
         public async Task<IEnumerable<Classroom>> GetOtherClassroomsAsync(int userId)
         {
-           
-            var userClassroomIds = await _context.UserSpecializations
+            // Lấy danh sách các SpecializationId mà người dùng đã tham gia
+            var userSpecializationIds = await _context.UserSpecializations
                 .Where(us => us.UserId == userId)
                 .Select(us => us.SpecializationId)
                 .Distinct()
                 .ToListAsync();
 
+            // Lấy danh sách các ClassroomId dựa trên SpecializationId mà người dùng đã tham gia
+            var userClassroomIds = await _context.Classrooms
+                .Where(c => userSpecializationIds.Contains(c.SpecializationId))
+                .Select(c => c.ClassroomId)
+                .Distinct()
+                .ToListAsync();
 
+            // Lấy các lớp học khác mà người dùng chưa tham gia
             var otherClassrooms = await _context.Classrooms
-                .Where(c => !userClassroomIds.Contains(c.ClassroomId))   
-                .Take(3)   
+                .Where(c => !userClassroomIds.Contains(c.ClassroomId))
+                .Distinct() // Bỏ qua các bản sao
                 .ToListAsync();
 
             return otherClassrooms;
         }
+
+
 
         public async Task<bool> CheckRoomUser(int userId, int roomId)
         {

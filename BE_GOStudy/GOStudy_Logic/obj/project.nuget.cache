@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "18aSgBpMw2o=",
+  "dgSpecHash": "6uBUT5NvNJ8=",
   "success": true,
-  "projectFilePath": "/Users/toanphuc/Desktop/EXE/BEGoStudy/temp-khoa/Be_GoStudy/BE_GOStudy/GOStudy_Logic/GOStudy_Logic.csproj",
+  "projectFilePath": "/Users/toanphuc/Desktop/PRM/BE/Be_GoStudy/BE_GOStudy/GOStudy_Logic/GOStudy_Logic.csproj",
   "expectedPackageFiles": [
     "/Users/toanphuc/.nuget/packages/automapper/13.0.1/automapper.13.0.1.nupkg.sha512",
     "/Users/toanphuc/.nuget/packages/awssdk.core/3.7.400.20/awssdk.core.3.7.400.20.nupkg.sha512",

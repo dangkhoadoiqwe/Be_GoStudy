@@ -6,11 +6,11 @@ namespace GOStudy_Logic.Service;
 
 public class ContactInfoService
 {
-    private readonly string _emailFrom = "minhhanguyen13072002@gmail.com"; 
-    private readonly string _smtpHost = "smtp.gmail.com";        
+    private readonly string _emailFrom = "gostudy.go01@gmail.com"; 
+    private readonly string _smtpHost = "smtp.gmail.com";    
     private readonly int _smtpPort = 587;                       
-    private readonly string _smtpUser = "nguyenthaitoanphuc156@gmail.com";  
-    private readonly string _smtpPass = "pcrm xzok bwwa vltj";  
+    private readonly string _smtpUser = "gostudy.go01@gmail.com";  
+    private readonly string _smtpPass = "acxs pzsr pobw mfjs";  
 
     public async Task SendContactEmailAsync(ContactInfo contactInfo)
     {

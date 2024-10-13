@@ -18,29 +18,22 @@ public class ContactController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> SubmitFeedback([FromForm] ContactInfo contactInfo)
     {
-        // Kiểm tra xem file có được tải lên không
         if (contactInfo.File != null)
         {
-            // Lưu file vào thư mục và lấy đường dẫn
             var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "uploads");
             if (!Directory.Exists(uploadsFolder))
             {
                 Directory.CreateDirectory(uploadsFolder);
             }
-
-            // Đặt tên file để lưu
+            
             var filePath = Path.Combine(uploadsFolder, contactInfo.File.FileName);
         
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
-                await contactInfo.File.CopyToAsync(stream); // Sử dụng contactInfo.File ở đây
+                await contactInfo.File.CopyToAsync(stream);
             }
-
-            // Lưu đường dẫn file vào UploadedFilePath
-            contactInfo.UploadedFilePath = filePath; // Đường dẫn file đã lưu
+            contactInfo.UploadedFilePath = filePath;
         }
-
-        // Gửi email với thông tin phản hồi
         await _contactInfoService.SendContactEmailAsync(contactInfo);
     
         return Ok();

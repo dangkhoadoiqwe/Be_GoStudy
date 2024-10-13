@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/toanphuc/Desktop/EXE/BEGoStudy/temp-khoa/Be_GoStudy/BE_GOStudy/GOStudy_Logic/GOStudy_Logic.csproj": {}
+    "/Users/toanphuc/Desktop/PRM/BE/Be_GoStudy/BE_GOStudy/GOStudy_Logic/GOStudy_Logic.csproj": {}
   },
   "projects": {
-    "/Users/toanphuc/Desktop/EXE/BEGoStudy/temp-khoa/Be_GoStudy/BE_GOStudy/DataAccess/DataAccess.csproj": {
+    "/Users/toanphuc/Desktop/PRM/BE/Be_GoStudy/BE_GOStudy/DataAccess/DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/toanphuc/Desktop/EXE/BEGoStudy/temp-khoa/Be_GoStudy/BE_GOStudy/DataAccess/DataAccess.csproj",
+        "projectUniqueName": "/Users/toanphuc/Desktop/PRM/BE/Be_GoStudy/BE_GOStudy/DataAccess/DataAccess.csproj",
         "projectName": "DataAccess",
-        "projectPath": "/Users/toanphuc/Desktop/EXE/BEGoStudy/temp-khoa/Be_GoStudy/BE_GOStudy/DataAccess/DataAccess.csproj",
+        "projectPath": "/Users/toanphuc/Desktop/PRM/BE/Be_GoStudy/BE_GOStudy/DataAccess/DataAccess.csproj",
         "packagesPath": "/Users/toanphuc/.nuget/packages/",
-        "outputPath": "/Users/toanphuc/Desktop/EXE/BEGoStudy/temp-khoa/Be_GoStudy/BE_GOStudy/DataAccess/obj/",
+        "outputPath": "/Users/toanphuc/Desktop/PRM/BE/Be_GoStudy/BE_GOStudy/DataAccess/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/toanphuc/.nuget/NuGet/NuGet.Config"
@@ -111,14 +111,14 @@
         }
       }
     },
-    "/Users/toanphuc/Desktop/EXE/BEGoStudy/temp-khoa/Be_GoStudy/BE_GOStudy/GOStudy_Logic/GOStudy_Logic.csproj": {
+    "/Users/toanphuc/Desktop/PRM/BE/Be_GoStudy/BE_GOStudy/GOStudy_Logic/GOStudy_Logic.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/toanphuc/Desktop/EXE/BEGoStudy/temp-khoa/Be_GoStudy/BE_GOStudy/GOStudy_Logic/GOStudy_Logic.csproj",
+        "projectUniqueName": "/Users/toanphuc/Desktop/PRM/BE/Be_GoStudy/BE_GOStudy/GOStudy_Logic/GOStudy_Logic.csproj",
         "projectName": "GOStudy_Logic",
-        "projectPath": "/Users/toanphuc/Desktop/EXE/BEGoStudy/temp-khoa/Be_GoStudy/BE_GOStudy/GOStudy_Logic/GOStudy_Logic.csproj",
+        "projectPath": "/Users/toanphuc/Desktop/PRM/BE/Be_GoStudy/BE_GOStudy/GOStudy_Logic/GOStudy_Logic.csproj",
         "packagesPath": "/Users/toanphuc/.nuget/packages/",
-        "outputPath": "/Users/toanphuc/Desktop/EXE/BEGoStudy/temp-khoa/Be_GoStudy/BE_GOStudy/GOStudy_Logic/obj/",
+        "outputPath": "/Users/toanphuc/Desktop/PRM/BE/Be_GoStudy/BE_GOStudy/GOStudy_Logic/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/toanphuc/.nuget/NuGet/NuGet.Config"
@@ -134,8 +134,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "/Users/toanphuc/Desktop/EXE/BEGoStudy/temp-khoa/Be_GoStudy/BE_GOStudy/DataAccess/DataAccess.csproj": {
-                "projectPath": "/Users/toanphuc/Desktop/EXE/BEGoStudy/temp-khoa/Be_GoStudy/BE_GOStudy/DataAccess/DataAccess.csproj"
+              "/Users/toanphuc/Desktop/PRM/BE/Be_GoStudy/BE_GOStudy/DataAccess/DataAccess.csproj": {
+                "projectPath": "/Users/toanphuc/Desktop/PRM/BE/Be_GoStudy/BE_GOStudy/DataAccess/DataAccess.csproj"
               }
             }
           }
