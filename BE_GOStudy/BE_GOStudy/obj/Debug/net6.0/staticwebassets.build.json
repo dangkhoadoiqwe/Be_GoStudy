@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "e4/Ys+mB0SDLEgxNvL6c7A5N5R4kXwk2dqBCgu/RsDA=",
+  "Hash": "cup3FkwZ4lNUVsy9FaY1ZRn7tOuGmBlIFpny0eZKEpM=",
   "Source": "BE_GOStudy",
   "BasePath": "_content/BE_GOStudy",
   "Mode": "Default",
@@ -8,19 +8,19 @@
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [
     {
-      "Name": "BE_GOStudy/wwwroot",
+      "Name": "BE_GOStudy\\wwwroot",
       "Source": "BE_GOStudy",
-      "ContentRoot": "/Users/toanphuc/Desktop/PRM/BE/Be_GoStudy/BE_GOStudy/BE_GOStudy/wwwroot/",
+      "ContentRoot": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy-khoa\\BE_GOStudy\\BE_GOStudy\\wwwroot\\",
       "BasePath": "_content/BE_GOStudy",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "/Users/toanphuc/Desktop/PRM/BE/Be_GoStudy/BE_GOStudy/BE_GOStudy/wwwroot/uploads/bc40eb21-88b4-4732-b59f-f7e76139f5b1_battle-with-4-heavenly-kings-black-myth-wukong-thumb.jpg",
+      "Identity": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy-khoa\\BE_GOStudy\\BE_GOStudy\\wwwroot\\uploads\\bc40eb21-88b4-4732-b59f-f7e76139f5b1_battle-with-4-heavenly-kings-black-myth-wukong-thumb.jpg",
       "SourceId": "BE_GOStudy",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/toanphuc/Desktop/PRM/BE/Be_GoStudy/BE_GOStudy/BE_GOStudy/wwwroot/",
+      "ContentRoot": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy-khoa\\BE_GOStudy\\BE_GOStudy\\wwwroot\\",
       "BasePath": "_content/BE_GOStudy",
       "RelativePath": "uploads/bc40eb21-88b4-4732-b59f-f7e76139f5b1_battle-with-4-heavenly-kings-black-myth-wukong-thumb.jpg",
       "AssetKind": "All",
@@ -33,13 +33,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/uploads/bc40eb21-88b4-4732-b59f-f7e76139f5b1_battle-with-4-heavenly-kings-black-myth-wukong-thumb.jpg"
+      "OriginalItemSpec": "wwwroot\\uploads\\bc40eb21-88b4-4732-b59f-f7e76139f5b1_battle-with-4-heavenly-kings-black-myth-wukong-thumb.jpg"
     },
     {
-      "Identity": "/Users/toanphuc/Desktop/PRM/BE/Be_GoStudy/BE_GOStudy/BE_GOStudy/wwwroot/uploads/d44d8060-57b9-4c6f-b2f5-a50ccb73bb8c_battle-with-4-heavenly-kings-black-myth-wukong-thumb.jpg",
+      "Identity": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy-khoa\\BE_GOStudy\\BE_GOStudy\\wwwroot\\uploads\\d44d8060-57b9-4c6f-b2f5-a50ccb73bb8c_battle-with-4-heavenly-kings-black-myth-wukong-thumb.jpg",
       "SourceId": "BE_GOStudy",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/toanphuc/Desktop/PRM/BE/Be_GoStudy/BE_GOStudy/BE_GOStudy/wwwroot/",
+      "ContentRoot": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy-khoa\\BE_GOStudy\\BE_GOStudy\\wwwroot\\",
       "BasePath": "_content/BE_GOStudy",
       "RelativePath": "uploads/d44d8060-57b9-4c6f-b2f5-a50ccb73bb8c_battle-with-4-heavenly-kings-black-myth-wukong-thumb.jpg",
       "AssetKind": "All",
@@ -52,13 +52,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/uploads/d44d8060-57b9-4c6f-b2f5-a50ccb73bb8c_battle-with-4-heavenly-kings-black-myth-wukong-thumb.jpg"
+      "OriginalItemSpec": "wwwroot\\uploads\\d44d8060-57b9-4c6f-b2f5-a50ccb73bb8c_battle-with-4-heavenly-kings-black-myth-wukong-thumb.jpg"
     },
     {
-      "Identity": "/Users/toanphuc/Desktop/PRM/BE/Be_GoStudy/BE_GOStudy/BE_GOStudy/wwwroot/uploads/e565c914-d7ae-47cc-a27d-7e47f138f1f2_battle-with-4-heavenly-kings-black-myth-wukong-thumb.jpg",
+      "Identity": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy-khoa\\BE_GOStudy\\BE_GOStudy\\wwwroot\\uploads\\e565c914-d7ae-47cc-a27d-7e47f138f1f2_battle-with-4-heavenly-kings-black-myth-wukong-thumb.jpg",
       "SourceId": "BE_GOStudy",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/toanphuc/Desktop/PRM/BE/Be_GoStudy/BE_GOStudy/BE_GOStudy/wwwroot/",
+      "ContentRoot": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy-khoa\\BE_GOStudy\\BE_GOStudy\\wwwroot\\",
       "BasePath": "_content/BE_GOStudy",
       "RelativePath": "uploads/e565c914-d7ae-47cc-a27d-7e47f138f1f2_battle-with-4-heavenly-kings-black-myth-wukong-thumb.jpg",
       "AssetKind": "All",
@@ -71,13 +71,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/uploads/e565c914-d7ae-47cc-a27d-7e47f138f1f2_battle-with-4-heavenly-kings-black-myth-wukong-thumb.jpg"
+      "OriginalItemSpec": "wwwroot\\uploads\\e565c914-d7ae-47cc-a27d-7e47f138f1f2_battle-with-4-heavenly-kings-black-myth-wukong-thumb.jpg"
     },
     {
-      "Identity": "/Users/toanphuc/Desktop/PRM/BE/Be_GoStudy/BE_GOStudy/BE_GOStudy/wwwroot/uploads/e7ad68d8-10b0-4766-8773-972067ea8130_458999591_122100328490517413_7618050607156865058_n.jpg",
+      "Identity": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy-khoa\\BE_GOStudy\\BE_GOStudy\\wwwroot\\uploads\\e7ad68d8-10b0-4766-8773-972067ea8130_458999591_122100328490517413_7618050607156865058_n.jpg",
       "SourceId": "BE_GOStudy",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/toanphuc/Desktop/PRM/BE/Be_GoStudy/BE_GOStudy/BE_GOStudy/wwwroot/",
+      "ContentRoot": "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\Dream\\DUAN\\Be_GoStudy-khoa\\BE_GOStudy\\BE_GOStudy\\wwwroot\\",
       "BasePath": "_content/BE_GOStudy",
       "RelativePath": "uploads/e7ad68d8-10b0-4766-8773-972067ea8130_458999591_122100328490517413_7618050607156865058_n.jpg",
       "AssetKind": "All",
@@ -90,7 +90,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/uploads/e7ad68d8-10b0-4766-8773-972067ea8130_458999591_122100328490517413_7618050607156865058_n.jpg"
+      "OriginalItemSpec": "wwwroot\\uploads\\e7ad68d8-10b0-4766-8773-972067ea8130_458999591_122100328490517413_7618050607156865058_n.jpg"
     }
   ]
 }

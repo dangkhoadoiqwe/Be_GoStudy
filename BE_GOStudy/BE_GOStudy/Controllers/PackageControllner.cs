@@ -31,8 +31,13 @@ namespace BE_GOStudy.Controllers
         }
 
         // Lấy package theo ID
-      
 
+        [HttpGet("GetAllUserPackages")]
+        public async Task<IActionResult> GetAllPackages(int userId)
+        {
+            var packages = await _packageService.GetAllPackagesWithUserStatusAsync(userId);
+            return Ok(packages);
+        }
         // Thêm package mới
         [HttpPost("Create_Package(Admin)")]
         public async Task<ActionResult> CreatePackage([FromBody] PackageViewModel packageViewModel , int userid)

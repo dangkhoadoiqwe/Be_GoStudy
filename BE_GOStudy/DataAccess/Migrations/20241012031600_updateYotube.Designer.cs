@@ -4,6 +4,7 @@ using DataAccess.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(GOStudyContext))]
-    partial class GOStudyContextModelSnapshot : ModelSnapshot
+    [Migration("20241012031600_updateYotube")]
+    partial class updateYotube
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -260,102 +262,102 @@ namespace DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            ClassroomId = 1,
-                            CreatedAt = new DateTime(2024, 10, 17, 13, 44, 0, 681, DateTimeKind.Utc).AddTicks(9737),
+                            ClassroomId = -1,
+                            CreatedAt = new DateTime(2024, 10, 12, 3, 15, 59, 572, DateTimeKind.Utc).AddTicks(3378),
                             LinkUrl = "http://example.com/eng101",
                             Name = "Room 101",
                             Nickname = "Eng101",
-                            SpecializationId = 1,
+                            SpecializationId = -1,
                             status = 1
                         },
                         new
                         {
-                            ClassroomId = 2,
-                            CreatedAt = new DateTime(2024, 10, 17, 13, 44, 0, 681, DateTimeKind.Utc).AddTicks(9738),
+                            ClassroomId = -2,
+                            CreatedAt = new DateTime(2024, 10, 12, 3, 15, 59, 572, DateTimeKind.Utc).AddTicks(3380),
                             LinkUrl = "http://example.com/chi102",
                             Name = "Room 102",
                             Nickname = "Chi102",
-                            SpecializationId = 2,
+                            SpecializationId = -2,
                             status = 1
                         },
                         new
                         {
-                            ClassroomId = 3,
-                            CreatedAt = new DateTime(2024, 10, 17, 13, 44, 0, 681, DateTimeKind.Utc).AddTicks(9739),
+                            ClassroomId = -3,
+                            CreatedAt = new DateTime(2024, 10, 12, 3, 15, 59, 572, DateTimeKind.Utc).AddTicks(3382),
                             LinkUrl = "http://example.com/jap103",
                             Name = "Room 103",
                             Nickname = "Jap103",
-                            SpecializationId = 3,
+                            SpecializationId = -3,
                             status = 1
                         },
                         new
                         {
-                            ClassroomId = 4,
-                            CreatedAt = new DateTime(2024, 10, 17, 13, 44, 0, 681, DateTimeKind.Utc).AddTicks(9740),
+                            ClassroomId = -4,
+                            CreatedAt = new DateTime(2024, 10, 12, 3, 15, 59, 572, DateTimeKind.Utc).AddTicks(3383),
                             LinkUrl = "http://example.com/econmgmt104",
                             Name = "Room 104",
                             Nickname = "EconMgmt104",
-                            SpecializationId = 4,
+                            SpecializationId = -4,
                             status = 1
                         },
                         new
                         {
-                            ClassroomId = 5,
-                            CreatedAt = new DateTime(2024, 10, 17, 13, 44, 0, 681, DateTimeKind.Utc).AddTicks(9741),
+                            ClassroomId = -5,
+                            CreatedAt = new DateTime(2024, 10, 12, 3, 15, 59, 572, DateTimeKind.Utc).AddTicks(3384),
                             LinkUrl = "http://example.com/mkt105",
                             Name = "Room 105",
                             Nickname = "Mkt105",
-                            SpecializationId = 5,
+                            SpecializationId = -5,
                             status = 1
                         },
                         new
                         {
-                            ClassroomId = 6,
-                            CreatedAt = new DateTime(2024, 10, 17, 13, 44, 0, 681, DateTimeKind.Utc).AddTicks(9742),
+                            ClassroomId = -6,
+                            CreatedAt = new DateTime(2024, 10, 12, 3, 15, 59, 572, DateTimeKind.Utc).AddTicks(3386),
                             LinkUrl = "http://example.com/mediajourn106",
                             Name = "Room 106",
                             Nickname = "MediaJourn106",
-                            SpecializationId = 6,
+                            SpecializationId = -6,
                             status = 1
                         },
                         new
                         {
-                            ClassroomId = 7,
-                            CreatedAt = new DateTime(2024, 10, 17, 13, 44, 0, 681, DateTimeKind.Utc).AddTicks(9742),
+                            ClassroomId = -7,
+                            CreatedAt = new DateTime(2024, 10, 12, 3, 15, 59, 572, DateTimeKind.Utc).AddTicks(3387),
                             LinkUrl = "http://example.com/design107",
                             Name = "Room 107",
                             Nickname = "Design107",
-                            SpecializationId = 7,
+                            SpecializationId = -7,
                             status = 1
                         },
                         new
                         {
-                            ClassroomId = 8,
-                            CreatedAt = new DateTime(2024, 10, 17, 13, 44, 0, 681, DateTimeKind.Utc).AddTicks(9743),
+                            ClassroomId = -8,
+                            CreatedAt = new DateTime(2024, 10, 12, 3, 15, 59, 572, DateTimeKind.Utc).AddTicks(3389),
                             LinkUrl = "http://example.com/scitech108",
                             Name = "Room 108",
                             Nickname = "SciTech108",
-                            SpecializationId = 8,
+                            SpecializationId = -8,
                             status = 1
                         },
                         new
                         {
-                            ClassroomId = 9,
-                            CreatedAt = new DateTime(2024, 10, 17, 13, 44, 0, 681, DateTimeKind.Utc).AddTicks(9744),
+                            ClassroomId = -9,
+                            CreatedAt = new DateTime(2024, 10, 12, 3, 15, 59, 572, DateTimeKind.Utc).AddTicks(3390),
                             LinkUrl = "http://example.com/indconst109",
                             Name = "Room 109",
                             Nickname = "IndConst109",
-                            SpecializationId = 9,
+                            SpecializationId = -9,
                             status = 1
                         },
                         new
                         {
-                            ClassroomId = 10,
-                            CreatedAt = new DateTime(2024, 10, 17, 13, 44, 0, 681, DateTimeKind.Utc).AddTicks(9745),
+                            ClassroomId = -10,
+                            CreatedAt = new DateTime(2024, 10, 12, 3, 15, 59, 572, DateTimeKind.Utc).AddTicks(3391),
                             LinkUrl = "http://example.com/gensub110",
                             Name = "Room 110",
                             Nickname = "GenSub110",
-                            SpecializationId = 10,
+                            SpecializationId = -10,
                             status = 1
                         });
                 });
@@ -700,23 +702,6 @@ namespace DataAccess.Migrations
                     b.HasKey("PrivacySettingId");
 
                     b.ToTable("PrivacySettings");
-
-                    b.HasData(
-                        new
-                        {
-                            PrivacySettingId = 1,
-                            Visibility = "Public"
-                        },
-                        new
-                        {
-                            PrivacySettingId = 2,
-                            Visibility = "Friends Only"
-                        },
-                        new
-                        {
-                            PrivacySettingId = 3,
-                            Visibility = "Private"
-                        });
                 });
 
             modelBuilder.Entity("DataAccess.Model.Ranking", b =>
@@ -828,23 +813,6 @@ namespace DataAccess.Migrations
                     b.HasKey("SemesterId");
 
                     b.ToTable("Semesters");
-
-                    b.HasData(
-                        new
-                        {
-                            SemesterId = 1,
-                            Name = "Fall 2024"
-                        },
-                        new
-                        {
-                            SemesterId = 2,
-                            Name = "Spring 2025"
-                        },
-                        new
-                        {
-                            SemesterId = 3,
-                            Name = "Summer 2025"
-                        });
                 });
 
             modelBuilder.Entity("DataAccess.Model.Specialization", b =>
@@ -866,52 +834,52 @@ namespace DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            SpecializationId = 1,
+                            SpecializationId = -1,
                             Name = "English"
                         },
                         new
                         {
-                            SpecializationId = 2,
+                            SpecializationId = -2,
                             Name = "Chinese"
                         },
                         new
                         {
-                            SpecializationId = 3,
+                            SpecializationId = -3,
                             Name = "Japanese"
                         },
                         new
                         {
-                            SpecializationId = 4,
+                            SpecializationId = -4,
                             Name = "Economics and Management"
                         },
                         new
                         {
-                            SpecializationId = 5,
+                            SpecializationId = -5,
                             Name = "Marketing"
                         },
                         new
                         {
-                            SpecializationId = 6,
+                            SpecializationId = -6,
                             Name = "Media and Journalism"
                         },
                         new
                         {
-                            SpecializationId = 7,
+                            SpecializationId = -7,
                             Name = "Design"
                         },
                         new
                         {
-                            SpecializationId = 8,
+                            SpecializationId = -8,
                             Name = "Science and Technology"
                         },
                         new
                         {
-                            SpecializationId = 9,
+                            SpecializationId = -9,
                             Name = "Industry and Construction"
                         },
                         new
                         {
-                            SpecializationId = 10,
+                            SpecializationId = -10,
                             Name = "General Subjects"
                         });
                 });
@@ -1023,9 +991,6 @@ namespace DataAccess.Migrations
 
                     b.Property<DateTime>("birthday")
                         .HasColumnType("datetime2");
-
-                    b.Property<bool>("isonline")
-                        .HasColumnType("bit");
 
                     b.Property<string>("phone")
                         .IsRequired()

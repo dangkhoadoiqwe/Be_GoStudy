@@ -266,7 +266,7 @@
   },
   {
     "ContainingType": "BE_GOStudy.Controllers.Room.ClassroomController",
-    "Method": "UpdateClassroomLinkUrl",
+    "Method": "UpdateClassroomMusicLinkUrl",
     "RelativePath": "api/Classroom/UpdateLinkUrl/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
@@ -280,6 +280,32 @@
       {
         "Name": "linkUrl",
         "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_GOStudy.Controllers.Room.ClassroomController",
+    "Method": "UpdateClassroomLinkUrl",
+    "RelativePath": "api/Classroom/UpdateSound/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "classroomId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "linkUrl",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "",
         "IsRequired": true
       }
     ],
@@ -336,6 +362,22 @@
       },
       {
         "Name": "userid",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_GOStudy.Controllers.PackageController",
+    "Method": "GetAllPackages",
+    "RelativePath": "api/Package/GetAllUserPackages",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
         "Type": "System.Int32",
         "IsRequired": false
       }
@@ -560,7 +602,7 @@
   {
     "ContainingType": "BE_GOStudy.Controllers.Room.TaskController",
     "Method": "CompleteTask",
-    "RelativePath": "api/Task/Completetask/{taskId}",
+    "RelativePath": "api/Task/CompleteTask/{taskId}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -761,6 +803,48 @@
   },
   {
     "ContainingType": "BE_GO_Study.Controllers.User.UserController",
+    "Method": "AcceptFriendRequest",
+    "RelativePath": "api/User/friendrequests/accept/{requesterId}/{recipientId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "requesterId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "recipientId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_GO_Study.Controllers.User.UserController",
+    "Method": "RejectFriendRequest",
+    "RelativePath": "api/User/friendrequests/reject/{requesterId}/{recipientId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "requesterId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "recipientId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_GO_Study.Controllers.User.UserController",
     "Method": "GetUserHome",
     "RelativePath": "api/User/GetUserHome/{userid}",
     "HttpMethod": "GET",
@@ -801,6 +885,27 @@
     "Parameters": [
       {
         "Name": "UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_GO_Study.Controllers.User.UserController",
+    "Method": "SendFriendRequest",
+    "RelativePath": "api/User/SendFriendRequest",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "requesterId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "recipientId",
         "Type": "System.Int32",
         "IsRequired": false
       }
@@ -855,6 +960,47 @@
       {
         "Name": "tokenModel",
         "Type": "GO_Study_Logic.ViewModel.TokenModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_GOStudy.Controllers.Room.YouTubeController",
+    "Method": "GetClassroomLinkUrl",
+    "RelativePath": "api/YouTube/GetYoutubeUrl",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_GOStudy.Controllers.Room.YouTubeController",
+    "Method": "GetSavedVideos",
+    "RelativePath": "api/YouTube/saved",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_GOStudy.Controllers.Room.YouTubeController",
+    "Method": "UpdateClassroomLinkUrl",
+    "RelativePath": "api/YouTube/UpdateYoutubeUrl/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "linkUrl",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "",
         "IsRequired": true
       }
     ],
