@@ -265,6 +265,41 @@ namespace DataAccess.Model
                 new Semester { SemesterId = 3, Name = "Summer 2025" }
             );
 
+            // Seed data for Packages
+            modelBuilder.Entity<Package>().HasData(
+                new Package { PackageId = 1, Name = "Free", Price = 0.00M },
+                new Package { PackageId = 2, Name = "Plus", Price = 39000.00M },
+                new Package { PackageId = 3, Name = "Premium", Price = 59000.00M }
+            );
+
+            // Seed data for Features
+            modelBuilder.Entity<Feature>().HasData(
+                new Feature { FeatureId = 4, Name = "Shows a total of 2 rooms corresponding to 2 subjects", PackageId = 1 },
+                new Feature { FeatureId = 5, Name = "Join the room of 2 subjects, after 3 days of use, you have the right to reset the room ~ subject", PackageId = 1 },
+                new Feature { FeatureId = 6, Name = "Provide symbolic times to be able to enhance the study schedule for subjects", PackageId = 1 },
+                new Feature { FeatureId = 7, Name = "Posts in the community are archived, but there are limits", PackageId = 1 },
+                new Feature { FeatureId = 8, Name = "Chat and exchange with friends in your community", PackageId = 1 },
+                new Feature { FeatureId = 9, Name = "Graded learning ability by week and by semester", PackageId = 1 },
+                new Feature { FeatureId = 10, Name = "Unlock 4 rooms corresponding to 4 subjects", PackageId = 2 },
+                new Feature { FeatureId = 11, Name = "Join the room of 4 subjects, after 1 day of use, you have the right to reset the room ~ subject", PackageId = 2 },
+                new Feature { FeatureId = 12, Name = "Provide a timetable to be able to schedule classes for subjects", PackageId = 2 },
+                new Feature { FeatureId = 13, Name = "The calendar will pop up in the room to fill in the next lesson", PackageId = 2 },
+                new Feature { FeatureId = 14, Name = "Store posts in a comfortable community", PackageId = 2 },
+                new Feature { FeatureId = 15, Name = "Chat and exchange with friends in your community", PackageId = 2 },
+                new Feature { FeatureId = 16, Name = "Evaluated and ranked learning productivity by day, week and semester", PackageId = 2 },
+                new Feature { FeatureId = 17, Name = "Light/Dark interface of Study Room", PackageId = 2 },
+                new Feature { FeatureId = 18, Name = "Unlock 6 rooms corresponding to 6 subjects", PackageId = 3 },
+                new Feature { FeatureId = 19, Name = "Join the room of 6 subjects, after 2 hours of use, you have the right to reset the room ~ subject", PackageId = 3 },
+                new Feature { FeatureId = 20, Name = "Provide a timetable to be able to schedule classes for subjects", PackageId = 3 },
+                new Feature { FeatureId = 21, Name = "Take notes and save them during the learning process", PackageId = 3 },
+                new Feature { FeatureId = 22, Name = "Store posts in a comfortable community", PackageId = 3 },
+                new Feature { FeatureId = 23, Name = "The calendar will pop up in the room to fill in the next lesson", PackageId = 3 },
+                new Feature { FeatureId = 24, Name = "Chat and exchange with friends in your community", PackageId = 3 },
+                new Feature { FeatureId = 25, Name = "Evaluated and ranked learning productivity by day, week and semester", PackageId = 3 },
+                new Feature { FeatureId = 26, Name = "Light/Dark interface of Study Room", PackageId = 3 },
+                new Feature { FeatureId = 27, Name = "Exclusive 30-day Premium avatar frame interface helps you stand out", PackageId = 3 }
+            );
+
             base.OnModelCreating(modelBuilder);
         }
     }
