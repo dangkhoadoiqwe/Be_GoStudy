@@ -14,6 +14,7 @@ namespace GO_Study_Logic.AutoMapperModule
         public static void ConfigPackageModeule(this IMapperConfigurationExpression mc)
         {
             mc.CreateMap<Package, PackageViewModel>().ReverseMap();
+            mc.CreateMap<Package, PackageViewStatusUserModel>().ReverseMap();
 
             mc.CreateMap<Feature, FeatuerViewModel>().ReverseMap();
 

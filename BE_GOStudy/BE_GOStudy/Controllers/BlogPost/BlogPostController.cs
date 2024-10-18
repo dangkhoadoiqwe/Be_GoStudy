@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using DataAccess.Model;
+﻿using DataAccess.Model;
 using GO_Study_Logic.Service;
 using GO_Study_Logic.ViewModel;
 using GOStudy_Logic.Service.Responses;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BE_GOStudy.Controllers.BlogPost

@@ -15,7 +15,16 @@ namespace GO_Study_Logic.ViewModel
         public decimal Price { get; set; }
       //  public List<FeatuerViewModel> Features { get; set; }
     }
+    public class PackageViewStatusUserModel
+    {
+        public int PackageId { get; set; }
+        public string Name { get; set; }
+        public decimal Price { get; set; }
 
+        public bool isBlock { get; set; }
+        public DateTime DateEnd { get; set; }
+        public List<FeatuerViewModel> Features { get; set; }
+    }
     public class PackageViewModel1
     {
         public int PackageId { get; set; }

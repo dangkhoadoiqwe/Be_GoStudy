@@ -14,6 +14,7 @@ namespace GO_Study_Logic.Service
         Task<bool> SavePackageAsync(PackageViewModel packageViewModel); // Lưu package mới
         Task<bool> UpdatePackageAsync(PackageViewModel packageViewModel); // Cập nhật package
         Task<IEnumerable<string>> GetPackageNamesByUserIdAsync(int userId);
+        Task<IEnumerable<PackageViewStatusUserModel>> GetAllPackagesWithUserStatusAsync(int userId);
     }
 
     public class PackageService : IPackageService
@@ -37,6 +38,53 @@ namespace GO_Study_Logic.Service
 
             return packageViewModels;
         }
+        public async Task<IEnumerable<PackageViewStatusUserModel>> GetAllPackagesWithUserStatusAsync(int userId)
+        {
+            // Lấy tất cả các gói package
+            var packages = await _packageRepository.GetAllPackage();
+
+            // Lấy tên các package mà user hiện đang sử dụng kèm DateEnd
+            var userPackagesWithDates = await _packageRepository.GetPackageNamesAndTransactionDatesByUserIdAsync(userId);
+
+            // Map sang PackageViewStatusUserModel
+            var packageViewModels = _mapper.Map<IEnumerable<PackageViewStatusUserModel>>(packages);
+
+            // Kiểm tra và set isBlock
+            foreach (var packageViewModel in packageViewModels)
+            {
+                // Lấy thông tin package của user (nếu có) với DateEnd
+                var userPackage = userPackagesWithDates.FirstOrDefault(up => up.PackageName == packageViewModel.Name);
+
+                // Nếu package của user đang dùng thì không khóa (isBlock = false)
+                packageViewModel.isBlock = userPackage == default;
+
+                // Set DateEnd nếu user có sử dụng package này
+ 
+
+                    packageViewModel.DateEnd = packageViewModel.isBlock == false
+     ? userPackage.TransactionDate.AddMonths(5)
+     : DateTime.Now;
+                // Lấy package tương ứng từ danh sách packages
+                var matchingPackage = packages.FirstOrDefault(p => p.Name == packageViewModel.Name);
+
+                // Kiểm tra null và lấy danh sách tính năng cho từng package
+                if (matchingPackage?.Feature != null)
+                {
+                    // Ánh xạ tính năng
+                    packageViewModel.Features = _mapper.Map<List<FeatuerViewModel>>(matchingPackage.Feature);
+                }
+                else
+                {
+                    // Khởi tạo danh sách rỗng nếu không có tính năng
+                    packageViewModel.Features = new List<FeatuerViewModel>();
+                }
+            }
+
+
+
+            return packageViewModels;
+        }
+
         public async Task<IEnumerable<string>> GetPackageNamesByUserIdAsync(int userId)
         {
             return await _packageRepository.GetPackageNamesByUserIdAsync(userId);

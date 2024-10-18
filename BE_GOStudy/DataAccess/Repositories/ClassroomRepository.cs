@@ -19,7 +19,7 @@ namespace DataAccess.Repositories
         Task<IEnumerable<Classroom>> GetUserRoomAsync( int userid );
 
         Task<IEnumerable<Classroom>> GetAllClassrooms();
-
+        Task UpdateClassroomLinkYtbUrlAsync(int classroomId, string linkUrl);
         Task<bool> CheckRoomUser(int userid , int roomId);
     }
     public class ClassroomRepository : IClassroomRepository
@@ -156,6 +156,16 @@ namespace DataAccess.Repositories
 
             return userHasSpecialization;
         }
-
+        
+        public async Task UpdateClassroomLinkYtbUrlAsync(int classroomId, string linkUrl)
+        {
+            var classroom = await _context.Classrooms.FindAsync(classroomId);
+            if (classroom != null)
+            {
+                classroom.YoutubeUrl = linkUrl; // Cập nhật LinkUrl
+                _context.Classrooms.Attach(classroom).Property(c => c.YoutubeUrl).IsModified = true;
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }

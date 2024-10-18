@@ -4,6 +4,7 @@ using DataAccess.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(GOStudyContext))]
-    partial class GOStudyContextModelSnapshot : ModelSnapshot
+    [Migration("20241012052019_updatestatusonline")]
+    partial class updatestatusonline
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -260,102 +262,102 @@ namespace DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            ClassroomId = 1,
-                            CreatedAt = new DateTime(2024, 10, 17, 13, 55, 39, 45, DateTimeKind.Utc).AddTicks(5413),
+                            ClassroomId = -1,
+                            CreatedAt = new DateTime(2024, 10, 12, 5, 20, 19, 96, DateTimeKind.Utc).AddTicks(2097),
                             LinkUrl = "http://example.com/eng101",
                             Name = "Room 101",
                             Nickname = "Eng101",
-                            SpecializationId = 1,
+                            SpecializationId = -1,
                             status = 1
                         },
                         new
                         {
-                            ClassroomId = 2,
-                            CreatedAt = new DateTime(2024, 10, 17, 13, 55, 39, 45, DateTimeKind.Utc).AddTicks(5415),
+                            ClassroomId = -2,
+                            CreatedAt = new DateTime(2024, 10, 12, 5, 20, 19, 96, DateTimeKind.Utc).AddTicks(2099),
                             LinkUrl = "http://example.com/chi102",
                             Name = "Room 102",
                             Nickname = "Chi102",
-                            SpecializationId = 2,
+                            SpecializationId = -2,
                             status = 1
                         },
                         new
                         {
-                            ClassroomId = 3,
-                            CreatedAt = new DateTime(2024, 10, 17, 13, 55, 39, 45, DateTimeKind.Utc).AddTicks(5415),
+                            ClassroomId = -3,
+                            CreatedAt = new DateTime(2024, 10, 12, 5, 20, 19, 96, DateTimeKind.Utc).AddTicks(2100),
                             LinkUrl = "http://example.com/jap103",
                             Name = "Room 103",
                             Nickname = "Jap103",
-                            SpecializationId = 3,
+                            SpecializationId = -3,
                             status = 1
                         },
                         new
                         {
-                            ClassroomId = 4,
-                            CreatedAt = new DateTime(2024, 10, 17, 13, 55, 39, 45, DateTimeKind.Utc).AddTicks(5417),
+                            ClassroomId = -4,
+                            CreatedAt = new DateTime(2024, 10, 12, 5, 20, 19, 96, DateTimeKind.Utc).AddTicks(2102),
                             LinkUrl = "http://example.com/econmgmt104",
                             Name = "Room 104",
                             Nickname = "EconMgmt104",
-                            SpecializationId = 4,
+                            SpecializationId = -4,
                             status = 1
                         },
                         new
                         {
-                            ClassroomId = 5,
-                            CreatedAt = new DateTime(2024, 10, 17, 13, 55, 39, 45, DateTimeKind.Utc).AddTicks(5418),
+                            ClassroomId = -5,
+                            CreatedAt = new DateTime(2024, 10, 12, 5, 20, 19, 96, DateTimeKind.Utc).AddTicks(2103),
                             LinkUrl = "http://example.com/mkt105",
                             Name = "Room 105",
                             Nickname = "Mkt105",
-                            SpecializationId = 5,
+                            SpecializationId = -5,
                             status = 1
                         },
                         new
                         {
-                            ClassroomId = 6,
-                            CreatedAt = new DateTime(2024, 10, 17, 13, 55, 39, 45, DateTimeKind.Utc).AddTicks(5418),
+                            ClassroomId = -6,
+                            CreatedAt = new DateTime(2024, 10, 12, 5, 20, 19, 96, DateTimeKind.Utc).AddTicks(2104),
                             LinkUrl = "http://example.com/mediajourn106",
                             Name = "Room 106",
                             Nickname = "MediaJourn106",
-                            SpecializationId = 6,
+                            SpecializationId = -6,
                             status = 1
                         },
                         new
                         {
-                            ClassroomId = 7,
-                            CreatedAt = new DateTime(2024, 10, 17, 13, 55, 39, 45, DateTimeKind.Utc).AddTicks(5419),
+                            ClassroomId = -7,
+                            CreatedAt = new DateTime(2024, 10, 12, 5, 20, 19, 96, DateTimeKind.Utc).AddTicks(2151),
                             LinkUrl = "http://example.com/design107",
                             Name = "Room 107",
                             Nickname = "Design107",
-                            SpecializationId = 7,
+                            SpecializationId = -7,
                             status = 1
                         },
                         new
                         {
-                            ClassroomId = 8,
-                            CreatedAt = new DateTime(2024, 10, 17, 13, 55, 39, 45, DateTimeKind.Utc).AddTicks(5420),
+                            ClassroomId = -8,
+                            CreatedAt = new DateTime(2024, 10, 12, 5, 20, 19, 96, DateTimeKind.Utc).AddTicks(2152),
                             LinkUrl = "http://example.com/scitech108",
                             Name = "Room 108",
                             Nickname = "SciTech108",
-                            SpecializationId = 8,
+                            SpecializationId = -8,
                             status = 1
                         },
                         new
                         {
-                            ClassroomId = 9,
-                            CreatedAt = new DateTime(2024, 10, 17, 13, 55, 39, 45, DateTimeKind.Utc).AddTicks(5422),
+                            ClassroomId = -9,
+                            CreatedAt = new DateTime(2024, 10, 12, 5, 20, 19, 96, DateTimeKind.Utc).AddTicks(2153),
                             LinkUrl = "http://example.com/indconst109",
                             Name = "Room 109",
                             Nickname = "IndConst109",
-                            SpecializationId = 9,
+                            SpecializationId = -9,
                             status = 1
                         },
                         new
                         {
-                            ClassroomId = 10,
-                            CreatedAt = new DateTime(2024, 10, 17, 13, 55, 39, 45, DateTimeKind.Utc).AddTicks(5422),
+                            ClassroomId = -10,
+                            CreatedAt = new DateTime(2024, 10, 12, 5, 20, 19, 96, DateTimeKind.Utc).AddTicks(2155),
                             LinkUrl = "http://example.com/gensub110",
                             Name = "Room 110",
                             Nickname = "GenSub110",
-                            SpecializationId = 10,
+                            SpecializationId = -10,
                             status = 1
                         });
                 });
@@ -500,152 +502,6 @@ namespace DataAccess.Migrations
                     b.HasIndex("PackageId");
 
                     b.ToTable("Features");
-
-                    b.HasData(
-                        new
-                        {
-                            FeatureId = 4,
-                            Name = "Shows a total of 2 rooms corresponding to 2 subjects",
-                            PackageId = 1
-                        },
-                        new
-                        {
-                            FeatureId = 5,
-                            Name = "Join the room of 2 subjects, after 3 days of use, you have the right to reset the room ~ subject",
-                            PackageId = 1
-                        },
-                        new
-                        {
-                            FeatureId = 6,
-                            Name = "Provide symbolic times to be able to enhance the study schedule for subjects",
-                            PackageId = 1
-                        },
-                        new
-                        {
-                            FeatureId = 7,
-                            Name = "Posts in the community are archived, but there are limits",
-                            PackageId = 1
-                        },
-                        new
-                        {
-                            FeatureId = 8,
-                            Name = "Chat and exchange with friends in your community",
-                            PackageId = 1
-                        },
-                        new
-                        {
-                            FeatureId = 9,
-                            Name = "Graded learning ability by week and by semester",
-                            PackageId = 1
-                        },
-                        new
-                        {
-                            FeatureId = 10,
-                            Name = "Unlock 4 rooms corresponding to 4 subjects",
-                            PackageId = 2
-                        },
-                        new
-                        {
-                            FeatureId = 11,
-                            Name = "Join the room of 4 subjects, after 1 day of use, you have the right to reset the room ~ subject",
-                            PackageId = 2
-                        },
-                        new
-                        {
-                            FeatureId = 12,
-                            Name = "Provide a timetable to be able to schedule classes for subjects",
-                            PackageId = 2
-                        },
-                        new
-                        {
-                            FeatureId = 13,
-                            Name = "The calendar will pop up in the room to fill in the next lesson",
-                            PackageId = 2
-                        },
-                        new
-                        {
-                            FeatureId = 14,
-                            Name = "Store posts in a comfortable community",
-                            PackageId = 2
-                        },
-                        new
-                        {
-                            FeatureId = 15,
-                            Name = "Chat and exchange with friends in your community",
-                            PackageId = 2
-                        },
-                        new
-                        {
-                            FeatureId = 16,
-                            Name = "Evaluated and ranked learning productivity by day, week and semester",
-                            PackageId = 2
-                        },
-                        new
-                        {
-                            FeatureId = 17,
-                            Name = "Light/Dark interface of Study Room",
-                            PackageId = 2
-                        },
-                        new
-                        {
-                            FeatureId = 18,
-                            Name = "Unlock 6 rooms corresponding to 6 subjects",
-                            PackageId = 3
-                        },
-                        new
-                        {
-                            FeatureId = 19,
-                            Name = "Join the room of 6 subjects, after 2 hours of use, you have the right to reset the room ~ subject",
-                            PackageId = 3
-                        },
-                        new
-                        {
-                            FeatureId = 20,
-                            Name = "Provide a timetable to be able to schedule classes for subjects",
-                            PackageId = 3
-                        },
-                        new
-                        {
-                            FeatureId = 21,
-                            Name = "Take notes and save them during the learning process",
-                            PackageId = 3
-                        },
-                        new
-                        {
-                            FeatureId = 22,
-                            Name = "Store posts in a comfortable community",
-                            PackageId = 3
-                        },
-                        new
-                        {
-                            FeatureId = 23,
-                            Name = "The calendar will pop up in the room to fill in the next lesson",
-                            PackageId = 3
-                        },
-                        new
-                        {
-                            FeatureId = 24,
-                            Name = "Chat and exchange with friends in your community",
-                            PackageId = 3
-                        },
-                        new
-                        {
-                            FeatureId = 25,
-                            Name = "Evaluated and ranked learning productivity by day, week and semester",
-                            PackageId = 3
-                        },
-                        new
-                        {
-                            FeatureId = 26,
-                            Name = "Light/Dark interface of Study Room",
-                            PackageId = 3
-                        },
-                        new
-                        {
-                            FeatureId = 27,
-                            Name = "Exclusive 30-day Premium avatar frame interface helps you stand out",
-                            PackageId = 3
-                        });
                 });
 
             modelBuilder.Entity("DataAccess.Model.FriendRequest", b =>
@@ -761,26 +617,6 @@ namespace DataAccess.Migrations
                     b.HasKey("PackageId");
 
                     b.ToTable("Packages");
-
-                    b.HasData(
-                        new
-                        {
-                            PackageId = 1,
-                            Name = "Free",
-                            Price = 0.00m
-                        },
-                        new
-                        {
-                            PackageId = 2,
-                            Name = "Plus",
-                            Price = 39000.00m
-                        },
-                        new
-                        {
-                            PackageId = 3,
-                            Name = "Premium",
-                            Price = 59000.00m
-                        });
                 });
 
             modelBuilder.Entity("DataAccess.Model.PaymentTransaction", b =>
@@ -866,23 +702,6 @@ namespace DataAccess.Migrations
                     b.HasKey("PrivacySettingId");
 
                     b.ToTable("PrivacySettings");
-
-                    b.HasData(
-                        new
-                        {
-                            PrivacySettingId = 1,
-                            Visibility = "Public"
-                        },
-                        new
-                        {
-                            PrivacySettingId = 2,
-                            Visibility = "Friends Only"
-                        },
-                        new
-                        {
-                            PrivacySettingId = 3,
-                            Visibility = "Private"
-                        });
                 });
 
             modelBuilder.Entity("DataAccess.Model.Ranking", b =>
@@ -994,23 +813,6 @@ namespace DataAccess.Migrations
                     b.HasKey("SemesterId");
 
                     b.ToTable("Semesters");
-
-                    b.HasData(
-                        new
-                        {
-                            SemesterId = 1,
-                            Name = "Fall 2024"
-                        },
-                        new
-                        {
-                            SemesterId = 2,
-                            Name = "Spring 2025"
-                        },
-                        new
-                        {
-                            SemesterId = 3,
-                            Name = "Summer 2025"
-                        });
                 });
 
             modelBuilder.Entity("DataAccess.Model.Specialization", b =>
@@ -1032,52 +834,52 @@ namespace DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            SpecializationId = 1,
+                            SpecializationId = -1,
                             Name = "English"
                         },
                         new
                         {
-                            SpecializationId = 2,
+                            SpecializationId = -2,
                             Name = "Chinese"
                         },
                         new
                         {
-                            SpecializationId = 3,
+                            SpecializationId = -3,
                             Name = "Japanese"
                         },
                         new
                         {
-                            SpecializationId = 4,
+                            SpecializationId = -4,
                             Name = "Economics and Management"
                         },
                         new
                         {
-                            SpecializationId = 5,
+                            SpecializationId = -5,
                             Name = "Marketing"
                         },
                         new
                         {
-                            SpecializationId = 6,
+                            SpecializationId = -6,
                             Name = "Media and Journalism"
                         },
                         new
                         {
-                            SpecializationId = 7,
+                            SpecializationId = -7,
                             Name = "Design"
                         },
                         new
                         {
-                            SpecializationId = 8,
+                            SpecializationId = -8,
                             Name = "Science and Technology"
                         },
                         new
                         {
-                            SpecializationId = 9,
+                            SpecializationId = -9,
                             Name = "Industry and Construction"
                         },
                         new
                         {
-                            SpecializationId = 10,
+                            SpecializationId = -10,
                             Name = "General Subjects"
                         });
                 });
