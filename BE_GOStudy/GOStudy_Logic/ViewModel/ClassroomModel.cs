@@ -19,6 +19,7 @@ namespace GO_Study_Logic.ViewModel
 
         public string LinkUrl { get; set; }
 
+        public string YoutubeUrl { get; set; }
         public DateTime CreatedAt { get; set; }
     }
     public class ClassroomNameModel

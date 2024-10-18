@@ -95,8 +95,29 @@ namespace BE_GOStudy.Controllers.Room
                 return StatusCode(500, "Internal server error");
             }
         }
+
+        [HttpPut("UpdateSound/{id}")]
+        public async Task<IActionResult> UpdateClassroomLinkUrl(int classroomId,[FromBody] string linkUrl)
+        {
+            if (string.IsNullOrEmpty(linkUrl))
+            {
+                return BadRequest("Link URL cannot be null or empty");
+            }
+
+            try
+            {
+               
+                await _service.UpdateClassroomLinkYtbUrlAsync(classroomId, linkUrl);
+                return Ok("Link URL updated successfully.");
+            }
+            catch (Exception ex)
+            {
+                // Log lỗi (ex) nếu cần
+                return StatusCode(500, $"Error updating Link URL: {ex.Message}");
+            }
+        }
         [HttpPut("UpdateLinkUrl/{id}")]
-        public async Task<IActionResult> UpdateClassroomLinkUrl(int id, [FromBody] string linkUrl)
+        public async Task<IActionResult> UpdateClassroomMusicLinkUrl(int id, [FromBody] string linkUrl)
         {
             if (string.IsNullOrEmpty(linkUrl))
             {

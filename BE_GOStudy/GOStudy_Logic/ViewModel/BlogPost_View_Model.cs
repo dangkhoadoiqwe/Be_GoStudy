@@ -139,13 +139,4 @@ namespace GO_Study_Logic.ViewModel
         public string Image { get; set; }
 
     }
-    
-    public class Comment_View_Model
-    {
-        public int CommentId { get; set; }
-        public int PostId { get; set; }
-        public int UserId { get; set; }
-        public string Content { get; set; }
-        public DateTime CreatedAt { get; set; }
-    }
 }

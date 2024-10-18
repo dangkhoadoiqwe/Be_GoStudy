@@ -23,6 +23,8 @@ namespace GO_Study_Logic.Service
         Task<IEnumerable<TaskViewMeeting>>GetRoomByUserID(int userId);
 
         Task<IEnumerable<ClassroomNameModel>> GetAllClassrooms();
+
+        Task UpdateClassroomLinkYtbUrlAsync(int classroomId, string linkUrl);
     }
 
     public class ClassroomService : IClassroomService
@@ -57,7 +59,12 @@ namespace GO_Study_Logic.Service
             var classroom = _mapper.Map<Classroom>(classroomModel);
             await _repository.AddClassroomAsync(classroom);
         }
+         
 
+        public async Task UpdateClassroomLinkYtbUrlAsync(int classroomId, string linkUrl)
+        {
+            await _repository.UpdateClassroomLinkYtbUrlAsync(classroomId, linkUrl);
+        }
         public async Task UpdateClassroomLinkUrlAsync(int classroomId, string linkUrl)
         {
             await _repository.UpdateClassroomLinkUrlAsync(classroomId, linkUrl);

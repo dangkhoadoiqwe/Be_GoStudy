@@ -19,6 +19,8 @@ namespace DataAccess.Model
         public string Nickname { get; set; }
         public string LinkUrl { get; set; }
 
+        public string? YoutubeUrl { get; set; }
+
         public int status { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 

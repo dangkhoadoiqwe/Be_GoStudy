@@ -2,10 +2,12 @@
 using GO_Study_Logic.Service;
 using GO_Study_Logic.ViewModel;
 using Google.Apis.Auth.OAuth2;
-using Google.Apis.Calendar.v3.Data;
 using Google.Apis.Calendar.v3;
+using Google.Apis.Calendar.v3.Data;
 using Google.Apis.Services;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,12 +18,10 @@ namespace BE_GOStudy.Controllers.Room
     public class TaskController : ControllerBase
     {
         private readonly ITaskService _taskService;
-        private readonly IRefreshTokenRepository _refreshTokenRepository; // Thêm RefreshTokenRepository
 
-        public TaskController(ITaskService taskService, IRefreshTokenRepository refreshTokenRepository)
+        public TaskController(ITaskService taskService)
         {
             _taskService = taskService;
-            _refreshTokenRepository = refreshTokenRepository; // Inject refresh token repository
         }
 
         [HttpDelete("SoftDelete/{taskId}")]
@@ -44,7 +44,8 @@ namespace BE_GOStudy.Controllers.Room
                 return StatusCode(500, $"An error occurred: {ex.Message}");
             }
         }
-        [HttpPut("Completetask/{taskId}")]
+
+        [HttpPut("CompleteTask/{taskId}")]
         public async Task<IActionResult> CompleteTask(int taskId)
         {
             try
@@ -52,11 +53,11 @@ namespace BE_GOStudy.Controllers.Room
                 var result = await _taskService.UpdateTaskComplete(taskId);
                 if (result)
                 {
-                    return Ok("Task Complete successfully.");
+                    return Ok("Task completed successfully.");
                 }
                 else
                 {
-                    return StatusCode(500, "Failed to Completethe task.");
+                    return StatusCode(500, "Failed to complete the task.");
                 }
             }
             catch (Exception ex)
@@ -65,104 +66,85 @@ namespace BE_GOStudy.Controllers.Room
             }
         }
 
-
-        // API to save a task
+        // API to save a task and add it to Google Calendar
         [HttpPost("SaveTask")]
-        public async Task<IActionResult> SaveTask([FromBody] TaskViewModel taskViewModel)
+        public async Task<IActionResult> SaveTask([FromBody] TaskViewModel taskViewModel)//, string googleAccessToken)
         {
             if (taskViewModel == null)
             {
                 return BadRequest("Task is null.");
             }
 
-            if (taskViewModel.Status == false)
-            {
-                taskViewModel.Status = false;
-            }
-
             // Lưu task vào cơ sở dữ liệu SQL
             await _taskService.SaveTaskAsync(taskViewModel);
 
-            // Lấy Google Access Token từ cơ sở dữ liệu
-            //var googleAccessToken = await _refreshTokenRepository.GetGoogleAccessTokenByUserIdAsync(taskViewModel.UserId);
+            // Lấy Access Token từ request thay vì từ cơ sở dữ liệu
+           
 
-            //if (googleAccessToken == null)
+            //if (string.IsNullOrEmpty(googleAccessToken))
             //{
-            //    return BadRequest("Google Access Token not found for the user.");
+            //    return BadRequest("Google Access Token not provided.");
             //}
 
-            //// Gọi Google Calendar API để thêm task vào Calendar
+            // Gọi Google Calendar API để thêm task vào Calendar
             //var addedToGoogleCalendar = await AddTaskToGoogleCalendar(googleAccessToken, taskViewModel);
             //if (!addedToGoogleCalendar)
             //{
             //    return StatusCode(500, "Failed to add task to Google Calendar.");
             //}
 
-            return Ok("Task saved and added to Google Calendar successfully.");
+            return Ok("Task saved    successfully.");
         }
 
         // Hàm để thêm task vào Google Calendar
-        private async Task<bool> AddTaskToGoogleCalendar(string accessToken, TaskViewModel taskViewModel)
-        {
-            try
-            {
-                var credential = GoogleCredential.FromAccessToken(accessToken);
-                var service = new CalendarService(new BaseClientService.Initializer()
-                {
-                    HttpClientInitializer = credential,
-                    ApplicationName = "Your App Name"
-                });
+        //private async Task<bool> AddTaskToGoogleCalendar(string accessToken, TaskViewModel taskViewModel)
+        //{
+        //    try
+        //    {
+        //        var credential = GoogleCredential.FromAccessToken(accessToken);
+        //        if (credential == null)
+        //        {
+        //            Console.WriteLine("Failed to create GoogleCredential from access token.");
+        //        }
+        //        else
+        //        {
+        //            Console.WriteLine("GoogleCredential created successfully.");
+        //        }
 
-                var calendarEvent = new Event
-                {
-                    Summary = taskViewModel.Title,
-                    Description = taskViewModel.Description,
-                    Start = new EventDateTime
-                    {
-                        DateTime = taskViewModel.ScheduledTime,
-                        TimeZone = "Asia/Ho_Chi_Minh",
-                    },
-                    End = new EventDateTime
-                    {
-                        DateTime = taskViewModel.ScheduledTime.Add(TimeSpan.FromMinutes(taskViewModel.TimeComplete)), // Sử dụng DurationInMinutes
-                        TimeZone = "Asia/Ho_Chi_Minh",
-                    }
-                };
+        //        var service = new CalendarService(new BaseClientService.Initializer()
+        //        {
+        //            HttpClientInitializer = credential,
+        //            ApplicationName = "GOStudy"
+        //        });
 
-                var request = service.Events.Insert(calendarEvent, "primary");
-                var createdEvent = await request.ExecuteAsync();
+        //        var calendarEvent = new Event
+        //        {
+        //            Summary = taskViewModel.Title,
+        //            Description = taskViewModel.Description,
+                     
+        //            Start = new EventDateTime
+        //            {
+        //                DateTime = taskViewModel.ScheduledTime,
+        //                TimeZone = "Asia/Ho_Chi_Minh",
+        //            },
+        //            End = new EventDateTime
+        //            {
+        //                DateTime = taskViewModel.ScheduledTime.Add(TimeSpan.FromMinutes(taskViewModel.TimeComplete)),
+        //                TimeZone = "Asia/Ho_Chi_Minh",
+        //            }
+        //        };
 
-                return createdEvent != null; // Trả về true nếu tạo sự kiện thành công
-            }
-            catch (Google.GoogleApiException ex)
-            {
-                if (ex.HttpStatusCode == System.Net.HttpStatusCode.Unauthorized)
-                {
-                    // Lấy Refresh Token từ cơ sở dữ liệu và làm mới Access Token
-                    var refreshToken = await _refreshTokenRepository.GetRefreshTokenByUserIdAsync(taskViewModel.UserId);
-                    if (refreshToken != null)
-                    {
-                        var newAccessToken = await _refreshTokenRepository.RefreshAccessTokenAsync(refreshToken); // Chuyển sang lấy Token từ RefreshToken
-                        if (newAccessToken != null)
-                        {
-                            // Cập nhật Access Token mới vào cơ sở dữ liệu
-                            refreshToken = newAccessToken;
-                            await _refreshTokenRepository.SaveAsync(); // Lưu lại thay đổi
+        //        var request = service.Events.Insert(calendarEvent, "khoapdse161076@fpt.edu.vn");
+        //        var createdEvent = await request.ExecuteAsync();
 
-                            // Gọi lại API để thêm sự kiện
-                            return await AddTaskToGoogleCalendar(newAccessToken, taskViewModel);
-                        }
-                    }
-                }
-                Console.WriteLine($"Google API Error: {ex.Message}");
-                return false;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"General Error: {ex.Message}");
-                return false;
-            }
-        }
+        //        return createdEvent != null; // Trả về true nếu tạo sự kiện thành công
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine($"Error adding to Google Calendar: {ex.Message}");
+        //        return false;
+        //    }
+        //}
 
         [HttpGet("today/{userId}")]
         public async Task<ActionResult<IEnumerable<TaskViewModel>>> GetTasksForToday(int userId)
@@ -226,7 +208,7 @@ namespace BE_GOStudy.Controllers.Room
 
             return Ok(tasks);
         }
-        
+
         [HttpPut("UpdateTask")]
         public async Task<IActionResult> UpdateTask([FromBody] TaskViewModel taskViewModel)
         {
@@ -251,10 +233,10 @@ namespace BE_GOStudy.Controllers.Room
             }
             catch (Exception ex)
             {
-                // Log the exception here if needed
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
+
         // API to get tasks for the next month
         [HttpGet("GetTasksForNextMonth/{userId}")]
         public async Task<IActionResult> GetTasksForNextMonth(int userId)

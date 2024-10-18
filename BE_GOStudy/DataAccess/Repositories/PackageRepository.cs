@@ -15,7 +15,7 @@ namespace DataAccess.Repositories
         Task<bool> SavePackageAsync(Package package); 
         Task<bool> UpdatePackageAsync(Package package);
         Task<IEnumerable<string>> GetPackageNamesByUserIdAsync(int userId);
-
+        Task<IEnumerable<(string PackageName, DateTime TransactionDate)>> GetPackageNamesAndTransactionDatesByUserIdAsync(int userId);
         //   Task<bool> CheckPaymentstatus(long code);
     }
     public class PackageRepository : IPackageRepository
@@ -33,6 +33,41 @@ namespace DataAccess.Repositories
                 .Include(p => p.Feature)  // Include related Features for each Package
                 .ToListAsync();
         }
+        //public async Task<IEnumerable<object>> GetPackageNamesAndTransactionDatesByUserIdAsync(int userId)
+        //{
+        //    return await _context.PaymentTransactions
+        //        .Where(pt => pt.UserId == userId && pt.Status == "PAID")
+        //        .Join(_context.Packages,
+        //              pt => pt.PackageId,
+        //              p => p.PackageId,
+        //              (pt, p) => new
+        //              {
+        //                  PackageName = p.Name,
+        //                  TransactionDate = pt.TransactionDate
+        //              })
+        //        .Distinct()
+        //        .ToListAsync();
+        //}
+        public async Task<IEnumerable<(string PackageName, DateTime TransactionDate)>> GetPackageNamesAndTransactionDatesByUserIdAsync(int userId)
+        {
+            // Trả về một Anonymous Type trong truy vấn LINQ
+            var result = await _context.PaymentTransactions
+                .Where(pt => pt.UserId == userId && pt.Status == "PAID")
+                .Join(_context.Packages,
+                      pt => pt.PackageId,
+                      p => p.PackageId,
+                      (pt, p) => new
+                      {
+                          PackageName = p.Name,
+                          TransactionDate = pt.TransactionDate
+                      })
+                .Distinct()
+                .ToListAsync();
+
+            // Chuyển đổi Anonymous Type thành tuple sau khi truy vấn hoàn tất
+            return result.Select(x => (x.PackageName, x.TransactionDate));
+        }
+
 
         public async Task<IEnumerable<string>> GetPackageNamesByUserIdAsync(int userId)
         {
