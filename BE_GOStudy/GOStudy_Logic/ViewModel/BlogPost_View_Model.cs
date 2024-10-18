@@ -21,6 +21,14 @@ namespace GO_Study_Logic.ViewModel
         public bool IsFavorite { get; set; }
         public bool IsTrending { get; set; }
     }
+    public class Comment_View_Model
+    {
+        public int CommentId { get; set; }
+        public int PostId { get; set; }
+        public int UserId { get; set; }
+        public string Content { get; set; }
+        public DateTime CreatedAt { get; set; }
+    }
     public class PaginatedResult<T>
     {
         public int CurrentPage { get; set; }
