@@ -261,7 +261,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = 1,
-                            CreatedAt = new DateTime(2024, 10, 18, 6, 44, 45, 191, DateTimeKind.Utc).AddTicks(5360),
+                            CreatedAt = new DateTime(2024, 10, 17, 13, 44, 0, 681, DateTimeKind.Utc).AddTicks(9737),
                             LinkUrl = "http://example.com/eng101",
                             Name = "Room 101",
                             Nickname = "Eng101",
@@ -271,7 +271,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = 2,
-                            CreatedAt = new DateTime(2024, 10, 18, 6, 44, 45, 191, DateTimeKind.Utc).AddTicks(5360),
+                            CreatedAt = new DateTime(2024, 10, 17, 13, 44, 0, 681, DateTimeKind.Utc).AddTicks(9738),
                             LinkUrl = "http://example.com/chi102",
                             Name = "Room 102",
                             Nickname = "Chi102",
@@ -281,7 +281,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = 3,
-                            CreatedAt = new DateTime(2024, 10, 18, 6, 44, 45, 191, DateTimeKind.Utc).AddTicks(5370),
+                            CreatedAt = new DateTime(2024, 10, 17, 13, 44, 0, 681, DateTimeKind.Utc).AddTicks(9739),
                             LinkUrl = "http://example.com/jap103",
                             Name = "Room 103",
                             Nickname = "Jap103",
@@ -291,7 +291,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = 4,
-                            CreatedAt = new DateTime(2024, 10, 18, 6, 44, 45, 191, DateTimeKind.Utc).AddTicks(5370),
+                            CreatedAt = new DateTime(2024, 10, 17, 13, 44, 0, 681, DateTimeKind.Utc).AddTicks(9740),
                             LinkUrl = "http://example.com/econmgmt104",
                             Name = "Room 104",
                             Nickname = "EconMgmt104",
@@ -301,7 +301,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = 5,
-                            CreatedAt = new DateTime(2024, 10, 18, 6, 44, 45, 191, DateTimeKind.Utc).AddTicks(5370),
+                            CreatedAt = new DateTime(2024, 10, 17, 13, 44, 0, 681, DateTimeKind.Utc).AddTicks(9741),
                             LinkUrl = "http://example.com/mkt105",
                             Name = "Room 105",
                             Nickname = "Mkt105",
@@ -311,7 +311,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = 6,
-                            CreatedAt = new DateTime(2024, 10, 18, 6, 44, 45, 191, DateTimeKind.Utc).AddTicks(5370),
+                            CreatedAt = new DateTime(2024, 10, 17, 13, 44, 0, 681, DateTimeKind.Utc).AddTicks(9742),
                             LinkUrl = "http://example.com/mediajourn106",
                             Name = "Room 106",
                             Nickname = "MediaJourn106",
@@ -321,7 +321,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = 7,
-                            CreatedAt = new DateTime(2024, 10, 18, 6, 44, 45, 191, DateTimeKind.Utc).AddTicks(5370),
+                            CreatedAt = new DateTime(2024, 10, 17, 13, 44, 0, 681, DateTimeKind.Utc).AddTicks(9742),
                             LinkUrl = "http://example.com/design107",
                             Name = "Room 107",
                             Nickname = "Design107",
@@ -331,7 +331,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = 8,
-                            CreatedAt = new DateTime(2024, 10, 18, 6, 44, 45, 191, DateTimeKind.Utc).AddTicks(5370),
+                            CreatedAt = new DateTime(2024, 10, 17, 13, 44, 0, 681, DateTimeKind.Utc).AddTicks(9743),
                             LinkUrl = "http://example.com/scitech108",
                             Name = "Room 108",
                             Nickname = "SciTech108",
@@ -341,7 +341,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = 9,
-                            CreatedAt = new DateTime(2024, 10, 18, 6, 44, 45, 191, DateTimeKind.Utc).AddTicks(5370),
+                            CreatedAt = new DateTime(2024, 10, 17, 13, 44, 0, 681, DateTimeKind.Utc).AddTicks(9744),
                             LinkUrl = "http://example.com/indconst109",
                             Name = "Room 109",
                             Nickname = "IndConst109",
@@ -351,7 +351,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             ClassroomId = 10,
-                            CreatedAt = new DateTime(2024, 10, 18, 6, 44, 45, 191, DateTimeKind.Utc).AddTicks(5370),
+                            CreatedAt = new DateTime(2024, 10, 17, 13, 44, 0, 681, DateTimeKind.Utc).AddTicks(9745),
                             LinkUrl = "http://example.com/gensub110",
                             Name = "Room 110",
                             Nickname = "GenSub110",
@@ -398,28 +398,12 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ContactInfoId"), 1L, 1);
 
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ContactName")
+                    b.Property<string>("ContactType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ContactPhone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Content")
+                    b.Property<string>("Detail")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StreetAddress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UploadedFilePath")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ContactInfoId");
@@ -516,152 +500,6 @@ namespace DataAccess.Migrations
                     b.HasIndex("PackageId");
 
                     b.ToTable("Features");
-
-                    b.HasData(
-                        new
-                        {
-                            FeatureId = 4,
-                            Name = "Shows a total of 2 rooms corresponding to 2 subjects",
-                            PackageId = 1
-                        },
-                        new
-                        {
-                            FeatureId = 5,
-                            Name = "Join the room of 2 subjects, after 3 days of use, you have the right to reset the room ~ subject",
-                            PackageId = 1
-                        },
-                        new
-                        {
-                            FeatureId = 6,
-                            Name = "Provide symbolic times to be able to enhance the study schedule for subjects",
-                            PackageId = 1
-                        },
-                        new
-                        {
-                            FeatureId = 7,
-                            Name = "Posts in the community are archived, but there are limits",
-                            PackageId = 1
-                        },
-                        new
-                        {
-                            FeatureId = 8,
-                            Name = "Chat and exchange with friends in your community",
-                            PackageId = 1
-                        },
-                        new
-                        {
-                            FeatureId = 9,
-                            Name = "Graded learning ability by week and by semester",
-                            PackageId = 1
-                        },
-                        new
-                        {
-                            FeatureId = 10,
-                            Name = "Unlock 4 rooms corresponding to 4 subjects",
-                            PackageId = 2
-                        },
-                        new
-                        {
-                            FeatureId = 11,
-                            Name = "Join the room of 4 subjects, after 1 day of use, you have the right to reset the room ~ subject",
-                            PackageId = 2
-                        },
-                        new
-                        {
-                            FeatureId = 12,
-                            Name = "Provide a timetable to be able to schedule classes for subjects",
-                            PackageId = 2
-                        },
-                        new
-                        {
-                            FeatureId = 13,
-                            Name = "The calendar will pop up in the room to fill in the next lesson",
-                            PackageId = 2
-                        },
-                        new
-                        {
-                            FeatureId = 14,
-                            Name = "Store posts in a comfortable community",
-                            PackageId = 2
-                        },
-                        new
-                        {
-                            FeatureId = 15,
-                            Name = "Chat and exchange with friends in your community",
-                            PackageId = 2
-                        },
-                        new
-                        {
-                            FeatureId = 16,
-                            Name = "Evaluated and ranked learning productivity by day, week and semester",
-                            PackageId = 2
-                        },
-                        new
-                        {
-                            FeatureId = 17,
-                            Name = "Light/Dark interface of Study Room",
-                            PackageId = 2
-                        },
-                        new
-                        {
-                            FeatureId = 18,
-                            Name = "Unlock 6 rooms corresponding to 6 subjects",
-                            PackageId = 3
-                        },
-                        new
-                        {
-                            FeatureId = 19,
-                            Name = "Join the room of 6 subjects, after 2 hours of use, you have the right to reset the room ~ subject",
-                            PackageId = 3
-                        },
-                        new
-                        {
-                            FeatureId = 20,
-                            Name = "Provide a timetable to be able to schedule classes for subjects",
-                            PackageId = 3
-                        },
-                        new
-                        {
-                            FeatureId = 21,
-                            Name = "Take notes and save them during the learning process",
-                            PackageId = 3
-                        },
-                        new
-                        {
-                            FeatureId = 22,
-                            Name = "Store posts in a comfortable community",
-                            PackageId = 3
-                        },
-                        new
-                        {
-                            FeatureId = 23,
-                            Name = "The calendar will pop up in the room to fill in the next lesson",
-                            PackageId = 3
-                        },
-                        new
-                        {
-                            FeatureId = 24,
-                            Name = "Chat and exchange with friends in your community",
-                            PackageId = 3
-                        },
-                        new
-                        {
-                            FeatureId = 25,
-                            Name = "Evaluated and ranked learning productivity by day, week and semester",
-                            PackageId = 3
-                        },
-                        new
-                        {
-                            FeatureId = 26,
-                            Name = "Light/Dark interface of Study Room",
-                            PackageId = 3
-                        },
-                        new
-                        {
-                            FeatureId = 27,
-                            Name = "Exclusive 30-day Premium avatar frame interface helps you stand out",
-                            PackageId = 3
-                        });
                 });
 
             modelBuilder.Entity("DataAccess.Model.FriendRequest", b =>
@@ -777,26 +615,6 @@ namespace DataAccess.Migrations
                     b.HasKey("PackageId");
 
                     b.ToTable("Packages");
-
-                    b.HasData(
-                        new
-                        {
-                            PackageId = 1,
-                            Name = "Free",
-                            Price = 0.00m
-                        },
-                        new
-                        {
-                            PackageId = 2,
-                            Name = "Plus",
-                            Price = 39000.00m
-                        },
-                        new
-                        {
-                            PackageId = 3,
-                            Name = "Premium",
-                            Price = 59000.00m
-                        });
                 });
 
             modelBuilder.Entity("DataAccess.Model.PaymentTransaction", b =>

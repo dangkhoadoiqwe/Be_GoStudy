@@ -14,7 +14,6 @@ using DataAccess.Repositories;
 using GO_Study_Logic.Service;
 using GO_Study_Logic.Service.VNPAY;
 using GO_Study_Logic.Service.Interface;
-using GOStudy_Logic.Service;
 
 
 namespace BE_GOStudy.DependencyInjection
@@ -65,10 +64,6 @@ namespace BE_GOStudy.DependencyInjection
             services.AddScoped<ICurrentUserService, CurrentUserService>();
             services.AddScoped<IConnectionService, ConnectionService>();
             
-            services.AddScoped<ICommentService, CommentService>();
-            services.AddScoped<ICommentRepository, CommentRepository>();
-
-            services.AddScoped<ContactInfoService>();
 
 
         }

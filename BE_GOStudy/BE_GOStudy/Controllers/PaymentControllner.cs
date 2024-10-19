@@ -80,9 +80,9 @@ public PaymentController(IPaymentService paymentService, IConfiguration configur
                 orderCode: orderCode,
                 amount: (int)paymentTransaction.Amount,
                 description: paymentTransaction.PaymentContent,
-                items: items,  
-                cancelUrl: "https://gostudy-be.arisavinh.dev/api/Payment/payos-cancel",
-                returnUrl: "https://gostudy-be.arisavinh.dev/api/Payment/payos-return", // Ensure this is the correct endpoint
+                items: items,
+                cancelUrl: "https://localhost:7173/api/Payment/payos-cancel",
+                returnUrl: "https://localhost:7173/api/Payment/payos-return", // Ensure this is the correct endpoint
                 buyerName: transaction.BuyerName, // Replace with actual user data from FE
                 buyerEmail: transaction.BuyerEmail, // Replace with actual user data from FE
                 buyerPhone: transaction.BuyerPhone, // Replace with actual user data from FE

@@ -18,6 +18,7 @@ namespace GO_Study_Logic.Service
     public interface IUserService
 
     {
+        Task<List<UserProfileModel>> GetAll();
         Task<User_View_Home_Model> GetHomeUserID(int userid);
         AppUser ConvertToAppUser(User user);
         Task<UserProfileModel> GetUserProfile(int userid);
@@ -36,6 +37,8 @@ namespace GO_Study_Logic.Service
         Task<FriendRequest?> GetFriendRequest(int requesterId, int recipientId);
 
         Task<bool> UpdateUserProfileAsync(int userId, updateUserProfileModel userProfileModel);
+
+
     }
     public class UserService : IUserService
     {
@@ -157,7 +160,7 @@ namespace GO_Study_Logic.Service
             var reci =  await _userRepository.GetAllFriendRecipientsAsync(userid);
             // Lấy danh sách bạn bè từ FriendRequest
             var friendRequestsList = await _userRepository.GetFriendsListAsync(userid);
-
+            var getall = await _userRepository.getAlluser();
             // Ánh xạ từ FriendRequest sang FriendViewModel
             var friendsModel = friendRequestsList.Select(fr =>
             {
@@ -223,6 +226,7 @@ namespace GO_Study_Logic.Service
                 FriendRecipient = _mapper.Map<List<FriendRequest_View_Model>>(reci),
                 ListFriend = friendsModel,  // Danh sách bạn bè đã ánh xạ
                 taskViewModels = _mapper.Map<List<TaskViewModel>>(tasks),
+                AllFriends = _mapper.Map<List<UserViewModel>>(getall),
                 SpecializationUserDetails = specializationDetails.ToList()
             };
 
@@ -397,5 +401,13 @@ namespace GO_Study_Logic.Service
             var usercheck = await _userRepository.CheckToken(userid);
             return usercheck;
         }
+
+        public async Task<List<UserProfileModel>> GetAll()
+        {
+            var getall = await _userRepository.getAlluser();
+            var AllFriends = _mapper.Map<List<UserProfileModel>>(getall); // Sử dụng List<UserProfileModel>
+            return AllFriends;
+        }
+
     }
 }

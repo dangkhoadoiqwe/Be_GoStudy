@@ -30,7 +30,18 @@ namespace BE_GO_Study.Controllers.User
             
             return Ok(userHomeData);
         }
+        [HttpGet("GetAll")]
+        public async Task<IActionResult> Getall()
+        {
+            var userHomeData = await _userService.GetAll();
 
+            if (userHomeData == null)
+            {
+                return NotFound($"User not found.");
+            }
+
+            return Ok(userHomeData);
+        }
         [HttpPost("SaveAttendance")]
         public async Task<IActionResult> SaveAttendance([FromQuery] AttendanceRequestModel attendanceRequest)
         {
