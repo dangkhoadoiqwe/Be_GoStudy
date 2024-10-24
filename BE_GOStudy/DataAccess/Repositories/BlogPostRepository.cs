@@ -79,10 +79,11 @@ namespace DataAccess.Repositories
         public async Task<IEnumerable<BlogPost>> GetPaginatedBlogPostsAsync(int pageNumber, int pageSize)
         {
             return await _context.BlogPosts
+                .Include(bp => bp.User)
                   .Include(bp => bp.Comments)
+                  .ThenInclude(c => c.User)
                  .Where(bp => !bp.IsDraft)
                 .Include(bp => bp.BlogImgs)      
-                .Include(bp => bp.User)          
                 .OrderByDescending(bp => bp.CreatedAt)  
                 .Skip((pageNumber - 1) * pageSize)      
                 .Take(pageSize)                         
@@ -202,6 +203,7 @@ namespace DataAccess.Repositories
             return await _context.BlogPosts
                  .Where(bp => !bp.IsDraft)
                  .Include(bp => bp.Comments)
+                   .ThenInclude(c => c.User)
                  .Include(bp => bp.BlogImgs)
                 .Where(p => p.UserId == userId)
                 .Include(p => p.User)  // Lấy tất cả thông tin của user liên quan
