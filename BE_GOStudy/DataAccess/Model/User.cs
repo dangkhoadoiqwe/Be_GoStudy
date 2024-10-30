@@ -28,7 +28,7 @@ namespace DataAccess.Model
         public string sex { get; set; }
 
         public string phone { get; set; }
-        public bool isonline  { get; set; } = false;
+        public bool isonline { get; set; } = false;
 
         public int? PrivacySettingId { get; set; }
         [ForeignKey("PrivacySettingId")]

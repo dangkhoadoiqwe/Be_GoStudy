@@ -39,6 +39,9 @@ namespace DataAccess.Model
         public DbSet<UserSpecialization> UserSpecializations { get; set; }
         public DbSet<BlogImg> BlogImgs { get; set; }
         public DbSet<Feature> Features { get; set; }
+        //public DbSet<UserPermission> UserPermissions { get; set; }
+        //public DbSet<Role> Roles { get; set; }
+
         public DbSet<UserLike> UserLikes { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

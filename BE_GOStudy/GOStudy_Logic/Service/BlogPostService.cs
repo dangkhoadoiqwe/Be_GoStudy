@@ -24,7 +24,8 @@ namespace GO_Study_Logic.Service
         Task AddBlogPostVIPAsync(BlogPost_Create_Model2 blogPostCreateModel, int userId);
         Task<bool> UpdateLikeCountAsync(int userId, int blogId);
         Task<bool> AddCommentAsync(Comment comment);
-
+        Task<bool> CanCreateBlogPostAsync(int userId);
+        Task<bool> CanAddCommentAsync(int userId, int postId);
         Task<bool> UpdateBlogPostAsync(BlogPost blogPost);
 
         Task<BlogPost?> GetBlogPostsByIdAsync(int postId);
@@ -65,7 +66,58 @@ namespace GO_Study_Logic.Service
             Data = blogPostsViewModels
         };
     }
+    public async Task<bool> CanCreateBlogPostAsync(int userId)
+    {
+        var user = await _userRepository.GetByIdAsync(userId);
+        if (user == null) return false;
 
+        DateTime today = DateTime.UtcNow.Date;
+
+        // Role-based limits
+        int maxPosts = user.Role switch
+        {
+            1 => 3, // Role 1: overall limit of 3 posts
+            3 => 3, // Role 3: daily limit of 3 posts
+            4 => int.MaxValue, // Role 4: no limit
+            _ => 0 // No posts allowed for other roles
+        };
+
+        // Count posts based on role-specific limits
+        int currentPostCount = user.Role switch
+        {
+            1 => await _repository.CountUserPostsAsync(userId), // Overall count for Role 1
+            3 => await _repository.CountUserPostsTodayAsync(userId, today), // Daily count for Role 3
+            _ => 0
+        };
+
+        return currentPostCount < maxPosts;
+    }
+    public async Task<bool> CanAddCommentAsync(int userId, int postId)
+    {
+        var user = await _userRepository.GetByIdAsync(userId);
+        if (user == null) return false;
+
+        DateTime today = DateTime.UtcNow.Date;
+
+        // Role-based limits
+        int maxComments = user.Role switch
+        {
+            1 => 3, // Role 1: overall limit of 3 comments
+            3 => 10, // Role 3: daily limit of 3 comments
+            4 => int.MaxValue, // Role 4: no limit
+            _ => 0 // No comments allowed for other roles
+        };
+
+        // Count comments based on role-specific limits
+        int currentCommentCount = user.Role switch
+        {
+            1 => await _repository.CountUserCommentsAsync(userId), // Overall count for Role 1
+            3 => await _repository.CountUserCommentsTodayAsync(userId, today), // Daily count for Role 3
+            _ => 0
+        };
+
+        return currentCommentCount < maxComments;
+    }
     public async Task<bool> UpdateBlogPostAsync(BlogPost blogPost)
     {
         var existingPost = await _repository.GetBlogPostByIdAsync(blogPost.PostId);
@@ -213,9 +265,11 @@ namespace GO_Study_Logic.Service
             blogPost.IsTrending = false;
             blogPost.Tags = "default_tags";
             blogPost.Category = "default_category";
-            blogPost.image = blogPostCreateModel.Images != null && blogPostCreateModel.Images.Count > 0 ? blogPostCreateModel.Images[0] : null;
-            // Add the blog post to the database
-            await _repository.AddBlogPostAsync(blogPost);
+        blogPost.image = (blogPostCreateModel.Images != null && blogPostCreateModel.Images.Count > 0 && blogPostCreateModel.Images[0] != "string")
+    ? blogPostCreateModel.Images[0]
+    : null;
+        // Add the blog post to the database
+        await _repository.AddBlogPostAsync(blogPost);
 
             // Handle multiple images by adding each one to the BlogImg table
             if (blogPostCreateModel.Images != null && blogPostCreateModel.Images.Count > 0)

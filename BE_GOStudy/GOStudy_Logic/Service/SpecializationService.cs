@@ -17,7 +17,9 @@ namespace GO_Study_Logic.Service
         Task<IEnumerable<SpecializationViewModel>> GetAllSpecializationAsync();
         Task<bool> SaveSpecializationsForUserAsync(int userId, IEnumerable<int> specializationViewModels);
         Task<IEnumerable<SpecializationViewModelByUser>> GetallspbyUserid(int userId);
-
+        Task<bool> UpdateSpecializationForUsersAsync(int userId, int specializationId);
+        Task<bool> UpdateSpecializationForUserAsync(int userSpecializationId, int specializationId);
+        Task<IEnumerable<SpecializationViewModel>> GetAvailableSpecializationsForUserAsync(int userId);
     }
 
     public class SpecializationService : ISpecializationService
@@ -33,17 +35,50 @@ namespace GO_Study_Logic.Service
             _classroomRepository = classroomRepository;
             this.userRepository = userRepository;
         }
+        public async Task<bool> UpdateSpecializationForUsersAsync(int userId, int specializationId)
+        {
+            var user = await userRepository.GetByIdAsync(userId);
+            if (user == null)
+            {
+                return false; // User not found
+            }
 
-        public async Task<IEnumerable<SpecializationViewModelByUser>> GetallspbyUserid(int userId)
+            var dateStart = DateTime.UtcNow;
+            TimeSpan duration = user.Role switch
+            {
+                1 => TimeSpan.FromDays(30),  // Role 1: Add 1 month
+                3 => TimeSpan.FromDays(7),   // Role 3: Add 1 week
+                4 => TimeSpan.FromDays(1),   // Role 4: Add 1 day
+                _ => TimeSpan.Zero
+            };
+
+            if (duration == TimeSpan.Zero)
+            {
+                return false; // Invalid role
+            }
+
+            var dateEnd = dateStart.Add(duration);
+            return await _specializationRepository.UpdateUserSpecializationAsync(userId, specializationId, dateStart, dateEnd);
+        }
+        public async Task<bool> UpdateSpecializationForUserAsync(int userSpecializationId, int specializationId)
+        {
+            return await _specializationRepository.UpdateUserSpecializationAsync(userSpecializationId, specializationId);
+        }
+    
+    public async Task<IEnumerable<SpecializationViewModelByUser>> GetallspbyUserid(int userId)
         {
             var userbyid = await userRepository.GetByIdAsync(userId);
             if (userbyid == null)
             {
-                // Return an empty list or throw an exception if the user does not exist
+                // Trả về danh sách rỗng nếu không tìm thấy user
                 return new List<SpecializationViewModelByUser>();
             }
-            var spe = await _specializationRepository.GetAllSpecializationsByUserIDAsync(userId);
-            var rs = spe.Select(s => new SpecializationViewModelByUser
+
+            // Lấy tất cả các chuyên ngành của người dùng từ repository
+            var specializations = await _specializationRepository.GetAllSpecializationsByUserIDAsync(userId);
+
+            // Ánh xạ từ entity sang view model
+            var result = specializations.Select(s => new SpecializationViewModelByUser
             {
                 SpecializationId = s.SpecializationId,
                 Name = s.Name,
@@ -52,11 +87,11 @@ namespace GO_Study_Logic.Service
                     UserId = userbyid.UserId,
                     FullName = userbyid.FullName,
                     Email = userbyid.Email,
-                    Role = userbyid.Role,
-                    PasswordHash = userbyid.PasswordHash // Although it's usually not a good practice to expose PasswordHash in the ViewModel
+                    Role = userbyid.Role
                 }
             });
-            return rs;
+
+            return result;
         }
 
         public async Task<IEnumerable<SpecializationViewModel>> GetAllSpecializationAsync()
@@ -100,11 +135,42 @@ namespace GO_Study_Logic.Service
 
             return result;
         }
+        public async Task<IEnumerable<SpecializationViewModel>> GetAvailableSpecializationsForUserAsync(int userId)
+        {
+            var specializations = await _specializationRepository.GetAvailableSpecializationsForUserAsync(userId);
 
+            return specializations.Select(s => new SpecializationViewModel
+            {
+                SpecializationId = s.SpecializationId,
+                Name = s.Name
+            }).ToList();
+        }
         public async Task<bool> SaveSpecializationsForUserAsync(int userId, IEnumerable<int> specializationIds)
         {
             var success = true;
             var dateStart = DateTime.UtcNow;
+
+            // Retrieve user information to determine their role
+            var user = await userRepository.GetByIdAsync(userId);
+            if (user == null)
+            {
+                return false; // User not found, cannot proceed
+            }
+
+            // Set the DateEnd based on the user's role
+            TimeSpan duration = user.Role switch
+            {
+                1 => TimeSpan.FromDays(30),    // Role 1: add 1 month
+                3 => TimeSpan.FromDays(7),     // Role 3: add 1 week
+                4 => TimeSpan.FromDays(1),     // Role 4: add 1 day
+                _ => TimeSpan.Zero             // Invalid role, no duration
+            };
+
+            if (duration == TimeSpan.Zero)
+            {
+                return false; // Invalid role specified
+            }
+
             // Filter out any invalid IDs (though they should have been validated in the controller)
             var validSpecializationIds = specializationIds.Where(id => id > 0).ToList();
 
@@ -112,13 +178,13 @@ namespace GO_Study_Logic.Service
             {
                 foreach (var specializationId in validSpecializationIds)
                 {
-                    // Create a new UserSpecialization object
+                    // Create a new UserSpecialization object with DateEnd calculated based on role
                     var userSpecialization = new UserSpecialization
                     {
                         UserId = userId,
                         SpecializationId = specializationId,
                         DateStart = dateStart,
-                        DateEnd = dateStart.AddMonths(4) // assuming no end date yet
+                        DateEnd = dateStart.Add(duration) // Set DateEnd based on the role-specific duration
                     };
 
                     // Save the UserSpecialization to the repository
@@ -131,5 +197,6 @@ namespace GO_Study_Logic.Service
 
             return false;
         }
+
     }
 }

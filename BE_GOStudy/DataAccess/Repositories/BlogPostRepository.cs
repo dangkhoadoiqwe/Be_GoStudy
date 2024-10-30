@@ -34,6 +34,10 @@ namespace DataAccess.Repositories
         Task<BlogPost?> GetBlogPostsByIdAsync(int postId);
 
         Task UpdateBlogPostsAsync(BlogPost blogPost);
+        Task<int> CountUserPostsAsync(int userId);
+        Task<int> CountUserPostsTodayAsync(int userId, DateTime date);
+        Task<int> CountUserCommentsAsync(int userId);
+        Task<int> CountUserCommentsTodayAsync(int userId, DateTime date);
     }
 
     public class BlogPostRepository : IBlogPostRepository
@@ -213,6 +217,27 @@ namespace DataAccess.Repositories
                 .ToListAsync();
         }
 
+        public async Task<int> CountUserPostsAsync(int userId)
+        {
+            return await _context.BlogPosts.CountAsync(bp => bp.UserId == userId && !bp.IsDraft);
+        }
+
+        public async Task<int> CountUserPostsTodayAsync(int userId, DateTime date)
+        {
+            return await _context.BlogPosts
+                .CountAsync(bp => bp.UserId == userId && !bp.IsDraft && bp.CreatedAt.Date == date);
+        }
+
+        public async Task<int> CountUserCommentsAsync(int userId)
+        {
+            return await _context.Comments.CountAsync(c => c.UserId == userId);
+        }
+
+        public async Task<int> CountUserCommentsTodayAsync(int userId, DateTime date)
+        {
+            return await _context.Comments
+                .CountAsync(c => c.UserId == userId && c.CreatedAt.Date == date);
+        }
 
         public async Task<List<BlogPost>> GetFavoriteBlogPosts(int userId)
         {

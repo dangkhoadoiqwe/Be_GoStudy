@@ -10,5 +10,10 @@ namespace GO_Study_Logic.ViewModel
     {
         
         public string Name { get; set; }
+
+        public int UserSpecializationId { get; set; }
+        public DateTime DateStart { get; set; }
+        public DateTime DateEnd { get; set; }
+
     }
 }

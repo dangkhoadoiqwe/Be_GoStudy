@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static DataAccess.Repositories.SpecializationRepository;
 
 namespace GO_Study_Logic.AutoMapperModule
 {
@@ -40,6 +41,8 @@ namespace GO_Study_Logic.AutoMapperModule
             mc.CreateMap<PrivacySetting, PrivacySetting_View_Model>().ReverseMap();
 
             mc.CreateMap<Attendance, AttendanceRequestModel>().ReverseMap();
+
+            mc.CreateMap<UserSpecializationWithDetails, Specialization_View_Model>().ReverseMap();
 
             mc.CreateMap<Specialization, SpecializationViewModel>().ReverseMap();
         }

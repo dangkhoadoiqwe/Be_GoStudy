@@ -372,7 +372,7 @@ namespace GO_Study_Logic.Service
                 return null; // Handle user not found scenario
             }
             var semsterss = await _semestersRepository.GetByIdAsync(user.SemesterId);
-         var Specialization = await _specializationRepository.GetAllSpecializationsByUserIDAsync(userid);
+            var Specialization = await _specializationRepository.GetAllSpecializationsByUserIDAsync(userid);
             var privacySetting = await _userRepository.GetPrivacySettingByuserIDAsync(userid);
            
             var SpecializationViewModel = _mapper.Map<List<Specialization_View_Model>>(Specialization);
@@ -384,7 +384,7 @@ namespace GO_Study_Logic.Service
                 FullName = user.FullName,
                 Semester  = semsterViewModel,
                 Email = user.Email,
-              Specialization = SpecializationViewModel,
+                Specialization = SpecializationViewModel,
                 ProfileImage = user.ProfileImage,
                 PrivacySetting = privacySettingViewModel,
                 PasswordHash = user.PasswordHash ,

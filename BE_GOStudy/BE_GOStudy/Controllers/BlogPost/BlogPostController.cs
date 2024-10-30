@@ -62,6 +62,17 @@ namespace BE_GOStudy.Controllers.BlogPost
         {
             try
             {
+                var canPost = await _blogPostService.CanCreateBlogPostAsync(userId);
+                if (!canPost)
+                {
+                    return BadRequest(new BaseResponse
+                    {
+                        StatusCode = StatusCodes.Status400BadRequest,
+                        Message = "You have reached your limit of 3 blog posts.",
+                        IsSuccess = false
+                    });
+                }
+
                 await _blogPostService.AddBlogPostVIPAsync(blogPostCreateModel, userId);
                 return Ok(new BaseResponse
                 {
@@ -72,16 +83,57 @@ namespace BE_GOStudy.Controllers.BlogPost
             }
             catch (Exception ex)
             {
-                // Log the error (consider logging to a file or external service)
                 return BadRequest(new BaseResponse
                 {
                     StatusCode = StatusCodes.Status400BadRequest,
                     Message = "An error occurred while creating the blog post.",
-                   // Details = ex.Message,
                     IsSuccess = false
                 });
             }
         }
+
+        [HttpPost("comments")]
+        public async Task<IActionResult> AddComment([FromBody] CommentModel commentViewModel)
+        {
+            var comment = new Comment
+            {
+                PostId = commentViewModel.PostId,
+                UserId = commentViewModel.UserId,
+                Content = commentViewModel.Content,
+                CreatedAt = commentViewModel.CreatedAt ?? DateTime.UtcNow
+            };
+
+            var canComment = await _blogPostService.CanAddCommentAsync(comment.UserId, comment.PostId);
+            if (!canComment)
+            {
+                return BadRequest(new BaseResponse
+                {
+                    StatusCode = StatusCodes.Status400BadRequest,
+                    Message = "You have reached your limit of 3 comments.",
+                    IsSuccess = false
+                });
+            }
+
+            var result = await _blogPostService.AddCommentAsync(comment);
+
+            if (!result)
+            {
+                return BadRequest(new BaseResponse
+                {
+                    StatusCode = StatusCodes.Status400BadRequest,
+                    Message = "An error occurred while adding the comment.",
+                    IsSuccess = false
+                });
+            }
+
+            return Ok(new BaseResponse
+            {
+                StatusCode = StatusCodes.Status200OK,
+                Message = "Comment added successfully.",
+                IsSuccess = true
+            });
+        }
+
 
         [HttpPost(Name = "CreateBlogPost")]
         public async Task<IActionResult> CreateBlogPost([FromBody] BlogPost_Create_Model1 blogPostCreateModel, [FromQuery] int userid)
@@ -236,36 +288,6 @@ namespace BE_GOStudy.Controllers.BlogPost
         }
 
 
-        [HttpPost("comments")]
-        public async Task<IActionResult> AddComment([FromBody] CommentModel commentViewModel)
-        {
-            var comment = new Comment
-            {
-                PostId = commentViewModel.PostId,
-                UserId = commentViewModel.UserId,
-                Content = commentViewModel.Content,
-                CreatedAt = commentViewModel.CreatedAt ?? DateTime.UtcNow
-            };
-
-            var result = await _blogPostService.AddCommentAsync(comment);
-
-            if (!result)
-            {
-                return BadRequest(new BaseResponse
-                {
-                    StatusCode = StatusCodes.Status400BadRequest,
-                    Message = "You have reached the comment limit for today (3 comments per post).",
-                    IsSuccess = false
-                });
-            }
-
-            return Ok(new BaseResponse
-            {
-                StatusCode = StatusCodes.Status200OK,
-                Message = "Comment added successfully.",
-                IsSuccess = true
-            });
-        }
 
          
     }

@@ -87,8 +87,26 @@ namespace GO_Study_Logic.Service.VNPAY
             // Tìm giao dịch trong cơ sở dữ liệu dựa trên PaymentRefId (orderCode)
             return await _context.PaymentTransactions.FirstOrDefaultAsync(pt => pt.PaymentRefId == orderCode);
         }
+        //public async Task<bool> UpdatePaymentTransactionStatusByOrderCodeAsync(string orderCode, string status)
+        //{
+        //    var paymentTransaction = await _context.PaymentTransactions
+        //        .FirstOrDefaultAsync(pt => pt.PaymentRefId == orderCode); // Giả sử PaymentRefId là OrderCode
+
+        //    if (paymentTransaction == null)
+        //    {
+        //        return false; // Không tìm thấy giao dịch
+        //    }
+
+        //    paymentTransaction.Status = status; // Cập nhật trạng thái
+        //    _context.PaymentTransactions.Update(paymentTransaction);
+        //    await _context.SaveChangesAsync();
+
+        //    return true;
+        //}
+
         public async Task<bool> UpdatePaymentTransactionStatusByOrderCodeAsync(string orderCode, string status)
         {
+            // Tìm giao dịch dựa trên mã đơn hàng
             var paymentTransaction = await _context.PaymentTransactions
                 .FirstOrDefaultAsync(pt => pt.PaymentRefId == orderCode); // Giả sử PaymentRefId là OrderCode
 
@@ -97,11 +115,32 @@ namespace GO_Study_Logic.Service.VNPAY
                 return false; // Không tìm thấy giao dịch
             }
 
-            paymentTransaction.Status = status; // Cập nhật trạng thái
+            // Cập nhật trạng thái giao dịch
+            paymentTransaction.Status = status;
+
+            // Kiểm tra PackageId và cập nhật Role của UserId tương ứng
+            var user = await _context.Users.FindAsync(paymentTransaction.UserId);
+            if (user == null)
+            {
+                return false; // Không tìm thấy người dùng
+            }
+
+            // Kiểm tra giá trị của PackageId để cập nhật Role
+            if (paymentTransaction.PackageId == 2)
+            {
+                user.Role = 3; // Cập nhật Role thành 2 nếu PackageId là 2
+            }
+            else if (paymentTransaction.PackageId == 3)
+            {
+                user.Role = 4; // Cập nhật Role thành 3 nếu PackageId là 3
+            }
+
+            // Cập nhật dữ liệu trong database
             _context.PaymentTransactions.Update(paymentTransaction);
+            _context.Users.Update(user);
             await _context.SaveChangesAsync();
 
-            return true;
+            return true; // Hoàn thành cập nhật
         }
 
         public async Task<PaymentTransaction> GetTransactionByIdAsync(int id)
