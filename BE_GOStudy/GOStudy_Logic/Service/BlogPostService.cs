@@ -165,11 +165,7 @@ namespace GO_Study_Logic.Service
         var commentCountToday = await _repository.CountUserCommentsTodayAsync(comment.UserId, comment.PostId);
 
         // Limit the number of comments to 3 per day
-        if (commentCountToday >= 3)
-        {
-            return false; // User has reached the comment limit for today
-        }
-
+       
         // Add the comment
         await _repository.AddCommentAsync(comment);
         return true;

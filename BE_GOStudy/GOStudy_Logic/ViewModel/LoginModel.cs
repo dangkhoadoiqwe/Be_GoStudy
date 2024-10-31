@@ -62,7 +62,8 @@ namespace GO_Study_Logic.ViewModel
     {
         User = 1,
         Admin = 2,
-        
- 
+        UserPLUS = 3,
+        UserPREMIUM = 4,
+
     }
 }
