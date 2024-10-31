@@ -92,7 +92,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactApp", policy =>
     {
-        policy.WithOrigins( "https://go-study-chi.vercel.app/", "https://pay.payos.vn")
+        policy.WithOrigins( "https://go-study-chi.vercel.app/", "https://pay.payos.vn", "http://localhost:3000")
               .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials();
