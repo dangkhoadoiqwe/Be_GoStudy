@@ -243,46 +243,94 @@ namespace GO_Study_Logic.Service
         }
     }
 
-
-
     public async Task AddBlogPostVIPAsync(BlogPost_Create_Model2 blogPostCreateModel, int userId)
-        {
-            // Map the BlogPost_Create_Model1 to BlogPost
-            var blogPost = _mapper.Map<BlogPost>(blogPostCreateModel);
+    {
+        // Ánh xạ BlogPost_Create_Model1 thành BlogPost
+        var blogPost = _mapper.Map<BlogPost>(blogPostCreateModel);
 
-            // Set additional properties
-            blogPost.UserId = userId;
-            blogPost.CreatedAt = DateTime.Now;
-            blogPost.ViewCount = 0;
-            blogPost.shareCount = 0;
-            blogPost.likeCount = 0;
-            blogPost.IsDraft = false;
-            blogPost.IsFavorite = false;
-            blogPost.IsTrending = false;
-            blogPost.Tags = "default_tags";
-            blogPost.Category = "default_category";
-        blogPost.image = (blogPostCreateModel.Images != null && blogPostCreateModel.Images.Count > 0 && blogPostCreateModel.Images[0] != "string")
-    ? blogPostCreateModel.Images[0]
-    : null;
-        // Add the blog post to the database
+        // Thiết lập các thuộc tính bổ sung
+        blogPost.UserId = userId;
+        blogPost.CreatedAt = DateTime.Now;
+        blogPost.ViewCount = 0;
+        blogPost.shareCount = 0;
+        blogPost.likeCount = 0;
+        blogPost.IsDraft = false;
+        blogPost.IsFavorite = false;
+        blogPost.IsTrending = false;
+        blogPost.Tags = "default_tags";
+        blogPost.Category = "default_category";
+
+        // Kiểm tra ảnh đại diện
+        if (blogPostCreateModel.Images != null && blogPostCreateModel.Images.Count > 0)
+        {
+            // Nếu ảnh đầu tiên là "string", gán giá trị ảnh là chuỗi rỗng
+            blogPost.image = blogPostCreateModel.Images[0] == "string" ? "" : blogPostCreateModel.Images[0];
+        }
+        else
+        {
+            // Nếu không có ảnh, đặt giá trị ảnh là null
+            blogPost.image = null;
+        }
+
+        // Thêm bài viết blog vào cơ sở dữ liệu
         await _repository.AddBlogPostAsync(blogPost);
 
-            // Handle multiple images by adding each one to the BlogImg table
-            if (blogPostCreateModel.Images != null && blogPostCreateModel.Images.Count > 0)
+        // Xử lý nhiều ảnh bằng cách thêm từng ảnh vào bảng BlogImg
+        if (blogPostCreateModel.Images != null && blogPostCreateModel.Images.Count > 0)
+        {
+            foreach (var imageUrl in blogPostCreateModel.Images)
             {
-                foreach (var imageUrl in blogPostCreateModel.Images)
+                var blogImg = new BlogImg
                 {
-                    var blogImg = new BlogImg
-                    {
-                        BlogId = blogPost.PostId,  // Link to the created blog post
-                        Img = imageUrl
-                    };
+                    BlogId = blogPost.PostId,  // Liên kết với bài viết blog vừa tạo
+                    Img = imageUrl
+                };
 
-                    // Add each image to the BlogImg table
-                    await _repository.AddBlogImgAsync(blogImg);
-                }
+                // Thêm từng ảnh vào bảng BlogImg
+                await _repository.AddBlogImgAsync(blogImg);
             }
         }
+    }
+
+
+    //public async Task AddBlogPostVIPAsync(BlogPost_Create_Model2 blogPostCreateModel, int userId)
+    //    {
+    //        // Map the BlogPost_Create_Model1 to BlogPost
+    //        var blogPost = _mapper.Map<BlogPost>(blogPostCreateModel);
+
+    //        // Set additional properties
+    //        blogPost.UserId = userId;
+    //        blogPost.CreatedAt = DateTime.Now;
+    //        blogPost.ViewCount = 0;
+    //        blogPost.shareCount = 0;
+    //        blogPost.likeCount = 0;
+    //        blogPost.IsDraft = false;
+    //        blogPost.IsFavorite = false;
+    //        blogPost.IsTrending = false;
+    //        blogPost.Tags = "default_tags";
+    //        blogPost.Category = "default_category";
+    //    blogPost.image = (blogPostCreateModel.Images != null && blogPostCreateModel.Images.Count > 0 && blogPostCreateModel.Images[0] != "string")
+    //? blogPostCreateModel.Images[0]
+    //: null;
+    //    // Add the blog post to the database
+    //    await _repository.AddBlogPostAsync(blogPost);
+
+    //        // Handle multiple images by adding each one to the BlogImg table
+    //        if (blogPostCreateModel.Images != null && blogPostCreateModel.Images.Count > 0)
+    //        {
+    //            foreach (var imageUrl in blogPostCreateModel.Images)
+    //            {
+    //                var blogImg = new BlogImg
+    //                {
+    //                    BlogId = blogPost.PostId,  // Link to the created blog post
+    //                    Img = imageUrl
+    //                };
+
+    //                // Add each image to the BlogImg table
+    //                await _repository.AddBlogImgAsync(blogImg);
+    //            }
+    //        }
+    //    }
 
     public async Task<bool> DeleteBlogPostAsync(int postId)
     {
