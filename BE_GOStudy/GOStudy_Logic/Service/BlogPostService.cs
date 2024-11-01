@@ -250,7 +250,7 @@ namespace GO_Study_Logic.Service
 
         // Thiết lập các thuộc tính bổ sung
         blogPost.UserId = userId;
-        blogPost.CreatedAt = DateTime.UtcNow.Date;
+        blogPost.CreatedAt = DateTime.Now;
         blogPost.ViewCount = 0;
         blogPost.shareCount = 0;
         blogPost.likeCount = 0;
