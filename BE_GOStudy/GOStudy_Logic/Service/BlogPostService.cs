@@ -226,7 +226,7 @@ namespace GO_Study_Logic.Service
             // Cập nhật các thuộc tính của bài viết
             existingBlogPost.Title = blogPostCreateModel.Title;
             existingBlogPost.Content = blogPostCreateModel.Content;
-            existingBlogPost.CreatedAt = DateTime.Now;  // Nếu bạn có trường UpdatedAt
+            existingBlogPost.CreatedAt = DateTime.UtcNow.Date;  // Nếu bạn có trường UpdatedAt
             existingBlogPost.UserId = blogPostCreateModel.userId;
             existingBlogPost.Category = "updated_category";  // Bạn có thể thêm logic cập nhật category nếu cần
             existingBlogPost.Tags = "updated_tags";          // Bạn có thể thêm logic cập nhật tags nếu cần
@@ -250,7 +250,7 @@ namespace GO_Study_Logic.Service
 
         // Thiết lập các thuộc tính bổ sung
         blogPost.UserId = userId;
-        blogPost.CreatedAt = DateTime.Now;
+        blogPost.CreatedAt = DateTime.UtcNow.Date;
         blogPost.ViewCount = 0;
         blogPost.shareCount = 0;
         blogPost.likeCount = 0;
